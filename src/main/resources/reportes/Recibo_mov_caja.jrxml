@@ -1,0 +1,388 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="567" leftMargin="14" rightMargin="14" topMargin="14" bottomMargin="14" uuid="73a62481-9ec4-4c59-95c4-545d08c01aac">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="rubro" class="java.lang.String"/>
+	<parameter name="logo" class="java.lang.Object"/>
+	<parameter name="cliente" class="java.lang.String"/>
+	<parameter name="valor" class="java.math.BigDecimal"/>
+	<parameter name="fecha" class="java.util.Date"/>
+	<parameter name="id" class="java.lang.Long"/>
+	<parameter name="detalle" class="java.lang.String"/>
+	<parameter name="moneda" class="java.lang.String"/>
+	<parameter name="proveedor" class="java.lang.String"/>
+	<parameter name="tipo" class="java.lang.String"/>
+	<parameter name="inmueble" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="409" splitType="Stretch">
+			<rectangle>
+				<reportElement x="1" y="0" width="280" height="409" uuid="90740809-eaf4-44eb-90dc-7d0abb5ebaf2"/>
+			</rectangle>
+			<image scaleImage="FillFrame">
+				<reportElement x="10" y="2" width="122" height="49" uuid="3ec095b3-40b6-4c9e-827b-18fc11859192"/>
+				<imageExpression><![CDATA[$P{logo}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="10" y="55" width="151" height="40" uuid="b2ff14e3-f791-45dd-bd62-0a8f694e55b3"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RUT: 140 164 700 019
+Por poder arrendador
+Figueroa 1136 TEL/FAX 4622 3048]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="134" y="0" width="66" height="20" uuid="08744d08-8818-4c75-aac7-169f61ec8923"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RECIBO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="158" y="25" width="33" height="20" uuid="d13ea299-c7b8-4779-9332-7ce20986feef"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nro:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="158" y="49" width="49" height="20" uuid="9277e93a-8221-4bf6-9bfc-51777ed2d9ff"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="207" y="53" width="73" height="20" uuid="54017820-ba48-40d6-ac4c-d4068579c94e"/>
+				<textElement>
+					<font fontName="Tahoma"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{fecha}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="195" y="29" width="85" height="20" uuid="3e6d8f37-14fc-421e-a1ef-4970edb9838c"/>
+				<textElement>
+					<font fontName="Tahoma"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{id}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="10" y="95" width="110" height="17" uuid="bce0da68-53f3-4acf-915e-87be2a9d3fb2"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Beneficiario]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="168" width="77" height="17" uuid="f2f73a1f-b5ce-4439-9ba8-b15c7ebf2c02"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Inmueble]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="209" width="110" height="17" uuid="245cc4e0-2593-4ed6-9bfd-0844f153c0d6"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Detalle:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="11" y="346" width="50" height="20" uuid="d172f3bc-5aa7-47b5-b72c-4b9f8599e56e"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="10" y="113" width="259" height="17" isPrintWhenDetailOverflows="true" uuid="4f585a3d-c2b2-4d85-908c-da35f67480f3"/>
+				<textElement>
+					<font fontName="Tahoma"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{cliente}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="10" y="184" width="259" height="20" uuid="dc8d61fd-864d-43a0-8830-850c928c4450"/>
+				<textElement>
+					<font fontName="Tahoma"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{inmueble}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement stretchType="RelativeToBandHeight" x="10" y="226" width="258" height="40" uuid="a345b148-4707-42a8-8624-7767a74274db"/>
+				<textElement>
+					<font fontName="Tahoma" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{detalle}]]></textFieldExpression>
+			</textField>
+			<rectangle radius="0">
+				<reportElement x="105" y="346" width="100" height="20" uuid="f60f95f6-d4bf-4598-bfbd-9dc61e2bc217"/>
+				<graphicElement>
+					<pen lineWidth="1.0"/>
+				</graphicElement>
+			</rectangle>
+			<textField>
+				<reportElement x="115" y="346" width="100" height="20" uuid="93d9978e-7525-480c-a36a-bc4251b51d56"/>
+				<textElement>
+					<font fontName="Tahoma"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{valor}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="2" y="92" width="279" height="1" uuid="02635e6d-ee03-43f8-8539-8e8afd95dcb3"/>
+			</line>
+			<rectangle>
+				<reportElement x="4" y="369" width="213" height="40" uuid="b0024169-e6e3-43d1-87fc-d7baaf759709"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="4" y="369" width="203" height="40" uuid="e51cd134-5a14-41b2-9986-a136fc511b61"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ESTE RECIBO NO ACREDITA LA CANCELACION DE ADEUDOS ANTERIORES O COMPLEMENTARIOS PARA SER VALIDO DEBE CONTAR CON LA FIRMA Y SELLO DE CAJA.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="218" y="369" width="62" height="20" uuid="d3c0b3ae-6d42-42b7-ac37-d790841bb028"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Vía caja]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="284" y="0" width="283" height="409" uuid="683078b7-f4b1-4558-b7f4-ebda7d2447a3"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="441" y="25" width="33" height="20" uuid="bcb8d7e9-a151-4c5b-a2ea-30a9ac5fbd72"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nro:]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="287" y="369" width="213" height="40" uuid="29cab109-b087-44b0-b299-e17fa52e4f41"/>
+			</rectangle>
+			<image scaleImage="FillFrame">
+				<reportElement x="293" y="2" width="122" height="49" uuid="41898bab-2787-4b8e-b52a-0b94caad1e9b"/>
+				<imageExpression><![CDATA[$P{logo}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="415" y="0" width="66" height="20" uuid="195db40c-14c2-4474-83c4-802acf81dfce"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RECIBO]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="490" y="53" width="73" height="20" uuid="faf20592-5e0a-4bbc-af57-04014e40ce12"/>
+				<textElement>
+					<font fontName="Tahoma"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{fecha}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="287" y="369" width="203" height="40" uuid="7dcba40d-74eb-444e-bb34-2e5d105ac71c"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ESTE RECIBO NO ACREDITA LA CANCELACION DE ADEUDOS ANTERIORES O COMPLEMENTARIOS PARA SER VALIDO DEBE CONTAR CON LA FIRMA Y SELLO DE CAJA.]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="478" y="29" width="85" height="20" uuid="392fdc58-c3cb-4a68-9ed9-be99d56cfd60"/>
+				<textElement>
+					<font fontName="Tahoma"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{id}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="285" y="92" width="279" height="1" uuid="b71979b9-e55a-4621-8011-9e86b353493e"/>
+			</line>
+			<staticText>
+				<reportElement x="501" y="369" width="62" height="20" uuid="51a324c9-3878-4f8e-9fa7-414a9681eb22"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Vía cliente]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="441" y="49" width="49" height="20" uuid="cab325ee-fe60-4b62-b48d-0225f08bdec6"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="293" y="55" width="151" height="40" uuid="e5859654-44d7-471d-a458-3878c8e7c196"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RUT: 140 164 700 019
+Por poder arrendador
+Figueroa 1136 TEL/FAX 4622 3048]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="61" y="346" width="37" height="20" uuid="2d752d62-6435-4bd3-a99b-07e38dc67520"/>
+				<textFieldExpression><![CDATA[$P{moneda}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="10" y="287" width="259" height="20" uuid="02d69fa2-f38a-4af2-af09-08f9491756da"/>
+				<textElement>
+					<font fontName="Tahoma"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{proveedor}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="10" y="270" width="77" height="17" uuid="6b81c5e8-5d16-463b-b189-3b0c908dcde1"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Proveedor]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="291" y="287" width="259" height="20" uuid="04583387-0998-42d6-b5e8-c507e814a00f"/>
+				<textElement>
+					<font fontName="Tahoma"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{proveedor}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="291" y="95" width="110" height="17" uuid="c4a0f423-cce8-4317-b1f2-14bd74f6bde8"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Beneficiario]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="291" y="210" width="110" height="17" uuid="8ed20a03-9b3b-41d7-9e15-5b9ac6c19e56"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Detalle:]]></text>
+			</staticText>
+			<textField>
+				<reportElement stretchType="RelativeToBandHeight" x="291" y="226" width="258" height="40" uuid="50b36d7a-7623-4b1d-a2a0-5aec49ff3bdb"/>
+				<textElement>
+					<font fontName="Tahoma" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{detalle}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="296" y="349" width="50" height="20" uuid="e65450f0-db47-473b-a289-fe612340f32f"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="291" y="186" width="259" height="20" uuid="be3e08ee-9106-4bd2-b0c0-8112c54c683f"/>
+				<textElement>
+					<font fontName="Tahoma"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{inmueble}]]></textFieldExpression>
+			</textField>
+			<rectangle radius="0">
+				<reportElement x="390" y="346" width="100" height="20" uuid="22d45adb-554a-47c6-8449-92f62d4726a0"/>
+				<graphicElement>
+					<pen lineWidth="1.0"/>
+				</graphicElement>
+			</rectangle>
+			<textField>
+				<reportElement x="291" y="113" width="259" height="17" isPrintWhenDetailOverflows="true" uuid="5108a55b-0aed-48d6-9185-045699c51504"/>
+				<textElement>
+					<font fontName="Tahoma"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{cliente}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="291" y="271" width="77" height="17" uuid="72f76276-0877-4448-9bde-1897e240da14"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Proveedor]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="346" y="349" width="37" height="20" uuid="4661ac27-03a4-489e-8c16-6dd696300916"/>
+				<textFieldExpression><![CDATA[$P{moneda}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="400" y="349" width="100" height="20" uuid="a9447a2a-4075-4a4e-a387-5f8e54f8736e"/>
+				<textElement>
+					<font fontName="Tahoma"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{valor}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="291" y="169" width="77" height="17" uuid="406356f5-3ac0-4990-87bc-1504554df800"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Inmueble]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="120" y="328" width="60" height="18" uuid="537abcf0-6308-4284-8dc3-1b525bf7fe5f"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="14" isBold="false" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Firma]]></text>
+			</staticText>
+			<line>
+				<reportElement x="35" y="326" width="207" height="1" uuid="ab45c215-0748-438b-8ab3-db320b4f0936"/>
+			</line>
+			<staticText>
+				<reportElement x="414" y="326" width="60" height="18" uuid="ea0e5446-42e1-4023-88f0-ae2dab445f70"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="14" isBold="false" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Firma]]></text>
+			</staticText>
+			<line>
+				<reportElement x="329" y="324" width="207" height="1" uuid="75aed04e-99ae-40b6-be95-7d6fa98e1d78"/>
+			</line>
+			<textField>
+				<reportElement x="481" y="0" width="85" height="20" uuid="858102b9-45fc-4ac7-aa8b-421baab122d6"/>
+				<textElement>
+					<font fontName="Tahoma" size="12" isBold="true" isItalic="true" isUnderline="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{tipo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="200" y="0" width="78" height="20" uuid="3f7203f9-099e-4117-aa10-a172590b75c7"/>
+				<textElement>
+					<font fontName="Tahoma" size="12" isBold="true" isItalic="true" isUnderline="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{tipo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="10" y="151" width="259" height="17" isPrintWhenDetailOverflows="true" uuid="d2f24c2a-d6a3-477d-b5e6-e9becd0cc857"/>
+				<textElement>
+					<font fontName="Tahoma"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{rubro}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="10" y="132" width="110" height="17" uuid="50bb19b8-f64c-4a1a-85e8-abc00f7f5320"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Rubro]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="291" y="132" width="110" height="17" uuid="637305e7-0222-4b0f-a12b-355b938701d9"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Rubro]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="291" y="152" width="259" height="17" isPrintWhenDetailOverflows="true" uuid="99541bda-2971-4a8a-b4a1-f339bdbadd83"/>
+				<textElement>
+					<font fontName="Tahoma"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{rubro}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+</jasperReport>

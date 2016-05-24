@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="567" leftMargin="14" rightMargin="14" topMargin="14" bottomMargin="14" uuid="73a62481-9ec4-4c59-95c4-545d08c01aac">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="logo" class="java.lang.Object"/>
+	<parameter name="cliente" class="java.lang.String"/>
+	<parameter name="valor" class="java.math.BigDecimal"/>
+	<parameter name="fecha" class="java.util.Date"/>
+	<parameter name="id" class="java.lang.Long"/>
+	<parameter name="moneda" class="java.lang.String"/>
+	<parameter name="logoBN" class="java.lang.Object"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="413" splitType="Stretch">
+			<rectangle>
+				<reportElement x="295" y="0" width="272" height="97" forecolor="#FFFFFF" backcolor="#FFFFFF" uuid="70c24335-f76f-4916-befe-17fe673369a4"/>
+				<graphicElement>
+					<pen lineWidth="1.0" lineStyle="Dotted" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="295" y="97" width="272" height="316" forecolor="#FFFFFF" backcolor="#FFFFFF" uuid="ba0dc9bb-da12-4e96-b4ea-bd2852045501"/>
+				<graphicElement>
+					<pen lineWidth="1.0" lineStyle="Dotted" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="311" y="-311" width="272" height="96" forecolor="#FFFFFF" backcolor="#FFFFFF" uuid="ff3ee639-f293-4337-b725-744c1d0f7f11"/>
+				<graphicElement>
+					<pen lineWidth="1.0" lineStyle="Dotted" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="1" y="0" width="272" height="97" forecolor="#FFFFFF" backcolor="#FFFFFF" uuid="44b09804-343f-49b4-8385-4a9e552bf387"/>
+				<graphicElement>
+					<pen lineWidth="1.0" lineStyle="Dotted" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="295" y="369" width="164" height="43" forecolor="#FFFFFF" backcolor="#FFFFFF" uuid="66815ba5-c9ba-44ba-9b21-5e18c7dff582"/>
+				<graphicElement>
+					<pen lineWidth="1.0" lineStyle="Dotted" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="395" y="187" width="158" height="17" forecolor="#FFFFFF" backcolor="#FFFFFF" uuid="d8a30a90-cb73-4dc5-b568-033f5e7ad0f8"/>
+				<graphicElement>
+					<pen lineWidth="1.0" lineStyle="Dotted" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="495" y="60" width="64" height="30" forecolor="#FFFFFF" backcolor="#FFFFFF" uuid="7cb25386-bf20-463a-8854-5b202f5baaeb"/>
+				<graphicElement>
+					<pen lineWidth="1.0" lineStyle="Dotted" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="0" y="97" width="273" height="316" backcolor="#E7EDF5" uuid="9bb7ae86-f801-4032-99ba-c0aa5e77340a"/>
+				<graphicElement>
+					<pen lineWidth="1.0" lineStyle="Dotted"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="203" y="61" width="64" height="27" forecolor="#FFFFFF" backcolor="#FFFFFF" uuid="d92856d6-cfc4-47f8-b312-9dfba126199b"/>
+				<graphicElement>
+					<pen lineWidth="1.0" lineStyle="Dotted" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="100" y="186" width="158" height="18" forecolor="#FFFFFF" backcolor="#FFFFFF" uuid="f912ef54-3d82-40b3-9643-5e956606715e"/>
+				<graphicElement>
+					<pen lineWidth="1.0" lineStyle="Dotted" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<textField>
+				<reportElement x="217" y="34" width="38" height="15" uuid="3e6d8f37-14fc-421e-a1ef-4970edb9838c"/>
+				<textElement>
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{id}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement mode="Opaque" x="203" y="188" width="55" height="15" backcolor="#FEF9F4" uuid="d0c6b7dd-c1b7-4149-8fbd-e480428ddf90"/>
+				<textElement>
+					<font fontName="Tahoma" size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{valor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="9" y="118" width="258" height="14" isPrintWhenDetailOverflows="true" uuid="4f585a3d-c2b2-4d85-908c-da35f67480f3"/>
+				<textElement>
+					<font fontName="Calibri" size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{cliente}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="184" y="188" width="19" height="15" backcolor="#FEF9F4" uuid="8ef8e16d-3f99-4744-a30b-8421c7561265"/>
+				<textElement>
+					<font fontName="Tahoma" size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{moneda}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement mode="Opaque" x="204" y="73" width="62" height="15" uuid="54017820-ba48-40d6-ac4c-d4068579c94e"/>
+				<textElement>
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{fecha}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="302" y="117" width="254" height="14" isPrintWhenDetailOverflows="true" uuid="594e6373-826c-4103-ba69-dd196a63a343"/>
+				<textElement>
+					<font fontName="Calibri" size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{cliente}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement mode="Opaque" x="496" y="75" width="63" height="15" uuid="3b6b6bb3-8484-4984-8b6d-bcec114539a8"/>
+				<textElement>
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{fecha}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="512" y="34" width="41" height="15" uuid="18de4810-67c0-45b0-8642-d4d26b900b1f"/>
+				<textElement>
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{id}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="301" y="156" width="211" height="14" uuid="383a2300-bffd-4e96-bac3-4f7fd67c9681"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Calibri" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Retiro de haberes]]></text>
+			</staticText>
+			<textField pattern="#,##0.00">
+				<reportElement mode="Opaque" x="505" y="188" width="48" height="15" backcolor="#D9D9D9" uuid="c30aad45-87ba-4907-8859-b1dc12717599"/>
+				<textElement>
+					<font fontName="Tahoma" size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{valor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="486" y="188" width="20" height="15" backcolor="#D9D9D9" uuid="d5376c4c-7bbd-47e5-8419-461c7faa0b9c"/>
+				<textElement>
+					<font fontName="Tahoma" size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{moneda}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="9" y="157" width="208" height="14" uuid="6adb7525-38ab-4d86-a959-6ab3a0e89785"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Calibri" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Retiro de haberes]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="302" y="375" width="154" height="31" uuid="145852f8-36f9-4307-8f9c-589e4ccde976"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="5" isBold="false" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[ESTE RECIBO NO ACREDITA LA CANCELACION DE ADEUDOS ANTERIORES O COMPLEMENTARIOS, PARA SER VALIDO DEBE CONTAR CON LA FIRMA Y SELLO DE CAJA.]]></text>
+			</staticText>
+			<image scaleImage="FillFrame">
+				<reportElement x="5" y="2" width="154" height="55" uuid="fc096637-78ce-4742-b8ed-6f588aaaa5ec"/>
+				<imageExpression><![CDATA[$P{logo}]]></imageExpression>
+			</image>
+			<image scaleImage="FillFrame">
+				<reportElement x="297" y="3" width="159" height="55" uuid="038208a6-67e2-40a3-8e87-d0ba9ee856f5"/>
+				<imageExpression><![CDATA[$P{logoBN}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="6" y="57" width="151" height="31" forecolor="#4F81BD" backcolor="#FFFFFF" uuid="6d14fc2d-bc7a-436c-8cee-dbec96825799"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Calibri" size="8" isBold="false" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Figueroa 1136 - Rivera - Tel 4622 3048
+www.inmobiliariaberrutti.com]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="302" y="56" width="154" height="32" forecolor="#000000" backcolor="#FFFFFF" uuid="f7edbbc4-c123-48fc-ac6f-ad8a6792116a"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Calibri" size="8" isBold="false" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Figueroa 1136 - Rivera - Tel 4622 3048
+www.inmobiliariaberrutti.com]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="9" y="104" width="257" height="13" forecolor="#FFFFFF" backcolor="#4F81BD" uuid="03ec680f-60c4-462f-94a6-89b90c874eed"/>
+				<textElement>
+					<font fontName="Calibri"/>
+				</textElement>
+				<text><![CDATA[Nombre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="9" y="144" width="208" height="13" forecolor="#FFFFFF" backcolor="#4F81BD" uuid="1724f056-c92a-4ab3-badd-f4b14cf82b21"/>
+				<textElement>
+					<font fontName="Calibri"/>
+				</textElement>
+				<text><![CDATA[Concepto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="203" y="60" width="63" height="13" forecolor="#FFFFFF" backcolor="#4F81BD" uuid="6c6abcbb-7f44-4d61-8b9c-246a8ade6292"/>
+				<textElement textAlignment="Center">
+					<font fontName="Calibri"/>
+				</textElement>
+				<text><![CDATA[Fecha]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="203" y="17" width="58" height="18" uuid="d49b15b0-4df7-4a26-981e-905ef760935e"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Calibri" size="14" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[RECIBO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="499" y="16" width="58" height="18" uuid="b58c011e-d7a5-46fd-a311-6ab2c30cf58a"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Calibri" size="14" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[RECIBO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="302" y="104" width="254" height="13" forecolor="#000000" backcolor="#D9D9D9" uuid="18a1f9ab-d804-49a7-8cbb-46ec31d9e2be"/>
+				<textElement>
+					<font fontName="Calibri"/>
+				</textElement>
+				<text><![CDATA[Nombre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="302" y="144" width="210" height="13" forecolor="#000000" backcolor="#D9D9D9" uuid="04d999e0-626c-4300-bc67-4d77aa6abf30"/>
+				<textElement>
+					<font fontName="Calibri"/>
+				</textElement>
+				<text><![CDATA[Concepto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="495" y="61" width="64" height="13" forecolor="#000000" backcolor="#D9D9D9" uuid="b13a6304-988b-4e80-9252-3296f4a6cd42"/>
+				<textElement textAlignment="Center">
+					<font fontName="Calibri"/>
+				</textElement>
+				<text><![CDATA[Fecha]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="102" y="187" width="70" height="16" uuid="338b8f14-f8e4-48d5-8bc3-1260ec37f0cf"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Calibri" size="10" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[IMPORTE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="397" y="188" width="69" height="15" uuid="54515e34-fbde-4f4e-b17d-0cbd331377eb"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Calibri" size="10" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[IMPORTE]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="0" y="369" width="164" height="43" forecolor="#FFFFFF" backcolor="#FFFFFF" uuid="94d5907d-e7d5-4bd5-b281-c4a1c0bb0c86"/>
+				<graphicElement>
+					<pen lineWidth="1.0" lineStyle="Dotted" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="5" y="375" width="154" height="31" uuid="fc88bdfe-4c56-4ff6-94b7-e0fb072b5c98"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="5" isBold="false" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[ESTE RECIBO NO ACREDITA LA CANCELACION DE ADEUDOS ANTERIORES O COMPLEMENTARIOS, PARA SER VALIDO DEBE CONTAR CON LA FIRMA Y SELLO DE CAJA.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="196" y="375" width="53" height="17" uuid="2485df17-5d08-4cab-a6f7-a3236af1875a"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Calibri" size="12" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Original]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="484" y="375" width="53" height="17" uuid="da5f5bd4-52eb-4d9b-9a5e-12e2294c3d0f"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Calibri" size="12" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Copia]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="499" y="35" width="13" height="13" uuid="3a5afc94-4821-4d2a-bb1f-c0f46534c746"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="11" isBold="false" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Nº]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="204" y="35" width="13" height="13" uuid="92d1c45b-3bce-4428-ae00-7eb77284b793"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="11" isBold="false" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Nº]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="9" y="214" width="252" height="83" uuid="9b68291b-bda2-4504-b2d9-d41ca0ba49e7"/>
+				<textElement>
+					<font fontName="Calibri"/>
+				</textElement>
+				<text><![CDATA[Recibí de INMOBILIARIA BERRUTTI la suma indicada, la cual se debitará de mi cuenta, según administraciones autorizadas oportunamente, con vigencia hasta la desocupación de los respectivos inmuebles. Asimismo doy mi conformidad con el saldo y movimientos que constan en mi cuenta al día de la fecha. ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="305" y="214" width="252" height="83" uuid="4cc6756b-e368-4da1-906b-3408c5a527ea"/>
+				<textElement>
+					<font fontName="Calibri"/>
+				</textElement>
+				<text><![CDATA[Recibí de INMOBILIARIA BERRUTTI la suma indicada, la cual se debitará de mi cuenta, según administraciones autorizadas oportunamente, con vigencia hasta la desocupación de los respectivos inmuebles. Asimismo doy mi conformidad con el saldo y movimientos que constan en mi cuenta al día de la fecha. ]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="29" y="308" width="210" height="42" uuid="68bf4d85-794f-4a5e-9e8f-446d1c3e3e19"/>
+				<graphicElement>
+					<pen lineWidth="0.0"/>
+				</graphicElement>
+			</rectangle>
+			<line>
+				<reportElement x="29" y="350" width="210" height="1" uuid="6d240af6-8226-407b-8ef2-418223e51863"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="122" y="351" width="25" height="13" uuid="6b461602-fc51-4905-a884-bf1dc36c8342"/>
+				<textElement>
+					<font fontName="Calibri"/>
+				</textElement>
+				<text><![CDATA[Firma]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="420" y="351" width="25" height="13" uuid="6dd25f4d-7c8a-47e2-b7fa-b84de7d6c185"/>
+				<textElement>
+					<font fontName="Calibri"/>
+				</textElement>
+				<text><![CDATA[Firma]]></text>
+			</staticText>
+			<line>
+				<reportElement x="327" y="350" width="210" height="1" uuid="ec56a8d5-13a0-4e75-8344-0e0c1a1a3182"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+		</band>
+	</title>
+</jasperReport>

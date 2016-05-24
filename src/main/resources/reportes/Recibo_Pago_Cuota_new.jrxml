@@ -1,0 +1,688 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="567" leftMargin="14" rightMargin="14" topMargin="14" bottomMargin="14" uuid="73a62481-9ec4-4c59-95c4-545d08c01aac">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="inmueble" class="java.lang.String"/>
+	<parameter name="logo" class="java.lang.Object"/>
+	<parameter name="cliente" class="java.lang.String"/>
+	<parameter name="valor" class="java.math.BigDecimal"/>
+	<parameter name="total" class="java.math.BigDecimal"/>
+	<parameter name="fecha" class="java.util.Date"/>
+	<parameter name="id" class="java.lang.Long"/>
+	<parameter name="cuota" class="java.lang.Integer"/>
+	<parameter name="vencimiento" class="java.util.Date"/>
+	<parameter name="cotizacion" class="java.math.BigDecimal"/>
+	<parameter name="equivalencia" class="java.math.BigDecimal"/>
+	<parameter name="moneda" class="java.lang.String"/>
+	<parameter name="total_cuotas" class="java.lang.Integer"/>
+	<parameter name="mora" class="java.math.BigDecimal"/>
+	<parameter name="contrato" class="java.lang.Long"/>
+	<parameter name="logoBN" class="java.lang.Object"/>
+	<parameter name="saldo" class="java.math.BigDecimal"/>
+	<parameter name="entrega" class="java.math.BigDecimal"/>
+	<parameter name="cotizacionImp" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="413" splitType="Stretch">
+			<rectangle>
+				<reportElement x="295" y="0" width="272" height="97" forecolor="#FFFFFF" backcolor="#FFFFFF" uuid="70c24335-f76f-4916-befe-17fe673369a4"/>
+				<graphicElement>
+					<pen lineWidth="1.0" lineStyle="Dotted" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="295" y="97" width="272" height="316" forecolor="#FFFFFF" backcolor="#FFFFFF" uuid="ba0dc9bb-da12-4e96-b4ea-bd2852045501"/>
+				<graphicElement>
+					<pen lineWidth="1.0" lineStyle="Dotted" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="311" y="-311" width="272" height="96" forecolor="#FFFFFF" backcolor="#FFFFFF" uuid="ff3ee639-f293-4337-b725-744c1d0f7f11"/>
+				<graphicElement>
+					<pen lineWidth="1.0" lineStyle="Dotted" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="1" y="0" width="272" height="97" forecolor="#FFFFFF" backcolor="#FFFFFF" uuid="44b09804-343f-49b4-8385-4a9e552bf387"/>
+				<graphicElement>
+					<pen lineWidth="1.0" lineStyle="Dotted" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="295" y="369" width="164" height="43" forecolor="#FFFFFF" backcolor="#FFFFFF" uuid="66815ba5-c9ba-44ba-9b21-5e18c7dff582"/>
+				<graphicElement>
+					<pen lineWidth="1.0" lineStyle="Dotted" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="484" y="333" width="68" height="16" forecolor="#FFFFFF" backcolor="#D9D9D9" uuid="40db73ae-fa4f-41fc-aa24-0e383383e9cc">
+					<printWhenExpression><![CDATA[new Boolean($P{cotizacion}.doubleValue() != 1.0)]]></printWhenExpression>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="1.0" lineStyle="Dotted" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="394" y="307" width="158" height="17" forecolor="#FFFFFF" backcolor="#D9D9D9" uuid="d8a30a90-cb73-4dc5-b568-033f5e7ad0f8"/>
+				<graphicElement>
+					<pen lineWidth="1.0" lineStyle="Dotted" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="394" y="228" width="158" height="79" forecolor="#FFFFFF" backcolor="#FFFFFF" uuid="70059e65-68c1-44b3-a863-08b41c3b6655"/>
+				<graphicElement>
+					<pen lineWidth="1.0" lineStyle="Dotted" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="495" y="60" width="64" height="30" forecolor="#FFFFFF" backcolor="#FFFFFF" uuid="7cb25386-bf20-463a-8854-5b202f5baaeb"/>
+				<graphicElement>
+					<pen lineWidth="1.0" lineStyle="Dotted" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="0" y="97" width="273" height="316" backcolor="#E7EDF5" uuid="9bb7ae86-f801-4032-99ba-c0aa5e77340a"/>
+				<graphicElement>
+					<pen lineWidth="1.0" lineStyle="Dotted"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="203" y="61" width="64" height="27" forecolor="#FFFFFF" backcolor="#FFFFFF" uuid="d92856d6-cfc4-47f8-b312-9dfba126199b"/>
+				<graphicElement>
+					<pen lineWidth="1.0" lineStyle="Dotted" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="9" y="194" width="98" height="13" forecolor="#FFFFFF" backcolor="#FFFFFF" uuid="8925c806-bd62-47cc-8d49-b1f38a184484"/>
+				<graphicElement>
+					<pen lineWidth="0.0"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="6" y="157" width="237" height="13" forecolor="#FFFFFF" backcolor="#FFFFFF" uuid="e28afc11-166e-4d47-81ec-b5152e301e3f"/>
+				<graphicElement>
+					<pen lineWidth="0.0"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="109" y="227" width="158" height="79" forecolor="#FFFFFF" backcolor="#FFFFFF" uuid="89763de7-8fba-4974-adbb-2e181a21ca39"/>
+				<graphicElement>
+					<pen lineWidth="1.0" lineStyle="Dotted" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="109" y="306" width="158" height="18" forecolor="#FFFFFF" backcolor="#FDE9D9" uuid="f912ef54-3d82-40b3-9643-5e956606715e"/>
+				<graphicElement>
+					<pen lineWidth="1.0" lineStyle="Dotted" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="199" y="332" width="68" height="16" forecolor="#FFFFFF" backcolor="#FDE9D9" uuid="3e9fdf0c-4341-4eeb-b20e-be53f8b61296">
+					<printWhenExpression><![CDATA[new Boolean($P{cotizacion}.doubleValue() != 1.0)]]></printWhenExpression>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="1.0" lineStyle="Dotted" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<textField>
+				<reportElement mode="Opaque" x="10" y="156" width="233" height="14" isPrintWhenDetailOverflows="true" uuid="9345ec79-a531-4de8-b38f-23ef6dfcc95d"/>
+				<textElement>
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{inmueble}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="217" y="34" width="38" height="15" uuid="3e6d8f37-14fc-421e-a1ef-4970edb9838c"/>
+				<textElement>
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{id}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="222" y="334" width="46" height="12" uuid="fd0cf4c2-5d38-4e56-8667-0c4e5cb5dca4">
+					<printWhenExpression><![CDATA[new Boolean($P{cotizacion}.doubleValue() != 1.0)]]></printWhenExpression>
+				</reportElement>
+				<textElement>
+					<font fontName="Arial" size="10" isBold="true" isItalic="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[(($P{entrega}).doubleValue()+($P{mora}).doubleValue())*$P{cotizacion}.doubleValue()]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement mode="Opaque" x="209" y="194" width="57" height="13" uuid="93d9978e-7525-480c-a36a-bc4251b51d56"/>
+				<textElement>
+					<font fontName="Tahoma" size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{valor}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="217" y="309" width="49" height="11" uuid="d0c6b7dd-c1b7-4149-8fbd-e480428ddf90"/>
+				<textElement>
+					<font fontName="Tahoma" size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($P{entrega}).doubleValue()+($P{mora}).doubleValue()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="190" y="336" width="8" height="10" uuid="04161f9e-fd41-4d82-8b40-27913664c667">
+					<printWhenExpression><![CDATA[new Boolean($P{cotizacion}.doubleValue() != 1.0)]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="7" isBold="false" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[=]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="66" y="196" width="10" height="10" uuid="72ea86e8-a1ae-4c19-b8c2-44864f4f13d4"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[de]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="204" y="334" width="18" height="12" uuid="06ade264-220d-49a1-b4b8-02d202571fd1">
+					<printWhenExpression><![CDATA[new Boolean($P{cotizacion}.doubleValue() != 1.0)]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="10" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[$]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="76" y="196" width="21" height="10" uuid="c5a1c66c-0e6f-4635-b92c-d41db036615c"/>
+				<textElement>
+					<font fontName="Arial" size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{total_cuotas}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="75" y="118" width="191" height="14" isPrintWhenDetailOverflows="true" uuid="4f585a3d-c2b2-4d85-908c-da35f67480f3"/>
+				<textElement>
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{cliente}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="196" y="309" width="19" height="11" uuid="8ef8e16d-3f99-4744-a30b-8421c7561265"/>
+				<textElement>
+					<font fontName="Tahoma" size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{moneda}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement mode="Opaque" x="135" y="194" width="54" height="13" backcolor="#FDE9D9" uuid="3041d0fb-92cf-43f1-9521-502d321df11e"/>
+				<textElement>
+					<font fontName="Tahoma" size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{vencimiento}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement mode="Opaque" x="204" y="73" width="62" height="15" uuid="54017820-ba48-40d6-ac4c-d4068579c94e"/>
+				<textElement>
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{fecha}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="56" y="196" width="11" height="10" uuid="16eb5c24-f412-41f5-92fb-33749aa9710c"/>
+				<textElement>
+					<font fontName="Arial" size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{cuota}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="299" y="158" width="255" height="14" isPrintWhenDetailOverflows="true" uuid="30942f9e-ecb1-4769-ad28-f4c296971e95"/>
+				<textElement>
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{inmueble}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="360" y="117" width="196" height="14" isPrintWhenDetailOverflows="true" uuid="594e6373-826c-4103-ba69-dd196a63a343"/>
+				<textElement>
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{cliente}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement mode="Opaque" x="496" y="75" width="63" height="15" uuid="3b6b6bb3-8484-4984-8b6d-bcec114539a8"/>
+				<textElement>
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{fecha}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="512" y="34" width="41" height="15" uuid="18de4810-67c0-45b0-8642-d4d26b900b1f"/>
+				<textElement>
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{id}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement mode="Opaque" x="426" y="194" width="54" height="13" uuid="cbcbb9c0-f26c-449a-bd10-756b7f13bcfb"/>
+				<textElement>
+					<font fontName="Tahoma" size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{vencimiento}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="362" y="196" width="22" height="10" uuid="410382da-f295-4d7a-8385-33e159283732"/>
+				<textElement>
+					<font fontName="Arial" size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{total_cuotas}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="352" y="196" width="10" height="10" uuid="9e51bd0d-3233-41e5-a2e8-f939e016c1e0"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[de]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="342" y="196" width="11" height="10" uuid="daa166b4-f751-4ae4-acd2-c6ac11654927"/>
+				<textElement>
+					<font fontName="Arial" size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{cuota}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement mode="Opaque" x="510" y="194" width="39" height="13" uuid="ac9fec02-88ae-4128-8e12-afa2a46a921d"/>
+				<textElement>
+					<font fontName="Tahoma" size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{valor}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="299" y="196" width="41" height="10" uuid="383a2300-bffd-4e96-bac3-4f7fd67c9681"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Pago cuota]]></text>
+			</staticText>
+			<textField pattern="#,##0.00">
+				<reportElement x="506" y="310" width="46" height="11" uuid="c30aad45-87ba-4907-8859-b1dc12717599"/>
+				<textElement>
+					<font fontName="Tahoma" size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($P{entrega}).doubleValue()+($P{mora}).doubleValue()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="484" y="310" width="20" height="11" uuid="d5376c4c-7bbd-47e5-8419-461c7faa0b9c"/>
+				<textElement>
+					<font fontName="Tahoma" size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{moneda}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="490" y="334" width="16" height="12" uuid="44b23e2e-e4f3-4a82-8a8c-db1fc54eb012">
+					<printWhenExpression><![CDATA[new Boolean($P{cotizacion}.doubleValue() != 1.0)]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="10" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[$]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="478" y="336" width="8" height="10" uuid="adb739d2-b3e0-4838-8dca-fd9f49d8640f">
+					<printWhenExpression><![CDATA[new Boolean($P{cotizacion}.doubleValue() != 1.0)]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="7" isBold="false" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[=]]></text>
+			</staticText>
+			<textField pattern="#,##0.00">
+				<reportElement x="508" y="334" width="44" height="12" uuid="9138138a-1a79-41bf-be5b-0753173005b0">
+					<printWhenExpression><![CDATA[new Boolean($P{cotizacion}.doubleValue() != 1.0)]]></printWhenExpression>
+				</reportElement>
+				<textElement>
+					<font fontName="Arial" size="10" isBold="true" isItalic="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[(($P{entrega}).doubleValue()+($P{mora}).doubleValue())*$P{cotizacion}.doubleValue()]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="223" y="293" width="38" height="10" uuid="27b1c650-4565-4035-b4bc-54e200b833ca">
+					<printWhenExpression><![CDATA[new Boolean($P{mora} != null&&$P{mora}.doubleValue() != 0.0)]]></printWhenExpression>
+				</reportElement>
+				<textElement>
+					<font fontName="Tahoma" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{mora}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="396" y="293" width="50" height="10" uuid="1f24baab-5427-4dab-a3cc-fe822dc6e4a1">
+					<printWhenExpression><![CDATA[new Boolean($P{mora} != null&&$P{mora}.doubleValue() != 0.0)]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="7" isBold="false"/>
+				</textElement>
+				<text><![CDATA[ Mora]]></text>
+			</staticText>
+			<textField pattern="#,##0.00">
+				<reportElement x="512" y="292" width="35" height="10" uuid="dcb201b6-e180-4823-8c95-34a2e7ce2a01">
+					<printWhenExpression><![CDATA[new Boolean($P{mora} != null&&$P{mora}.doubleValue() != 0.0)]]></printWhenExpression>
+				</reportElement>
+				<textElement>
+					<font fontName="Tahoma" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{mora}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="10" y="118" width="40" height="14" isPrintWhenDetailOverflows="true" uuid="5512453d-1744-4ad5-b371-5a92ae2aab97"/>
+				<textElement>
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{contrato}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="302" y="118" width="42" height="14" isPrintWhenDetailOverflows="true" uuid="ec005dd4-7df3-4ea2-841d-dd5416f50949"/>
+				<textElement>
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{contrato}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="13" y="196" width="42" height="10" uuid="6adb7525-38ab-4d86-a959-6ab3a0e89785"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Pago cuota]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="109" y="293" width="50" height="10" uuid="15665ef0-e8fc-4fe8-a6e2-0bd1dd6a1992">
+					<printWhenExpression><![CDATA[new Boolean($P{mora} != null&&$P{mora}.doubleValue() != 0.0)]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="7" isBold="false"/>
+				</textElement>
+				<text><![CDATA[ Mora]]></text>
+			</staticText>
+			<textField pattern="">
+				<reportElement x="166" y="336" width="24" height="10" uuid="71a474c8-39e2-4934-a2ce-0e03b8de86e7">
+					<printWhenExpression><![CDATA[new Boolean($P{cotizacion}.doubleValue() != 1.0)]]></printWhenExpression>
+				</reportElement>
+				<textElement>
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{cotizacionImp}]]></textFieldExpression>
+			</textField>
+			<textField pattern="">
+				<reportElement x="455" y="336" width="24" height="10" uuid="392ab8bd-97ba-4790-bfda-a49c03d7d961">
+					<printWhenExpression><![CDATA[new Boolean($P{cotizacion}.doubleValue() != 1.0)]]></printWhenExpression>
+				</reportElement>
+				<textElement>
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{cotizacionImp}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="111" y="283" width="50" height="10" uuid="719a44b2-8916-49bb-b742-001bc18265aa">
+					<printWhenExpression><![CDATA[new Boolean(($P{total}.doubleValue()-$P{entrega}.doubleValue()) == 0.0)]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="7" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Saldo cuota]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="302" y="375" width="154" height="31" uuid="145852f8-36f9-4307-8f9c-589e4ccde976"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="5" isBold="false" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[ESTE RECIBO NO ACREDITA LA CANCELACION DE ADEUDOS ANTERIORES O COMPLEMENTARIOS, PARA SER VALIDO DEBE CONTAR CON LA FIRMA Y SELLO DE CAJA.]]></text>
+			</staticText>
+			<image scaleImage="FillFrame">
+				<reportElement x="5" y="2" width="154" height="55" uuid="fc096637-78ce-4742-b8ed-6f588aaaa5ec"/>
+				<imageExpression><![CDATA[$P{logo}]]></imageExpression>
+			</image>
+			<image scaleImage="FillFrame">
+				<reportElement x="297" y="3" width="159" height="55" uuid="038208a6-67e2-40a3-8e87-d0ba9ee856f5"/>
+				<imageExpression><![CDATA[$P{logoBN}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="6" y="57" width="151" height="31" forecolor="#4F81BD" backcolor="#FFFFFF" uuid="6d14fc2d-bc7a-436c-8cee-dbec96825799"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Calibri" size="8" isBold="false" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Figueroa 1136 - Rivera - Tel 4622 3048
+www.inmobiliariaberrutti.com]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="302" y="56" width="154" height="32" forecolor="#000000" backcolor="#FFFFFF" uuid="f7edbbc4-c123-48fc-ac6f-ad8a6792116a"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Calibri" size="8" isBold="false" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Figueroa 1136 - Rivera - Tel 4622 3048
+www.inmobiliariaberrutti.com]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="10" y="104" width="40" height="13" forecolor="#FFFFFF" backcolor="#4F81BD" uuid="0d81da7e-381c-4d1c-b3f9-82cae0392d6f"/>
+				<textElement>
+					<font fontName="Calibri"/>
+				</textElement>
+				<text><![CDATA[Contrato]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="75" y="104" width="191" height="13" forecolor="#FFFFFF" backcolor="#4F81BD" uuid="03ec680f-60c4-462f-94a6-89b90c874eed"/>
+				<textElement>
+					<font fontName="Calibri"/>
+				</textElement>
+				<text><![CDATA[Nombre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="10" y="143" width="233" height="13" forecolor="#FFFFFF" backcolor="#4F81BD" uuid="c5896f56-f2ef-4292-9bb1-aa6e3bfaf986"/>
+				<textElement>
+					<font fontName="Calibri"/>
+				</textElement>
+				<text><![CDATA[Referencia]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="9" y="181" width="98" height="13" forecolor="#FFFFFF" backcolor="#4F81BD" uuid="1724f056-c92a-4ab3-badd-f4b14cf82b21"/>
+				<textElement>
+					<font fontName="Calibri"/>
+				</textElement>
+				<text><![CDATA[Concepto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="135" y="181" width="54" height="13" forecolor="#FFFFFF" backcolor="#4F81BD" uuid="7535012c-5739-4d76-9168-afb0536d57c5"/>
+				<textElement>
+					<font fontName="Calibri"/>
+				</textElement>
+				<text><![CDATA[Vencimiento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="209" y="181" width="57" height="13" forecolor="#FFFFFF" backcolor="#4F81BD" uuid="86512386-bdd4-42df-bc33-32a90e5542c3"/>
+				<textElement>
+					<font fontName="Calibri"/>
+				</textElement>
+				<text><![CDATA[Valor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="203" y="60" width="63" height="13" forecolor="#FFFFFF" backcolor="#4F81BD" uuid="6c6abcbb-7f44-4d61-8b9c-246a8ade6292"/>
+				<textElement textAlignment="Center">
+					<font fontName="Calibri"/>
+				</textElement>
+				<text><![CDATA[Fecha]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="203" y="17" width="58" height="18" uuid="d49b15b0-4df7-4a26-981e-905ef760935e"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Calibri" size="14" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[RECIBO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="499" y="16" width="58" height="18" uuid="b58c011e-d7a5-46fd-a311-6ab2c30cf58a"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Calibri" size="14" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[RECIBO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="299" y="104" width="44" height="13" forecolor="#000000" backcolor="#D9D9D9" uuid="3d703779-81cc-4b78-a13c-0b87253faa96"/>
+				<textElement>
+					<font fontName="Calibri"/>
+				</textElement>
+				<text><![CDATA[Contrato]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="360" y="104" width="196" height="13" forecolor="#000000" backcolor="#D9D9D9" uuid="18a1f9ab-d804-49a7-8cbb-46ec31d9e2be"/>
+				<textElement>
+					<font fontName="Calibri"/>
+				</textElement>
+				<text><![CDATA[Nombre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="299" y="143" width="253" height="13" forecolor="#000000" backcolor="#D9D9D9" uuid="42a5df3e-fa85-4fc4-9ef2-82977eb73b78"/>
+				<textElement>
+					<font fontName="Calibri"/>
+				</textElement>
+				<text><![CDATA[Referencia]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="299" y="181" width="85" height="13" forecolor="#000000" backcolor="#D9D9D9" uuid="04d999e0-626c-4300-bc67-4d77aa6abf30"/>
+				<textElement>
+					<font fontName="Calibri"/>
+				</textElement>
+				<text><![CDATA[Concepto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="426" y="181" width="54" height="13" forecolor="#000000" backcolor="#D9D9D9" uuid="52d80e18-19a6-47a5-bec0-73c27e560afe"/>
+				<textElement>
+					<font fontName="Calibri"/>
+				</textElement>
+				<text><![CDATA[Vencimiento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="512" y="181" width="37" height="13" forecolor="#000000" backcolor="#D9D9D9" uuid="00c40cbd-0b3f-40b8-a02e-cce07d1a64c7"/>
+				<textElement>
+					<font fontName="Calibri"/>
+				</textElement>
+				<text><![CDATA[Valor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="495" y="61" width="64" height="13" forecolor="#000000" backcolor="#D9D9D9" uuid="b13a6304-988b-4e80-9252-3296f4a6cd42"/>
+				<textElement textAlignment="Center">
+					<font fontName="Calibri"/>
+				</textElement>
+				<text><![CDATA[Fecha]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="396" y="282" width="50" height="10" uuid="5547c64e-20af-4fd5-93c8-eed1b836fc2c">
+					<printWhenExpression><![CDATA[new Boolean(($P{total}.doubleValue()-$P{entrega}.doubleValue()) == 0.0)]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="7" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Saldo cuota]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="111" y="307" width="70" height="17" uuid="338b8f14-f8e4-48d5-8bc3-1260ec37f0cf"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Calibri" size="10" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[IMPORTE TOTAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="395" y="308" width="69" height="15" uuid="54515e34-fbde-4f4e-b17d-0cbd331377eb"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Calibri" size="10" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[IMPORTE TOTAL]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="0" y="369" width="164" height="43" forecolor="#FFFFFF" backcolor="#FFFFFF" uuid="94d5907d-e7d5-4bd5-b281-c4a1c0bb0c86"/>
+				<graphicElement>
+					<pen lineWidth="1.0" lineStyle="Dotted" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="5" y="375" width="154" height="31" uuid="fc88bdfe-4c56-4ff6-94b7-e0fb072b5c98"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="5" isBold="false" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[ESTE RECIBO NO ACREDITA LA CANCELACION DE ADEUDOS ANTERIORES O COMPLEMENTARIOS, PARA SER VALIDO DEBE CONTAR CON LA FIRMA Y SELLO DE CAJA.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="196" y="375" width="53" height="17" uuid="2485df17-5d08-4cab-a6f7-a3236af1875a"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Calibri" size="12" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Original]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="484" y="375" width="53" height="17" uuid="da5f5bd4-52eb-4d9b-9a5e-12e2294c3d0f"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Calibri" size="12" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Copia]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="499" y="35" width="13" height="13" uuid="3a5afc94-4821-4d2a-bb1f-c0f46534c746"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="11" isBold="false" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Nº]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="204" y="35" width="13" height="13" uuid="92d1c45b-3bce-4428-ae00-7eb77284b793"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="11" isBold="false" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Nº]]></text>
+			</staticText>
+			<textField pattern="#,##0.00">
+				<reportElement x="223" y="282" width="38" height="10" uuid="ce3605da-3897-498c-9428-3d247100d56c"/>
+				<textElement>
+					<font fontName="Tahoma" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{entrega}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="512" y="282" width="38" height="10" uuid="56836410-adb1-4497-b985-8e892a69831a"/>
+				<textElement>
+					<font fontName="Tahoma" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{entrega}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="111" y="283" width="50" height="10" uuid="2dc5fb6f-c703-43c3-a7ff-10ba358283c1">
+					<printWhenExpression><![CDATA[new Boolean(($P{total}.doubleValue()-$P{entrega}.doubleValue()) != 0.0)]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="7" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Entrega]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="396" y="282" width="50" height="10" uuid="511ed900-1eb4-4d56-ba55-c361f8118815">
+					<printWhenExpression><![CDATA[new Boolean(($P{total}.doubleValue()-$P{entrega}.doubleValue()) != 0.0)]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="7" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Entrega]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="156" y="336" width="10" height="10" uuid="eddbe866-cf16-4be9-b621-a0206b9c0d37">
+					<printWhenExpression><![CDATA[new Boolean($P{cotizacion}.doubleValue() != 1.0)]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="7" isBold="false" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[x]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="446" y="336" width="10" height="10" uuid="9df74a14-ed67-4393-b228-93566332c30b">
+					<printWhenExpression><![CDATA[new Boolean($P{cotizacion}.doubleValue() != 1.0)]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="7" isBold="false" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[x]]></text>
+			</staticText>
+		</band>
+	</title>
+</jasperReport>

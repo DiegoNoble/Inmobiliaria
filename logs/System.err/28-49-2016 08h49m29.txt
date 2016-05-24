@@ -1,0 +1,16 @@
+Exception in thread "main" java.lang.VerifyError: Bad type on operand stack
+Exception Details:
+  Location:
+    com/dnsoft/inmobiliaria/views/MenuPrincipalView.mnuItemRegistrarPrestamo1ActionPerformed(Ljava/awt/event/ActionEvent;)V @22: invokevirtual
+  Reason:
+    Type 'com/dnsoft/inmobiliaria/views/ConsultaCCPropietarioView' (current frame, stack[1]) is not assignable to 'java/awt/Component'
+  Current Frame:
+    bci: @22
+    flags: { }
+    locals: { 'com/dnsoft/inmobiliaria/views/MenuPrincipalView', 'java/awt/event/ActionEvent', 'com/dnsoft/inmobiliaria/views/ConsultaCCPropietarioView', 'com/dnsoft/inmobiliaria/controllers/ConsultaCCPropietariosController' }
+    stack: { 'com/dnsoft/inmobiliaria/utils/DecorateDesktopPane', 'com/dnsoft/inmobiliaria/views/ConsultaCCPropietarioView' }
+  Bytecode:
+    0x0000000: bb02 0459 b702 054d bb02 0659 2cb7 0207
+    0x0000010: 4e2a b400 3b2c b600 4b57 2db6 0208 b1  
+
+	at com.dnsoft.inmobiliaria.Main.main(Main.java:30)
