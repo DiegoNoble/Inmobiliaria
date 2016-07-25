@@ -60,7 +60,6 @@ public class ContratosDialog extends javax.swing.JDialog {
         cbMoneda = new javax.swing.JComboBox();
         jLabel8 = new javax.swing.JLabel();
         cbTipoReajustes = new javax.swing.JComboBox();
-        btnNuevoTipo = new javax.swing.JButton();
         jlFin = new javax.swing.JLabel();
         dpExtension = new org.jdesktop.swingx.JXDatePicker();
         jPanel7 = new javax.swing.JPanel();
@@ -84,6 +83,19 @@ public class ContratosDialog extends javax.swing.JDialog {
         lblExtension = new javax.swing.JLabel();
         cbTipoContrato = new javax.swing.JComboBox();
         jLTipoDepago = new javax.swing.JLabel();
+        panelDestinoAlquiler = new javax.swing.JPanel();
+        cbDestinoAlquiler = new javax.swing.JComboBox();
+        btnNuevoTipoDestino = new javax.swing.JButton();
+        panelGarantiaAlquiler = new javax.swing.JPanel();
+        txtMontoGarantia = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jlVencimineto1 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        txtObsGarantia = new javax.swing.JTextField();
+        jLabel18 = new javax.swing.JLabel();
+        cbMonedaGarantia = new javax.swing.JComboBox();
+        cbTipoGarantia = new javax.swing.JComboBox();
+        btnNuevoTipoGarantia = new javax.swing.JButton();
         panelVenta = new javax.swing.JPanel();
         txtValorTotal = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
@@ -112,12 +124,16 @@ public class ContratosDialog extends javax.swing.JDialog {
         txtCotizacion = new javax.swing.JTextField();
         lblTipoCotizacion = new javax.swing.JLabel();
         cbTipoCotizacion = new javax.swing.JComboBox();
-        jPanel4 = new javax.swing.JPanel();
-        chbActivo = new javax.swing.JCheckBox();
+        btnNuevoTipoReajuste = new javax.swing.JButton();
+        panelSituacion = new javax.swing.JPanel();
         lblContrato = new javax.swing.JLabel();
+        dpFechaInactivacion = new org.jdesktop.swingx.JXDatePicker();
+        chbActivo = new javax.swing.JCheckBox();
+        btnInactivar = new javax.swing.JButton();
+        jlFin2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(950, 750));
+        setPreferredSize(new java.awt.Dimension(1024, 750));
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
         jPanel2.setBackground(new java.awt.Color(204, 0, 0));
@@ -183,9 +199,8 @@ public class ContratosDialog extends javax.swing.JDialog {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipadx = 1;
         getContentPane().add(jPanel3, gridBagConstraints);
 
         jPanel1.setLayout(new java.awt.GridBagLayout());
@@ -209,6 +224,7 @@ public class ContratosDialog extends javax.swing.JDialog {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipadx = 1;
         getContentPane().add(jPanel1, gridBagConstraints);
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Condiciones contrato", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
@@ -218,17 +234,17 @@ public class ContratosDialog extends javax.swing.JDialog {
         jlInicio.setText("Fecha inicio");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridy = 5;
         jPanel5.add(jlInicio, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridy = 5;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         jPanel5.add(dpInicio, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridy = 5;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         jPanel5.add(dpFIn, gridBagConstraints);
@@ -258,28 +274,22 @@ public class ContratosDialog extends javax.swing.JDialog {
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridy = 7;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         jPanel5.add(cbTipoReajustes, gridBagConstraints);
-
-        btnNuevoTipo.setText("Nuevo tipo");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 6;
-        jPanel5.add(btnNuevoTipo, gridBagConstraints);
 
         jlFin.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jlFin.setText("Fecha fin");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridy = 5;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         jPanel5.add(jlFin, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 5;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridy = 5;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         jPanel5.add(dpExtension, gridBagConstraints);
@@ -353,7 +363,7 @@ public class ContratosDialog extends javax.swing.JDialog {
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 8;
+        gridBagConstraints.gridy = 9;
         gridBagConstraints.gridwidth = 6;
         jPanel5.add(jPanel7, gridBagConstraints);
 
@@ -361,34 +371,34 @@ public class ContratosDialog extends javax.swing.JDialog {
         chbAsegurado.setText("Asegurado ?");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridy = 4;
         jPanel5.add(chbAsegurado, gridBagConstraints);
 
         jLabel15.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel15.setText("Comisión %");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridy = 6;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         jPanel5.add(jLabel15, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridy = 6;
         gridBagConstraints.ipadx = 30;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         jPanel5.add(spComision, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridy = 6;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         jPanel5.add(cbIVA, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridy = 4;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         jPanel5.add(cbTipoPagoAlquiler, gridBagConstraints);
@@ -397,7 +407,7 @@ public class ContratosDialog extends javax.swing.JDialog {
         jLabel11.setText("I.V.A. comisión");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridy = 6;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         jPanel5.add(jLabel11, gridBagConstraints);
@@ -406,12 +416,13 @@ public class ContratosDialog extends javax.swing.JDialog {
         lblExtension.setText("Fecha extensión");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridy = 5;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         jPanel5.add(lblExtension, gridBagConstraints);
 
-        cbTipoContrato.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
+        cbTipoContrato.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
+        cbTipoContrato.setForeground(new java.awt.Color(0, 51, 255));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
@@ -423,10 +434,111 @@ public class ContratosDialog extends javax.swing.JDialog {
         jLTipoDepago.setText("Tipo pago");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridy = 4;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         jPanel5.add(jLTipoDepago, gridBagConstraints);
+
+        panelDestinoAlquiler.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Destino alquiler", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
+        panelDestinoAlquiler.setLayout(new java.awt.GridBagLayout());
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        panelDestinoAlquiler.add(cbDestinoAlquiler, gridBagConstraints);
+
+        btnNuevoTipoDestino.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/add.png"))); // NOI18N
+        btnNuevoTipoDestino.setBorder(null);
+        btnNuevoTipoDestino.setBorderPainted(false);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 0;
+        panelDestinoAlquiler.add(btnNuevoTipoDestino, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 7;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        jPanel5.add(panelDestinoAlquiler, gridBagConstraints);
+
+        panelGarantiaAlquiler.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Garantía alquiler", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
+        panelGarantiaAlquiler.setLayout(new java.awt.GridBagLayout());
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 100;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        panelGarantiaAlquiler.add(txtMontoGarantia, gridBagConstraints);
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel4.setText("Monto");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridy = 0;
+        panelGarantiaAlquiler.add(jLabel4, gridBagConstraints);
+
+        jlVencimineto1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jlVencimineto1.setText("Tipo garantía");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        panelGarantiaAlquiler.add(jlVencimineto1, gridBagConstraints);
+
+        jLabel16.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel16.setText("Observaciones");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        panelGarantiaAlquiler.add(jLabel16, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 6;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 100;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        panelGarantiaAlquiler.add(txtObsGarantia, gridBagConstraints);
+
+        jLabel18.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel18.setText("Moneda");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 0;
+        panelGarantiaAlquiler.add(jLabel18, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        panelGarantiaAlquiler.add(cbMonedaGarantia, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        panelGarantiaAlquiler.add(cbTipoGarantia, gridBagConstraints);
+
+        btnNuevoTipoGarantia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/add.png"))); // NOI18N
+        btnNuevoTipoGarantia.setBorder(null);
+        btnNuevoTipoGarantia.setBorderPainted(false);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 0;
+        panelGarantiaAlquiler.add(btnNuevoTipoGarantia, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridwidth = 7;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        jPanel5.add(panelGarantiaAlquiler, gridBagConstraints);
+        panelGarantiaAlquiler.getAccessibleContext().setAccessibleName("Garantía Alquiler");
 
         panelVenta.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Venta", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
         panelVenta.setLayout(new java.awt.GridBagLayout());
@@ -545,7 +657,7 @@ public class ContratosDialog extends javax.swing.JDialog {
         panelVenta.add(txtValorCuotas1, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.gridwidth = 7;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
@@ -569,23 +681,23 @@ public class ContratosDialog extends javax.swing.JDialog {
         panelAlquiler.add(txtValorAlquiler, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.gridwidth = 4;
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 2;
         jPanel5.add(panelAlquiler, gridBagConstraints);
 
         chbCierraMes.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         chbCierraMes.setText("Cierra mes?");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridy = 4;
         jPanel5.add(chbCierraMes, gridBagConstraints);
 
         lblTipoReajuste.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblTipoReajuste.setText("Tipo de reajuste");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridy = 7;
         jPanel5.add(lblTipoReajuste, gridBagConstraints);
 
         txtObservaciones.setColumns(20);
@@ -595,8 +707,8 @@ public class ContratosDialog extends javax.swing.JDialog {
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 6;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridwidth = 4;
         gridBagConstraints.gridheight = 6;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 1.0;
@@ -607,11 +719,11 @@ public class ContratosDialog extends javax.swing.JDialog {
         lblCotizacion.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblCotizacion.setText("Cotización");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridx = 8;
         gridBagConstraints.gridy = 1;
         jPanel5.add(lblCotizacion, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 7;
+        gridBagConstraints.gridx = 9;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.ipadx = 40;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
@@ -621,40 +733,84 @@ public class ContratosDialog extends javax.swing.JDialog {
         lblTipoCotizacion.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblTipoCotizacion.setText("Tipo cotización ");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridx = 6;
         gridBagConstraints.gridy = 1;
         jPanel5.add(lblTipoCotizacion, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridx = 7;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         jPanel5.add(cbTipoCotizacion, gridBagConstraints);
 
+        btnNuevoTipoReajuste.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/add.png"))); // NOI18N
+        btnNuevoTipoReajuste.setBorder(null);
+        btnNuevoTipoReajuste.setBorderPainted(false);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        jPanel5.add(btnNuevoTipoReajuste, gridBagConstraints);
+
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
         getContentPane().add(jPanel5, gridBagConstraints);
 
-        jPanel4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        panelSituacion.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        panelSituacion.setLayout(new java.awt.GridBagLayout());
+
+        lblContrato.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lblContrato.setForeground(new java.awt.Color(51, 102, 255));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 4;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        panelSituacion.add(lblContrato, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        panelSituacion.add(dpFechaInactivacion, gridBagConstraints);
 
         chbActivo.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         chbActivo.setSelected(true);
         chbActivo.setText("Activo");
-        jPanel4.add(chbActivo);
+        chbActivo.setEnabled(false);
+        chbActivo.setPreferredSize(new java.awt.Dimension(1024, 650));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        panelSituacion.add(chbActivo, gridBagConstraints);
 
-        lblContrato.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        lblContrato.setForeground(new java.awt.Color(0, 51, 204));
-        jPanel4.add(lblContrato);
+        btnInactivar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/delete_20chico.png"))); // NOI18N
+        btnInactivar.setBorder(null);
+        btnInactivar.setBorderPainted(false);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        panelSituacion.add(btnInactivar, gridBagConstraints);
+
+        jlFin2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jlFin2.setText("Fecha inactivación");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        panelSituacion.add(jlFin2, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-        getContentPane().add(jPanel4, gridBagConstraints);
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipadx = 1;
+        getContentPane().add(panelSituacion, gridBagConstraints);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -664,17 +820,23 @@ public class ContratosDialog extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public botones.BotonGuardar btnGuardar;
     public botones.BotonGuardar btnGuardarModificaciones;
+    public javax.swing.JButton btnInactivar;
     public javax.swing.JButton btnInmueble;
     public javax.swing.JButton btnInquilino;
-    public javax.swing.JButton btnNuevoTipo;
+    public javax.swing.JButton btnNuevoTipoDestino;
+    public javax.swing.JButton btnNuevoTipoGarantia;
+    public javax.swing.JButton btnNuevoTipoReajuste;
     public javax.swing.JButton btnRemoveInmueble;
     public javax.swing.JButton btnRemoveInquilino;
     public botones.BotonVolver btnVolver;
     public javax.swing.JComboBox cbDestino;
+    public javax.swing.JComboBox cbDestinoAlquiler;
     public javax.swing.JComboBox cbIVA;
     public javax.swing.JComboBox cbMoneda;
+    public javax.swing.JComboBox cbMonedaGarantia;
     public javax.swing.JComboBox cbTipoContrato;
     public javax.swing.JComboBox cbTipoCotizacion;
+    public javax.swing.JComboBox cbTipoGarantia;
     public javax.swing.JComboBox cbTipoPagoAlquiler;
     public javax.swing.JComboBox cbTipoReajustes;
     public javax.swing.JCheckBox chbActivo;
@@ -682,6 +844,7 @@ public class ContratosDialog extends javax.swing.JDialog {
     public javax.swing.JCheckBox chbCierraMes;
     public org.jdesktop.swingx.JXDatePicker dpExtension;
     public org.jdesktop.swingx.JXDatePicker dpFIn;
+    public org.jdesktop.swingx.JXDatePicker dpFechaInactivacion;
     public org.jdesktop.swingx.JXDatePicker dpInicio;
     public org.jdesktop.swingx.JXDatePicker dpVencimiento;
     public javax.swing.JLabel jLTipoDepago;
@@ -692,12 +855,15 @@ public class ContratosDialog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -706,21 +872,25 @@ public class ContratosDialog extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JLabel jlFin;
+    public javax.swing.JLabel jlFin2;
     public javax.swing.JLabel jlInicio;
     public javax.swing.JLabel jlInobiliaria;
     public javax.swing.JLabel jlPropietario;
     public javax.swing.JLabel jlVencimineto;
+    public javax.swing.JLabel jlVencimineto1;
     public javax.swing.JLabel lblContrato;
     public javax.swing.JLabel lblCotizacion;
     public javax.swing.JLabel lblExtension;
     public javax.swing.JLabel lblTipoCotizacion;
     public javax.swing.JLabel lblTipoReajuste;
     public javax.swing.JPanel panelAlquiler;
+    public javax.swing.JPanel panelDestinoAlquiler;
+    public javax.swing.JPanel panelGarantiaAlquiler;
+    public javax.swing.JPanel panelSituacion;
     public javax.swing.JPanel panelVenta;
     public javax.swing.JSpinner spComision;
     public javax.swing.JSpinner spMoraInmobiliaria;
@@ -733,6 +903,8 @@ public class ContratosDialog extends javax.swing.JDialog {
     public javax.swing.JTextField txtCotizacion;
     public javax.swing.JTextField txtInmueble;
     public javax.swing.JTextField txtInquilino;
+    public javax.swing.JTextField txtMontoGarantia;
+    public javax.swing.JTextField txtObsGarantia;
     public javax.swing.JTextArea txtObservaciones;
     public javax.swing.JTextField txtValorAlquiler;
     public javax.swing.JTextField txtValorCuotas1;

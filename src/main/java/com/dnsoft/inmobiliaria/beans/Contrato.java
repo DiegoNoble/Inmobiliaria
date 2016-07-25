@@ -46,6 +46,10 @@ public class Contrato extends AbstractPersistable<Long> {
     @Temporal(TemporalType.DATE)
     private Date fechaFin;
 
+    @Column(name = "fecha_inactivacion")
+    @Temporal(TemporalType.DATE)
+    private Date fechaInactivacion;
+
     @Column(name = "vencimiento_primer_cuota")
     @Temporal(TemporalType.DATE)
     private Date venciminetoPrimerCuota;
@@ -99,6 +103,17 @@ public class Contrato extends AbstractPersistable<Long> {
     @ManyToOne(fetch = FetchType.LAZY)
     private TipoReajuste tipoReajuste;
 
+    @JoinColumn(name = "garantia_alquiler_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    private GarantiaAlquiler garantiaAlquiler;
+    private Moneda monedaGarantia;
+    private BigDecimal montoGarantia;
+    private String obsGarantia;
+
+    @JoinColumn(name = "destino_alquiler_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    private DestinoAlquiler destinoAlquiler;
+
     @Enumerated(EnumType.STRING)
     private TipoContrato tipoContrato;
 
@@ -120,8 +135,7 @@ public class Contrato extends AbstractPersistable<Long> {
 
     private Integer cantidadCuotas;
     private BigDecimal valorCuota;
-    
-    
+
     private Integer cantidadCuotas1;
     private Integer cantidadCuotas2;
     private Integer cantidadCuotas3;
@@ -395,7 +409,6 @@ public class Contrato extends AbstractPersistable<Long> {
         this.cotizacion = cotizacion;
     }
 
- 
     public BigDecimal getValorCuotas2() {
         return valorCuotas2;
     }
@@ -436,7 +449,54 @@ public class Contrato extends AbstractPersistable<Long> {
         this.valorCuotas3 = valorCuotas3;
     }
 
-    
+    public GarantiaAlquiler getGarantiaAlquiler() {
+        return garantiaAlquiler;
+    }
+
+    public void setGarantiaAlquiler(GarantiaAlquiler garantiaAlquiler) {
+        this.garantiaAlquiler = garantiaAlquiler;
+    }
+
+    public Moneda getMonedaGarantia() {
+        return monedaGarantia;
+    }
+
+    public void setMonedaGarantia(Moneda monedaGarantia) {
+        this.monedaGarantia = monedaGarantia;
+    }
+
+    public BigDecimal getMontoGarantia() {
+        return montoGarantia;
+    }
+
+    public void setMontoGarantia(BigDecimal montoGarantia) {
+        this.montoGarantia = montoGarantia;
+    }
+
+    public String getObsGarantia() {
+        return obsGarantia;
+    }
+
+    public void setObsGarantia(String obsGarantia) {
+        this.obsGarantia = obsGarantia;
+    }
+
+    public DestinoAlquiler getDestinoAlquiler() {
+        return destinoAlquiler;
+    }
+
+    public void setDestinoAlquiler(DestinoAlquiler destinoAlquiler) {
+        this.destinoAlquiler = destinoAlquiler;
+    }
+
+    public Date getFechaInactivacion() {
+        return fechaInactivacion;
+    }
+
+    public void setFechaInactivacion(Date fechaInactivacion) {
+        this.fechaInactivacion = fechaInactivacion;
+    }
+
     @Override
     public String toString() {
 

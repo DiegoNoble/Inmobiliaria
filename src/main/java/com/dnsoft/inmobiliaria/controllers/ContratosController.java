@@ -7,7 +7,9 @@ package com.dnsoft.inmobiliaria.controllers;
 
 import com.dnsoft.inmobiliaria.views.ContratosDialog;
 import com.dnsoft.inmobiliaria.beans.Contrato;
+import com.dnsoft.inmobiliaria.beans.DestinoAlquiler;
 import com.dnsoft.inmobiliaria.beans.DestinoMoraEnum;
+import com.dnsoft.inmobiliaria.beans.GarantiaAlquiler;
 import com.dnsoft.inmobiliaria.beans.Iva;
 import com.dnsoft.inmobiliaria.beans.Inmueble;
 import com.dnsoft.inmobiliaria.beans.Inquilino;
@@ -19,6 +21,8 @@ import com.dnsoft.inmobiliaria.beans.TipoCotizacionContrato;
 import com.dnsoft.inmobiliaria.beans.TipoPagoAlquiler;
 import com.dnsoft.inmobiliaria.beans.TipoReajuste;
 import com.dnsoft.inmobiliaria.daos.IContratoDAO;
+import com.dnsoft.inmobiliaria.daos.IDestinoAlquilerDAO;
+import com.dnsoft.inmobiliaria.daos.IGarantiaAlquilerDAO;
 import com.dnsoft.inmobiliaria.daos.IInmuebleDAO;
 import com.dnsoft.inmobiliaria.daos.IRecibosDAO;
 import com.dnsoft.inmobiliaria.daos.IIvaDAO;
@@ -27,6 +31,8 @@ import com.dnsoft.inmobiliaria.utils.CalculaRecibos;
 import com.dnsoft.inmobiliaria.utils.Container;
 import com.dnsoft.inmobiliaria.utils.ControlarEntradaTexto;
 import com.dnsoft.inmobiliaria.utils.RollOverButtonsChicos;
+import com.dnsoft.inmobiliaria.views.CRUDDestinoAlquiler;
+import com.dnsoft.inmobiliaria.views.CRUDGarantiaAlquileres;
 import com.dnsoft.inmobiliaria.views.InmueblesDialog;
 import com.dnsoft.inmobiliaria.views.InmuebleDetallesDialog_new;
 import com.dnsoft.inmobiliaria.views.InquilinoDetallesDlg;
@@ -57,6 +63,7 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.text.DefaultFormatter;
+import org.apache.poi.poifs.crypt.ChainingMode;
 
 /**
  *
@@ -73,6 +80,8 @@ public final class ContratosController implements ActionListener {
     IContratoDAO contratoDAO;
     IInmuebleDAO inmuebleDAO;
     ITipoReajusteDAO tiporeajusteDAO;
+    IGarantiaAlquilerDAO iGarantiaAlquilerDAO;
+    IDestinoAlquilerDAO iDestinoAlquilerDAO;
     IRecibosDAO recibosDAO;
     IIvaDAO iivadao;
     Contrato contratoSeleccionado;
@@ -84,6 +93,7 @@ public final class ContratosController implements ActionListener {
         this.container = Container.getInstancia();
         this.view = view;
         this.desktopPane = desktopPane;
+        view.panelSituacion.setVisible(false);
         inicia();
         this.view.btnGuardarModificaciones.setVisible(false);
         this.view.btnGuardar.setVisible(true);
@@ -106,6 +116,8 @@ public final class ContratosController implements ActionListener {
         this.view = view;
         this.contratoSeleccionado = contratoSeleccionado;
         this.respaldoContrato = contratoSeleccionado;
+        this.view.panelSituacion.setVisible(true);
+        this.view.cbTipoContrato.setEnabled(false);
         inicia();
         this.view.btnGuardarModificaciones.setVisible(true);
         this.view.btnGuardar.setVisible(false);
@@ -121,8 +133,17 @@ public final class ContratosController implements ActionListener {
     private void inicia() {
 
         view.setLocationRelativeTo(null);
-        this.view.btnNuevoTipo.setActionCommand("btNuevoTipoReajuste");
-        this.view.btnNuevoTipo.addActionListener(this);
+        this.view.btnNuevoTipoReajuste.setActionCommand("btNuevoTipoReajuste");
+        this.view.btnNuevoTipoReajuste.addActionListener(this);
+
+        this.view.btnNuevoTipoGarantia.setActionCommand("btNuevoTipoGarantia");
+        this.view.btnNuevoTipoGarantia.addActionListener(this);
+
+        this.view.btnInactivar.setActionCommand("btnInactivar");
+        this.view.btnInactivar.addActionListener(this);
+
+        this.view.btnNuevoTipoDestino.setActionCommand("btnNuevoTipoDestino");
+        this.view.btnNuevoTipoDestino.addActionListener(this);
 
         this.view.btnInmueble.setActionCommand("btnInmueble");
         this.view.btnInmueble.addActionListener(this);
@@ -148,6 +169,7 @@ public final class ContratosController implements ActionListener {
         Character chs[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.'};
         Character chsInt[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
         view.txtValorTotal.setDocument(new ControlarEntradaTexto(10, chs));
+        view.txtMontoGarantia.setDocument(new ControlarEntradaTexto(10, chs));
 
         view.txtValorCuotas1.setDocument(new ControlarEntradaTexto(10, chs));
         view.txtValorCuotas2.setDocument(new ControlarEntradaTexto(10, chs));
@@ -164,6 +186,8 @@ public final class ContratosController implements ActionListener {
 
         contratoDAO = container.getBean(IContratoDAO.class);
         inmuebleDAO = container.getBean(IInmuebleDAO.class);
+        iDestinoAlquilerDAO = container.getBean(IDestinoAlquilerDAO.class);
+        iGarantiaAlquilerDAO = container.getBean(IGarantiaAlquilerDAO.class);
         tiporeajusteDAO = container.getBean(ITipoReajusteDAO.class);
         recibosDAO = container.getBean(IRecibosDAO.class);
         iivadao = container.getBean(IIvaDAO.class);
@@ -182,6 +206,7 @@ public final class ContratosController implements ActionListener {
         //.spCuotas.setModel(new SpinnerNumberModel(1, 1, 500, 1));
         view.cbTipoPagoAlquiler.setModel(new DefaultComboBoxModel(TipoPagoAlquiler.values()));
         view.cbMoneda.setModel(new DefaultComboBoxModel(Moneda.values()));
+        view.cbMonedaGarantia.setModel(new DefaultComboBoxModel(Moneda.values()));
         view.cbTipoContrato.setModel(new DefaultComboBoxModel(TipoContrato.values()));
         view.cbTipoCotizacion.setModel(new DefaultComboBoxModel(TipoCotizacionContrato.values()));
         new RollOverButtonsChicos(view.btnInquilino).RollOverButtonBuscar();
@@ -192,6 +217,8 @@ public final class ContratosController implements ActionListener {
         buscaIVAs();
         configuraComboDestino();
         cargaTipoReajuste();
+        cargaDestinoAlquiler();
+        cargaGarantiasAlquiler();
         configuraSpinner();
         accionesBotones();
         habilitaCamposAlquiler();
@@ -331,11 +358,29 @@ public final class ContratosController implements ActionListener {
 
     }
 
-    void cargaTipoReajuste() {
+    public void cargaTipoReajuste() {
         view.cbTipoReajustes.removeAllItems();
         List<TipoReajuste> reajustes = tiporeajusteDAO.findAll();
         for (TipoReajuste tipo : reajustes) {
             view.cbTipoReajustes.addItem(tipo);
+        }
+
+    }
+
+    public void cargaGarantiasAlquiler() {
+        view.cbTipoGarantia.removeAllItems();
+        List<GarantiaAlquiler> garantias = iGarantiaAlquilerDAO.findAll();
+        for (GarantiaAlquiler garantia : garantias) {
+            view.cbTipoGarantia.addItem(garantia);
+        }
+
+    }
+
+    public void cargaDestinoAlquiler() {
+        view.cbDestinoAlquiler.removeAllItems();
+        List<DestinoAlquiler> destinos = iDestinoAlquilerDAO.findAll();
+        for (DestinoAlquiler destino : destinos) {
+            view.cbDestinoAlquiler.addItem(destino);
         }
 
     }
@@ -402,6 +447,12 @@ public final class ContratosController implements ActionListener {
                         contrato.setTipoPagoAlquiler((TipoPagoAlquiler) view.cbTipoPagoAlquiler.getSelectedItem());
                         contrato.setCierraMes(view.chbCierraMes.isSelected());
 
+                        contrato.setDestinoAlquiler((DestinoAlquiler) view.cbDestinoAlquiler.getSelectedItem());
+                        contrato.setGarantiaAlquiler((GarantiaAlquiler) view.cbTipoGarantia.getSelectedItem());
+                        contrato.setMonedaGarantia((Moneda) view.cbMonedaGarantia.getSelectedItem());
+                        contrato.setMontoGarantia(BigDecimal.valueOf(new Double(view.txtMontoGarantia.getText())));
+                        contrato.setObsGarantia(view.txtObsGarantia.getText());
+
                     } else if (view.cbTipoContrato.getSelectedItem() == TipoContrato.VENTA) {
                         calculaSaldo();
                         contrato.setValorTotal(new BigDecimal(view.txtValorTotal.getText()));
@@ -420,7 +471,7 @@ public final class ContratosController implements ActionListener {
 
                     }
 
-                    contrato.setActivo(view.chbActivo.isSelected());
+                    //contrato.setActivo(view.chbActivo.isSelected());
                     contrato.setObservaciones(view.txtObservaciones.getText());
                     contrato.setPorcentajeMoraTotal((Double) view.spPorcentajeMora.getValue());
                     contrato.setPorcentajeMoraInmobiliaria((Double) view.spMoraInmobiliaria.getValue());
@@ -473,7 +524,15 @@ public final class ContratosController implements ActionListener {
         view.panelAlquiler.setVisible(false);
         view.lblExtension.setVisible(false);
         view.cbTipoReajustes.setVisible(false);
-        view.btnNuevoTipo.setVisible(false);
+        view.btnNuevoTipoReajuste.setVisible(false);
+        /*view.btnNuevoTipoGarantia.setVisible(false);
+         view.btnNuevoTipoDestino.setVisible(false);
+         view.txtObsGarantia.setVisible(true);
+         view.cbTipoGarantia.setVisible(true);
+         view.cbDestinoAlquiler.setVisible(true);
+         view.txtMontoGarantia.setVisible(true);*/
+        view.panelDestinoAlquiler.setVisible(false);
+        view.panelGarantiaAlquiler.setVisible(false);
         view.lblTipoReajuste.setVisible(false);
         view.cbTipoReajustes.setSelectedItem(null);
         view.chbAsegurado.setVisible(false);
@@ -500,7 +559,9 @@ public final class ContratosController implements ActionListener {
         view.panelAlquiler.setVisible(true);
         view.lblExtension.setVisible(true);
         view.cbTipoReajustes.setVisible(true);
-        view.btnNuevoTipo.setVisible(true);
+        view.btnNuevoTipoReajuste.setVisible(true);
+        view.panelDestinoAlquiler.setVisible(true);
+        view.panelGarantiaAlquiler.setVisible(true);
         view.lblTipoReajuste.setVisible(true);
         view.chbAsegurado.setVisible(true);
         view.cbTipoPagoAlquiler.setVisible(true);
@@ -596,6 +657,32 @@ public final class ContratosController implements ActionListener {
 
                 inmuebleController.go();
                 break;
+
+            case "btNuevoTipoGarantia":
+                CRUDGarantiaAlquileres garantias = new CRUDGarantiaAlquileres(null, true, null, this);
+                garantias.setVisible(true);
+                garantias.toFront();
+                break;
+
+            case "btnNuevoTipoDestino":
+                CRUDDestinoAlquiler destino = new CRUDDestinoAlquiler(null, true, null, this);
+                destino.setVisible(true);
+                destino.toFront();
+                break;
+
+            case "btnInactivar":
+                Date fecha = view.dpFechaInactivacion.getDate();
+                if (fecha == null) {
+                    JOptionPane.showMessageDialog(null, "Debe ingresar la fecha de inactivación", "Error", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    contratoSeleccionado.setFechaInactivacion(fecha);
+                    contratoSeleccionado.setActivo(false);
+                    contratoDAO.save(contratoSeleccionado);
+                    JOptionPane.showMessageDialog(view, "El contrato se inactivo correctamente", "Correcto", JOptionPane.INFORMATION_MESSAGE);
+                }
+
+                break;
+
             default:
                 throw new AssertionError();
         }
@@ -667,8 +754,10 @@ public final class ContratosController implements ActionListener {
         this.view.lblContrato.setText("Contrato Nro: " + contratoSeleccionado.getId());
         this.view.dpInicio.setDate(contratoSeleccionado.getFechaInicio());
         this.view.dpFIn.setDate(contratoSeleccionado.getFechaFin());
+
         this.view.chbActivo.setSelected(contratoSeleccionado.getActivo());
 
+        this.view.dpFechaInactivacion.setDate(contratoSeleccionado.getFechaInactivacion());
         if (contratoSeleccionado.getTipoContrato() == TipoContrato.VENTA) {
             this.view.txtValorTotal.setText(contratoSeleccionado.getValorTotal().toString());
             this.view.txtValorCuotas1.setText(contratoSeleccionado.getValorCuota().toString());
@@ -685,6 +774,12 @@ public final class ContratosController implements ActionListener {
             this.view.chbCierraMes.setSelected(contratoSeleccionado.getCierraMes());
             this.view.chbAsegurado.setSelected(contratoSeleccionado.getAsegurado());
             this.view.cbTipoPagoAlquiler.setSelectedItem(contratoSeleccionado.getTipoPagoAlquiler());
+
+            view.cbDestinoAlquiler.setSelectedItem(contratoSeleccionado.getDestinoAlquiler());
+            view.cbTipoGarantia.setSelectedItem(contratoSeleccionado.getGarantiaAlquiler());
+            view.cbMonedaGarantia.setSelectedItem(contratoSeleccionado.getMonedaGarantia());
+            view.txtMontoGarantia.setText(contratoSeleccionado.getMonedaGarantia().toString());
+            view.txtObsGarantia.setText(contratoSeleccionado.getObsGarantia());
         }
         this.view.cbMoneda.setSelectedItem(contratoSeleccionado.getMoneda());
         this.view.cbTipoCotizacion.setSelectedItem(contratoSeleccionado.getTipoCotizacionContrato());

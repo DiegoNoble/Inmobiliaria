@@ -32,9 +32,9 @@ public final class MenuPrincipalView extends javax.swing.JFrame {
         initComponents();
         //setIconImage(icon);
         /*Image icon = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/imagenes/logoTrans.png"));
-        setIconImage(icon);
-        setVisible(true);*/
-        
+         setIconImage(icon);
+         setVisible(true);*/
+
         setSize(1060, 768);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
 
@@ -48,7 +48,6 @@ public final class MenuPrincipalView extends javax.swing.JFrame {
 
         //mnuItemPropiedades2ActionPerformed(null);
         //actualizaContratos();
-        
     }
 
     void actualizaContratos() {
@@ -71,7 +70,6 @@ public final class MenuPrincipalView extends javax.swing.JFrame {
 
     }
 
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -103,6 +101,10 @@ public final class MenuPrincipalView extends javax.swing.JFrame {
         jSeparator8 = new javax.swing.JPopupMenu.Separator();
         mnuCotizacion3 = new javax.swing.JMenuItem();
         jSeparator7 = new javax.swing.JPopupMenu.Separator();
+        mnuCotizacion28 = new javax.swing.JMenuItem();
+        jSeparator48 = new javax.swing.JPopupMenu.Separator();
+        mnuCotizacion29 = new javax.swing.JMenuItem();
+        jSeparator49 = new javax.swing.JPopupMenu.Separator();
         mnuCotizacion9 = new javax.swing.JMenuItem();
         jSeparator9 = new javax.swing.JPopupMenu.Separator();
         mnuCotizacion12 = new javax.swing.JMenuItem();
@@ -353,6 +355,30 @@ public final class MenuPrincipalView extends javax.swing.JFrame {
         });
         jMenu1.add(mnuCotizacion3);
         jMenu1.add(jSeparator7);
+
+        mnuCotizacion28.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
+        mnuCotizacion28.setText(" Garantías alquileres");
+        mnuCotizacion28.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        mnuCotizacion28.setBorderPainted(true);
+        mnuCotizacion28.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuCotizacion28ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(mnuCotizacion28);
+        jMenu1.add(jSeparator48);
+
+        mnuCotizacion29.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
+        mnuCotizacion29.setText(" Destino alquileres");
+        mnuCotizacion29.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        mnuCotizacion29.setBorderPainted(true);
+        mnuCotizacion29.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuCotizacion29ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(mnuCotizacion29);
+        jMenu1.add(jSeparator49);
 
         mnuCotizacion9.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         mnuCotizacion9.setText(" Rubros ");
@@ -1273,6 +1299,20 @@ public final class MenuPrincipalView extends javax.swing.JFrame {
 
     }//GEN-LAST:event_mnuCotizacion26ActionPerformed
 
+    private void mnuCotizacion28ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuCotizacion28ActionPerformed
+
+        CRUDGarantiaAlquileres garantias = new CRUDGarantiaAlquileres(this, true, this, null);
+        garantias.setVisible(true);
+        garantias.toFront();
+
+    }//GEN-LAST:event_mnuCotizacion28ActionPerformed
+
+    private void mnuCotizacion29ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuCotizacion29ActionPerformed
+        CRUDDestinoAlquiler destino = new CRUDDestinoAlquiler(this, true, this, null);
+        destino.setVisible(true);
+        destino.toFront();
+    }//GEN-LAST:event_mnuCotizacion29ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel fondo;
     private javax.swing.JMenu jMenu1;
@@ -1323,6 +1363,8 @@ public final class MenuPrincipalView extends javax.swing.JFrame {
     private javax.swing.JPopupMenu.Separator jSeparator45;
     private javax.swing.JPopupMenu.Separator jSeparator46;
     private javax.swing.JPopupMenu.Separator jSeparator47;
+    private javax.swing.JPopupMenu.Separator jSeparator48;
+    private javax.swing.JPopupMenu.Separator jSeparator49;
     private javax.swing.JPopupMenu.Separator jSeparator5;
     private javax.swing.JPopupMenu.Separator jSeparator6;
     private javax.swing.JPopupMenu.Separator jSeparator7;
@@ -1353,6 +1395,8 @@ public final class MenuPrincipalView extends javax.swing.JFrame {
     private javax.swing.JMenuItem mnuCotizacion24;
     private javax.swing.JMenuItem mnuCotizacion25;
     private javax.swing.JMenuItem mnuCotizacion26;
+    private javax.swing.JMenuItem mnuCotizacion28;
+    private javax.swing.JMenuItem mnuCotizacion29;
     private javax.swing.JMenuItem mnuCotizacion3;
     private javax.swing.JMenuItem mnuCotizacion4;
     private javax.swing.JMenuItem mnuCotizacion5;
