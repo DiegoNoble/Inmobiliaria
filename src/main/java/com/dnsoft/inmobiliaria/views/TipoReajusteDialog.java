@@ -1,7 +1,8 @@
 package com.dnsoft.inmobiliaria.views;
 
-import com.dnsoft.inmobiliaria.beans.TipoReajusteAlquilerEnum;
 import com.dnsoft.inmobiliaria.beans.TipoReajuste;
+import com.dnsoft.inmobiliaria.beans.TipoReajusteAlquilerEnum;
+import com.dnsoft.inmobiliaria.controllers.ContratosController;
 import com.dnsoft.inmobiliaria.daos.ITipoReajusteDAO;
 import com.dnsoft.inmobiliaria.models.TipoReajusteTableModel;
 import com.dnsoft.inmobiliaria.utils.Container;
@@ -11,7 +12,6 @@ import java.awt.Component;
 import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
@@ -34,16 +34,18 @@ public final class TipoReajusteDialog extends javax.swing.JDialog {
     List<TipoReajuste> listTiporeajuste;
     TipoReajusteTableModel tableModel;
     ListSelectionModel listModel;
+    ContratosController contratosController;
     int nuevo = 0;
 
-    public TipoReajusteDialog(java.awt.Frame parent, boolean modal, Component frame) {
+    public TipoReajusteDialog(java.awt.Frame parent, boolean modal, Component frame, ContratosController contratosController) {
         super(parent, modal);
+        this.contratosController = contratosController;
         initComponents();
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/imagenes/logoTrans.png")));
         //CIERRA JOPTIONPANE CON ESCAPE
         jPanel1.grabFocus();
         jPanel1.addKeyListener(new OptionPaneEstandar(this));
-        
+
         this.container = Container.getInstancia();
         setLocationRelativeTo(frame);
         inicio();
@@ -53,10 +55,8 @@ public final class TipoReajusteDialog extends javax.swing.JDialog {
     void inicio() {
         tiporeajusteDAO = container.getBean(ITipoReajusteDAO.class);
         Character chs[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.'};
-        txtValor.setDocument(new ControlarEntradaTexto(10, chs));
         txtPeriodicidad.setDocument(new ControlarEntradaTexto(2, chs));
-        txtPeriodo.setDocument(new ControlarEntradaTexto(2, chs));
-        cbTipoReajuste.setModel(new DefaultComboBoxModel(TipoReajusteAlquilerEnum.values()));
+        cbTipo.setModel(new DefaultComboBoxModel(TipoReajusteAlquilerEnum.values()));
         configuraTbl();
         buscaDatos();
         accionesBotones();
@@ -85,6 +85,9 @@ public final class TipoReajusteDialog extends javax.swing.JDialog {
             public void mouseClicked(MouseEvent evt) {
 
                 guardar();
+                if (contratosController != null) {
+                    contratosController.cargaTipoReajuste();
+                }
                 deshabilitaCampos();
                 limpiaCampos();
                 buscaDatos();
@@ -103,6 +106,22 @@ public final class TipoReajusteDialog extends javax.swing.JDialog {
             }
         });
 
+        btnVolver.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent evt) {
+                if (contratosController != null) {
+                    contratosController.cargaTipoReajuste();
+                }
+                dispose();
+            }
+        });
+        btnEditar.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent evt) {
+                nuevo = 0;
+                habilitaCampos();
+            }
+        });
     }
 
     final void configuraTbl() {
@@ -123,9 +142,13 @@ public final class TipoReajusteDialog extends javax.swing.JDialog {
                 if (tbl.getSelectedRow() != -1) {
                     tiporeajusteSeleccionado = listTiporeajuste.get(tbl.getSelectedRow());
                     muestraDetalles();
-
+                    btnEditar.setEnabled(true);
+                    btnValores.setEnabled(true);
                 } else {
+                    deshabilitaCampos();
                     limpiaCampos();
+                    btnEditar.setEnabled(false);
+                    btnValores.setEnabled(false);
                 }
             }
         });
@@ -140,18 +163,22 @@ public final class TipoReajusteDialog extends javax.swing.JDialog {
 
     private void guardar() {
         try {
-            TipoReajuste nuevoTipoReajuste = new TipoReajuste();
-            nuevoTipoReajuste.setDescripcion(txtDescripcion.getText());
-            nuevoTipoReajuste.setNombre(txtNombre.getText());
-            nuevoTipoReajuste.setPeriodicidad(Integer.parseInt(txtPeriodicidad.getText()));
-            nuevoTipoReajuste.setPeriodogeneracion(Integer.parseInt(txtPeriodo.getText()));
-            if (cbTipoReajuste.getSelectedItem() == TipoReajusteAlquilerEnum.FIJO) {
-                nuevoTipoReajuste.setValor(BigDecimal.valueOf(Double.parseDouble(txtValor.getText())));
+            if (nuevo == 1) {
+                TipoReajuste nuevoTipoReajuste = new TipoReajuste();
+                nuevoTipoReajuste.setDescripcion(txtDescripcion.getText());
+                nuevoTipoReajuste.setNombre(txtNombre.getText());
+                nuevoTipoReajuste.setPeriodicidad(Integer.parseInt(txtPeriodicidad.getText()));
+                nuevoTipoReajuste.setTipoReajusteAlquilerEnum((TipoReajusteAlquilerEnum) cbTipo.getSelectedItem());
+                tiporeajusteDAO.save(nuevoTipoReajuste);
+                JOptionPane.showMessageDialog(this, "Se guardaron los datos correctamente", "Correcto", JOptionPane.INFORMATION_MESSAGE);
+            } else if (nuevo == 0) {
+                tiporeajusteSeleccionado.setDescripcion(txtDescripcion.getText());
+                tiporeajusteSeleccionado.setNombre(txtNombre.getText());
+                tiporeajusteSeleccionado.setPeriodicidad(Integer.parseInt(txtPeriodicidad.getText()));
+                tiporeajusteSeleccionado.setTipoReajusteAlquilerEnum((TipoReajusteAlquilerEnum) cbTipo.getSelectedItem());
+                tiporeajusteDAO.save(tiporeajusteSeleccionado);
+                JOptionPane.showMessageDialog(this, "Se guardaron los datos correctamente", "Correcto", JOptionPane.INFORMATION_MESSAGE);
             }
-            nuevoTipoReajuste.setTipoReajusteAlquilerEnum((TipoReajusteAlquilerEnum) cbTipoReajuste.getSelectedItem());
-
-            tiporeajusteDAO.save(nuevoTipoReajuste);
-            JOptionPane.showMessageDialog(this, "Se guardaron los datos correctamente", "Correcto", JOptionPane.INFORMATION_MESSAGE);
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error al guardar datos " + e, "Error", JOptionPane.ERROR_MESSAGE);
@@ -163,27 +190,20 @@ public final class TipoReajusteDialog extends javax.swing.JDialog {
         txtDescripcion.setEnabled(true);
         txtNombre.setEnabled(true);
         txtPeriodicidad.setEnabled(true);
-        txtPeriodo.setEnabled(true);
-        if (cbTipoReajuste.getSelectedItem() == TipoReajusteAlquilerEnum.FIJO) {
-            txtValor.setEnabled(true);
-        } else {
-            txtValor.setEnabled(false);
-            txtValor.setText("");
+        cbTipo.setEnabled(true);
 
-        }
-        cbTipoReajuste.setEnabled(true);
         btnCancelar.setEnabled(true);
         btnGuardar.setEnabled(true);
         btnNuevo.setEnabled(false);
+
     }
 
     void deshabilitaCampos() {
         txtDescripcion.setEnabled(false);
         txtNombre.setEnabled(false);
         txtPeriodicidad.setEnabled(false);
-        txtPeriodo.setEnabled(false);
-        txtValor.setEnabled(false);
-        cbTipoReajuste.setEnabled(false);
+        cbTipo.setEnabled(false);
+
         btnCancelar.setEnabled(false);
         btnGuardar.setEnabled(false);
         btnNuevo.setEnabled(true);
@@ -193,24 +213,12 @@ public final class TipoReajusteDialog extends javax.swing.JDialog {
         txtDescripcion.setText("");
         txtNombre.setText("");
         txtPeriodicidad.setText("");
-        txtPeriodo.setText("");
-        txtValor.setText("");
     }
 
     void muestraDetalles() {
         txtDescripcion.setText(tiporeajusteSeleccionado.getDescripcion());
         txtNombre.setText(tiporeajusteSeleccionado.getNombre());
         txtPeriodicidad.setText(tiporeajusteSeleccionado.getPeriodicidad().toString());
-        txtPeriodo.setText(tiporeajusteSeleccionado.getPeriodogeneracion().toString());
-        cbTipoReajuste.setSelectedItem(tiporeajusteSeleccionado.getTipoReajusteAlquilerEnum());
-
-        if (tiporeajusteSeleccionado.getTipoReajusteAlquilerEnum() == TipoReajusteAlquilerEnum.FIJO) {
-            txtValor.setText(tiporeajusteSeleccionado.getValor().toString());
-            btnValores.setEnabled(false);
-        } else if (tiporeajusteSeleccionado.getTipoReajusteAlquilerEnum() == TipoReajusteAlquilerEnum.COEFICIENTE_VARIABLE) {
-            txtValor.setText("");
-            btnValores.setEnabled(true);
-        }
 
     }
 
@@ -225,6 +233,8 @@ public final class TipoReajusteDialog extends javax.swing.JDialog {
         btnGuardar = new botones.BotonGuardar();
         btnNuevo = new botones.BotonNuevo();
         btnCancelar = new botones.BotonCancelar();
+        btnVolver = new botones.BotonVolver();
+        btnEditar = new botones.BotonEdicion();
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
@@ -232,17 +242,13 @@ public final class TipoReajusteDialog extends javax.swing.JDialog {
         tbl = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         txtPeriodicidad = new javax.swing.JTextField();
-        txtPeriodo = new javax.swing.JTextField();
-        txtValor = new javax.swing.JTextField();
         txtNombre = new javax.swing.JTextField();
-        cbTipoReajuste = new javax.swing.JComboBox();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         txtDescripcion = new javax.swing.JTextField();
+        cbTipo = new javax.swing.JComboBox();
+        jLabel7 = new javax.swing.JLabel();
 
         jButton2.setText("jButton2");
 
@@ -255,14 +261,14 @@ public final class TipoReajusteDialog extends javax.swing.JDialog {
         btnValores.setEnabled(false);
         btnValores.setText("Valores");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
         jPanel3.add(btnValores, gridBagConstraints);
 
         btnGuardar.setEnabled(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
         jPanel3.add(btnGuardar, gridBagConstraints);
@@ -274,10 +280,23 @@ public final class TipoReajusteDialog extends javax.swing.JDialog {
 
         btnCancelar.setEnabled(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
         jPanel3.add(btnCancelar, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
+        jPanel3.add(btnVolver, gridBagConstraints);
+
+        btnEditar.setEnabled(false);
+        btnEditar.setText("Editar");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
+        jPanel3.add(btnEditar, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -338,24 +357,6 @@ public final class TipoReajusteDialog extends javax.swing.JDialog {
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         jPanel1.add(txtPeriodicidad, gridBagConstraints);
 
-        txtPeriodo.setEnabled(false);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.ipadx = 100;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-        jPanel1.add(txtPeriodo, gridBagConstraints);
-
-        txtValor.setEnabled(false);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.ipadx = 100;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-        jPanel1.add(txtValor, gridBagConstraints);
-
         txtNombre.setEnabled(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
@@ -364,34 +365,6 @@ public final class TipoReajusteDialog extends javax.swing.JDialog {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         jPanel1.add(txtNombre, gridBagConstraints);
-
-        cbTipoReajuste.setEnabled(false);
-        cbTipoReajuste.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbTipoReajusteActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.ipadx = 200;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-        jPanel1.add(cbTipoReajuste, gridBagConstraints);
-
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel1.setText("Periodo de generación");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 2;
-        jPanel1.add(jLabel1, gridBagConstraints);
-
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel2.setText("Valor");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
-        jPanel1.add(jLabel2, gridBagConstraints);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel4.setText("Periodicidad");
@@ -406,13 +379,6 @@ public final class TipoReajusteDialog extends javax.swing.JDialog {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         jPanel1.add(jLabel5, gridBagConstraints);
-
-        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel7.setText("Tipo de reajuste");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        jPanel1.add(jLabel7, gridBagConstraints);
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel6.setText("Descripción");
@@ -430,6 +396,21 @@ public final class TipoReajusteDialog extends javax.swing.JDialog {
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         jPanel1.add(txtDescripcion, gridBagConstraints);
 
+        cbTipo.setEnabled(false);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        jPanel1.add(cbTipo, gridBagConstraints);
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel7.setText("Tipo");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jPanel1.add(jLabel7, gridBagConstraints);
+
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
@@ -440,28 +421,16 @@ public final class TipoReajusteDialog extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cbTipoReajusteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTipoReajusteActionPerformed
-
-        if (nuevo == 1) {
-
-            if (cbTipoReajuste.getSelectedItem() == TipoReajusteAlquilerEnum.FIJO) {
-                txtValor.setEnabled(true);
-            } else if (cbTipoReajuste.getSelectedItem() == TipoReajusteAlquilerEnum.COEFICIENTE_VARIABLE) {
-                txtValor.setEnabled(false);
-            }
-        }
-    }//GEN-LAST:event_cbTipoReajusteActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private botones.BotonCancelar btnCancelar;
+    private botones.BotonEdicion btnEditar;
     private botones.BotonGuardar btnGuardar;
     private botones.BotonNuevo btnNuevo;
     private botones.BotonPagar btnValores;
-    private javax.swing.JComboBox cbTipoReajuste;
+    private botones.BotonVolver btnVolver;
+    private javax.swing.JComboBox cbTipo;
     private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -476,8 +445,6 @@ public final class TipoReajusteDialog extends javax.swing.JDialog {
     private javax.swing.JTextField txtDescripcion;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtPeriodicidad;
-    private javax.swing.JTextField txtPeriodo;
-    private javax.swing.JTextField txtValor;
     // End of variables declaration//GEN-END:variables
 
 }

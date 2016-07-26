@@ -38,7 +38,7 @@ public class Contrato extends AbstractPersistable<Long> {
     @Temporal(TemporalType.DATE)
     private Date fechaInicio;
 
-    @Column(name = "fecha_eUPDxtencion")
+    @Column(name = "fecha_extencion")
     @Temporal(TemporalType.DATE)
     private Date fechaExtencion;
 
@@ -49,6 +49,10 @@ public class Contrato extends AbstractPersistable<Long> {
     @Column(name = "fecha_inactivacion")
     @Temporal(TemporalType.DATE)
     private Date fechaInactivacion;
+
+    @Column(name = "fecha_reajuste")
+    @Temporal(TemporalType.DATE)
+    private Date fechaReajuste;
 
     @Column(name = "vencimiento_primer_cuota")
     @Temporal(TemporalType.DATE)
@@ -106,6 +110,7 @@ public class Contrato extends AbstractPersistable<Long> {
     @JoinColumn(name = "garantia_alquiler_id")
     @ManyToOne(fetch = FetchType.LAZY)
     private GarantiaAlquiler garantiaAlquiler;
+    
     private Moneda monedaGarantia;
     private BigDecimal montoGarantia;
     private String obsGarantia;
@@ -199,6 +204,14 @@ public class Contrato extends AbstractPersistable<Long> {
 
     public void setFechaFin(Date fechafin) {
         this.fechaFin = fechafin;
+    }
+
+    public Date getFechaReajuste() {
+        return fechaReajuste;
+    }
+
+    public void setFechaReajuste(Date fechaReajuste) {
+        this.fechaReajuste = fechaReajuste;
     }
 
     public Date getVenciminetoPrimerCuota() {

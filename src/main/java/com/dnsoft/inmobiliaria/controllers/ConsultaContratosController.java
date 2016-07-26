@@ -7,9 +7,11 @@ package com.dnsoft.inmobiliaria.controllers;
 
 import com.dnsoft.inmobiliaria.views.ContratosDialog;
 import com.dnsoft.inmobiliaria.Renderers.TableRendererColorActivo;
+import com.dnsoft.inmobiliaria.Renderers.TableRendererConsultaContratos;
 import com.dnsoft.inmobiliaria.beans.Contrato;
 import com.dnsoft.inmobiliaria.beans.Inmueble;
 import com.dnsoft.inmobiliaria.beans.Inquilino;
+import com.dnsoft.inmobiliaria.beans.TipoContrato;
 import com.dnsoft.inmobiliaria.daos.IContratoDAO;
 import com.dnsoft.inmobiliaria.daos.IGastoInmuebleInquilinoDAO;
 import com.dnsoft.inmobiliaria.daos.IInmuebleDAO;
@@ -116,7 +118,7 @@ public class ConsultaContratosController implements ActionListener {
         tableModelContratos = new ContratosTableModel(listContratos);
         view.tblContratos.setModel(tableModelContratos);
         buscaContratos();
-        view.tblContratos.setDefaultRenderer(Object.class, new TableRendererColorActivo(5));
+        view.tblContratos.setDefaultRenderer(Object.class, new TableRendererConsultaContratos(5));
 
         int[] anchos = {5, 400, 250, 50, 50, 5};
 
@@ -185,10 +187,15 @@ public class ConsultaContratosController implements ActionListener {
     }
 
     void editaSeleccionado() {
-        contratoSeleccionado = contratosDAO.findByContrato(listContratos.get(view.tblContratos.getSelectedRow()).getId());
-        ContratosController editaContrato = new ContratosController(new ContratosDialog(null, true), contratoSeleccionado);
-        editaContrato.go();
-
+        if (contratoSeleccionado.getTipoContrato() == TipoContrato.VENTA) {
+            contratoSeleccionado = contratosDAO.findByContrato(listContratos.get(view.tblContratos.getSelectedRow()).getId());
+            ContratosController editaContrato = new ContratosController(new ContratosDialog(null, true), contratoSeleccionado);
+            editaContrato.go();
+        } else if (contratoSeleccionado.getTipoContrato() == TipoContrato.ALQUILER) {
+            contratoSeleccionado = contratosDAO.findContratoAlquiler(listContratos.get(view.tblContratos.getSelectedRow()).getId());
+            ContratosController editaContrato = new ContratosController(new ContratosDialog(null, true), contratoSeleccionado);
+            editaContrato.go();
+        }
         buscaContratos();
 
     }

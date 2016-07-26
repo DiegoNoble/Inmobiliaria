@@ -8,12 +8,14 @@ package com.dnsoft.inmobiliaria.views;
 import com.dnsoft.inmobiliaria.Renderers.MeDefaultCellRenderer;
 import com.dnsoft.inmobiliaria.Renderers.MeMesAnoCellRenderer;
 import com.dnsoft.inmobiliaria.Renderers.MeTimeCellRenderer;
-import com.dnsoft.inmobiliaria.beans.TipoReajusteAlquilerEnum;
+import com.dnsoft.inmobiliaria.beans.Contrato;
 import com.dnsoft.inmobiliaria.beans.CotizacionReajustes;
 import com.dnsoft.inmobiliaria.beans.TipoReajuste;
+import com.dnsoft.inmobiliaria.daos.IContratoDAO;
 import com.dnsoft.inmobiliaria.daos.ICotizacionReajustesDAO;
 import com.dnsoft.inmobiliaria.daos.ITipoReajusteDAO;
 import com.dnsoft.inmobiliaria.models.CotizacionIndicesTableModel;
+import com.dnsoft.inmobiliaria.utils.CalculaRecibos;
 import com.dnsoft.inmobiliaria.utils.Container;
 import com.dnsoft.inmobiliaria.utils.OptionPaneEstandar;
 import java.awt.Toolkit;
@@ -25,12 +27,16 @@ import java.net.URISyntaxException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableCellRenderer;
 
 /**
@@ -45,18 +51,19 @@ public final class CotizacionReajustesVariablesDialog extends javax.swing.JDialo
     CotizacionIndicesTableModel tableModel;
     ITipoReajusteDAO tipoReajusteDAO;
     TipoReajuste tipoReajuste;
+    IContratoDAO contratoDAO;
 
     public CotizacionReajustesVariablesDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         try {
             initComponents();
             setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/imagenes/logoTrans.png")));
-        //CIERRA JOPTIONPANE CON ESCAPE
-        jPanel2.grabFocus();
-        jPanel2.addKeyListener(new OptionPaneEstandar(this));
+            //CIERRA JOPTIONPANE CON ESCAPE
+            jPanel2.grabFocus();
+            jPanel2.addKeyListener(new OptionPaneEstandar(this));
             this.container = Container.getInstancia();
             inicio();
-            buscarTiposReajusteVariables();
+            buscarTiposReajuste();
             jXHyperlink1.setURI(new URI("http://ciu.org.uy/indicadores_economicos/"));
         } catch (URISyntaxException ex) {
             Logger.getLogger(CotizacionReajustesVariablesDialog.class.getName()).log(Level.SEVERE, null, ex);
@@ -81,6 +88,7 @@ public final class CotizacionReajustesVariablesDialog extends javax.swing.JDialo
 
         cotizacionDAO = container.getBean(ICotizacionReajustesDAO.class);
         tipoReajusteDAO = container.getBean(ITipoReajusteDAO.class);
+        contratoDAO = container.getBean(IContratoDAO.class);
         defineModelo();
 
         buscarCotizacionIndiceses();
@@ -88,8 +96,8 @@ public final class CotizacionReajustesVariablesDialog extends javax.swing.JDialo
         setLocationRelativeTo(null);
     }
 
-    void buscarTiposReajusteVariables() {
-        for (TipoReajuste tipoReajuste : tipoReajusteDAO.findByTipoReajusteAlquilerEnum(TipoReajusteAlquilerEnum.COEFICIENTE_VARIABLE)) {
+    void buscarTiposReajuste() {
+        for (TipoReajuste tipoReajuste : tipoReajusteDAO.findAll()) {
             cbTiposReajuste.addItem(tipoReajuste);
         }
     }
@@ -120,6 +128,23 @@ public final class CotizacionReajustesVariablesDialog extends javax.swing.JDialo
                 deshabilitaCampos();
             }
         });
+
+        btnVolver.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent evt) {
+
+                dispose();
+            }
+        });
+
+        btnAjustar.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent evt) {
+
+                ajustarContratos();
+            }
+        });
+
     }
 
     void habilitaCampos() {
@@ -134,10 +159,30 @@ public final class CotizacionReajustesVariablesDialog extends javax.swing.JDialo
         btnGuardar.setEnabled(false);
     }
 
+    void ajustarContratos() {
+
+        BigDecimal valorReajuste = listCotizacionIndices.get(0).getValor();
+
+        Calendar fecha = Calendar.getInstance();
+        fecha.setTime(listCotizacionIndices.get(0).getPeriodo());
+        Integer month = fecha.get(Calendar.MONTH);
+        Integer year = fecha.get(Calendar.YEAR);
+        List<Contrato> contratosReajustar = contratoDAO.findByTipoReauste(tipoReajuste, year, month);
+        for (Contrato contratoSeleccionado : contratosReajustar) {
+            new CalculaRecibos().reajusteAlquiler(contratoSeleccionado, tipoReajuste, valorReajuste);
+        }
+
+    }
+
     void guardar() {
         try {
             cotizacionDAO.save(listCotizacionIndices);
             JOptionPane.showMessageDialog(this, "Se guardaron los datos correctamente", "Correcto", JOptionPane.INFORMATION_MESSAGE);
+
+            if (JOptionPane.showConfirmDialog(this, "Desea aplicar el reajuste a los contratos habilitados?", "Correcto", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+
+                ajustarContratos();
+            }
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error al guardar datos " + e, "Error", JOptionPane.ERROR_MESSAGE);
@@ -160,6 +205,18 @@ public final class CotizacionReajustesVariablesDialog extends javax.swing.JDialo
 
         tblCotizacion.setRowHeight(25);
 
+        ListSelectionModel selectionModel = tblCotizacion.getSelectionModel();
+        selectionModel.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent lse) {
+
+                if (tblCotizacion.getSelectedRow() != -1) {
+                    btnAjustar.setEnabled(true);
+                } else {
+                    btnAjustar.setEnabled(true);
+                }
+            }
+        });
     }
 
     Date verificaMes() {
@@ -196,12 +253,15 @@ public final class CotizacionReajustesVariablesDialog extends javax.swing.JDialo
         tblCotizacion = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        btnNuevaCotizacion = new botones.BotonNuevo();
-        btnGuardar = new botones.BotonGuardar();
-        btnCancelar = new botones.BotonCancelar();
         jXHyperlink1 = new org.jdesktop.swingx.JXHyperlink();
         jLabel1 = new javax.swing.JLabel();
         cbTiposReajuste = new javax.swing.JComboBox();
+        jPanel1 = new javax.swing.JPanel();
+        btnVolver = new botones.BotonVolver();
+        btnCancelar = new botones.BotonCancelar();
+        btnGuardar = new botones.BotonGuardar();
+        btnNuevaCotizacion = new botones.BotonNuevo();
+        btnAjustar = new botones.BotonPagar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new java.awt.GridBagLayout());
@@ -253,32 +313,6 @@ public final class CotizacionReajustesVariablesDialog extends javax.swing.JDialo
         gridBagConstraints.ipady = 1;
         getContentPane().add(jPanel2, gridBagConstraints);
 
-        btnNuevaCotizacion.setText("Nueva cotización");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-        getContentPane().add(btnNuevaCotizacion, gridBagConstraints);
-
-        btnGuardar.setEnabled(false);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-        getContentPane().add(btnGuardar, gridBagConstraints);
-
-        btnCancelar.setEnabled(false);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-        getContentPane().add(btnCancelar, gridBagConstraints);
-
         jXHyperlink1.setText("Consultar indices online");
         jXHyperlink1.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -305,6 +339,52 @@ public final class CotizacionReajustesVariablesDialog extends javax.swing.JDialo
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         getContentPane().add(cbTiposReajuste, gridBagConstraints);
 
+        jPanel1.setLayout(new java.awt.GridBagLayout());
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
+        jPanel1.add(btnVolver, gridBagConstraints);
+
+        btnCancelar.setEnabled(false);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
+        jPanel1.add(btnCancelar, gridBagConstraints);
+
+        btnGuardar.setEnabled(false);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
+        jPanel1.add(btnGuardar, gridBagConstraints);
+
+        btnNuevaCotizacion.setText("Nueva cotización");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
+        jPanel1.add(btnNuevaCotizacion, gridBagConstraints);
+
+        btnAjustar.setEnabled(false);
+        btnAjustar.setText("Ejecutar ajuste");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        jPanel1.add(btnAjustar, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridwidth = 3;
+        getContentPane().add(jPanel1, gridBagConstraints);
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -316,13 +396,16 @@ public final class CotizacionReajustesVariablesDialog extends javax.swing.JDialo
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private botones.BotonPagar btnAjustar;
     private botones.BotonCancelar btnCancelar;
     private botones.BotonGuardar btnGuardar;
     private botones.BotonNuevo btnNuevaCotizacion;
+    private botones.BotonVolver btnVolver;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox cbTiposReajuste;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;

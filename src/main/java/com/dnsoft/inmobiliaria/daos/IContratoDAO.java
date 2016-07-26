@@ -3,6 +3,8 @@ package com.dnsoft.inmobiliaria.daos;
 import com.dnsoft.inmobiliaria.beans.Contrato;
 import com.dnsoft.inmobiliaria.beans.Inmueble;
 import com.dnsoft.inmobiliaria.beans.Inquilino;
+import com.dnsoft.inmobiliaria.beans.TipoReajuste;
+import java.util.Date;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -39,7 +41,13 @@ public interface IContratoDAO extends JpaRepository<Contrato, Long> {
     @Query("from Contrato c where c.id = ?1")
     Contrato findByContrato(Long contratoId);
 
+    @Query("from Contrato c join fetch c.destinoAlquiler join fetch c.garantiaAlquiler join fetch c.tipoReajuste where c.id = ?1")
+    Contrato findContratoAlquiler(Long contratoId);
+
     @Query("from Contrato c where c.id like ?1")
     List<Contrato> findByContratoLike(Long contratoId);
+
+    @Query("from Contrato c where c.tipoReajuste = ?1 and YEAR(c.fechaReajuste) = ?2 and MONTH(c.fechaReajuste) = ?3")
+    List<Contrato> findByTipoReauste(TipoReajuste tipoReajuste, Integer year, Integer month);
 
 }

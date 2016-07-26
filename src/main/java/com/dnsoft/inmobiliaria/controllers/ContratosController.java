@@ -63,7 +63,6 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.text.DefaultFormatter;
-import org.apache.poi.poifs.crypt.ChainingMode;
 
 /**
  *
@@ -114,11 +113,11 @@ public final class ContratosController implements ActionListener {
 
         this.container = Container.getInstancia();
         this.view = view;
-        this.contratoSeleccionado = contratoSeleccionado;
         this.respaldoContrato = contratoSeleccionado;
         this.view.panelSituacion.setVisible(true);
         this.view.cbTipoContrato.setEnabled(false);
         inicia();
+        this.contratoSeleccionado = contratoSeleccionado;
         this.view.btnGuardarModificaciones.setVisible(true);
         this.view.btnGuardar.setVisible(false);
         this.view.btnRemoveInmueble.setVisible(false);
@@ -179,7 +178,7 @@ public final class ContratosController implements ActionListener {
         view.txtCantidadCuotas2.setDocument(new ControlarEntradaTexto(3, chsInt));
         view.txtCantidadCuotas3.setDocument(new ControlarEntradaTexto(3, chsInt));
         documentListener(view.txtValorTotal);
-
+        documentListener(view.txtValorAlquiler);
         documentListener(view.txtValorCuotas1);
         documentListener(view.txtValorCuotas2);
         documentListener(view.txtValorCuotas3);
@@ -453,6 +452,12 @@ public final class ContratosController implements ActionListener {
                         contrato.setMontoGarantia(BigDecimal.valueOf(new Double(view.txtMontoGarantia.getText())));
                         contrato.setObsGarantia(view.txtObsGarantia.getText());
 
+                        Calendar fechaReajuste = Calendar.getInstance();
+                        fechaReajuste.setTime(view.dpInicio.getDate());
+                        fechaReajuste.add(Calendar.MONTH, 12);
+                        fechaReajuste.add(Calendar.DAY_OF_MONTH, (Integer) view.spToleranciaMora.getValue());
+                        contrato.setFechaReajuste(fechaReajuste.getTime());
+
                     } else if (view.cbTipoContrato.getSelectedItem() == TipoContrato.VENTA) {
                         calculaSaldo();
                         contrato.setValorTotal(new BigDecimal(view.txtValorTotal.getText()));
@@ -625,7 +630,7 @@ public final class ContratosController implements ActionListener {
                 break;
 
             case "btNuevoTipoReajuste":
-                TipoReajusteDialog nuevoTipoReajuste = new TipoReajusteDialog(null, true, this.view);
+                TipoReajusteDialog nuevoTipoReajuste = new TipoReajusteDialog(null, true, this.view, this);
                 nuevoTipoReajuste.setVisible(true);
                 nuevoTipoReajuste.toFront();
                 cargaTipoReajuste();
