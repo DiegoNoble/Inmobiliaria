@@ -10,9 +10,11 @@ import com.dnsoft.inmobiliaria.Renderers.MeMesAnoCellRenderer;
 import com.dnsoft.inmobiliaria.Renderers.MeTimeCellRenderer;
 import com.dnsoft.inmobiliaria.beans.Contrato;
 import com.dnsoft.inmobiliaria.beans.CotizacionReajustes;
+import com.dnsoft.inmobiliaria.beans.Recibo;
 import com.dnsoft.inmobiliaria.beans.TipoReajuste;
 import com.dnsoft.inmobiliaria.daos.IContratoDAO;
 import com.dnsoft.inmobiliaria.daos.ICotizacionReajustesDAO;
+import com.dnsoft.inmobiliaria.daos.IRecibosDAO;
 import com.dnsoft.inmobiliaria.daos.ITipoReajusteDAO;
 import com.dnsoft.inmobiliaria.models.CotizacionIndicesTableModel;
 import com.dnsoft.inmobiliaria.utils.CalculaRecibos;
@@ -21,12 +23,16 @@ import com.dnsoft.inmobiliaria.utils.OptionPaneEstandar;
 import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintStream;
 import java.math.BigDecimal;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -35,9 +41,11 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableCellRenderer;
+import org.jdesktop.swingx.table.DatePickerCellEditor;
 
 /**
  *
@@ -52,6 +60,7 @@ public final class CotizacionReajustesVariablesDialog extends javax.swing.JDialo
     ITipoReajusteDAO tipoReajusteDAO;
     TipoReajuste tipoReajuste;
     IContratoDAO contratoDAO;
+    IRecibosDAO recibosDAO;
 
     public CotizacionReajustesVariablesDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -85,7 +94,7 @@ public final class CotizacionReajustesVariablesDialog extends javax.swing.JDialo
     }
 
     void inicio() {
-
+        recibosDAO = container.getBean(IRecibosDAO.class);
         cotizacionDAO = container.getBean(ICotizacionReajustesDAO.class);
         tipoReajusteDAO = container.getBean(ITipoReajusteDAO.class);
         contratoDAO = container.getBean(IContratoDAO.class);
@@ -161,15 +170,48 @@ public final class CotizacionReajustesVariablesDialog extends javax.swing.JDialo
 
     void ajustarContratos() {
 
-        BigDecimal valorReajuste = listCotizacionIndices.get(0).getValor();
+        BigDecimal valorReajuste = listCotizacionIndices.get(tblCotizacion.getSelectedRow()).getValor();
 
         Calendar fecha = Calendar.getInstance();
-        fecha.setTime(listCotizacionIndices.get(0).getPeriodo());
+        fecha.setTime(listCotizacionIndices.get(tblCotizacion.getSelectedRow()).getPeriodo());
         Integer month = fecha.get(Calendar.MONTH);
         Integer year = fecha.get(Calendar.YEAR);
-        List<Contrato> contratosReajustar = contratoDAO.findByTipoReauste(tipoReajuste, year, month);
+        LogReajusteAlquileres logss = null;
+        new Thread() {
+            @Override
+            public void run() {
+                logss = new LogReajusteAlquileres(null, false);
+                logss.setVisible(true);
+                logss.toFront();
+            }
+
+        }.start();
+
+        List<Contrato> contratosReajustar = contratoDAO.findByTipoReauste(tipoReajuste, year, month + 1);
+
         for (Contrato contratoSeleccionado : contratosReajustar) {
-            new CalculaRecibos().reajusteAlquiler(contratoSeleccionado, tipoReajuste, valorReajuste);
+
+            SwingUtilities.invokeLater(new Runnable() {
+                public void run() {
+                    logss.jTextArea1.append("Generando recibos, contrato: " + contratoSeleccionado.getId() + "\n");
+                }
+            });
+
+            Calendar fechaReajuste = Calendar.getInstance();
+            fechaReajuste.setTime(contratoSeleccionado.getFechaReajuste());
+            fechaReajuste.add(Calendar.YEAR, 1);
+            contratoSeleccionado.setFechaReajuste(fechaReajuste.getTime());
+            List<Recibo> listRecibosAjustados = new CalculaRecibos().reajusteAlquiler(contratoSeleccionado, tipoReajuste, valorReajuste);
+            recibosDAO.save(listRecibosAjustados);
+
+        }
+
+        if (contratosReajustar.isEmpty()) {
+            logss.dispose();
+            JOptionPane.showMessageDialog(this, "No existen contratos habilitados al ajuste");
+        } else {
+            logss.dispose();
+            JOptionPane.showMessageDialog(this, "Se ajustaron los siguientes contratos: " + Arrays.toString(contratosReajustar.toArray()));
         }
 
     }
@@ -200,8 +242,9 @@ public final class CotizacionReajustesVariablesDialog extends javax.swing.JDialo
         tblCotizacion.setModel(tableModel);
 
         tblCotizacion.getColumn("Valor").setCellRenderer(new MeDefaultCellRenderer());
-        tblCotizacion.getColumn("Fecha").setCellRenderer(new MeTimeCellRenderer());
-        tblCotizacion.getColumn("Período").setCellRenderer(new MeMesAnoCellRenderer());
+        tblCotizacion.getColumn("Fecha registro").setCellRenderer(new MeTimeCellRenderer());
+        tblCotizacion.getColumn("Aplica al").setCellEditor(new DatePickerCellEditor());
+        tblCotizacion.getColumn("Aplica al").setCellRenderer(new MeMesAnoCellRenderer());
 
         tblCotizacion.setRowHeight(25);
 
@@ -237,7 +280,7 @@ public final class CotizacionReajustesVariablesDialog extends javax.swing.JDialo
     void buscarCotizacionIndiceses() {
 
         listCotizacionIndices.clear();
-        listCotizacionIndices.addAll(cotizacionDAO.findByTipoReajuste((TipoReajuste) cbTiposReajuste.getSelectedItem()));
+        listCotizacionIndices.addAll(cotizacionDAO.findByTipoReajusteOrderByPeriodoDesc((TipoReajuste) cbTiposReajuste.getSelectedItem()));
 
         tableModel.fireTableDataChanged();
     }

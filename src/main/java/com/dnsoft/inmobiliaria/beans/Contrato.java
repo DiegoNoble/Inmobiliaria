@@ -61,6 +61,9 @@ public class Contrato extends AbstractPersistable<Long> {
     @Column(name = "activo", columnDefinition = "tinyint default true")
     private Boolean activo;
 
+    @Column(name = "valorAlquiler_inicio_contrato")
+    private BigDecimal valorAlquilerInicioContrato;
+
     @Column(name = "valorAlquiler")
     private BigDecimal valorAlquiler;
 
@@ -110,7 +113,7 @@ public class Contrato extends AbstractPersistable<Long> {
     @JoinColumn(name = "garantia_alquiler_id")
     @ManyToOne(fetch = FetchType.LAZY)
     private GarantiaAlquiler garantiaAlquiler;
-    
+
     private Moneda monedaGarantia;
     private BigDecimal montoGarantia;
     private String obsGarantia;
@@ -508,6 +511,14 @@ public class Contrato extends AbstractPersistable<Long> {
 
     public void setFechaInactivacion(Date fechaInactivacion) {
         this.fechaInactivacion = fechaInactivacion;
+    }
+
+    public BigDecimal getValorAlquilerInicioContrato() {
+        return valorAlquilerInicioContrato;
+    }
+
+    public void setValorAlquilerInicioContrato(BigDecimal valorAlquilerInicioContrato) {
+        this.valorAlquilerInicioContrato = valorAlquilerInicioContrato;
     }
 
     @Override

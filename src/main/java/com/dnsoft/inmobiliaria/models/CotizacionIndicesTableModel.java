@@ -20,7 +20,7 @@ import javax.swing.table.AbstractTableModel;
 public class CotizacionIndicesTableModel extends AbstractTableModel {
 
     //nome da coluna da table
-    private final String[] colunas = new String[]{"Período", "Fecha", "Valor"};
+    private final String[] colunas = new String[]{"Aplica al", "Fecha registro", "Valor"};
     //lista para a manipulacao do objeto
     private List<CotizacionReajustes> listCotizacionIndices;
 
@@ -43,6 +43,7 @@ public class CotizacionIndicesTableModel extends AbstractTableModel {
     public int getColumnCount() {
         return colunas.length;
     }
+    
 
     //define o que cada coluna conter� do objeto
     @Override
@@ -71,7 +72,7 @@ public class CotizacionIndicesTableModel extends AbstractTableModel {
     public Class<?> getColumnClass(int columnIndex) {
         switch (columnIndex) {
             case 0:
-                return Mes.class;
+                return Date.class;
             case 1:
                 return Date.class;
             case 2:

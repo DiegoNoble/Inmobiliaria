@@ -7,6 +7,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ICotizacionReajustesDAO extends JpaRepository<CotizacionReajustes, Long> {
 
-    List<CotizacionReajustes> findByTipoReajuste(TipoReajuste tipoReajuste);
+    List<CotizacionReajustes> findByTipoReajusteOrderByPeriodoDesc(TipoReajuste tipoReajuste);
 
 }

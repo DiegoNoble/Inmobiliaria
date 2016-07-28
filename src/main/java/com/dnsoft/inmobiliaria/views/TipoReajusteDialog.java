@@ -100,7 +100,7 @@ public final class TipoReajusteDialog extends javax.swing.JDialog {
             @Override
             public void mouseClicked(MouseEvent evt) {
 
-                CotizacionReajustesVariablesDialog cotizacionIndicesDialog = new CotizacionReajustesVariablesDialog(null, true, tiporeajusteSeleccionado);
+                CotizacionReajustesVariablesDialog cotizacionIndicesDialog = new CotizacionReajustesVariablesDialog(null, false, tiporeajusteSeleccionado);
                 cotizacionIndicesDialog.setVisible(true);
                 cotizacionIndicesDialog.toFront();
             }

@@ -35,7 +35,7 @@ public class CotizacionReajustes extends AbstractPersistable<Long> {
     private TipoReajuste tipoReajuste;
 
     @Column(name = "periodo")
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     private Date periodo;
 
     public CotizacionReajustes() {

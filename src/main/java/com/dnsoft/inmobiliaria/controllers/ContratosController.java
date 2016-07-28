@@ -440,6 +440,7 @@ public final class ContratosController implements ActionListener {
                         contrato.setFechaFin(view.dpFIn.getDate());
                         contrato.setFechaExtencion(view.dpExtension.getDate());
                         contrato.setValorAlquiler(BigDecimal.valueOf(new Double(view.txtValorAlquiler.getText())));
+                        contrato.setValorAlquilerInicioContrato(BigDecimal.valueOf(new Double(view.txtValorAlquiler.getText())));
                         contrato.setTipoReajuste((TipoReajuste) view.cbTipoReajustes.getSelectedItem());
                         inmuebleSeleccionado.setStatusInmueble(StatusInmueble.ALQUILADA);
                         contrato.setAsegurado(view.chbAsegurado.isSelected());
@@ -449,12 +450,16 @@ public final class ContratosController implements ActionListener {
                         contrato.setDestinoAlquiler((DestinoAlquiler) view.cbDestinoAlquiler.getSelectedItem());
                         contrato.setGarantiaAlquiler((GarantiaAlquiler) view.cbTipoGarantia.getSelectedItem());
                         contrato.setMonedaGarantia((Moneda) view.cbMonedaGarantia.getSelectedItem());
-                        contrato.setMontoGarantia(BigDecimal.valueOf(new Double(view.txtMontoGarantia.getText())));
+                        try {
+                            contrato.setMontoGarantia(BigDecimal.valueOf(new Double(view.txtMontoGarantia.getText())));
+                        } catch (Exception e) {
+                            contrato.setMontoGarantia(new BigDecimal(0));
+                        }
                         contrato.setObsGarantia(view.txtObsGarantia.getText());
 
                         Calendar fechaReajuste = Calendar.getInstance();
                         fechaReajuste.setTime(view.dpInicio.getDate());
-                        fechaReajuste.add(Calendar.MONTH, 12);
+                        fechaReajuste.add(Calendar.YEAR, 1);
                         fechaReajuste.add(Calendar.DAY_OF_MONTH, (Integer) view.spToleranciaMora.getValue());
                         contrato.setFechaReajuste(fechaReajuste.getTime());
 
@@ -783,7 +788,7 @@ public final class ContratosController implements ActionListener {
             view.cbDestinoAlquiler.setSelectedItem(contratoSeleccionado.getDestinoAlquiler());
             view.cbTipoGarantia.setSelectedItem(contratoSeleccionado.getGarantiaAlquiler());
             view.cbMonedaGarantia.setSelectedItem(contratoSeleccionado.getMonedaGarantia());
-            view.txtMontoGarantia.setText(contratoSeleccionado.getMonedaGarantia().toString());
+            view.txtMontoGarantia.setText(contratoSeleccionado.getMontoGarantia().toString());
             view.txtObsGarantia.setText(contratoSeleccionado.getObsGarantia());
         }
         this.view.cbMoneda.setSelectedItem(contratoSeleccionado.getMoneda());

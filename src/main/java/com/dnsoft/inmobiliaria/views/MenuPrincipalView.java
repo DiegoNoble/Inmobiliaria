@@ -1068,7 +1068,7 @@ public final class MenuPrincipalView extends javax.swing.JFrame {
     }//GEN-LAST:event_mnuItemPropiedades2ActionPerformed
 
     private void mnuCotizacion1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuCotizacion1ActionPerformed
-        TipoReajusteDialog detalleTipoReajuste = new TipoReajusteDialog(this, true, this, null);
+        TipoReajusteDialog detalleTipoReajuste = new TipoReajusteDialog(this, false, this, null);
         detalleTipoReajuste.setVisible(true);
         detalleTipoReajuste.toFront();
     }//GEN-LAST:event_mnuCotizacion1ActionPerformed
