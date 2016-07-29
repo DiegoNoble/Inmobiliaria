@@ -220,7 +220,7 @@ public class ConsultaContratosController implements ActionListener {
         view.btnNuevoContrato.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent evt) {
-                ContratosDialog viewContrato = new ContratosDialog(null, true);
+                ContratosDialog viewContrato = new ContratosDialog(null, false);
                 ContratosController controller = new ContratosController(viewContrato, desktopPane);
 
                 controller.go();

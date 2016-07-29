@@ -106,7 +106,7 @@ public class CotizacionIndicesTableModel extends AbstractTableModel {
     }
 
     public void agregar(CotizacionReajustes cotizacion) {
-        listCotizacionIndices.add(cotizacion);
+        listCotizacionIndices.add(0,cotizacion);
 
         this.fireTableRowsInserted(listCotizacionIndices.size() - 1, listCotizacionIndices.size() - 1);
     }

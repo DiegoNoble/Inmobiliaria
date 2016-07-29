@@ -635,7 +635,7 @@ public final class ContratosController implements ActionListener {
                 break;
 
             case "btNuevoTipoReajuste":
-                TipoReajusteDialog nuevoTipoReajuste = new TipoReajusteDialog(null, true, this.view, this);
+                TipoReajusteDialog nuevoTipoReajuste = new TipoReajusteDialog(null, false, this.view, this);
                 nuevoTipoReajuste.setVisible(true);
                 nuevoTipoReajuste.toFront();
                 cargaTipoReajuste();

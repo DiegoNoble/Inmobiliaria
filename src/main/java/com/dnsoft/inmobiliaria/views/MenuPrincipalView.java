@@ -1041,7 +1041,7 @@ public final class MenuPrincipalView extends javax.swing.JFrame {
     }//GEN-LAST:event_mnuItemPropietariosActionPerformed
 
     private void mnuItemPropiedadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuItemPropiedadesActionPerformed
-        InmueblesDialog view = new InmueblesDialog(this, false);
+        InmueblesDialog view = new InmueblesDialog(this, true);
         InmueblesController controller = new InmueblesController(view);
 
         controller.go();
@@ -1050,7 +1050,7 @@ public final class MenuPrincipalView extends javax.swing.JFrame {
 
     private void mnuItemPropiedades1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuItemPropiedades1ActionPerformed
 
-        ContratosDialog view = new ContratosDialog(this, true);
+        ContratosDialog view = new ContratosDialog(this, false);
         ContratosController controller = new ContratosController(view, desktopPane);
 
         controller.go();

@@ -8,32 +8,25 @@ package com.dnsoft.inmobiliaria.views;
 import com.dnsoft.inmobiliaria.Renderers.MeDefaultCellRenderer;
 import com.dnsoft.inmobiliaria.Renderers.MeMesAnoCellRenderer;
 import com.dnsoft.inmobiliaria.Renderers.MeTimeCellRenderer;
-import com.dnsoft.inmobiliaria.beans.Contrato;
 import com.dnsoft.inmobiliaria.beans.CotizacionReajustes;
-import com.dnsoft.inmobiliaria.beans.Recibo;
 import com.dnsoft.inmobiliaria.beans.TipoReajuste;
 import com.dnsoft.inmobiliaria.daos.IContratoDAO;
 import com.dnsoft.inmobiliaria.daos.ICotizacionReajustesDAO;
 import com.dnsoft.inmobiliaria.daos.IRecibosDAO;
 import com.dnsoft.inmobiliaria.daos.ITipoReajusteDAO;
 import com.dnsoft.inmobiliaria.models.CotizacionIndicesTableModel;
-import com.dnsoft.inmobiliaria.utils.CalculaRecibos;
 import com.dnsoft.inmobiliaria.utils.Container;
 import com.dnsoft.inmobiliaria.utils.OptionPaneEstandar;
+import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.io.PrintStream;
 import java.math.BigDecimal;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -41,7 +34,6 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
-import javax.swing.SwingUtilities;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -83,6 +75,7 @@ public final class CotizacionReajustesVariablesDialog extends javax.swing.JDialo
         super(parent, modal);
         try {
             initComponents();
+            setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/imagenes/logoTrans.png")));
             this.container = Container.getInstancia();
             inicio();
             this.tipoReajuste = tipoReajuste;
@@ -115,9 +108,17 @@ public final class CotizacionReajustesVariablesDialog extends javax.swing.JDialo
         btnNuevaCotizacion.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent evt) {
+                CotizacionReajustes cotizacionReajustes = new CotizacionReajustes(new Date(), BigDecimal.ZERO, (TipoReajuste) cbTiposReajuste.getSelectedItem(), verificaMes());
+                tableModel.agregar(cotizacionReajustes);
+                int index = listCotizacionIndices.indexOf(cotizacionReajustes);
 
-                tableModel.agregar(new CotizacionReajustes(new Date(), BigDecimal.ZERO, (TipoReajuste) cbTiposReajuste.getSelectedItem(), verificaMes()));
+                tblCotizacion.setRowSelectionInterval(index, index);
+                Rectangle r = tblCotizacion.getCellRect(index, index, true);
+                tblCotizacion.scrollRectToVisible(r);
+                tblCotizacion.editCellAt(index, 0);
+                tblCotizacion.getEditorComponent().requestFocus();
                 btnNuevaCotizacion.setEnabled(false);
+
                 habilitaCampos();
             }
         });
@@ -150,7 +151,11 @@ public final class CotizacionReajustesVariablesDialog extends javax.swing.JDialo
             @Override
             public void mouseClicked(MouseEvent evt) {
 
-                ajustarContratos();
+                LogReajusteAlquileres log = new LogReajusteAlquileres(null, true, listCotizacionIndices.get(tblCotizacion.getSelectedRow()));
+                log.setVisible(true);
+                log.toFront();
+
+                //ajustarContratos();
             }
         });
 
@@ -168,54 +173,53 @@ public final class CotizacionReajustesVariablesDialog extends javax.swing.JDialo
         btnGuardar.setEnabled(false);
     }
 
-    void ajustarContratos() {
+    /*void ajustarContratos() {
 
-        BigDecimal valorReajuste = listCotizacionIndices.get(tblCotizacion.getSelectedRow()).getValor();
+     BigDecimal valorReajuste = listCotizacionIndices.get(tblCotizacion.getSelectedRow()).getValor();
 
-        Calendar fecha = Calendar.getInstance();
-        fecha.setTime(listCotizacionIndices.get(tblCotizacion.getSelectedRow()).getPeriodo());
-        Integer month = fecha.get(Calendar.MONTH);
-        Integer year = fecha.get(Calendar.YEAR);
-        Thread thread = new Thread() {
-            @Override
-            public void run() {
-                LogReajusteAlquileres logss = new LogReajusteAlquileres(null, false);
-                logss.setVisible(true);
-                logss.toFront();
-            }
+     Calendar fecha = Calendar.getInstance();
+     fecha.setTime(listCotizacionIndices.get(tblCotizacion.getSelectedRow()).getPeriodo());
+     Integer month = fecha.get(Calendar.MONTH);
+     Integer year = fecha.get(Calendar.YEAR);
+     Thread thread = new Thread() {
+     @Override
+     public void run() {
+     LogReajusteAlquileres logss = new LogReajusteAlquileres(null, false);
+     logss.setVisible(true);
+     logss.toFront();
+     }
 
-        };
-                thread.start();
+     };
+     thread.start();
 
-        List<Contrato> contratosReajustar = contratoDAO.findByTipoReauste(tipoReajuste, year, month + 1);
+     List<Contrato> contratosReajustar = contratoDAO.findByTipoReauste(tipoReajuste, year, month + 1);
 
-        for (Contrato contratoSeleccionado : contratosReajustar) {
+     for (Contrato contratoSeleccionado : contratosReajustar) {
 
-            SwingUtilities.invokeLater(new Runnable() {
-                public void run() {
-                    logss.jTextArea1.append("Generando recibos, contrato: " + contratoSeleccionado.getId() + "\n");
-                }
-            });
+     SwingUtilities.invokeLater(new Runnable() {
+     public void run() {
+     logss.jTextArea1.append("Generando recibos, contrato: " + contratoSeleccionado.getId() + "\n");
+     }
+     });
 
-            Calendar fechaReajuste = Calendar.getInstance();
-            fechaReajuste.setTime(contratoSeleccionado.getFechaReajuste());
-            fechaReajuste.add(Calendar.YEAR, 1);
-            contratoSeleccionado.setFechaReajuste(fechaReajuste.getTime());
-            List<Recibo> listRecibosAjustados = new CalculaRecibos().reajusteAlquiler(contratoSeleccionado, tipoReajuste, valorReajuste);
-            recibosDAO.save(listRecibosAjustados);
+     Calendar fechaReajuste = Calendar.getInstance();
+     fechaReajuste.setTime(contratoSeleccionado.getFechaReajuste());
+     fechaReajuste.add(Calendar.YEAR, 1);
+     contratoSeleccionado.setFechaReajuste(fechaReajuste.getTime());
+     List<Recibo> listRecibosAjustados = new CalculaRecibos().reajusteAlquiler(contratoSeleccionado, tipoReajuste, valorReajuste);
+     recibosDAO.save(listRecibosAjustados);
 
-        }
+     }
 
-        if (contratosReajustar.isEmpty()) {
-            logss.dispose();
-            JOptionPane.showMessageDialog(this, "No existen contratos habilitados al ajuste");
-        } else {
-            logss.dispose();
-            JOptionPane.showMessageDialog(this, "Se ajustaron los siguientes contratos: " + Arrays.toString(contratosReajustar.toArray()));
-        }
+     if (contratosReajustar.isEmpty()) {
+     logss.dispose();
+     JOptionPane.showMessageDialog(this, "No existen contratos habilitados al ajuste");
+     } else {
+     logss.dispose();
+     JOptionPane.showMessageDialog(this, "Se ajustaron los siguientes contratos: " + Arrays.toString(contratosReajustar.toArray()));
+     }
 
-    }
-
+     }*/
     void guardar() {
         try {
             cotizacionDAO.save(listCotizacionIndices);
@@ -223,7 +227,10 @@ public final class CotizacionReajustesVariablesDialog extends javax.swing.JDialo
 
             if (JOptionPane.showConfirmDialog(this, "Desea aplicar el reajuste a los contratos habilitados?", "Correcto", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
 
-                ajustarContratos();
+                LogReajusteAlquileres log = new LogReajusteAlquileres(null, true, listCotizacionIndices.get(tblCotizacion.getSelectedRow()));
+                log.setVisible(true);
+                log.toFront();
+
             }
 
         } catch (Exception e) {
@@ -254,7 +261,10 @@ public final class CotizacionReajustesVariablesDialog extends javax.swing.JDialo
             public void valueChanged(ListSelectionEvent lse) {
 
                 if (tblCotizacion.getSelectedRow() != -1) {
-                    btnAjustar.setEnabled(true);
+                    if (!listCotizacionIndices.get(tblCotizacion.getSelectedRow()).isNew()) {
+
+                        btnAjustar.setEnabled(true);
+                    }
                 } else {
                     btnAjustar.setEnabled(true);
                 }
@@ -384,7 +394,7 @@ public final class CotizacionReajustesVariablesDialog extends javax.swing.JDialo
 
         jPanel1.setLayout(new java.awt.GridBagLayout());
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
@@ -392,7 +402,7 @@ public final class CotizacionReajustesVariablesDialog extends javax.swing.JDialo
 
         btnCancelar.setEnabled(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
@@ -400,15 +410,16 @@ public final class CotizacionReajustesVariablesDialog extends javax.swing.JDialo
 
         btnGuardar.setEnabled(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
         jPanel1.add(btnGuardar, gridBagConstraints);
 
+        btnNuevaCotizacion.setPreferredSize(new java.awt.Dimension(100, 60));
         btnNuevaCotizacion.setText("Nueva cotización");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
