@@ -543,7 +543,7 @@ public final class MenuPrincipalView extends javax.swing.JFrame {
         mnuVentas.add(jSeparator20);
 
         mnuCotizacion1.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
-        mnuCotizacion1.setText("  Reajustes ");
+        mnuCotizacion1.setText(" Reajustes ");
         mnuCotizacion1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         mnuCotizacion1.setBorderPainted(true);
         mnuCotizacion1.addActionListener(new java.awt.event.ActionListener() {
@@ -1227,7 +1227,12 @@ public final class MenuPrincipalView extends javax.swing.JFrame {
     }//GEN-LAST:event_mnuItemRegistrarPrestamo12ActionPerformed
 
     private void mnuItemRegistrarPrestamo13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuItemRegistrarPrestamo13ActionPerformed
-        // TODO add your handling code here:
+
+        FacturacionView facturacion = new FacturacionView();
+        this.desktopPane.add(facturacion);
+        facturacion.setVisible(true);
+        facturacion.toFront();
+
     }//GEN-LAST:event_mnuItemRegistrarPrestamo13ActionPerformed
 
     private void mnuItemRegistrarPrestamo14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuItemRegistrarPrestamo14ActionPerformed

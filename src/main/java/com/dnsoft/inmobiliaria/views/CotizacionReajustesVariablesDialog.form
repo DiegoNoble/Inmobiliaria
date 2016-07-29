@@ -169,7 +169,7 @@
         <Component class="botones.BotonNuevo" name="btnNuevaCotizacion">
           <Properties>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[100, 60]"/>
+              <Dimension value="[120, 60]"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Nueva cotizaci&#xf3;n"/>
           </Properties>
@@ -182,6 +182,9 @@
         <Component class="botones.BotonPagar" name="btnAjustar">
           <Properties>
             <Property name="enabled" type="boolean" value="false"/>
+            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[120, 60]"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Ejecutar ajuste"/>
           </Properties>
           <Constraints>

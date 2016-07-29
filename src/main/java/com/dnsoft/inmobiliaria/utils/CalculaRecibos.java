@@ -217,11 +217,11 @@ public class CalculaRecibos {
         int primerRecibo = recibosDAO.findByContratoOrderByNroReciboDesc(contratoSeleccionado).get(0).getNroRecibo();
 
         if (tipoReajuste.getTipoReajusteAlquilerEnum() == TipoReajusteAlquilerEnum.FIJO) {
-            valorAlquiler = contratoSeleccionado.getValorAlquiler().add(valorReajuste);
+            valorAlquiler = contratoSeleccionado.getValorAlquiler().add(valorReajuste).setScale(2, RoundingMode.CEILING);
             contratoSeleccionado.setValorAlquiler(valorAlquiler);
             contratoDAO.save(contratoSeleccionado);
         } else if (tipoReajuste.getTipoReajusteAlquilerEnum() == TipoReajusteAlquilerEnum.COEFICIENTE_VARIABLE) {
-            valorAlquiler = contratoSeleccionado.getValorAlquiler().multiply(valorReajuste);
+            valorAlquiler = contratoSeleccionado.getValorAlquiler().multiply(valorReajuste).setScale(2, RoundingMode.CEILING);
             contratoSeleccionado.setValorAlquiler(valorAlquiler);
             contratoDAO.save(contratoSeleccionado);
         }
@@ -237,12 +237,13 @@ public class CalculaRecibos {
 
             //fechaVencimientos.setTime(nuevoContrato.getFechaInicio());
             if (contadorPeriodicidad == tipoReajuste.getPeriodicidad()) {
+                contadorPeriodicidad = 0;
                 if (tipoReajuste.getTipoReajusteAlquilerEnum() == TipoReajusteAlquilerEnum.FIJO) {
-                    valorAlquiler = contratoSeleccionado.getValorAlquiler().add(valorReajuste);
+                    valorAlquiler = contratoSeleccionado.getValorAlquiler().add(valorReajuste).setScale(2, RoundingMode.CEILING);
                     contratoSeleccionado.setValorAlquiler(valorAlquiler);
                     contratoDAO.save(contratoSeleccionado);
                 } else if (tipoReajuste.getTipoReajusteAlquilerEnum() == TipoReajusteAlquilerEnum.COEFICIENTE_VARIABLE) {
-                    valorAlquiler = contratoSeleccionado.getValorAlquiler().multiply(valorReajuste);
+                    valorAlquiler = contratoSeleccionado.getValorAlquiler().multiply(valorReajuste).setScale(2, RoundingMode.CEILING);
                     contratoSeleccionado.setValorAlquiler(valorAlquiler);
                     contratoDAO.save(contratoSeleccionado);
                 }

@@ -154,8 +154,6 @@ public final class CotizacionReajustesVariablesDialog extends javax.swing.JDialo
                 LogReajusteAlquileres log = new LogReajusteAlquileres(null, true, listCotizacionIndices.get(tblCotizacion.getSelectedRow()));
                 log.setVisible(true);
                 log.toFront();
-
-                //ajustarContratos();
             }
         });
 
@@ -173,53 +171,6 @@ public final class CotizacionReajustesVariablesDialog extends javax.swing.JDialo
         btnGuardar.setEnabled(false);
     }
 
-    /*void ajustarContratos() {
-
-     BigDecimal valorReajuste = listCotizacionIndices.get(tblCotizacion.getSelectedRow()).getValor();
-
-     Calendar fecha = Calendar.getInstance();
-     fecha.setTime(listCotizacionIndices.get(tblCotizacion.getSelectedRow()).getPeriodo());
-     Integer month = fecha.get(Calendar.MONTH);
-     Integer year = fecha.get(Calendar.YEAR);
-     Thread thread = new Thread() {
-     @Override
-     public void run() {
-     LogReajusteAlquileres logss = new LogReajusteAlquileres(null, false);
-     logss.setVisible(true);
-     logss.toFront();
-     }
-
-     };
-     thread.start();
-
-     List<Contrato> contratosReajustar = contratoDAO.findByTipoReauste(tipoReajuste, year, month + 1);
-
-     for (Contrato contratoSeleccionado : contratosReajustar) {
-
-     SwingUtilities.invokeLater(new Runnable() {
-     public void run() {
-     logss.jTextArea1.append("Generando recibos, contrato: " + contratoSeleccionado.getId() + "\n");
-     }
-     });
-
-     Calendar fechaReajuste = Calendar.getInstance();
-     fechaReajuste.setTime(contratoSeleccionado.getFechaReajuste());
-     fechaReajuste.add(Calendar.YEAR, 1);
-     contratoSeleccionado.setFechaReajuste(fechaReajuste.getTime());
-     List<Recibo> listRecibosAjustados = new CalculaRecibos().reajusteAlquiler(contratoSeleccionado, tipoReajuste, valorReajuste);
-     recibosDAO.save(listRecibosAjustados);
-
-     }
-
-     if (contratosReajustar.isEmpty()) {
-     logss.dispose();
-     JOptionPane.showMessageDialog(this, "No existen contratos habilitados al ajuste");
-     } else {
-     logss.dispose();
-     JOptionPane.showMessageDialog(this, "Se ajustaron los siguientes contratos: " + Arrays.toString(contratosReajustar.toArray()));
-     }
-
-     }*/
     void guardar() {
         try {
             cotizacionDAO.save(listCotizacionIndices);
@@ -266,7 +217,7 @@ public final class CotizacionReajustesVariablesDialog extends javax.swing.JDialo
                         btnAjustar.setEnabled(true);
                     }
                 } else {
-                    btnAjustar.setEnabled(true);
+                    btnAjustar.setEnabled(false);
                 }
             }
         });
@@ -416,7 +367,7 @@ public final class CotizacionReajustesVariablesDialog extends javax.swing.JDialo
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
         jPanel1.add(btnGuardar, gridBagConstraints);
 
-        btnNuevaCotizacion.setPreferredSize(new java.awt.Dimension(100, 60));
+        btnNuevaCotizacion.setPreferredSize(new java.awt.Dimension(120, 60));
         btnNuevaCotizacion.setText("Nueva cotización");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
@@ -426,6 +377,7 @@ public final class CotizacionReajustesVariablesDialog extends javax.swing.JDialo
         jPanel1.add(btnNuevaCotizacion, gridBagConstraints);
 
         btnAjustar.setEnabled(false);
+        btnAjustar.setPreferredSize(new java.awt.Dimension(120, 60));
         btnAjustar.setText("Ejecutar ajuste");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
