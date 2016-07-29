@@ -176,16 +176,16 @@ public final class CotizacionReajustesVariablesDialog extends javax.swing.JDialo
         fecha.setTime(listCotizacionIndices.get(tblCotizacion.getSelectedRow()).getPeriodo());
         Integer month = fecha.get(Calendar.MONTH);
         Integer year = fecha.get(Calendar.YEAR);
-        LogReajusteAlquileres logss = null;
-        new Thread() {
+        Thread thread = new Thread() {
             @Override
             public void run() {
-                logss = new LogReajusteAlquileres(null, false);
+                LogReajusteAlquileres logss = new LogReajusteAlquileres(null, false);
                 logss.setVisible(true);
                 logss.toFront();
             }
 
-        }.start();
+        };
+                thread.start();
 
         List<Contrato> contratosReajustar = contratoDAO.findByTipoReauste(tipoReajuste, year, month + 1);
 
