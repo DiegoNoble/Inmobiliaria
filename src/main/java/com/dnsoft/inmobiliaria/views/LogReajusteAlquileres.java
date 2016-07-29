@@ -35,7 +35,7 @@ public class LogReajusteAlquileres extends javax.swing.JDialog {
 
     public LogReajusteAlquileres(java.awt.Frame parent, boolean modal, CotizacionReajustes cotizacionReajustes) {
         super(parent, modal);
-        this.setLocationRelativeTo(null);
+        //this.setLocationRelativeTo(null);
 
         this.container = Container.getInstancia();
         contratoDAO = container.getBean(IContratoDAO.class);
