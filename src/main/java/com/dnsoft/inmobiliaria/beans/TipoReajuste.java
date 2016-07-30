@@ -28,6 +28,8 @@ public class TipoReajuste extends AbstractPersistable<Long> {
     @Column(name = "periodicidad")
     private Integer periodicidad;
 
+    private BigDecimal valor;
+
     @Enumerated(value = EnumType.STRING)
     @Column(length = 20)
     private TipoReajusteAlquilerEnum tipoReajusteAlquilerEnum;
@@ -67,9 +69,17 @@ public class TipoReajuste extends AbstractPersistable<Long> {
         this.tipoReajusteAlquilerEnum = tipoReajusteAlquilerEnum;
     }
 
+    public BigDecimal getValor() {
+        return valor;
+    }
+
+    public void setValor(BigDecimal valor) {
+        this.valor = valor;
+    }
+
     @Override
     public String toString() {
-        return descripcion;
+        return nombre;
     }
 
 }

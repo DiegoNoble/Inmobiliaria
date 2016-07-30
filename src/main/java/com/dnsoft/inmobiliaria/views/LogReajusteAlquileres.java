@@ -79,7 +79,7 @@ public class LogReajusteAlquileres extends javax.swing.JDialog {
             fechaReajuste.setTime(contratoSeleccionado.getFechaReajuste());
             fechaReajuste.add(Calendar.YEAR, 1);
             contratoSeleccionado.setFechaReajuste(fechaReajuste.getTime());
-            List<Recibo> listRecibosAjustados = new CalculaRecibos().reajusteAlquiler(contratoSeleccionado, cotizacionReajustes.getTipoReajuste(), valorReajuste);
+            List<Recibo> listRecibosAjustados = new CalculaRecibos().reajusteAlquilerCoeficienteVariable(contratoSeleccionado, cotizacionReajustes.getTipoReajuste(), valorReajuste);
             jTextArea1.append("\t Generando recibos: \n");
             for (Recibo recibo : listRecibosAjustados) {
                 int index = listRecibosAjustados.indexOf(recibo) + 1;

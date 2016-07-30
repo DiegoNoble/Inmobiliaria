@@ -189,11 +189,11 @@ public class ConsultaContratosController implements ActionListener {
     void editaSeleccionado() {
         if (contratoSeleccionado.getTipoContrato() == TipoContrato.VENTA) {
             contratoSeleccionado = contratosDAO.findByContrato(listContratos.get(view.tblContratos.getSelectedRow()).getId());
-            ContratosController editaContrato = new ContratosController(new ContratosDialog(null, true), contratoSeleccionado);
+            ContratosController editaContrato = new ContratosController(new ContratosDialog(null, true), contratoSeleccionado,this);
             editaContrato.go();
         } else if (contratoSeleccionado.getTipoContrato() == TipoContrato.ALQUILER) {
             contratoSeleccionado = contratosDAO.findContratoAlquiler(listContratos.get(view.tblContratos.getSelectedRow()).getId());
-            ContratosController editaContrato = new ContratosController(new ContratosDialog(null, true), contratoSeleccionado);
+            ContratosController editaContrato = new ContratosController(new ContratosDialog(null, true), contratoSeleccionado,this);
             editaContrato.go();
         }
         buscaContratos();
@@ -221,7 +221,7 @@ public class ConsultaContratosController implements ActionListener {
             @Override
             public void mouseClicked(MouseEvent evt) {
                 ContratosDialog viewContrato = new ContratosDialog(null, false);
-                ContratosController controller = new ContratosController(viewContrato, desktopPane);
+                ContratosController controller = new ContratosController(viewContrato, desktopPane, ConsultaContratosController.this);
 
                 controller.go();
                 buscaContratos();

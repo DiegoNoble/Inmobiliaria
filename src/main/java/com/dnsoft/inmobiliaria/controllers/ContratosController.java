@@ -86,10 +86,12 @@ public final class ContratosController implements ActionListener {
     Contrato contratoSeleccionado;
     Contrato respaldoContrato;
     Integer cantidadCuotas;
+    ConsultaContratosController consultaContratosController;
 
-    public ContratosController(ContratosDialog view, JDesktopPane desktopPane) {
+    public ContratosController(ContratosDialog view, JDesktopPane desktopPane, ConsultaContratosController consultaContratosController) {
 
         this.container = Container.getInstancia();
+        this.consultaContratosController = consultaContratosController;
         this.view = view;
         this.desktopPane = desktopPane;
         view.panelSituacion.setVisible(false);
@@ -109,9 +111,10 @@ public final class ContratosController implements ActionListener {
         // view.txtSaldo.setText("0.00");
     }
 
-    public ContratosController(ContratosDialog view, Contrato contratoSeleccionado) {
+    public ContratosController(ContratosDialog view, Contrato contratoSeleccionado,ConsultaContratosController consultaContratosController) {
 
         this.container = Container.getInstancia();
+        this.consultaContratosController = consultaContratosController;
         this.view = view;
         this.respaldoContrato = contratoSeleccionado;
         this.view.panelSituacion.setVisible(true);
@@ -516,6 +519,9 @@ public final class ContratosController implements ActionListener {
 
                     //alquileresDAO.save(new CalculaAlquileres().generaRecibos(contrato));
                     JOptionPane.showMessageDialog(view, "El contrato se genero/modifico correctamente", "Correcto", JOptionPane.INFORMATION_MESSAGE);
+                    if(consultaContratosController!=null){
+                        consultaContratosController.buscaContratos();
+                    }
                     this.view.dispose();
                     /*if (consultaContratosController != null) {
                      consultaContratosController.actualizaTbl();
@@ -786,6 +792,7 @@ public final class ContratosController implements ActionListener {
             this.view.cbTipoPagoAlquiler.setSelectedItem(contratoSeleccionado.getTipoPagoAlquiler());
 
             view.cbDestinoAlquiler.setSelectedItem(contratoSeleccionado.getDestinoAlquiler());
+            view.cbTipoReajustes.setSelectedItem(contratoSeleccionado.getTipoReajuste());
             view.cbTipoGarantia.setSelectedItem(contratoSeleccionado.getGarantiaAlquiler());
             view.cbMonedaGarantia.setSelectedItem(contratoSeleccionado.getMonedaGarantia());
             view.txtMontoGarantia.setText(contratoSeleccionado.getMontoGarantia().toString());

@@ -11,7 +11,7 @@ package com.dnsoft.inmobiliaria.beans;
  */
 public enum TipoReajusteAlquilerEnum {
 
-    COEFICIENTE_VARIABLE("Coeficiente variable"), FIJO("Fijo");
+    COEFICIENTE_VARIABLE("Coeficiente variable"), FIJO("Fijo"), PORCENTAJE("Porcentaje"),MANUAL("Manual");
 
     private final String string;
 

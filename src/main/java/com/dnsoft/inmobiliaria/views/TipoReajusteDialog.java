@@ -12,6 +12,7 @@ import java.awt.Component;
 import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
@@ -36,6 +37,7 @@ public final class TipoReajusteDialog extends javax.swing.JDialog {
     ListSelectionModel listModel;
     ContratosController contratosController;
     int nuevo = 0;
+    int visualizando = 0;
 
     public TipoReajusteDialog(java.awt.Frame parent, boolean modal, Component frame, ContratosController contratosController) {
         super(parent, modal);
@@ -56,6 +58,7 @@ public final class TipoReajusteDialog extends javax.swing.JDialog {
         tiporeajusteDAO = container.getBean(ITipoReajusteDAO.class);
         Character chs[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.'};
         txtPeriodicidad.setDocument(new ControlarEntradaTexto(2, chs));
+        txtValor.setDocument(new ControlarEntradaTexto(10, chs));
         cbTipo.setModel(new DefaultComboBoxModel(TipoReajusteAlquilerEnum.values()));
         configuraTbl();
         buscaDatos();
@@ -143,7 +146,18 @@ public final class TipoReajusteDialog extends javax.swing.JDialog {
                     tiporeajusteSeleccionado = listTiporeajuste.get(tbl.getSelectedRow());
                     muestraDetalles();
                     btnEditar.setEnabled(true);
-                    btnValores.setEnabled(true);
+
+                    if (cbTipo.getSelectedItem() == TipoReajusteAlquilerEnum.COEFICIENTE_VARIABLE) {
+                        txtValor.setEnabled(false);
+                        btnValores.setEnabled(true);
+                    } else if (cbTipo.getSelectedItem() == TipoReajusteAlquilerEnum.MANUAL) {
+                        txtValor.setEnabled(false);
+                        btnValores.setEnabled(false);
+                    } else {
+                        //txtValor.setEnabled(true);
+                        btnValores.setEnabled(false);
+                    }
+
                 } else {
                     deshabilitaCampos();
                     limpiaCampos();
@@ -169,6 +183,11 @@ public final class TipoReajusteDialog extends javax.swing.JDialog {
                 nuevoTipoReajuste.setNombre(txtNombre.getText());
                 nuevoTipoReajuste.setPeriodicidad(Integer.parseInt(txtPeriodicidad.getText()));
                 nuevoTipoReajuste.setTipoReajusteAlquilerEnum((TipoReajusteAlquilerEnum) cbTipo.getSelectedItem());
+                if (nuevoTipoReajuste.getTipoReajusteAlquilerEnum() == TipoReajusteAlquilerEnum.FIJO) {
+                    nuevoTipoReajuste.setValor(BigDecimal.valueOf(new Double(txtValor.getText())));
+                } else if (nuevoTipoReajuste.getTipoReajusteAlquilerEnum() == TipoReajusteAlquilerEnum.PORCENTAJE) {
+                    nuevoTipoReajuste.setValor(BigDecimal.valueOf(new Double(txtValor.getText())));
+                }
                 tiporeajusteDAO.save(nuevoTipoReajuste);
                 JOptionPane.showMessageDialog(this, "Se guardaron los datos correctamente", "Correcto", JOptionPane.INFORMATION_MESSAGE);
             } else if (nuevo == 0) {
@@ -176,6 +195,11 @@ public final class TipoReajusteDialog extends javax.swing.JDialog {
                 tiporeajusteSeleccionado.setNombre(txtNombre.getText());
                 tiporeajusteSeleccionado.setPeriodicidad(Integer.parseInt(txtPeriodicidad.getText()));
                 tiporeajusteSeleccionado.setTipoReajusteAlquilerEnum((TipoReajusteAlquilerEnum) cbTipo.getSelectedItem());
+                if (tiporeajusteSeleccionado.getTipoReajusteAlquilerEnum() == TipoReajusteAlquilerEnum.FIJO) {
+                    tiporeajusteSeleccionado.setValor(BigDecimal.valueOf(new Double(txtValor.getText())));
+                } else if (tiporeajusteSeleccionado.getTipoReajusteAlquilerEnum() == TipoReajusteAlquilerEnum.PORCENTAJE) {
+                    tiporeajusteSeleccionado.setValor(BigDecimal.valueOf(new Double(txtValor.getText())));
+                }
                 tiporeajusteDAO.save(tiporeajusteSeleccionado);
                 JOptionPane.showMessageDialog(this, "Se guardaron los datos correctamente", "Correcto", JOptionPane.INFORMATION_MESSAGE);
             }
@@ -190,6 +214,8 @@ public final class TipoReajusteDialog extends javax.swing.JDialog {
         txtDescripcion.setEnabled(true);
         txtNombre.setEnabled(true);
         txtPeriodicidad.setEnabled(true);
+        txtValor.setEnabled(true);
+
         cbTipo.setEnabled(true);
 
         btnCancelar.setEnabled(true);
@@ -202,6 +228,7 @@ public final class TipoReajusteDialog extends javax.swing.JDialog {
         txtDescripcion.setEnabled(false);
         txtNombre.setEnabled(false);
         txtPeriodicidad.setEnabled(false);
+        txtValor.setEnabled(false);
         cbTipo.setEnabled(false);
 
         btnCancelar.setEnabled(false);
@@ -213,12 +240,21 @@ public final class TipoReajusteDialog extends javax.swing.JDialog {
         txtDescripcion.setText("");
         txtNombre.setText("");
         txtPeriodicidad.setText("");
+        txtValor.setText("");
     }
 
     void muestraDetalles() {
         txtDescripcion.setText(tiporeajusteSeleccionado.getDescripcion());
         txtNombre.setText(tiporeajusteSeleccionado.getNombre());
+        cbTipo.setSelectedItem(tiporeajusteSeleccionado.getTipoReajusteAlquilerEnum());
         txtPeriodicidad.setText(tiporeajusteSeleccionado.getPeriodicidad().toString());
+        if (tiporeajusteSeleccionado.getTipoReajusteAlquilerEnum() == TipoReajusteAlquilerEnum.FIJO) {
+            txtValor.setText(tiporeajusteSeleccionado.getValor().toString());
+        } else if (tiporeajusteSeleccionado.getTipoReajusteAlquilerEnum() == TipoReajusteAlquilerEnum.PORCENTAJE) {
+            txtValor.setText(tiporeajusteSeleccionado.getValor().toString());
+        }else{
+            txtValor.setText("");
+        }
 
     }
 
@@ -249,6 +285,8 @@ public final class TipoReajusteDialog extends javax.swing.JDialog {
         txtDescripcion = new javax.swing.JTextField();
         cbTipo = new javax.swing.JComboBox();
         jLabel7 = new javax.swing.JLabel();
+        lblValor = new javax.swing.JLabel();
+        txtValor = new javax.swing.JTextField();
 
         jButton2.setText("jButton2");
 
@@ -367,7 +405,7 @@ public final class TipoReajusteDialog extends javax.swing.JDialog {
         jPanel1.add(txtNombre, gridBagConstraints);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel4.setText("Periodicidad");
+        jLabel4.setText("Periodicidad (meses)");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
@@ -391,12 +429,18 @@ public final class TipoReajusteDialog extends javax.swing.JDialog {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         jPanel1.add(txtDescripcion, gridBagConstraints);
 
         cbTipo.setEnabled(false);
+        cbTipo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbTipoActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
@@ -411,6 +455,22 @@ public final class TipoReajusteDialog extends javax.swing.JDialog {
         gridBagConstraints.gridy = 0;
         jPanel1.add(jLabel7, gridBagConstraints);
 
+        lblValor.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblValor.setText("Valor");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 2;
+        jPanel1.add(lblValor, gridBagConstraints);
+
+        txtValor.setEnabled(false);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.ipadx = 100;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        jPanel1.add(txtValor, gridBagConstraints);
+
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
@@ -420,6 +480,17 @@ public final class TipoReajusteDialog extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void cbTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTipoActionPerformed
+
+        if (txtNombre.isEnabled()) {
+            if (cbTipo.getSelectedItem() == TipoReajusteAlquilerEnum.COEFICIENTE_VARIABLE || cbTipo.getSelectedItem() == TipoReajusteAlquilerEnum.MANUAL) {
+                txtValor.setEnabled(false);
+            } else {
+                txtValor.setEnabled(true);
+            }
+        }
+    }//GEN-LAST:event_cbTipoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -441,10 +512,12 @@ public final class TipoReajusteDialog extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblValor;
     private javax.swing.JTable tbl;
     private javax.swing.JTextField txtDescripcion;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtPeriodicidad;
+    private javax.swing.JTextField txtValor;
     // End of variables declaration//GEN-END:variables
 
 }

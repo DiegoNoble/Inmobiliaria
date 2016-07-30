@@ -108,7 +108,7 @@ public final class CotizacionReajustesVariablesDialog extends javax.swing.JDialo
         btnNuevaCotizacion.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent evt) {
-                CotizacionReajustes cotizacionReajustes = new CotizacionReajustes(new Date(), BigDecimal.ZERO, (TipoReajuste) cbTiposReajuste.getSelectedItem(), verificaMes());
+                CotizacionReajustes cotizacionReajustes = new CotizacionReajustes(new Date(), BigDecimal.ZERO, (TipoReajuste) cbTiposReajuste.getSelectedItem(), new Date());
                 tableModel.agregar(cotizacionReajustes);
                 int index = listCotizacionIndices.indexOf(cotizacionReajustes);
 
@@ -223,20 +223,7 @@ public final class CotizacionReajustesVariablesDialog extends javax.swing.JDialo
         });
     }
 
-    Date verificaMes() {
-        try {
-            Date mesToReturn;
-            SimpleDateFormat formato = new SimpleDateFormat("01/MM/yyyy");
-
-            mesToReturn = formato.parse(formato.format(new Date()));
-            return mesToReturn;
-        } catch (ParseException ex) {
-            ex.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Error en formato de fecha " + ex, "Error", JOptionPane.ERROR_MESSAGE);
-            return null;
-        }
-
-    }
+    
 
     void buscarCotizacionIndiceses() {
 

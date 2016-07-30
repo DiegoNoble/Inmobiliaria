@@ -1051,7 +1051,7 @@ public final class MenuPrincipalView extends javax.swing.JFrame {
     private void mnuItemPropiedades1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuItemPropiedades1ActionPerformed
 
         ContratosDialog view = new ContratosDialog(this, false);
-        ContratosController controller = new ContratosController(view, desktopPane);
+        ContratosController controller = new ContratosController(view, desktopPane, null);
 
         controller.go();
 
