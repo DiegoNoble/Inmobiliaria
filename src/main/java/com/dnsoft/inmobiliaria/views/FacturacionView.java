@@ -77,7 +77,7 @@ public class FacturacionView extends InternalFrameEstandar {
                 fecha.setTime(dpMes.getDate());
                 Integer mes = fecha.get(Calendar.MONTH);
                 Integer ano = fecha.get(Calendar.YEAR);
-
+//pp
                 listPagos.addAll(pagoReciboDAO.findPagosParaFacturacion(mes + 1, ano, (TipoContrato) cbTipoContrato.getSelectedItem(), (Iva) cbIVA.getSelectedItem()));
                 pagoReciboTableModel.fireTableDataChanged();
             }

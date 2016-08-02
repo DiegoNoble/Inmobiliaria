@@ -299,14 +299,11 @@ public class CalculaRecibos {
 
         int contadorPeriodicidad = 0;
         valorAlquilerInicioCalculo = valorAlquilerInicioCalculo.add(prorrateoIncremento);
-        for (int i = 0; i < 12; i++) { // genera tantos recibos como el periodo
 
-            if (contadorPeriodicidad == tipoReajuste.getPeriodicidad()) {
-                contadorPeriodicidad = 0;
+        for (int i = 0; i < 12; i++) { // genera 12 recibos por el año
 
-                valorAlquilerInicioCalculo = valorAlquilerInicioCalculo.add(prorrateoIncremento);
+            if (tipoReajuste.getPeriodicidad() == 12) {
 
-            } else if (tipoReajuste.getPeriodicidad() == 12) {
                 Recibo recibo = new Recibo();
                 primerRecibo = primerRecibo + 1;
                 recibo.setNroRecibo(primerRecibo);
@@ -320,21 +317,28 @@ public class CalculaRecibos {
                 listAlquileres.add(recibo);
                 fechaVencimientos.add(Calendar.MONTH, 1);//suma 1 mes a la fecha de inicio del contrato
                 contadorPeriodicidad++;
-            }
 
-            Recibo recibo = new Recibo();
-            primerRecibo = primerRecibo + 1;
-            recibo.setNroRecibo(primerRecibo);
-            recibo.setFechaEmision(new Date());
-            recibo.setFechaVencimiento(fechaVencimientos.getTime());
-            recibo.setSituacion(Situacion.PENDIENTE);
-            recibo.setContrato(contratoSeleccionado);
-            recibo.setSaldo(valorAlquilerInicioCalculo);
-            recibo.setValor(valorAlquilerInicioCalculo);
-            recibo.setMoneda(contratoSeleccionado.getMoneda());
-            listAlquileres.add(recibo);
-            fechaVencimientos.add(Calendar.MONTH, 1);//suma 1 mes a la fecha de inicio del contrato
-            contadorPeriodicidad++;
+            } else if (tipoReajuste.getPeriodicidad() != 12) {
+                if (contadorPeriodicidad == tipoReajuste.getPeriodicidad()) {
+                    contadorPeriodicidad = 0;
+
+                    valorAlquilerInicioCalculo = valorAlquilerInicioCalculo.add(prorrateoIncremento);
+
+                }
+                Recibo recibo = new Recibo();
+                primerRecibo = primerRecibo + 1;
+                recibo.setNroRecibo(primerRecibo);
+                recibo.setFechaEmision(new Date());
+                recibo.setFechaVencimiento(fechaVencimientos.getTime());
+                recibo.setSituacion(Situacion.PENDIENTE);
+                recibo.setContrato(contratoSeleccionado);
+                recibo.setSaldo(valorAlquilerInicioCalculo);
+                recibo.setValor(valorAlquilerInicioCalculo);
+                recibo.setMoneda(contratoSeleccionado.getMoneda());
+                listAlquileres.add(recibo);
+                fechaVencimientos.add(Calendar.MONTH, 1);//suma 1 mes a la fecha de inicio del contrato
+                contadorPeriodicidad++;
+            }
         }
         calculaPeriodosRecibos(contratoSeleccionado, listAlquileres, true);
         return listAlquileres;
@@ -342,7 +346,11 @@ public class CalculaRecibos {
 
     void calculaPeriodosRecibos(Contrato contrato, List<Recibo> recibos, boolean reajuste) {
         Calendar periodoDesde = Calendar.getInstance();
-        periodoDesde.setTime(contrato.getFechaInicio());
+        if (reajuste == false) {
+            periodoDesde.setTime(contrato.getFechaInicio());
+        } else {
+            periodoDesde.setTime(contrato.getFechaReajuste());
+        }
 
         Calendar periodoHasta = Calendar.getInstance();
         periodoHasta.setTime(contrato.getFechaInicio());
@@ -353,7 +361,9 @@ public class CalculaRecibos {
 
             for (Recibo recibo : recibos) {
                 int index = recibos.indexOf(recibo);
-                recibo.setNroRecibo(index + 1);
+                if (reajuste == false) { //si es un calculo por reajuste no setea nro recibo
+                    recibo.setNroRecibo(index + 1);
+                }
                 if (index == 0) { //al primer recibo calcula el cierre de mes
 
                     int m1 = periodoDesde.get(Calendar.DAY_OF_YEAR);
@@ -377,7 +387,9 @@ public class CalculaRecibos {
         } else {
             for (Recibo recibo : recibos) {
                 int index = recibos.indexOf(recibo);
-                recibo.setNroRecibo(index + 1);
+                if (reajuste == false) { //si es un calculo por reajuste no setea nro recibo
+                    recibo.setNroRecibo(index + 1);
+                }
                 recibo.setCantidadRecibos(recibos.size());
 
                 periodoDesde.add(Calendar.MONTH, 1); //le añade 1 mes a cada recibo
