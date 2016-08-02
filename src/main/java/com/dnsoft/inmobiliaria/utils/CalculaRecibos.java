@@ -41,7 +41,7 @@ public class CalculaRecibos {
         if (nuevoContrato.getTipoContrato() == TipoContrato.ALQUILER) {
 
             listRecibos.addAll(contratoAlquiler(nuevoContrato));
-            calculaPeriodosRecibos(nuevoContrato, listRecibos, false);
+            //calculaPeriodosRecibos(nuevoContrato, listRecibos, false);
 
         } else if (nuevoContrato.getTipoContrato() == TipoContrato.VENTA) {
 
@@ -276,6 +276,8 @@ public class CalculaRecibos {
 
         List<Recibo> listAlquileres = new ArrayList<>();
         BigDecimal valorAlquiler = null;
+        BigDecimal valorAlquilerInicioCalculo = contratoSeleccionado.getValorAlquiler();
+
         Calendar fechaVencimientos = Calendar.getInstance();
 
         Calendar fechaFinContrato = Calendar.getInstance();
@@ -283,39 +285,43 @@ public class CalculaRecibos {
 
         int primerRecibo = recibosDAO.findByContratoOrderByNroReciboDesc(contratoSeleccionado).get(0).getNroRecibo();
 
-        if (tipoReajuste.getTipoReajusteAlquilerEnum() == TipoReajusteAlquilerEnum.FIJO) {
-            valorAlquiler = contratoSeleccionado.getValorAlquiler().add(valorReajuste).setScale(2, RoundingMode.CEILING);
-            contratoSeleccionado.setValorAlquiler(valorAlquiler);
-            contratoDAO.save(contratoSeleccionado);
-        } else if (tipoReajuste.getTipoReajusteAlquilerEnum() == TipoReajusteAlquilerEnum.COEFICIENTE_VARIABLE) {
-            valorAlquiler = contratoSeleccionado.getValorAlquiler().multiply(valorReajuste).setScale(2, RoundingMode.CEILING);
-            contratoSeleccionado.setValorAlquiler(valorAlquiler);
-            contratoDAO.save(contratoSeleccionado);
-        }
+        valorAlquiler = contratoSeleccionado.getValorAlquiler().multiply(valorReajuste).setScale(2, RoundingMode.CEILING);
+        contratoSeleccionado.setValorAlquiler(valorAlquiler);
+        contratoDAO.save(contratoSeleccionado);
+        BigDecimal incrementoAlquiler = valorAlquiler.subtract(valorAlquilerInicioCalculo);
+        BigDecimal prorrateoIncremento = incrementoAlquiler.divide(new BigDecimal(12).divide(new BigDecimal(tipoReajuste.getPeriodicidad()), 2, RoundingMode.CEILING), 2, RoundingMode.CEILING).setScale(2, RoundingMode.CEILING);
 
         fechaVencimientos.setTime(contratoSeleccionado.getFechaReajuste());
 
         if (contratoSeleccionado.getTipoPagoAlquiler() == TipoPagoAlquiler.MES_VENCIDO) {
             fechaVencimientos.add(Calendar.MONTH, 1);
-
         }
+
         int contadorPeriodicidad = 0;
+        valorAlquilerInicioCalculo = valorAlquilerInicioCalculo.add(prorrateoIncremento);
         for (int i = 0; i < 12; i++) { // genera tantos recibos como el periodo
 
-            // BigDecimal prorrateoCoeficiente = valorAlquiler tipoReajuste.getPeriodicidad()
-//fechaVencimientos.setTime(nuevoContrato.getFechaInicio());
             if (contadorPeriodicidad == tipoReajuste.getPeriodicidad()) {
                 contadorPeriodicidad = 0;
-                if (tipoReajuste.getTipoReajusteAlquilerEnum() == TipoReajusteAlquilerEnum.FIJO) {
-                    valorAlquiler = contratoSeleccionado.getValorAlquiler().add(valorReajuste).setScale(2, RoundingMode.CEILING);
-                    contratoSeleccionado.setValorAlquiler(valorAlquiler);
-                    contratoDAO.save(contratoSeleccionado);
-                } else if (tipoReajuste.getTipoReajusteAlquilerEnum() == TipoReajusteAlquilerEnum.COEFICIENTE_VARIABLE) {
-                    valorAlquiler = contratoSeleccionado.getValorAlquiler().multiply(valorReajuste).setScale(2, RoundingMode.CEILING);
-                    contratoSeleccionado.setValorAlquiler(valorAlquiler);
-                    contratoDAO.save(contratoSeleccionado);
-                }
+
+                valorAlquilerInicioCalculo = valorAlquilerInicioCalculo.add(prorrateoIncremento);
+
+            } else if (tipoReajuste.getPeriodicidad() == 12) {
+                Recibo recibo = new Recibo();
+                primerRecibo = primerRecibo + 1;
+                recibo.setNroRecibo(primerRecibo);
+                recibo.setFechaEmision(new Date());
+                recibo.setFechaVencimiento(fechaVencimientos.getTime());
+                recibo.setSituacion(Situacion.PENDIENTE);
+                recibo.setContrato(contratoSeleccionado);
+                recibo.setSaldo(valorAlquiler);
+                recibo.setValor(valorAlquiler);
+                recibo.setMoneda(contratoSeleccionado.getMoneda());
+                listAlquileres.add(recibo);
+                fechaVencimientos.add(Calendar.MONTH, 1);//suma 1 mes a la fecha de inicio del contrato
+                contadorPeriodicidad++;
             }
+
             Recibo recibo = new Recibo();
             primerRecibo = primerRecibo + 1;
             recibo.setNroRecibo(primerRecibo);
@@ -323,8 +329,8 @@ public class CalculaRecibos {
             recibo.setFechaVencimiento(fechaVencimientos.getTime());
             recibo.setSituacion(Situacion.PENDIENTE);
             recibo.setContrato(contratoSeleccionado);
-            recibo.setSaldo(valorAlquiler);
-            recibo.setValor(valorAlquiler);
+            recibo.setSaldo(valorAlquilerInicioCalculo);
+            recibo.setValor(valorAlquilerInicioCalculo);
             recibo.setMoneda(contratoSeleccionado.getMoneda());
             listAlquileres.add(recibo);
             fechaVencimientos.add(Calendar.MONTH, 1);//suma 1 mes a la fecha de inicio del contrato
@@ -339,6 +345,7 @@ public class CalculaRecibos {
         periodoDesde.setTime(contrato.getFechaInicio());
 
         Calendar periodoHasta = Calendar.getInstance();
+        periodoHasta.setTime(contrato.getFechaInicio());
         //periodoHasta.setTime(contrato.getFechaInicio());
         periodoHasta.set(Calendar.DAY_OF_MONTH, periodoDesde.getActualMaximum(Calendar.DAY_OF_MONTH));
 
@@ -346,9 +353,7 @@ public class CalculaRecibos {
 
             for (Recibo recibo : recibos) {
                 int index = recibos.indexOf(recibo);
-                if (reajuste == false) { //si es un calculo por reajuste no setea nro recibo
-                    recibo.setNroRecibo(index + 1);
-                }
+                recibo.setNroRecibo(index + 1);
                 if (index == 0) { //al primer recibo calcula el cierre de mes
 
                     int m1 = periodoDesde.get(Calendar.DAY_OF_YEAR);
@@ -372,9 +377,7 @@ public class CalculaRecibos {
         } else {
             for (Recibo recibo : recibos) {
                 int index = recibos.indexOf(recibo);
-                if (reajuste == false) { //si es un calculo por reajuste no setea nro recibo
-                    recibo.setNroRecibo(index + 1);
-                }
+                recibo.setNroRecibo(index + 1);
                 recibo.setCantidadRecibos(recibos.size());
 
                 periodoDesde.add(Calendar.MONTH, 1); //le añade 1 mes a cada recibo
@@ -387,6 +390,6 @@ public class CalculaRecibos {
             }
 
         }
-    }
 
+    }
 }
