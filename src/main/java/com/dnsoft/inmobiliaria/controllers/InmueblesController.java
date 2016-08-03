@@ -194,14 +194,14 @@ public class InmueblesController implements ActionListener {
 
             tableModel = new InmuebleTableModel(listInmueble);
 
-            view.tblInmuebles.setDefaultRenderer(Object.class, new TableRendererColorActivo(2));
+            view.tblInmuebles.setDefaultRenderer(Object.class, new TableRendererColorActivo(3));
             RowSorter ordenador = new TableRowSorter(tableModel);
 
             view.tblInmuebles.setRowSorter(ordenador);
 
             view.tblInmuebles.setModel(tableModel);
 //view.tblInmuebles.setAutoCreateRowSorter(true);
-            int[] anchos = {200, 40, 40};
+            int[] anchos = {1,500, 10, 40};
 
             for (int i = 0; i < view.tblInmuebles.getColumnCount(); i++) {
 

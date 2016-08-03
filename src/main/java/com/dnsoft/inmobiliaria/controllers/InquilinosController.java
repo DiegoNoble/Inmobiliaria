@@ -172,7 +172,16 @@ public class InquilinosController implements ActionListener {
 
         tableModel = new InquilinosTableModel(listInquilinos);
         view.tbl.setModel(tableModel);
-        view.tbl.setDefaultRenderer(Object.class, new TableRendererColorActivo(2));
+        
+        int[] anchos = {1,300, 100, 100,100,100,10};
+
+            for (int i = 0; i < view.tbl.getColumnCount(); i++) {
+
+                view.tbl.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
+
+            }
+            
+        view.tbl.setDefaultRenderer(Object.class, new TableRendererColorActivo(3));
 
         view.tbl.setRowHeight(25);
 
@@ -198,7 +207,7 @@ public class InquilinosController implements ActionListener {
                 }
             }
         });
-        new ButtonColumnDetalles(view.tbl, 5) {
+        new ButtonColumnDetalles(view.tbl, 6) {
 
             @Override
             public void actionPerformed(ActionEvent ae) {

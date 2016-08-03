@@ -17,7 +17,7 @@ import javax.swing.table.AbstractTableModel;
 public class InquilinosTableModel extends AbstractTableModel {
 
     //nome da coluna da table
-    private final String[] colunas = new String[]{"Nombre", "Documento", "Activo", "Dirección", "Contacto", "Contratos"};
+    private final String[] colunas = new String[]{"ID","Nombre", "Documento", "Activo", "Dirección", "Contacto", "Contratos"};
     //lista para a manipulacao do objeto
     private List<Inquilino> listInquilinos;
 
@@ -47,14 +47,16 @@ public class InquilinosTableModel extends AbstractTableModel {
         Inquilino c = listInquilinos.get(rowIndex);
         switch (columnIndex) {
             case 0:
-                return c.getNombre();
+                return  c.getId();
             case 1:
-                return c.getDocumento();
+                return c.getNombre();
             case 2:
-                return c.getActivo();
+                return c.getDocumento();
             case 3:
-                return c.getDireccion();
+                return c.getActivo();
             case 4:
+                return c.getDireccion();
+            case 5:
                 //return "Tel "+c.getTel()+", Cel "+c.getCel();
                 String tel = "";
                 String cel = "";
@@ -92,10 +94,12 @@ public class InquilinosTableModel extends AbstractTableModel {
             case 1:
                 return String.class;
             case 2:
-                return Boolean.class;
-            case 3:
                 return String.class;
+            case 3:
+                return Boolean.class;
             case 4:
+                return String.class;
+            case 5:
                 return String.class;
             default:
                 return null;

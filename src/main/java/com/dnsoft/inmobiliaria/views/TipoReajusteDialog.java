@@ -70,7 +70,7 @@ public final class TipoReajusteDialog extends javax.swing.JDialog {
         btnNuevo.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent evt) {
-
+                limpiaCampos();
                 habilitaCampos();
                 nuevo = 1;
             }

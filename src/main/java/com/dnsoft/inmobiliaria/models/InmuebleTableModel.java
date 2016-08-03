@@ -17,7 +17,7 @@ import javax.swing.table.AbstractTableModel;
 public class InmuebleTableModel extends AbstractTableModel {
 
     //nome da coluna da table
-    private final String[] colunas = new String[]{"Dirección", "Situación", "Activo"};
+    private final String[] colunas = new String[]{"ID", "Dirección", "Situación", "Activo"};
     //lista para a manipulacao do objeto
     private List<Inmueble> listInmuebles;
 
@@ -47,10 +47,12 @@ public class InmuebleTableModel extends AbstractTableModel {
         Inmueble c = listInmuebles.get(rowIndex);
         switch (columnIndex) {
             case 0:
-                return c;
+                return c.getId();
             case 1:
-                return c.getStatusInmueble().toString();
+                return c;
             case 2:
+                return c.getStatusInmueble().toString();
+            case 3:
                 return c.getActivo();
             default:
                 return null;
@@ -68,10 +70,12 @@ public class InmuebleTableModel extends AbstractTableModel {
     public Class<?> getColumnClass(int columnIndex) {
         switch (columnIndex) {
             case 0:
-                return Inmueble.class;
-            case 1:
                 return String.class;
+            case 1:
+                return Inmueble.class;
             case 2:
+                return String.class;
+            case 3:
                 return Boolean.class;
             default:
                 return null;
