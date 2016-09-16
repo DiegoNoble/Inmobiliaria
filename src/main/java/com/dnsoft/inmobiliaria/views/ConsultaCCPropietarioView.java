@@ -19,12 +19,17 @@ public class ConsultaCCPropietarioView extends InternalFrameEstandar {
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
         txtBusqueda = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         tblPropietario = new javax.swing.JTable();
+        jLabel5 = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
+        txtDolares = new javax.swing.JTextField();
+        txtPesos = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         btnCuenta = new botones.BotonBuscar();
         botonVolver1 = new botones.BotonVolver();
@@ -51,16 +56,9 @@ public class ConsultaCCPropietarioView extends InternalFrameEstandar {
         getContentPane().add(jPanel2, gridBagConstraints);
 
         jPanel1.setLayout(new java.awt.GridBagLayout());
-
-        jLabel2.setText("Buscar");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        jPanel1.add(jLabel2, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 4;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.ipadx = 400;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
@@ -108,6 +106,55 @@ public class ConsultaCCPropietarioView extends InternalFrameEstandar {
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
         jPanel1.add(jPanel7, gridBagConstraints);
+
+        jLabel5.setText("Buscar");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jPanel1.add(jLabel5, gridBagConstraints);
+
+        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Saldos"));
+        jPanel5.setLayout(new java.awt.GridBagLayout());
+
+        txtDolares.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        txtDolares.setEnabled(false);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 100;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        jPanel5.add(txtDolares, gridBagConstraints);
+
+        txtPesos.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        txtPesos.setEnabled(false);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 100;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        jPanel5.add(txtPesos, gridBagConstraints);
+
+        jLabel4.setText("Pesos");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        jPanel5.add(jLabel4, gridBagConstraints);
+
+        jLabel2.setText("Dólares");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        jPanel5.add(jLabel2, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 4;
+        jPanel1.add(jPanel5, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -160,14 +207,19 @@ public class ConsultaCCPropietarioView extends InternalFrameEstandar {
     public botones.BotonEdicion btnPropietario;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel7;
     public javax.swing.JScrollPane jScrollPane4;
     public javax.swing.JTable tblPropietario;
     public javax.swing.JTextField txtBusqueda;
+    public javax.swing.JTextField txtDolares;
+    public javax.swing.JTextField txtPesos;
     // End of variables declaration//GEN-END:variables
 
 }

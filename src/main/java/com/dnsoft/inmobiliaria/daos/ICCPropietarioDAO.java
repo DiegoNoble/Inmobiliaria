@@ -18,6 +18,6 @@ public interface ICCPropietarioDAO extends JpaRepository<CCPropietario, Long> {
     @Query("select c from CCPropietario c where c.id = (select max(id) from CCPropietario ca where ca.moneda = ?1 and ca.propietario = ?2)")
     CCPropietario findUltimoMovimiento(Moneda moneda, Propietario propietario);
 
-    
     List<CCPropietario> findByPropietarioAndMonedaOrderByIdAsc(Propietario propietario, Moneda moneda);
+
 }

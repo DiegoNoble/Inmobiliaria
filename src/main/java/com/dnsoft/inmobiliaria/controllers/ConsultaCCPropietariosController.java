@@ -6,6 +6,8 @@
 package com.dnsoft.inmobiliaria.controllers;
 
 import com.dnsoft.inmobiliaria.Renderers.TableRendererColorActivo;
+import com.dnsoft.inmobiliaria.beans.CCPropietario;
+import com.dnsoft.inmobiliaria.beans.Moneda;
 import com.dnsoft.inmobiliaria.beans.Parametros;
 import com.dnsoft.inmobiliaria.beans.Propietario;
 import com.dnsoft.inmobiliaria.beans.Rubro;
@@ -22,6 +24,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.beans.PropertyVetoException;
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -79,6 +84,24 @@ public class ConsultaCCPropietariosController implements ActionListener {
 
     }
 
+    void saldos() {
+        DecimalFormat formatter = new DecimalFormat("###,###,###.00");
+        BigDecimal saldoPesos = new BigDecimal(BigInteger.ZERO);
+        BigDecimal saldoDolares = new BigDecimal(BigInteger.ZERO);;
+        for (Propietario propietario : listPropietarios) {
+            CCPropietario ccPesos = cCPropietarioDAO.findUltimoMovimiento(Moneda.PESOS, propietario);
+            if (ccPesos != null) {
+                saldoPesos = saldoPesos.add(ccPesos.getSaldo());
+            }
+            CCPropietario ccDolares = cCPropietarioDAO.findUltimoMovimiento(Moneda.DOLARES, propietario);
+            if (ccDolares != null) {
+                saldoDolares = saldoDolares.add(ccDolares.getSaldo());
+            }
+        }
+        view.txtDolares.setText(formatter.format(saldoDolares));
+        view.txtPesos.setText(formatter.format(saldoPesos));
+    }
+
     final void inicio() {
         this.container = Container.getInstancia();
         PromptSupport.setPrompt("Buscar por nombre, apellido o documento", view.txtBusqueda);
@@ -91,6 +114,7 @@ public class ConsultaCCPropietariosController implements ActionListener {
         configuraTblPropietarios();
         buscarPropietarios();
         accionesBotones();
+        saldos();
     }
 
     final void configuraTblPropietarios() {

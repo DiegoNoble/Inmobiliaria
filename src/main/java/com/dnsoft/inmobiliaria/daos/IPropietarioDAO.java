@@ -16,4 +16,6 @@ public interface IPropietarioDAO extends JpaRepository<Propietario, Long> {
 
     @Query("Select new Propietario(p.id,p.nombre, p.documento, p.activo, p.direccion, p.tel, p.cel) from Propietario p")
     List<Propietario> findAllNombreDocumento();
+    
+    
 }

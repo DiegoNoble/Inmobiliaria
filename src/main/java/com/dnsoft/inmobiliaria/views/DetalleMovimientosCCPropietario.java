@@ -7,9 +7,6 @@ package com.dnsoft.inmobiliaria.views;
 
 import com.dnsoft.inmobiliaria.utils.OptionPaneEstandar;
 import java.awt.Toolkit;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import javax.swing.JDialog;
 
 /**
  *
