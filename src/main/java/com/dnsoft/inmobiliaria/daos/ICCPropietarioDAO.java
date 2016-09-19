@@ -15,9 +15,12 @@ public interface ICCPropietarioDAO extends JpaRepository<CCPropietario, Long> {
     List<CCPropietario> findByPropietarioAndMonedaAndFechaBetween(Propietario propietario, Moneda moneda, Date fechaInicio, Date fechaFin);
 
     //CCPropietario findByPropietario(Propietario propietario);
+    /*@Query("select c from CCPropietario c join fetch c.propietario where c.id = (select max(id) from CCPropietario ca where ca.moneda = ?1 and ca.propietario = ?2)")
+    CCPropietario findUltimoMovimientoEager(Moneda moneda, Propietario propietario);*/
+
     @Query("select c from CCPropietario c where c.id = (select max(id) from CCPropietario ca where ca.moneda = ?1 and ca.propietario = ?2)")
     CCPropietario findUltimoMovimiento(Moneda moneda, Propietario propietario);
-
+    
     List<CCPropietario> findByPropietarioAndMonedaOrderByIdAsc(Propietario propietario, Moneda moneda);
 
 }

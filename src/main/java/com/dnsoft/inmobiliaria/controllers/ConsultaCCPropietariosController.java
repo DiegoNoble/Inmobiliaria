@@ -38,6 +38,14 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableCellRenderer;
 import org.jdesktop.swingx.prompt.PromptSupport;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartFrame;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.labels.StandardPieSectionLabelGenerator;
+import org.jfree.chart.plot.MultiplePiePlot;
+import org.jfree.chart.plot.PiePlot;
+import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.util.TableOrder;
 
 /**
  *
@@ -85,9 +93,11 @@ public class ConsultaCCPropietariosController implements ActionListener {
     }
 
     void saldos() {
+
         DecimalFormat formatter = new DecimalFormat("###,###,###.00");
         BigDecimal saldoPesos = new BigDecimal(BigInteger.ZERO);
         BigDecimal saldoDolares = new BigDecimal(BigInteger.ZERO);;
+
         for (Propietario propietario : listPropietarios) {
             CCPropietario ccPesos = cCPropietarioDAO.findUltimoMovimiento(Moneda.PESOS, propietario);
             if (ccPesos != null) {
@@ -100,6 +110,38 @@ public class ConsultaCCPropietariosController implements ActionListener {
         }
         view.txtDolares.setText(formatter.format(saldoDolares));
         view.txtPesos.setText(formatter.format(saldoPesos));
+
+    }
+
+    void muestraGrafico() {
+
+        DefaultCategoryDataset dataSet = new DefaultCategoryDataset();
+        //DefaultPieDataset dataDolares = new DefaultPieDataset();
+
+        for (Propietario propietario : listPropietarios) {
+            CCPropietario ccPesos = cCPropietarioDAO.findUltimoMovimiento(Moneda.PESOS, propietario);
+            if (ccPesos != null) {
+                dataSet.setValue(ccPesos.getSaldo(), "Pesos", propietario.toString());
+            }
+            CCPropietario ccDolares = cCPropietarioDAO.findUltimoMovimiento(Moneda.DOLARES, propietario);
+            if (ccDolares != null) {
+                dataSet.setValue(ccDolares.getSaldo(), "Dolares", propietario.toString());
+            }
+        }
+        // Creando el Grafico
+        //JFreeChart chart = ChartFactory.createPieChart("Saldos", (PieDataset) dataSet, true, true, false);
+        JFreeChart chart = ChartFactory.createMultiplePieChart("Saldos", dataSet, TableOrder.BY_ROW, false, true, false);
+        //PieSectionLabelGenerator gen = new StandardPieSectionLabelGenerator("{0}: {1} ({2})", new DecimalFormat("0"), new DecimalFormat("0%"));
+        MultiplePiePlot plot = (MultiplePiePlot) chart.getPlot();
+        JFreeChart subchart = plot.getPieChart();
+        PiePlot p = (PiePlot) subchart.getPlot();
+        p.setLabelGenerator(new StandardPieSectionLabelGenerator("{0}: {1} ({2})"));
+        //JFreeChart chartDolares = ChartFactory.createPieChart("Saldos en Dolares", dataDolares, true, true, false);
+        // Mostrar Grafico
+        ChartFrame frame = new ChartFrame("JFreeChart", chart);
+        frame.pack();
+        frame.setVisible(true);
+
     }
 
     final void inicio() {
@@ -107,6 +149,10 @@ public class ConsultaCCPropietariosController implements ActionListener {
         PromptSupport.setPrompt("Buscar por nombre, apellido o documento", view.txtBusqueda);
         this.view.txtBusqueda.setActionCommand("txtBusqueda");
         this.view.txtBusqueda.addActionListener(this);
+
+        this.view.btnGrafico.setActionCommand("btnGrafico");
+        this.view.btnGrafico.addActionListener(this);
+
         propietarioDAO = container.getBean(IPropietarioDAO.class);
         cCPropietarioDAO = container.getBean(ICCPropietarioDAO.class);
         parametrosDAO = container.getBean(IParametrosDAO.class);
@@ -217,6 +263,10 @@ public class ConsultaCCPropietariosController implements ActionListener {
 
             case "txtBusqueda":
                 buscarPropietarios();
+                break;
+
+            case "btnGrafico":
+                muestraGrafico();
                 break;
 
             default:
