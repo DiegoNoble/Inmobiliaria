@@ -14,7 +14,8 @@ public interface IInmuebleDAO extends JpaRepository<Inmueble, Long> {
     
     @Query("select i from Inmueble i where i.padron like %?1% or i.calle.nombre like %?1% "
             + "or i.barrio.nombre like %?1% or i.ciudad.nombre like %?1% or i.nro like %?1% "
-            + "or i.fraccionamiento like %?1% or i.manzana like %?1% or i.solar like %?1% order by i.id desc")
+            + "or i.fraccionamiento like %?1% or i.manzana like %?1% or i.solar like %?1% "
+            + "or i.codReferencia like %?1% order by i.id desc")
     List<Inmueble> findInmuebles(String texto);
 
     List<Inmueble> findByStatusInmueble(StatusInmueble statusInmueble);

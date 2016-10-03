@@ -201,7 +201,7 @@ public class InmueblesController implements ActionListener {
 
             view.tblInmuebles.setModel(tableModel);
 //view.tblInmuebles.setAutoCreateRowSorter(true);
-            int[] anchos = {1,500, 10, 40};
+            int[] anchos = {1, 30, 500, 10, 40};
 
             for (int i = 0; i < view.tblInmuebles.getColumnCount(); i++) {
 

@@ -88,6 +88,9 @@ public class Inmueble extends AbstractPersistable<Long> {
     //@LazyCollection(LazyCollectionOption.FALSE)
     private List<PropietarioHasInmueble> propietarioHasPropiedad;
 
+    @Column(name = "cod_referencia", length = 25)
+    private String codReferencia;
+    
     public Inmueble() {
     }
 
@@ -237,6 +240,15 @@ public class Inmueble extends AbstractPersistable<Long> {
         this.activo = activo;
     }
 
+    public String getCodReferencia() {
+        return codReferencia;
+    }
+
+    public void setCodReferencia(String codReferencia) {
+        this.codReferencia = codReferencia;
+    }
+
+    
     @Override
     public String toString() {
 

@@ -231,6 +231,7 @@ public final class InmuebleDetallesDialog_new extends javax.swing.JDialog {
 
     void detallesInmueble() {
 
+        txtCodReferencia.setText(inmueble.getCodReferencia());
         txtNro.setText(inmueble.getNro());
         cbCalle.setSelectedItem(inmueble.getCalle());
         cbBarrio.setSelectedItem(inmueble.getBarrio());
@@ -250,6 +251,7 @@ public final class InmuebleDetallesDialog_new extends javax.swing.JDialog {
 
     void guardarCambios() {
         try {
+            inmueble.setCodReferencia(txtCodReferencia.getText());
             inmueble.setNro(txtNro.getText());
             inmueble.setCalle((Calle) cbCalle.getSelectedItem());
             inmueble.setBarrio((Barrio) cbBarrio.getSelectedItem());
@@ -382,6 +384,8 @@ public final class InmuebleDetallesDialog_new extends javax.swing.JDialog {
         jLabel19 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         txtDescripcion = new javax.swing.JTextArea();
+        jLabel25 = new javax.swing.JLabel();
+        txtCodReferencia = new javax.swing.JTextField();
         jPanel7 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         tblPropietarios = new javax.swing.JTable();
@@ -572,10 +576,10 @@ public final class InmuebleDetallesDialog_new extends javax.swing.JDialog {
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         jPanel1.add(txtNro, gridBagConstraints);
 
-        jLabel22.setText("Número");
+        jLabel22.setText("Código Referencia");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridy = 0;
         jPanel1.add(jLabel22, gridBagConstraints);
 
         jLabel23.setText("Calle");
@@ -672,6 +676,19 @@ public final class InmuebleDetallesDialog_new extends javax.swing.JDialog {
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         jPanel1.add(jScrollPane2, gridBagConstraints);
+
+        jLabel25.setText("Número");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 1;
+        jPanel1.add(jLabel25, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 30;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        jPanel1.add(txtCodReferencia, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -799,6 +816,7 @@ public final class InmuebleDetallesDialog_new extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
@@ -812,6 +830,7 @@ public final class InmuebleDetallesDialog_new extends javax.swing.JDialog {
     public javax.swing.JTable tblPropietarios;
     private javax.swing.JTextField txtAreaEdificada;
     private javax.swing.JTextField txtAreaPredio;
+    private javax.swing.JTextField txtCodReferencia;
     private javax.swing.JTextArea txtDescripcion;
     private javax.swing.JTextField txtFraccionamiento;
     private javax.swing.JTextField txtManzana;
