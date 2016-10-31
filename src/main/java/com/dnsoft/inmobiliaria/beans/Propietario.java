@@ -61,12 +61,16 @@ public class Propietario extends AbstractPersistable<Long> {
 
     @Column(name = "activo", columnDefinition = "tinyint default true")
     private Boolean activo;
+    
+    @Column(name = "cod_referencia", length = 25)
+    private String codReferencia;
 
     public Propietario() {
     }
 
-    public Propietario(Long id, String nombre, String documento, Boolean activo, String direccion, String tel, String cel) {
+    public Propietario(Long id, String codReferencia, String nombre, String documento, Boolean activo, String direccion, String tel, String cel) {
         this.id = id;
+        this.codReferencia = codReferencia;
         this.nombre = nombre;
         this.documento = documento;
         this.activo = activo;
@@ -180,6 +184,15 @@ public class Propietario extends AbstractPersistable<Long> {
     public void setActivo(Boolean activo) {
         this.activo = activo;
     }
+
+    public String getCodReferencia() {
+        return codReferencia;
+    }
+
+    public void setCodReferencia(String codReferencia) {
+        this.codReferencia = codReferencia;
+    }
+    
 
     @Override
     public String toString() {

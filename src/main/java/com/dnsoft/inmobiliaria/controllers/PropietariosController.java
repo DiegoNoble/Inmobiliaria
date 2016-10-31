@@ -153,7 +153,7 @@ public class PropietariosController implements ActionListener {
 
         tableModel = new PropietariosTableModel(listPropietarios);
         view.tblPropietarios.setModel(tableModel);
-        view.tblPropietarios.setDefaultRenderer(Object.class, new TableRendererColorActivo(2));
+        view.tblPropietarios.setDefaultRenderer(Object.class, new TableRendererColorActivo(3));
         view.tblPropietarios.setRowHeight(25);
 
         view.tblPropietarios.getColumn("Activo").setWidth(0);

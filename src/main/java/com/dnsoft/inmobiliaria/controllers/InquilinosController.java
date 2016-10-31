@@ -173,7 +173,7 @@ public class InquilinosController implements ActionListener {
         tableModel = new InquilinosTableModel(listInquilinos);
         view.tbl.setModel(tableModel);
         
-        int[] anchos = {1,300, 100, 100,100,100,10};
+        int[] anchos = {1,20,300, 100, 100,100,100,10};
 
             for (int i = 0; i < view.tbl.getColumnCount(); i++) {
 
@@ -181,7 +181,7 @@ public class InquilinosController implements ActionListener {
 
             }
             
-        view.tbl.setDefaultRenderer(Object.class, new TableRendererColorActivo(3));
+        view.tbl.setDefaultRenderer(Object.class, new TableRendererColorActivo(4));
 
         view.tbl.setRowHeight(25);
 
@@ -207,7 +207,7 @@ public class InquilinosController implements ActionListener {
                 }
             }
         });
-        new ButtonColumnDetalles(view.tbl, 6) {
+        new ButtonColumnDetalles(view.tbl, 7) {
 
             @Override
             public void actionPerformed(ActionEvent ae) {
@@ -215,7 +215,7 @@ public class InquilinosController implements ActionListener {
             }
 
             private void buscarContratos() {
-                
+                view.toBack();
                 ConsultaContratosInternal contratos = new ConsultaContratosInternal();
                 ConsultaContratosController controller = new ConsultaContratosController(contratos,desktopPane);
                 contratos.txtBusqueda.setText(inquilinoSeleccionado.toString());

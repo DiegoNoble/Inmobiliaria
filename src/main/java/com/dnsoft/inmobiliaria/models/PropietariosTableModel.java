@@ -18,7 +18,7 @@ import javax.swing.table.AbstractTableModel;
 public class PropietariosTableModel extends AbstractTableModel {
 
     //nome da coluna da table
-    private final String[] colunas = new String[]{"Nombre", "Documento", "Activo", "Dirección", "Contacto"};
+    private final String[] colunas = new String[]{"Nombre", "Cod. Ref.", "Documento", "Activo", "Dirección", "Contacto"};
     //lista para a manipulacao do objeto
     private List<Propietario> listPropietarios;
 
@@ -47,15 +47,17 @@ public class PropietariosTableModel extends AbstractTableModel {
     public Object getValueAt(int rowIndex, int columnIndex) {
         Propietario c = listPropietarios.get(rowIndex);
         switch (columnIndex) {
-             case 0:
+            case 0:
                 return c.getNombre();
             case 1:
-                return c.getDocumento();
+                return c.getCodReferencia();
             case 2:
-                return c.getActivo();
+                return c.getDocumento();
             case 3:
-                return c.getDireccion();
+                return c.getActivo();
             case 4:
+                return c.getDireccion();
+            case 5:
                 //return "Tel "+c.getTel()+", Cel "+c.getCel();
                 String tel = "";
                 String cel = "";
@@ -91,10 +93,12 @@ public class PropietariosTableModel extends AbstractTableModel {
             case 1:
                 return String.class;
             case 2:
-                return Boolean.class;
-            case 3:
                 return String.class;
+            case 3:
+                return Boolean.class;
             case 4:
+                return String.class;
+            case 5:
                 return String.class;
             default:
                 return null;

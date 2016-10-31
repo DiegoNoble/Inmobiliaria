@@ -194,7 +194,7 @@ public class InmueblesController implements ActionListener {
 
             tableModel = new InmuebleTableModel(listInmueble);
 
-            view.tblInmuebles.setDefaultRenderer(Object.class, new TableRendererColorActivo(3));
+            view.tblInmuebles.setDefaultRenderer(Object.class, new TableRendererColorActivo(4));
             RowSorter ordenador = new TableRowSorter(tableModel);
 
             view.tblInmuebles.setRowSorter(ordenador);

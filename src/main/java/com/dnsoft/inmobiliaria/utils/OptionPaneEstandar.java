@@ -5,6 +5,8 @@
  */
 package com.dnsoft.inmobiliaria.utils;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import javax.swing.JDialog;
@@ -16,6 +18,11 @@ public class OptionPaneEstandar implements KeyListener {
     public OptionPaneEstandar(JDialog dialog) {
         System.out.println("Dialog!");
         this.dialog = dialog;
+        Toolkit t = Toolkit.getDefaultToolkit();
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        if(dialog.getSize().getHeight()>screenSize.getHeight()){
+            dialog.getSize().setSize(dialog.getWidth(), screenSize.getHeight()-100);
+        }
     }
 
     @Override

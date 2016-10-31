@@ -61,7 +61,7 @@ public class InquilinoDetallesDlg extends javax.swing.JDialog {
         //CIERRA JOPTIONPANE CON ESCAPE
         jPanel1.grabFocus();
         jPanel1.addKeyListener(new OptionPaneEstandar(this));
-        
+
         this.container = Container.getInstancia();
         setLocationRelativeTo(null);
         inquilino = new Inquilino();
@@ -106,7 +106,7 @@ public class InquilinoDetallesDlg extends javax.swing.JDialog {
     }
 
     void detallesInquilino() {
-
+        txtCodReferencia.setText(inquilino.getCodReferencia());
         txtDireccion.setText(inquilino.getDireccion());
         chActivo.setSelected(inquilino.getActivo());
         txtCel.setText(inquilino.getCel());
@@ -123,6 +123,7 @@ public class InquilinoDetallesDlg extends javax.swing.JDialog {
 
     void guardarCambios() {
 
+        inquilino.setCodReferencia(txtCodReferencia.getText());
         inquilino.setDireccion(txtDireccion.getText());
         inquilino.setCel(txtCel.getText());
         inquilino.setActivo(chActivo.isSelected());
@@ -166,7 +167,6 @@ public class InquilinoDetallesDlg extends javax.swing.JDialog {
         tbl.getColumn("Banco").setCellEditor(new ComboBoxCellEditor(new InquilinoDetallesDlg.comboBancos()));
 
         tbl.setRowHeight(25);
-        
 
         ListSelectionModel selectionModel = tbl.getSelectionModel();
         selectionModel.addListSelectionListener(new ListSelectionListener() {
@@ -274,6 +274,8 @@ public class InquilinoDetallesDlg extends javax.swing.JDialog {
         txtObservaciones = new javax.swing.JTextArea();
         jLabel14 = new javax.swing.JLabel();
         chActivo = new javax.swing.JCheckBox();
+        jLabel22 = new javax.swing.JLabel();
+        txtCodReferencia = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1024, 700));
@@ -297,11 +299,11 @@ public class InquilinoDetallesDlg extends javax.swing.JDialog {
         jLabel2.setText("Nombre");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridy = 2;
         jPanel1.add(jLabel2, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridy = 5;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.ipadx = 150;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
@@ -310,11 +312,11 @@ public class InquilinoDetallesDlg extends javax.swing.JDialog {
         jLabel4.setText("Dirección");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridy = 2;
         jPanel1.add(jLabel4, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridy = 2;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 1.0;
@@ -324,11 +326,11 @@ public class InquilinoDetallesDlg extends javax.swing.JDialog {
         jLabel5.setText("Tel");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridy = 4;
         jPanel1.add(jLabel5, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridy = 4;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.ipadx = 150;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
@@ -337,11 +339,11 @@ public class InquilinoDetallesDlg extends javax.swing.JDialog {
         jLabel6.setText("Email");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridy = 5;
         jPanel1.add(jLabel6, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
@@ -350,11 +352,11 @@ public class InquilinoDetallesDlg extends javax.swing.JDialog {
         jLabel7.setText("Cel");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridy = 4;
         jPanel1.add(jLabel7, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridy = 4;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.ipadx = 150;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
@@ -377,11 +379,11 @@ public class InquilinoDetallesDlg extends javax.swing.JDialog {
         jLabel9.setText("Documento");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridy = 3;
         jPanel1.add(jLabel9, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridy = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.ipadx = 150;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
@@ -389,7 +391,7 @@ public class InquilinoDetallesDlg extends javax.swing.JDialog {
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridy = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         jPanel1.add(cbTIpoDocumento, gridBagConstraints);
@@ -467,9 +469,9 @@ public class InquilinoDetallesDlg extends javax.swing.JDialog {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 7;
         gridBagConstraints.gridwidth = 5;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipady = 50;
         gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.weighty = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         jPanel1.add(jPanel6, gridBagConstraints);
 
@@ -481,19 +483,19 @@ public class InquilinoDetallesDlg extends javax.swing.JDialog {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridy = 3;
         jPanel1.add(btnRegistraTipoDocumento, gridBagConstraints);
 
         chbAgenteRetensorIRPF.setText("Es agente retensor?");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridy = 5;
         jPanel1.add(chbAgenteRetensorIRPF, gridBagConstraints);
 
         jLabel8.setText("Observaciones");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridy = 6;
         jPanel1.add(jLabel8, gridBagConstraints);
 
         txtObservaciones.setColumns(20);
@@ -502,7 +504,7 @@ public class InquilinoDetallesDlg extends javax.swing.JDialog {
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridy = 6;
         gridBagConstraints.gridwidth = 4;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 1.0;
@@ -513,14 +515,28 @@ public class InquilinoDetallesDlg extends javax.swing.JDialog {
         jLabel14.setText("Tipo Documento");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridy = 3;
         jPanel1.add(jLabel14, gridBagConstraints);
 
+        chActivo.setSelected(true);
         chActivo.setText("Activo");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridy = 5;
         jPanel1.add(chActivo, gridBagConstraints);
+
+        jLabel22.setText("Código Referencia");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        jPanel1.add(jLabel22, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 30;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        jPanel1.add(txtCodReferencia, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -583,6 +599,7 @@ public class InquilinoDetallesDlg extends javax.swing.JDialog {
     private javax.swing.JCheckBox chbAgenteRetensorIRPF;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -599,6 +616,7 @@ public class InquilinoDetallesDlg extends javax.swing.JDialog {
     public javax.swing.JScrollPane jScrollPane3;
     public javax.swing.JTable tbl;
     private javax.swing.JTextField txtCel;
+    private javax.swing.JTextField txtCodReferencia;
     private javax.swing.JTextField txtDireccion;
     private javax.swing.JTextField txtDocumento;
     private javax.swing.JTextField txtEmail;

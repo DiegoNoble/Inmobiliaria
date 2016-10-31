@@ -62,6 +62,8 @@ public class Proveedor extends AbstractPersistable<Long> {
 
     @Column(name = "email")
     private String email;
+    
+    
 
     public Proveedor() {
     }
@@ -162,6 +164,7 @@ public class Proveedor extends AbstractPersistable<Long> {
         this.listCuentas = listCuentas;
     }
 
+  
    
 
     @Override
