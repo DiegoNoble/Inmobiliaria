@@ -12,7 +12,7 @@ public interface IPropietarioDAO extends JpaRepository<Propietario, Long> {
     List<Propietario> findPropietario(String texto);
 
     
-    @Query("from Propietario p join fetch p.tipoDocumento where p.id = ?1")
+    @Query("from Propietario p join fetch p.tipoDocumento join fetch p.lugarFormadePago where p.id = ?1")
     Propietario findByPropietarioEager(Long propietarioId);
 
     @Query("Select new Propietario(p.id,p.codReferencia,p.nombre, p.documento, p.activo, p.direccion, p.tel, p.cel) from Propietario p")

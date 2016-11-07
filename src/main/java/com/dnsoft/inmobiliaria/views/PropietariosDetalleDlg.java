@@ -2,10 +2,12 @@ package com.dnsoft.inmobiliaria.views;
 
 import com.dnsoft.inmobiliaria.beans.Banco;
 import com.dnsoft.inmobiliaria.beans.CuentaBancoPropietario;
+import com.dnsoft.inmobiliaria.beans.LugarFormadePago;
 import com.dnsoft.inmobiliaria.beans.Propietario;
 import com.dnsoft.inmobiliaria.beans.TipoDocumento;
 import com.dnsoft.inmobiliaria.daos.IBancoDAO;
 import com.dnsoft.inmobiliaria.daos.ICuentaBancoPropietarioDAO;
+import com.dnsoft.inmobiliaria.daos.ILugarFormadePagoDAO;
 import com.dnsoft.inmobiliaria.daos.IPropietarioDAO;
 import com.dnsoft.inmobiliaria.daos.ITipoDocumentoDAO;
 import com.dnsoft.inmobiliaria.models.CuentasBancosPropietarioTableModel;
@@ -38,6 +40,7 @@ public class PropietariosDetalleDlg extends javax.swing.JDialog {
     IPropietarioDAO propietarioDAO;
     IBancoDAO bancosDAO;
     ICuentaBancoPropietarioDAO cuentaBancoDAO;
+    ILugarFormadePagoDAO lugarFormadePagoDAO;
     ITipoDocumentoDAO tipoDocumentoDAO;
     Propietario propietario;
     CuentasBancosPropietarioTableModel tableModel;
@@ -52,7 +55,7 @@ public class PropietariosDetalleDlg extends javax.swing.JDialog {
         //CIERRA JOPTIONPANE CON ESCAPE
         jPanel1.grabFocus();
         jPanel1.addKeyListener(new OptionPaneEstandar(this));
-        
+
         inicio();
         setLocationRelativeTo(null);
         propietario = new Propietario();
@@ -78,10 +81,12 @@ public class PropietariosDetalleDlg extends javax.swing.JDialog {
         bancosDAO = container.getBean(IBancoDAO.class);
         cuentaBancoDAO = container.getBean(ICuentaBancoPropietarioDAO.class);
         tipoDocumentoDAO = container.getBean(ITipoDocumentoDAO.class);
+        lugarFormadePagoDAO = container.getBean(ILugarFormadePagoDAO.class);
         listCuentasToRemove = new ArrayList<>();
         accionesBotones();
         configuraTbl();
         comboTipoDocumentos();
+        lugarFormadePago();
     }
 
     void accionesBotones() {
@@ -100,8 +105,15 @@ public class PropietariosDetalleDlg extends javax.swing.JDialog {
         });
     }
 
-    final void detallesPropietario() {
+    void lugarFormadePago() {
+        for (LugarFormadePago lugarFormadePago : lugarFormadePagoDAO.findAll()) {
+            cbLugaryFormadePago.addItem(lugarFormadePago);
+        }
+    }
 
+    final void detallesPropietario() {
+        cbLugaryFormadePago.setSelectedItem(propietario.getLugarFormadePago());
+        txtObs.setText(propietario.getObs());
         txtCodReferencia.setText(propietario.getCodReferencia());
         txtDireccion.setText(propietario.getDireccion());
         txtCel.setText(propietario.getCel());
@@ -119,6 +131,8 @@ public class PropietariosDetalleDlg extends javax.swing.JDialog {
     void guardarCambios() {
 
         try {
+            propietario.setObs(txtObs.getText());
+            propietario.setLugarFormadePago((LugarFormadePago) cbLugaryFormadePago.getSelectedItem());
             propietario.setCodReferencia(txtCodReferencia.getText());
             propietario.setDireccion(txtDireccion.getText());
             propietario.setCel(txtCel.getText());
@@ -158,7 +172,7 @@ public class PropietariosDetalleDlg extends javax.swing.JDialog {
         tbl.setModel(tableModel);
         tbl.getColumn("Banco").setCellEditor(new ComboBoxCellEditor(new comboBancos()));
 
-        tbl.setRowHeight(25);
+        //tbl.setRowHeight(25);
 
         ListSelectionModel selectionModel = tbl.getSelectionModel();
         selectionModel.addListSelectionListener(new ListSelectionListener() {
@@ -218,6 +232,8 @@ public class PropietariosDetalleDlg extends javax.swing.JDialog {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
@@ -250,6 +266,15 @@ public class PropietariosDetalleDlg extends javax.swing.JDialog {
         chbActivo = new javax.swing.JCheckBox();
         jLabel22 = new javax.swing.JLabel();
         txtCodReferencia = new javax.swing.JTextField();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txtObs = new javax.swing.JTextArea();
+        cbLugaryFormadePago = new javax.swing.JComboBox();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane1.setViewportView(jTextArea1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(800, 600));
@@ -273,11 +298,11 @@ public class PropietariosDetalleDlg extends javax.swing.JDialog {
         jLabel2.setText("Nombre");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridy = 1;
         jPanel1.add(jLabel2, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridy = 4;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.ipadx = 150;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
@@ -286,11 +311,11 @@ public class PropietariosDetalleDlg extends javax.swing.JDialog {
         jLabel4.setText("Dirección");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridy = 1;
         jPanel1.add(jLabel4, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridy = 1;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 1.0;
@@ -300,11 +325,11 @@ public class PropietariosDetalleDlg extends javax.swing.JDialog {
         jLabel5.setText("Tel");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridy = 3;
         jPanel1.add(jLabel5, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridy = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.ipadx = 150;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
@@ -313,7 +338,7 @@ public class PropietariosDetalleDlg extends javax.swing.JDialog {
         jLabel6.setText("Email");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridy = 4;
         jPanel1.add(jLabel6, gridBagConstraints);
 
         btnRegistraTipoDocumento.setText("Registra Tipo");
@@ -324,11 +349,11 @@ public class PropietariosDetalleDlg extends javax.swing.JDialog {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridy = 2;
         jPanel1.add(btnRegistraTipoDocumento, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
@@ -337,11 +362,11 @@ public class PropietariosDetalleDlg extends javax.swing.JDialog {
         jLabel7.setText("Cel");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridy = 3;
         jPanel1.add(jLabel7, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridy = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.ipadx = 150;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
@@ -359,26 +384,27 @@ public class PropietariosDetalleDlg extends javax.swing.JDialog {
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 8;
+        gridBagConstraints.gridy = 10;
         gridBagConstraints.gridwidth = 5;
         jPanel1.add(jPanel3, gridBagConstraints);
 
         jLabel9.setText("C. Identidad / RUT");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridy = 2;
         jPanel1.add(jLabel9, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.ipadx = 150;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         jPanel1.add(txtDocumento, gridBagConstraints);
 
-        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Cuentas bancarias"));
+        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cuentas bancarias", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 10))); // NOI18N
         jPanel5.setLayout(new java.awt.GridBagLayout());
 
+        tbl.setFont(new java.awt.Font("Tahoma", 0, 9)); // NOI18N
         tbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -403,6 +429,7 @@ public class PropietariosDetalleDlg extends javax.swing.JDialog {
 
         jPanel6.setLayout(new java.awt.GridBagLayout());
 
+        btnQuitar.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         btnQuitar.setText("Quitar cuenta");
         btnQuitar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -416,6 +443,7 @@ public class PropietariosDetalleDlg extends javax.swing.JDialog {
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
         jPanel6.add(btnQuitar, gridBagConstraints);
 
+        btnIncluye.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         btnIncluye.setText("Asignar cuenta");
         btnIncluye.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -429,6 +457,7 @@ public class PropietariosDetalleDlg extends javax.swing.JDialog {
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
         jPanel6.add(btnIncluye, gridBagConstraints);
 
+        btnRegistraBanco.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         btnRegistraBanco.setText("Registra Banco");
         btnRegistraBanco.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -447,31 +476,32 @@ public class PropietariosDetalleDlg extends javax.swing.JDialog {
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 7;
-        gridBagConstraints.gridwidth = 5;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.ipady = 50;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.gridheight = 4;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         jPanel1.add(jPanel5, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         jPanel1.add(cbTIpoDocumento, gridBagConstraints);
 
-        jLabel1.setText("Tipo Documento");
+        jLabel1.setText("Lugar y forma de pago");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridy = 5;
         jPanel1.add(jLabel1, gridBagConstraints);
 
         chbRetenerIRPF.setText("Reneter IRPF?");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridy = 4;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         jPanel1.add(chbRetenerIRPF, gridBagConstraints);
@@ -485,7 +515,7 @@ public class PropietariosDetalleDlg extends javax.swing.JDialog {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridy = 4;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         jPanel1.add(chbActivo, gridBagConstraints);
@@ -493,15 +523,49 @@ public class PropietariosDetalleDlg extends javax.swing.JDialog {
         jLabel22.setText("Código Referencia");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridy = 0;
         jPanel1.add(jLabel22, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.ipadx = 30;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         jPanel1.add(txtCodReferencia, gridBagConstraints);
+
+        txtObs.setColumns(20);
+        txtObs.setRows(5);
+        jScrollPane2.setViewportView(txtObs);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridwidth = 4;
+        gridBagConstraints.gridheight = 4;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
+        jPanel1.add(jScrollPane2, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        jPanel1.add(cbLugaryFormadePago, gridBagConstraints);
+
+        jLabel8.setText("Observaciones");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 8;
+        jPanel1.add(jLabel8, gridBagConstraints);
+
+        jLabel10.setText("Tipo Documento");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        jPanel1.add(jLabel10, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -560,10 +624,12 @@ public class PropietariosDetalleDlg extends javax.swing.JDialog {
     private javax.swing.JButton btnRegistraBanco;
     private javax.swing.JButton btnRegistraTipoDocumento;
     public botones.BotonVolver btnVolver;
+    private javax.swing.JComboBox cbLugaryFormadePago;
     private javax.swing.JComboBox cbTIpoDocumento;
     private javax.swing.JCheckBox chbActivo;
     private javax.swing.JCheckBox chbRetenerIRPF;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel3;
@@ -571,13 +637,17 @@ public class PropietariosDetalleDlg extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     public javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTextArea jTextArea1;
     public javax.swing.JTable tbl;
     private javax.swing.JTextField txtCel;
     private javax.swing.JTextField txtCodReferencia;
@@ -585,6 +655,7 @@ public class PropietariosDetalleDlg extends javax.swing.JDialog {
     private javax.swing.JTextField txtDocumento;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtNombre;
+    private javax.swing.JTextArea txtObs;
     private javax.swing.JTextField txtTel;
     // End of variables declaration//GEN-END:variables
 }

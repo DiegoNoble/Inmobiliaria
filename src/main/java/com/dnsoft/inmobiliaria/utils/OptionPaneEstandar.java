@@ -20,8 +20,9 @@ public class OptionPaneEstandar implements KeyListener {
         this.dialog = dialog;
         Toolkit t = Toolkit.getDefaultToolkit();
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        if(dialog.getSize().getHeight()>screenSize.getHeight()){
-            dialog.getSize().setSize(dialog.getWidth(), screenSize.getHeight()-100);
+        if(dialog.getSize().getHeight()>screenSize.getHeight()-50){
+            dialog.setSize(new Dimension(dialog.getWidth(), (int) (screenSize.getHeight()-100)));
+            dialog.setLocationRelativeTo(null);
         }
     }
 

@@ -61,9 +61,16 @@ public class Propietario extends AbstractPersistable<Long> {
 
     @Column(name = "activo", columnDefinition = "tinyint default true")
     private Boolean activo;
-    
+
     @Column(name = "cod_referencia", length = 25)
     private String codReferencia;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "lugarFormadePago_id")
+    private LugarFormadePago lugarFormadePago;
+
+    @Column(name = "obs")
+    private String obs;
 
     public Propietario() {
     }
@@ -192,7 +199,22 @@ public class Propietario extends AbstractPersistable<Long> {
     public void setCodReferencia(String codReferencia) {
         this.codReferencia = codReferencia;
     }
-    
+
+    public LugarFormadePago getLugarFormadePago() {
+        return lugarFormadePago;
+    }
+
+    public void setLugarFormadePago(LugarFormadePago lugarFormadePago) {
+        this.lugarFormadePago = lugarFormadePago;
+    }
+
+    public String getObs() {
+        return obs;
+    }
+
+    public void setObs(String obs) {
+        this.obs = obs;
+    }
 
     @Override
     public String toString() {

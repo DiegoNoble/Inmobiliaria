@@ -110,6 +110,8 @@ public final class MenuPrincipalView extends javax.swing.JFrame {
         mnuCotizacion12 = new javax.swing.JMenuItem();
         jSeparator21 = new javax.swing.JPopupMenu.Separator();
         mnuCotizacion26 = new javax.swing.JMenuItem();
+        jSeparator50 = new javax.swing.JPopupMenu.Separator();
+        mnuCotizacion27 = new javax.swing.JMenuItem();
         jSeparator13 = new javax.swing.JPopupMenu.Separator();
         mnuInquilinos = new javax.swing.JMenuItem();
         jSeparator22 = new javax.swing.JPopupMenu.Separator();
@@ -414,6 +416,18 @@ public final class MenuPrincipalView extends javax.swing.JFrame {
             }
         });
         jMenu1.add(mnuCotizacion26);
+        jMenu1.add(jSeparator50);
+
+        mnuCotizacion27.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
+        mnuCotizacion27.setText(" Lugar y forma de pago");
+        mnuCotizacion27.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        mnuCotizacion27.setBorderPainted(true);
+        mnuCotizacion27.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuCotizacion27ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(mnuCotizacion27);
 
         mnuRegistros.add(jMenu1);
         mnuRegistros.add(jSeparator13);
@@ -1318,6 +1332,12 @@ public final class MenuPrincipalView extends javax.swing.JFrame {
         destino.toFront();
     }//GEN-LAST:event_mnuCotizacion29ActionPerformed
 
+    private void mnuCotizacion27ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuCotizacion27ActionPerformed
+         DetalleLugarFormadePago lugarFormadePago = new DetalleLugarFormadePago(this, true, this);
+        lugarFormadePago.setVisible(true);
+        lugarFormadePago.toFront();
+    }//GEN-LAST:event_mnuCotizacion27ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel fondo;
     private javax.swing.JMenu jMenu1;
@@ -1371,6 +1391,7 @@ public final class MenuPrincipalView extends javax.swing.JFrame {
     private javax.swing.JPopupMenu.Separator jSeparator48;
     private javax.swing.JPopupMenu.Separator jSeparator49;
     private javax.swing.JPopupMenu.Separator jSeparator5;
+    private javax.swing.JPopupMenu.Separator jSeparator50;
     private javax.swing.JPopupMenu.Separator jSeparator6;
     private javax.swing.JPopupMenu.Separator jSeparator7;
     private javax.swing.JPopupMenu.Separator jSeparator8;
@@ -1400,6 +1421,7 @@ public final class MenuPrincipalView extends javax.swing.JFrame {
     private javax.swing.JMenuItem mnuCotizacion24;
     private javax.swing.JMenuItem mnuCotizacion25;
     private javax.swing.JMenuItem mnuCotizacion26;
+    private javax.swing.JMenuItem mnuCotizacion27;
     private javax.swing.JMenuItem mnuCotizacion28;
     private javax.swing.JMenuItem mnuCotizacion29;
     private javax.swing.JMenuItem mnuCotizacion3;
