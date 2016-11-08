@@ -7,7 +7,8 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface IInquilinoDAO extends JpaRepository<Inquilino, Long> {
 
-    @Query("select new Inquilino(i.id,i.codReferencia, i.nombre, i.documento, i.activo) from Inquilino i where i.nombre like %?1% or i.documento like %?1% or i.codReferencia like %?1%")
+    @Query("select new Inquilino(i.id,i.codReferencia, i.nombre, i.documento, i.activo) "
+            + "from Inquilino i where i.nombre like %?1% or i.documento like %?1% or i.codReferencia like %?1%")
     List<Inquilino> findInquilino(String texto);
 
     @Query("from Inquilino i join fetch i.tipoDocumento left join fetch i.listCuentas where i.id = ?1")
