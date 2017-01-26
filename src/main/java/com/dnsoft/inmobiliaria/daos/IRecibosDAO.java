@@ -22,7 +22,7 @@ public interface IRecibosDAO extends JpaRepository<Recibo, Long> {
 
     List<Recibo> findByContratoOrderByNroReciboDesc(Contrato contrato);
 
-    Recibo findByContratoAndNroRecibo(Contrato contrato, Integer nroRecibo);
+    List<Recibo> findByContratoAndNroRecibo(Contrato contrato, Integer nroRecibo);
 
     List<Recibo> findByContratoAndSituacion(Contrato contrato, Situacion situacion);
 

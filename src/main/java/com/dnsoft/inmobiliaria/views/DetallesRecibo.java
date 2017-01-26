@@ -129,7 +129,7 @@ public class DetallesRecibo extends javax.swing.JDialog {
 
     void guardaNuevo() {
 
-        if (recibosDAO.findByContratoAndNroRecibo(contratoSeleccionado, Integer.valueOf(txtNroRecibo.getText())) != null) {
+        if (!recibosDAO.findByContratoAndNroRecibo(contratoSeleccionado, Integer.valueOf(txtNroRecibo.getText())).isEmpty()) {
             int resp = JOptionPane.showConfirmDialog(null, "Existe un recibo con el mismo nro, confirma la generacion del recibo?", "Atención!", JOptionPane.YES_NO_OPTION);
             if (resp == 0) {
                 nuevoRecibo();

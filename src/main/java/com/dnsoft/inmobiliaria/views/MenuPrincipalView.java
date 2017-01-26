@@ -8,6 +8,7 @@ import com.dnsoft.inmobiliaria.controllers.ConsultaGastosInmueblesController;
 import com.dnsoft.inmobiliaria.controllers.InmueblesController;
 import com.dnsoft.inmobiliaria.controllers.ContratosController;
 import com.dnsoft.inmobiliaria.controllers.ControlDeCajaController;
+import com.dnsoft.inmobiliaria.controllers.InformeComisionesController;
 import com.dnsoft.inmobiliaria.controllers.InquilinosController;
 import com.dnsoft.inmobiliaria.controllers.PropietariosController;
 import com.dnsoft.inmobiliaria.controllers.ProveedoresController;
@@ -1294,7 +1295,8 @@ public final class MenuPrincipalView extends javax.swing.JFrame {
     }//GEN-LAST:event_mnuCotizacion20ActionPerformed
 
     private void mnuCotizacion21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuCotizacion21ActionPerformed
-        // TODO add your handling code here:
+        InformeComisiones view = new InformeComisiones(null, true);
+        view.go();
     }//GEN-LAST:event_mnuCotizacion21ActionPerformed
 
     private void mnuCotizacion22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuCotizacion22ActionPerformed
@@ -1333,7 +1335,7 @@ public final class MenuPrincipalView extends javax.swing.JFrame {
     }//GEN-LAST:event_mnuCotizacion29ActionPerformed
 
     private void mnuCotizacion27ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuCotizacion27ActionPerformed
-         DetalleLugarFormadePago lugarFormadePago = new DetalleLugarFormadePago(this, true, this);
+        DetalleLugarFormadePago lugarFormadePago = new DetalleLugarFormadePago(this, true, this);
         lugarFormadePago.setVisible(true);
         lugarFormadePago.toFront();
     }//GEN-LAST:event_mnuCotizacion27ActionPerformed
