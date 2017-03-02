@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="871fcd49-fe28-42fb-8731-6f28ab90d11e">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="net.sf.jasperreports.export.xls.ignore.graphics" value="false"/>
+	<property name="net.sf.jasperreports.export.xls.collapse.row.span" value="false"/>
+	<property name="net.sf.jasperreports.export.xls.ignore.cell.border" value="false"/>
+	<style name="miestilo">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$F{descipcion}.startsWith("Pago")]]></conditionExpression>
+			<style mode="Opaque" forecolor="#000000" backcolor="#CCCCCC" fontName="Arial" fontSize="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false">
+				<pen lineWidth="1.0" lineStyle="Dashed"/>
+			</style>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$F{descipcion}.startsWith("RETIRO")]]></conditionExpression>
+			<style mode="Opaque" forecolor="#000000" backcolor="#666666" fontName="Arial" fontSize="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false">
+				<pen lineWidth="1.0" lineStyle="Dashed"/>
+			</style>
+		</conditionalStyle>
+	</style>
+	<parameter name="propietario" class="java.lang.String"/>
+	<parameter name="moneda" class="java.lang.String"/>
+	<parameter name="saldo" class="java.lang.String"/>
+	<parameter name="fechaInicio" class="java.util.Date"/>
+	<parameter name="fechaFin" class="java.util.Date"/>
+	<parameter name="logo" class="java.lang.Object"/>
+	<field name="descipcion" class="java.lang.String"/>
+	<field name="debito" class="java.math.BigDecimal"/>
+	<field name="credito" class="java.math.BigDecimal"/>
+	<field name="saldo" class="java.math.BigDecimal"/>
+	<field name="fecha" class="java.util.Date"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="82" splitType="Stretch">
+			<textField>
+				<reportElement x="210" y="33" width="282" height="20" uuid="21138696-14bb-4921-b9ed-ac64e09840b7"/>
+				<textElement>
+					<font fontName="Arial" size="16" isBold="true" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{propietario}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="210" y="0" width="220" height="24" backcolor="#D4D0C8" uuid="fcf69af0-bd6a-4761-94e1-236c53251f05"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="20" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ESTADO DE CUENTA]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="103" y="60" width="100" height="20" uuid="17f89e35-a470-498c-8d63-394c08975af4"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="14" isBold="true" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{fechaInicio}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="2" y="61" width="66" height="20" uuid="c3420c47-d812-4e8a-a73a-1c402f410f21"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Período]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="210" y="60" width="100" height="20" uuid="650d588b-abc1-44ed-b29d-144ec28f13b6"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="14" isBold="true" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{fechaFin}]]></textFieldExpression>
+			</textField>
+			<image scaleImage="FillFrame">
+				<reportElement x="2" y="0" width="190" height="60" uuid="9d8dbbab-50ab-467d-a7be-5f255d5ff776"/>
+				<imageExpression><![CDATA[$P{logo}]]></imageExpression>
+			</image>
+			<line>
+				<reportElement x="0" y="80" width="325" height="1" uuid="d80fd133-6d72-4431-ba35-6f211b19a080"/>
+			</line>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="32" splitType="Stretch">
+			<textField>
+				<reportElement x="210" y="9" width="100" height="20" uuid="1a9c73ca-c441-477d-92c4-d0f82c6a6950"/>
+				<textElement>
+					<font fontName="Arial" size="14" isBold="true" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{moneda}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="28" width="552" height="1" uuid="0d8fdada-cc19-4b1c-8854-0fdc77532578"/>
+			</line>
+			<staticText>
+				<reportElement x="2" y="8" width="159" height="20" uuid="d8d75e8a-cbf7-46a2-9dff-6fb5cccff1a3"/>
+				<textElement>
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cuenta Corriente en: ]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="47" splitType="Stretch">
+			<staticText>
+				<reportElement x="2" y="4" width="101" height="20" uuid="6e1e49ba-fb6b-4ddf-8511-0e762acaebe6"/>
+				<textElement>
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="352" y="4" width="60" height="20" uuid="676f73dc-0424-4302-bf14-65090a0347b5"/>
+				<textElement>
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Debe]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="410" y="4" width="73" height="20" uuid="67ef22eb-cacb-4f1b-9c03-09eb84aaa1d1"/>
+				<textElement>
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Haber]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="483" y="4" width="70" height="20" uuid="7ae93f4e-2cd9-48f0-bfab-2ab6258d2c6d"/>
+				<textElement>
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Saldo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="103" y="4" width="100" height="20" uuid="5b5f472b-3730-4f63-9122-76157e06a258"/>
+				<textElement>
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Detalle movimiento]]></text>
+			</staticText>
+			<line>
+				<reportElement x="1" y="22" width="552" height="1" uuid="d88a0344-f9a7-406a-8702-ee90f7f516af"/>
+			</line>
+			<textField>
+				<reportElement x="483" y="22" width="70" height="20" uuid="c543f9fb-fb2e-437f-b9d1-b6b5c6a2ae25"/>
+				<textElement>
+					<font fontName="Arial" size="14" isBold="true" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{saldo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="2" y="27" width="101" height="20" uuid="1047fa94-43d9-4c4a-828e-52dc6a456dd4"/>
+				<textElement>
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Saldo:]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="22" splitType="Stretch">
+			<textField>
+				<reportElement style="miestilo" x="352" y="0" width="60" height="16" uuid="37bf272b-9a7e-41eb-a157-6a4b0db81297">
+					<printWhenExpression><![CDATA[$F{debito}.intValue() != 0.00]]></printWhenExpression>
+				</reportElement>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{debito}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="miestilo" x="410" y="0" width="73" height="16" uuid="fb2c1f6c-4bb6-4772-8b65-b797fae5a9d2">
+					<printWhenExpression><![CDATA[$F{credito}.intValue() != 0.00]]></printWhenExpression>
+				</reportElement>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{credito}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="miestilo" x="103" y="0" width="249" height="16" uuid="143f63c7-13d5-45fa-8518-0495ee78aeff"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{descipcion}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement style="miestilo" x="2" y="0" width="101" height="16" uuid="6b8a1395-f7da-41e9-9bf1-2ef84625804d"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fecha}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="miestilo" x="483" y="0" width="70" height="16" uuid="ee093d2f-2a83-424a-a597-67c1177e401b"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{saldo}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="50">
+			<textField>
+				<reportElement x="429" y="28" width="100" height="20" uuid="f3efe4c8-9859-4c24-95b5-3f4bc7dee54e"/>
+				<textElement>
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy h.mm a">
+				<reportElement x="429" y="8" width="100" height="20" uuid="828afc8d-d070-4aee-84b2-13d6436f47c9"/>
+				<textElement>
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="359" y="28" width="39" height="20" uuid="eff12e63-3a78-4e66-b4db-5a47556dfa66"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Página:]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="56" splitType="Stretch"/>
+	</summary>
+</jasperReport>

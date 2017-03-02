@@ -8,7 +8,6 @@ import com.dnsoft.inmobiliaria.controllers.ConsultaGastosInmueblesController;
 import com.dnsoft.inmobiliaria.controllers.InmueblesController;
 import com.dnsoft.inmobiliaria.controllers.ContratosController;
 import com.dnsoft.inmobiliaria.controllers.ControlDeCajaController;
-import com.dnsoft.inmobiliaria.controllers.InformeComisionesController;
 import com.dnsoft.inmobiliaria.controllers.InquilinosController;
 import com.dnsoft.inmobiliaria.controllers.PropietariosController;
 import com.dnsoft.inmobiliaria.controllers.ProveedoresController;
@@ -1267,7 +1266,10 @@ public final class MenuPrincipalView extends javax.swing.JFrame {
     }//GEN-LAST:event_mnuCotizacion13ActionPerformed
 
     private void mnuCotizacion14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuCotizacion14ActionPerformed
-        // TODO add your handling code here:
+
+        InformeComisiones informeComisiones = new InformeComisiones(this, false);
+        informeComisiones.go();
+
     }//GEN-LAST:event_mnuCotizacion14ActionPerformed
 
     private void mnuCotizacion15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuCotizacion15ActionPerformed
