@@ -167,6 +167,8 @@ public class ConsultaContratosInternal extends InternalFrameEstandar {
         getContentPane().add(jPanel2, gridBagConstraints);
 
         jPanel5.setLayout(new java.awt.GridBagLayout());
+
+        txtBusqueda.setText(" ");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 0;

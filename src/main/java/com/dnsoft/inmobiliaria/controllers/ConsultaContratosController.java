@@ -6,7 +6,6 @@
 package com.dnsoft.inmobiliaria.controllers;
 
 import com.dnsoft.inmobiliaria.views.ContratosDialog;
-import com.dnsoft.inmobiliaria.Renderers.TableRendererColorActivo;
 import com.dnsoft.inmobiliaria.Renderers.TableRendererConsultaContratos;
 import com.dnsoft.inmobiliaria.beans.Contrato;
 import com.dnsoft.inmobiliaria.beans.Inmueble;
