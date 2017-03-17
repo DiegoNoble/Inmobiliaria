@@ -10,11 +10,13 @@ import com.dnsoft.inmobiliaria.Renderers.TableRendererConsultaContratos;
 import com.dnsoft.inmobiliaria.beans.Contrato;
 import com.dnsoft.inmobiliaria.beans.Inmueble;
 import com.dnsoft.inmobiliaria.beans.Inquilino;
+import com.dnsoft.inmobiliaria.beans.Recibo;
 import com.dnsoft.inmobiliaria.beans.TipoContrato;
 import com.dnsoft.inmobiliaria.daos.IContratoDAO;
 import com.dnsoft.inmobiliaria.daos.IGastoInmuebleInquilinoDAO;
 import com.dnsoft.inmobiliaria.daos.IInmuebleDAO;
 import com.dnsoft.inmobiliaria.daos.IInquilinoDAO;
+import com.dnsoft.inmobiliaria.daos.IRecibosDAO;
 import com.dnsoft.inmobiliaria.models.ContratosTableModel;
 import com.dnsoft.inmobiliaria.utils.Container;
 import com.dnsoft.inmobiliaria.utils.ControlarEntradaTexto;
@@ -53,6 +55,7 @@ public class ConsultaContratosController implements ActionListener {
     IContratoDAO contratosDAO;
     IInmuebleDAO inmuebleDAO;
     IInquilinoDAO inquilinoDAO;
+    IRecibosDAO recibosDAO;
     IGastoInmuebleInquilinoDAO gastoInmuebleInquilinoDAO;
     ListSelectionModel listModel;
     ControlDeCajaController cajaController;
@@ -89,6 +92,7 @@ public class ConsultaContratosController implements ActionListener {
 
     private void inicia() {
 
+        recibosDAO = container.getBean(IRecibosDAO.class);
         this.view.txtBusqueda.setActionCommand("txtBusqueda");
         this.view.txtBusqueda.addActionListener(this);
         this.view.txtBusquedaPorNroContrato.setActionCommand("txtBusquedaPorNroContrato");
@@ -188,11 +192,11 @@ public class ConsultaContratosController implements ActionListener {
     void editaSeleccionado() {
         if (contratoSeleccionado.getTipoContrato() == TipoContrato.VENTA) {
             contratoSeleccionado = contratosDAO.findByContrato(listContratos.get(view.tblContratos.getSelectedRow()).getId());
-            ContratosController editaContrato = new ContratosController(new ContratosDialog(null, true), contratoSeleccionado,this);
+            ContratosController editaContrato = new ContratosController(new ContratosDialog(null, true), contratoSeleccionado, this);
             editaContrato.go();
         } else if (contratoSeleccionado.getTipoContrato() == TipoContrato.ALQUILER) {
             contratoSeleccionado = contratosDAO.findContratoAlquiler(listContratos.get(view.tblContratos.getSelectedRow()).getId());
-            ContratosController editaContrato = new ContratosController(new ContratosDialog(null, true), contratoSeleccionado,this);
+            ContratosController editaContrato = new ContratosController(new ContratosDialog(null, true), contratoSeleccionado, this);
             editaContrato.go();
         }
         buscaContratos();
@@ -245,13 +249,21 @@ public class ConsultaContratosController implements ActionListener {
         view.btnEliminarInmueble.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent evt) {
-                int c = JOptionPane.showConfirmDialog(view, "Confirma eliminación del contrato: " + contratoSeleccionado.toString(), "Confirmación", JOptionPane.YES_NO_OPTION);
+                contratoSeleccionado = contratosDAO.findByContrato(listContratos.get(view.tblContratos.getSelectedRow()).getId());
+                int c = JOptionPane.showConfirmDialog(null, "Confirma eliminación del contrato: " + contratoSeleccionado.toString(), "Confirmación", JOptionPane.YES_NO_OPTION);
                 if (c == 0) {
                     try {
+                        List<Recibo> recibos = recibosDAO.findByContratoOrderByNroReciboDesc(contratoSeleccionado);
+                        for (Recibo recibo : recibos) {
+                            recibosDAO.deleteRecibo(recibo.getId());
+                        }
+
+                        //contratoSeleccionado = contratosDAO.findByContrato(listContratos.get(view.tblContratos.getSelectedRow()).getId());
                         contratosDAO.delete(contratoSeleccionado);
                         buscaContratos();
                     } catch (Exception e) {
                         JOptionPane.showMessageDialog(null, "No es posible eliminar el inmueble", "Error", JOptionPane.ERROR_MESSAGE);
+                        e.printStackTrace();
                     }
                 }
 
