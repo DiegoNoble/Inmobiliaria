@@ -64,6 +64,9 @@ public class Parametros extends AbstractPersistable<Long> {
     @ManyToOne
     Rubro otrosGastosTerceros;
 
+     private String MySql_Path;
+    private String nombreBasesDatos;
+    
     public Parametros() {
     }
 
@@ -219,4 +222,21 @@ public class Parametros extends AbstractPersistable<Long> {
         this.otrosGastosTerceros = otrosGastosTerceros;
     }
 
+    public String getMySql_Path() {
+        return MySql_Path;
+    }
+
+    public void setMySql_Path(String MySql_Path) {
+        this.MySql_Path = MySql_Path;
+    }
+
+    public String getNombreBasesDatos() {
+        return nombreBasesDatos;
+    }
+
+    public void setNombreBasesDatos(String nombreBasesDatos) {
+        this.nombreBasesDatos = nombreBasesDatos;
+    }
+
+    
 }

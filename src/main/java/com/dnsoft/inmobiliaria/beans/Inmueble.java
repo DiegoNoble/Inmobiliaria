@@ -90,7 +90,7 @@ public class Inmueble extends AbstractPersistable<Long> {
 
     @Column(name = "cod_referencia", length = 25)
     private String codReferencia;
-    
+
     public Inmueble() {
     }
 
@@ -248,7 +248,6 @@ public class Inmueble extends AbstractPersistable<Long> {
         this.codReferencia = codReferencia;
     }
 
-    
     @Override
     public String toString() {
 
@@ -261,15 +260,19 @@ public class Inmueble extends AbstractPersistable<Long> {
             } else {
                 padronToReturn = "Padrón ".concat(padron);
             }
-            if (manzana != null || !manzana.equals("")) {
-                manzanaToReturn = "Manz. ".concat(manzana);
-            } else {
+
+            if (manzana == null || "".equals(manzana)) {
                 manzana = "";
-            }
-            if (solar != null || !solar.equals("")) {
-                solarToReturn = "Solar ".concat(solar);
             } else {
+
+                manzanaToReturn = "Manz. ".concat(manzana);
+            }
+
+            if (solar == null || "".equals(solar)) {
                 solar = "";
+            } else {
+
+                solarToReturn = "Solar ".concat(solar);
             }
             return fraccionamiento + " " + manzanaToReturn + " " + solarToReturn + " " + padronToReturn;
         } else {

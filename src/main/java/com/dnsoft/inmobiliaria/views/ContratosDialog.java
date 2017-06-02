@@ -128,12 +128,10 @@ public class ContratosDialog extends javax.swing.JDialog {
         panelSituacion = new javax.swing.JPanel();
         lblContrato = new javax.swing.JLabel();
         dpFechaInactivacion = new org.jdesktop.swingx.JXDatePicker();
-        chbActivo = new javax.swing.JCheckBox();
-        btnInactivar = new javax.swing.JButton();
         jlFin2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1120, 750));
+        setPreferredSize(new java.awt.Dimension(1120, 800));
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
         jPanel2.setBackground(new java.awt.Color(204, 0, 0));
@@ -786,25 +784,6 @@ public class ContratosDialog extends javax.swing.JDialog {
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         panelSituacion.add(dpFechaInactivacion, gridBagConstraints);
 
-        chbActivo.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        chbActivo.setSelected(true);
-        chbActivo.setText("Activo");
-        chbActivo.setEnabled(false);
-        chbActivo.setPreferredSize(new java.awt.Dimension(1024, 650));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-        panelSituacion.add(chbActivo, gridBagConstraints);
-
-        btnInactivar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/delete_20chico.png"))); // NOI18N
-        btnInactivar.setBorder(null);
-        btnInactivar.setBorderPainted(false);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        panelSituacion.add(btnInactivar, gridBagConstraints);
-
         jlFin2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jlFin2.setText("Fecha inactivación");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -828,7 +807,6 @@ public class ContratosDialog extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public botones.BotonGuardar btnGuardar;
     public botones.BotonGuardar btnGuardarModificaciones;
-    public javax.swing.JButton btnInactivar;
     public javax.swing.JButton btnInmueble;
     public javax.swing.JButton btnInquilino;
     public javax.swing.JButton btnNuevoTipoDestino;
@@ -847,7 +825,6 @@ public class ContratosDialog extends javax.swing.JDialog {
     public javax.swing.JComboBox cbTipoGarantia;
     public javax.swing.JComboBox cbTipoPagoAlquiler;
     public javax.swing.JComboBox cbTipoReajustes;
-    public javax.swing.JCheckBox chbActivo;
     public javax.swing.JCheckBox chbAsegurado;
     public javax.swing.JCheckBox chbCierraMes;
     public org.jdesktop.swingx.JXDatePicker dpExtension;

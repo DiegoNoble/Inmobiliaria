@@ -81,6 +81,7 @@ public final class MenuPrincipalView extends javax.swing.JFrame {
         fondo = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         mnuSistema = new javax.swing.JMenu();
+        mnuItemSesion1 = new javax.swing.JMenuItem();
         mnuItemSesion = new javax.swing.JMenuItem();
         mnuItemSalir = new javax.swing.JMenuItem();
         mnuRegistros = new javax.swing.JMenu();
@@ -229,6 +230,17 @@ public final class MenuPrincipalView extends javax.swing.JFrame {
         mnuSistema.setText(" SISTEMA ");
         mnuSistema.setBorderPainted(true);
         mnuSistema.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+
+        mnuItemSesion1.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
+        mnuItemSesion1.setText(" Respaldar Base");
+        mnuItemSesion1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        mnuItemSesion1.setBorderPainted(true);
+        mnuItemSesion1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuItemSesion1ActionPerformed(evt);
+            }
+        });
+        mnuSistema.add(mnuItemSesion1);
 
         mnuItemSesion.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         mnuItemSesion.setText(" Cerrar sesión ");
@@ -1342,6 +1354,14 @@ public final class MenuPrincipalView extends javax.swing.JFrame {
         lugarFormadePago.toFront();
     }//GEN-LAST:event_mnuCotizacion27ActionPerformed
 
+    private void mnuItemSesion1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuItemSesion1ActionPerformed
+
+        BackUpsView logBackup = new BackUpsView();
+        logBackup.setVisible(true);
+        logBackup.toFront();
+
+    }//GEN-LAST:event_mnuItemSesion1ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel fondo;
     private javax.swing.JMenu jMenu1;
@@ -1462,6 +1482,7 @@ public final class MenuPrincipalView extends javax.swing.JFrame {
     private javax.swing.JMenuItem mnuItemRegistrarPrestamo9;
     private javax.swing.JMenuItem mnuItemSalir;
     private javax.swing.JMenuItem mnuItemSesion;
+    private javax.swing.JMenuItem mnuItemSesion1;
     private javax.swing.JMenu mnuRegistros;
     private javax.swing.JMenu mnuSistema;
     private javax.swing.JMenu mnuVentas;

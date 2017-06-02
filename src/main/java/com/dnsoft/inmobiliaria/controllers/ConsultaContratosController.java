@@ -30,6 +30,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
@@ -145,10 +146,12 @@ public class ConsultaContratosController implements ActionListener {
                     contratoSeleccionado = listContratos.get(view.tblContratos.getSelectedRow());
                     view.btnModificarContrato.setEnabled(true);
                     view.btnPagarConsultarRecibos.setEnabled(true);
+                    view.btnActivarInactivar.setEnabled(true);
 
                 } else {
                     view.btnPagarConsultarRecibos.setEnabled(false);
                     view.btnModificarContrato.setEnabled(false);
+                    view.btnActivarInactivar.setEnabled(false);
                 }
             }
         });
@@ -277,6 +280,26 @@ public class ConsultaContratosController implements ActionListener {
             }
         });
 
+        view.btnActivarInactivar.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent evt) {
+                contratoSeleccionado = contratosDAO.findByContrato(listContratos.get(view.tblContratos.getSelectedRow()).getId());
+                int c = JOptionPane.showConfirmDialog(view, "Confirma inactivacion del contrato: " + contratoSeleccionado.toString(), "Confirmación", JOptionPane.YES_NO_OPTION);
+                if (c == 0) {
+                    if (contratoSeleccionado.getActivo() == Boolean.FALSE) {
+                        contratoSeleccionado.setActivo(Boolean.TRUE);
+                        contratoSeleccionado.setFechaInactivacion(null);
+                    } else {
+                        contratoSeleccionado.setActivo(Boolean.FALSE);
+                        contratoSeleccionado.setFechaInactivacion(new Date());
+                    }
+                    contratosDAO.save(contratoSeleccionado);
+                    buscaContratos();
+
+                }
+                buscaContratos();
+            }
+        });
     }
 
     void consultaRecibosGastos() {

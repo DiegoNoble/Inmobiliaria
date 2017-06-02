@@ -240,7 +240,7 @@ public final class InmuebleDetallesDialog_new extends javax.swing.JDialog {
         txtAreaPredio.setText(inmueble.getAreapredio());
         txtDescripcion.setText(inmueble.getDocumentacion());
         dpFechaConstruccion.setDate(inmueble.getFechaconstruccion());
-
+        txtPadron.setText(inmueble.getPadron());
         txtManzana.setText(inmueble.getManzana());
         txtObservaciones.setText(inmueble.getObservaciones());
         txtSolar.setText(inmueble.getSolar());
@@ -268,6 +268,7 @@ public final class InmuebleDetallesDialog_new extends javax.swing.JDialog {
             inmueble.setManzana(txtManzana.getText());
             inmueble.setObservaciones(txtObservaciones.getText());
             inmueble.setSolar(txtSolar.getText());
+            inmueble.setPadron(txtPadron.getText());
             inmueble.setFraccionamiento(txtFraccionamiento.getText());
             inmueble.setTipoinmueble((TipoInmueble) cbTipoInmueble.getSelectedItem());
             if (inmueble.isNew()) {
@@ -374,7 +375,7 @@ public final class InmuebleDetallesDialog_new extends javax.swing.JDialog {
         jLabel22 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
-        txtPadron1 = new javax.swing.JTextField();
+        txtPadron = new javax.swing.JTextField();
         btnRegistraBarrio = new javax.swing.JButton();
         btnRegistraCiudad = new javax.swing.JButton();
         btnRegistraCalle = new javax.swing.JButton();
@@ -599,7 +600,7 @@ public final class InmuebleDetallesDialog_new extends javax.swing.JDialog {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.ipadx = 30;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-        jPanel1.add(txtPadron1, gridBagConstraints);
+        jPanel1.add(txtPadron, gridBagConstraints);
 
         btnRegistraBarrio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -836,7 +837,7 @@ public final class InmuebleDetallesDialog_new extends javax.swing.JDialog {
     private javax.swing.JTextField txtManzana;
     private javax.swing.JTextField txtNro;
     private javax.swing.JTextArea txtObservaciones;
-    private javax.swing.JTextField txtPadron1;
+    private javax.swing.JTextField txtPadron;
     private javax.swing.JTextField txtSolar;
     // End of variables declaration//GEN-END:variables
 }

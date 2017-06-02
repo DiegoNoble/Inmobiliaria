@@ -41,6 +41,7 @@ public class ConsultaContratosInternal extends InternalFrameEstandar {
         btnEliminarInmueble = new botones.BotonEliminar();
         btnPagarConsultarRecibos = new botones.BotonPagar();
         brnVolver = new botones.BotonVolver();
+        btnActivarInactivar = new botones.BotonCancelar();
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
@@ -100,7 +101,7 @@ public class ConsultaContratosInternal extends InternalFrameEstandar {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 5;
+        gridBagConstraints.gridwidth = 6;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
@@ -109,7 +110,7 @@ public class ConsultaContratosInternal extends InternalFrameEstandar {
 
         btnEliminarInmueble.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridx = 5;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
@@ -134,6 +135,16 @@ public class ConsultaContratosInternal extends InternalFrameEstandar {
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         jPanel4.add(brnVolver, gridBagConstraints);
+
+        btnActivarInactivar.setEnabled(false);
+        btnActivarInactivar.setText("Activar/Inactivar");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        jPanel4.add(btnActivarInactivar, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -209,6 +220,7 @@ public class ConsultaContratosInternal extends InternalFrameEstandar {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public botones.BotonVolver brnVolver;
+    public botones.BotonCancelar btnActivarInactivar;
     public botones.BotonEliminar btnEliminarInmueble;
     public botones.BotonEdicion btnModificarContrato;
     public botones.BotonNuevo btnNuevoContrato;

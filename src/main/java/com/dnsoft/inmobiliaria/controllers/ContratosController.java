@@ -111,7 +111,7 @@ public final class ContratosController implements ActionListener {
         // view.txtSaldo.setText("0.00");
     }
 
-    public ContratosController(ContratosDialog view, Contrato contratoSeleccionado,ConsultaContratosController consultaContratosController) {
+    public ContratosController(ContratosDialog view, Contrato contratoSeleccionado, ConsultaContratosController consultaContratosController) {
 
         this.container = Container.getInstancia();
         this.consultaContratosController = consultaContratosController;
@@ -141,9 +141,8 @@ public final class ContratosController implements ActionListener {
         this.view.btnNuevoTipoGarantia.setActionCommand("btNuevoTipoGarantia");
         this.view.btnNuevoTipoGarantia.addActionListener(this);
 
-        this.view.btnInactivar.setActionCommand("btnInactivar");
-        this.view.btnInactivar.addActionListener(this);
-
+        //this.view.btnInactivar.setActionCommand("btnInactivar");
+        //this.view.btnInactivar.addActionListener(this);
         this.view.btnNuevoTipoDestino.setActionCommand("btnNuevoTipoDestino");
         this.view.btnNuevoTipoDestino.addActionListener(this);
 
@@ -252,6 +251,7 @@ public final class ContratosController implements ActionListener {
         view.btnGuardar.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent evt) {
+                
                 guardarContrato(new Contrato());
             }
         }
@@ -496,7 +496,7 @@ public final class ContratosController implements ActionListener {
                     contrato.setIva((Iva) view.cbIVA.getSelectedItem());
 
                     if (contrato.isNew()) {
-
+                        contratoSeleccionado.setActivo(true);
                         contrato.setRecibosList(new CalculaRecibos().generaRecibos(contrato));
                         contrato.setInmueble(inmuebleSeleccionado);
                         // contrato.setDescripcionInmueble(inmuebleSeleccionado.toString());
@@ -504,6 +504,14 @@ public final class ContratosController implements ActionListener {
                         //inmuebleSeleccionado.setStatuspropiedad(StatusInmueble.VENDIDA);
                         inmuebleDAO.save(inmuebleSeleccionado);
                     } else {
+                        if (view.dpFechaInactivacion.getEditor().getText().equals("")) {
+
+                            contratoSeleccionado.setFechaInactivacion(view.dpFechaInactivacion.getDate());
+                            contratoSeleccionado.setActivo(false);
+                        }else{
+                            contratoSeleccionado.setFechaInactivacion(null);
+                            contratoSeleccionado.setActivo(true);
+                        }
                         if (JOptionPane.showConfirmDialog(view, "Desea volver a generar recibos pendientes?", "Confirmación", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
 
                             recibosDAO.deleteInBatch(recibosDAO.findByContratoAndSituacion(contrato, Situacion.PENDIENTE));
@@ -519,7 +527,7 @@ public final class ContratosController implements ActionListener {
 
                     //alquileresDAO.save(new CalculaAlquileres().generaRecibos(contrato));
                     JOptionPane.showMessageDialog(view, "El contrato se genero/modifico correctamente", "Correcto", JOptionPane.INFORMATION_MESSAGE);
-                    if(consultaContratosController!=null){
+                    if (consultaContratosController != null) {
                         consultaContratosController.buscaContratos();
                     }
                     this.view.dispose();
@@ -771,8 +779,7 @@ public final class ContratosController implements ActionListener {
         this.view.dpInicio.setDate(contratoSeleccionado.getFechaInicio());
         this.view.dpFIn.setDate(contratoSeleccionado.getFechaFin());
 
-        this.view.chbActivo.setSelected(contratoSeleccionado.getActivo());
-
+        ///this.view.chbActivo.setSelected(contratoSeleccionado.getActivo());
         this.view.dpFechaInactivacion.setDate(contratoSeleccionado.getFechaInactivacion());
         if (contratoSeleccionado.getTipoContrato() == TipoContrato.VENTA) {
             this.view.txtValorTotal.setText(contratoSeleccionado.getValorTotal().toString());
