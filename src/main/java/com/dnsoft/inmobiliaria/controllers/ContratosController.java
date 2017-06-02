@@ -496,7 +496,7 @@ public final class ContratosController implements ActionListener {
                     contrato.setIva((Iva) view.cbIVA.getSelectedItem());
 
                     if (contrato.isNew()) {
-                        contratoSeleccionado.setActivo(true);
+                        //contrato.setActivo(true);
                         contrato.setRecibosList(new CalculaRecibos().generaRecibos(contrato));
                         contrato.setInmueble(inmuebleSeleccionado);
                         // contrato.setDescripcionInmueble(inmuebleSeleccionado.toString());
