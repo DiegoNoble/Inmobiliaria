@@ -151,6 +151,8 @@ public final class MenuPrincipalView extends javax.swing.JFrame {
         mnuItemRegistrarPrestamo6 = new javax.swing.JMenuItem();
         jSeparator25 = new javax.swing.JPopupMenu.Separator();
         mnuItemRegistrarPrestamo7 = new javax.swing.JMenuItem();
+        jSeparator51 = new javax.swing.JPopupMenu.Separator();
+        mnuItemRegistrarPrestamo10 = new javax.swing.JMenuItem();
         mnuVentas3 = new javax.swing.JMenu();
         mnuItemRegistrarPrestamo8 = new javax.swing.JMenuItem();
         jSeparator28 = new javax.swing.JPopupMenu.Separator();
@@ -228,13 +230,11 @@ public final class MenuPrincipalView extends javax.swing.JFrame {
 
         mnuSistema.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         mnuSistema.setText(" SISTEMA ");
-        mnuSistema.setBorderPainted(true);
         mnuSistema.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
 
         mnuItemSesion1.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         mnuItemSesion1.setText(" Respaldar Base");
         mnuItemSesion1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        mnuItemSesion1.setBorderPainted(true);
         mnuItemSesion1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnuItemSesion1ActionPerformed(evt);
@@ -245,7 +245,6 @@ public final class MenuPrincipalView extends javax.swing.JFrame {
         mnuItemSesion.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         mnuItemSesion.setText(" Cerrar sesión ");
         mnuItemSesion.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        mnuItemSesion.setBorderPainted(true);
         mnuItemSesion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnuItemSesionActionPerformed(evt);
@@ -256,7 +255,6 @@ public final class MenuPrincipalView extends javax.swing.JFrame {
         mnuItemSalir.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         mnuItemSalir.setText(" Salir ");
         mnuItemSalir.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        mnuItemSalir.setBorderPainted(true);
         mnuItemSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnuItemSalirActionPerformed(evt);
@@ -268,7 +266,6 @@ public final class MenuPrincipalView extends javax.swing.JFrame {
 
         mnuRegistros.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         mnuRegistros.setText(" REGISTROS ");
-        mnuRegistros.setBorderPainted(true);
         mnuRegistros.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
 
         jMenu1.setText("  Globales");
@@ -277,7 +274,6 @@ public final class MenuPrincipalView extends javax.swing.JFrame {
         mnuCotizacion10.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         mnuCotizacion10.setText(" Parametros Globales ");
         mnuCotizacion10.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        mnuCotizacion10.setBorderPainted(true);
         mnuCotizacion10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnuCotizacion10ActionPerformed(evt);
@@ -289,7 +285,6 @@ public final class MenuPrincipalView extends javax.swing.JFrame {
         mnuCotizacion2.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         mnuCotizacion2.setText(" Calles");
         mnuCotizacion2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        mnuCotizacion2.setBorderPainted(true);
         mnuCotizacion2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnuCotizacion2ActionPerformed(evt);
@@ -301,7 +296,6 @@ public final class MenuPrincipalView extends javax.swing.JFrame {
         mnuCotizacion4.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         mnuCotizacion4.setText(" Ciudades");
         mnuCotizacion4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        mnuCotizacion4.setBorderPainted(true);
         mnuCotizacion4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnuCotizacion4ActionPerformed(evt);
@@ -313,7 +307,6 @@ public final class MenuPrincipalView extends javax.swing.JFrame {
         mnuCotizacion5.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         mnuCotizacion5.setText(" Comodidades ");
         mnuCotizacion5.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        mnuCotizacion5.setBorderPainted(true);
         mnuCotizacion5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnuCotizacion5ActionPerformed(evt);
@@ -325,7 +318,6 @@ public final class MenuPrincipalView extends javax.swing.JFrame {
         mnuCotizacion6.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         mnuCotizacion6.setText(" Tipos de inmueble");
         mnuCotizacion6.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        mnuCotizacion6.setBorderPainted(true);
         mnuCotizacion6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnuCotizacion6ActionPerformed(evt);
@@ -337,7 +329,6 @@ public final class MenuPrincipalView extends javax.swing.JFrame {
         mnuCotizacion7.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         mnuCotizacion7.setText(" Bancos");
         mnuCotizacion7.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        mnuCotizacion7.setBorderPainted(true);
         mnuCotizacion7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnuCotizacion7ActionPerformed(evt);
@@ -349,7 +340,6 @@ public final class MenuPrincipalView extends javax.swing.JFrame {
         mnuCotizacion8.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         mnuCotizacion8.setText(" Tipos de documento");
         mnuCotizacion8.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        mnuCotizacion8.setBorderPainted(true);
         mnuCotizacion8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnuCotizacion8ActionPerformed(evt);
@@ -361,7 +351,6 @@ public final class MenuPrincipalView extends javax.swing.JFrame {
         mnuCotizacion3.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         mnuCotizacion3.setText(" Barrios");
         mnuCotizacion3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        mnuCotizacion3.setBorderPainted(true);
         mnuCotizacion3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnuCotizacion3ActionPerformed(evt);
@@ -373,7 +362,6 @@ public final class MenuPrincipalView extends javax.swing.JFrame {
         mnuCotizacion28.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         mnuCotizacion28.setText(" Garantías alquileres");
         mnuCotizacion28.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        mnuCotizacion28.setBorderPainted(true);
         mnuCotizacion28.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnuCotizacion28ActionPerformed(evt);
@@ -385,7 +373,6 @@ public final class MenuPrincipalView extends javax.swing.JFrame {
         mnuCotizacion29.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         mnuCotizacion29.setText(" Destino alquileres");
         mnuCotizacion29.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        mnuCotizacion29.setBorderPainted(true);
         mnuCotizacion29.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnuCotizacion29ActionPerformed(evt);
@@ -397,7 +384,6 @@ public final class MenuPrincipalView extends javax.swing.JFrame {
         mnuCotizacion9.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         mnuCotizacion9.setText(" Rubros ");
         mnuCotizacion9.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        mnuCotizacion9.setBorderPainted(true);
         mnuCotizacion9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnuCotizacion9ActionPerformed(evt);
@@ -409,7 +395,6 @@ public final class MenuPrincipalView extends javax.swing.JFrame {
         mnuCotizacion12.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         mnuCotizacion12.setText(" Tipos de Caja ");
         mnuCotizacion12.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        mnuCotizacion12.setBorderPainted(true);
         mnuCotizacion12.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnuCotizacion12ActionPerformed(evt);
@@ -421,7 +406,6 @@ public final class MenuPrincipalView extends javax.swing.JFrame {
         mnuCotizacion26.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         mnuCotizacion26.setText(" Actualiza descripción Contratos");
         mnuCotizacion26.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        mnuCotizacion26.setBorderPainted(true);
         mnuCotizacion26.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnuCotizacion26ActionPerformed(evt);
@@ -433,7 +417,6 @@ public final class MenuPrincipalView extends javax.swing.JFrame {
         mnuCotizacion27.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         mnuCotizacion27.setText(" Lugar y forma de pago");
         mnuCotizacion27.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        mnuCotizacion27.setBorderPainted(true);
         mnuCotizacion27.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnuCotizacion27ActionPerformed(evt);
@@ -447,7 +430,6 @@ public final class MenuPrincipalView extends javax.swing.JFrame {
         mnuInquilinos.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         mnuInquilinos.setText(" Inquilinos / Compradores");
         mnuInquilinos.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        mnuInquilinos.setBorderPainted(true);
         mnuInquilinos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnuInquilinosActionPerformed(evt);
@@ -459,7 +441,6 @@ public final class MenuPrincipalView extends javax.swing.JFrame {
         mnuItemPropietarios.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         mnuItemPropietarios.setText(" Propietarios ");
         mnuItemPropietarios.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        mnuItemPropietarios.setBorderPainted(true);
         mnuItemPropietarios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnuItemPropietariosActionPerformed(evt);
@@ -471,7 +452,6 @@ public final class MenuPrincipalView extends javax.swing.JFrame {
         mnuItemPropiedades.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         mnuItemPropiedades.setText(" Inmuebles ");
         mnuItemPropiedades.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        mnuItemPropiedades.setBorderPainted(true);
         mnuItemPropiedades.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnuItemPropiedadesActionPerformed(evt);
@@ -483,7 +463,6 @@ public final class MenuPrincipalView extends javax.swing.JFrame {
         mnuInquilinos1.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         mnuInquilinos1.setText(" Proveedores ");
         mnuInquilinos1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        mnuInquilinos1.setBorderPainted(true);
         mnuInquilinos1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnuInquilinos1ActionPerformed(evt);
@@ -496,14 +475,12 @@ public final class MenuPrincipalView extends javax.swing.JFrame {
 
         mnuAyuda2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         mnuAyuda2.setText(" CAJA ");
-        mnuAyuda2.setBorderPainted(true);
         mnuAyuda2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         mnuAyuda2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
 
         mnuItemPropiedades2.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         mnuItemPropiedades2.setText(" Movimientos  ");
         mnuItemPropiedades2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        mnuItemPropiedades2.setBorderPainted(true);
         mnuItemPropiedades2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnuItemPropiedades2ActionPerformed(evt);
@@ -515,7 +492,6 @@ public final class MenuPrincipalView extends javax.swing.JFrame {
         mnuItemPropiedades6.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         mnuItemPropiedades6.setText(" Consultas ");
         mnuItemPropiedades6.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        mnuItemPropiedades6.setBorderPainted(true);
         mnuItemPropiedades6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnuItemPropiedades6ActionPerformed(evt);
@@ -527,7 +503,6 @@ public final class MenuPrincipalView extends javax.swing.JFrame {
         mnuCotizacion.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         mnuCotizacion.setText(" Cotizaciónes");
         mnuCotizacion.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        mnuCotizacion.setBorderPainted(true);
         mnuCotizacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnuCotizacionActionPerformed(evt);
@@ -540,14 +515,12 @@ public final class MenuPrincipalView extends javax.swing.JFrame {
 
         mnuVentas.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         mnuVentas.setText(" CONTRATOS ");
-        mnuVentas.setBorderPainted(true);
         mnuVentas.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         mnuVentas.add(jSeparator19);
 
         mnuItemPropiedades1.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         mnuItemPropiedades1.setText(" Nuevo ");
         mnuItemPropiedades1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        mnuItemPropiedades1.setBorderPainted(true);
         mnuItemPropiedades1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnuItemPropiedades1ActionPerformed(evt);
@@ -559,7 +532,6 @@ public final class MenuPrincipalView extends javax.swing.JFrame {
         mnuItemRegistrarPrestamo.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         mnuItemRegistrarPrestamo.setText(" Consultas/Modifica/Pagos ");
         mnuItemRegistrarPrestamo.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        mnuItemRegistrarPrestamo.setBorderPainted(true);
         mnuItemRegistrarPrestamo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnuItemRegistrarPrestamoActionPerformed(evt);
@@ -571,7 +543,6 @@ public final class MenuPrincipalView extends javax.swing.JFrame {
         mnuCotizacion1.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         mnuCotizacion1.setText(" Reajustes ");
         mnuCotizacion1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        mnuCotizacion1.setBorderPainted(true);
         mnuCotizacion1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnuCotizacion1ActionPerformed(evt);
@@ -584,13 +555,11 @@ public final class MenuPrincipalView extends javax.swing.JFrame {
 
         mnuVentas1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         mnuVentas1.setText(" PROPIETARIOS ");
-        mnuVentas1.setBorderPainted(true);
         mnuVentas1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
 
         mnuItemRegistrarPrestamo1.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         mnuItemRegistrarPrestamo1.setText(" Estado de cuenta/Retiros");
         mnuItemRegistrarPrestamo1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        mnuItemRegistrarPrestamo1.setBorderPainted(true);
         mnuItemRegistrarPrestamo1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnuItemRegistrarPrestamo1ActionPerformed(evt);
@@ -602,7 +571,6 @@ public final class MenuPrincipalView extends javax.swing.JFrame {
         mnuItemRegistrarPrestamo2.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         mnuItemRegistrarPrestamo2.setText(" Movimientos ");
         mnuItemRegistrarPrestamo2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        mnuItemRegistrarPrestamo2.setBorderPainted(true);
         mnuItemRegistrarPrestamo2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnuItemRegistrarPrestamo2ActionPerformed(evt);
@@ -614,13 +582,11 @@ public final class MenuPrincipalView extends javax.swing.JFrame {
 
         mnuVentas2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         mnuVentas2.setText(" CONSULTAS/LISTADOS");
-        mnuVentas2.setBorderPainted(true);
         mnuVentas2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
 
         mnuItemRegistrarPrestamo3.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         mnuItemRegistrarPrestamo3.setText(" Propietarios ");
         mnuItemRegistrarPrestamo3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        mnuItemRegistrarPrestamo3.setBorderPainted(true);
         mnuItemRegistrarPrestamo3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnuItemRegistrarPrestamo3ActionPerformed(evt);
@@ -632,7 +598,6 @@ public final class MenuPrincipalView extends javax.swing.JFrame {
         mnuItemRegistrarPrestamo4.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         mnuItemRegistrarPrestamo4.setText(" Inquilinos ");
         mnuItemRegistrarPrestamo4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        mnuItemRegistrarPrestamo4.setBorderPainted(true);
         mnuItemRegistrarPrestamo4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnuItemRegistrarPrestamo4ActionPerformed(evt);
@@ -644,7 +609,6 @@ public final class MenuPrincipalView extends javax.swing.JFrame {
         mnuItemRegistrarPrestamo5.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         mnuItemRegistrarPrestamo5.setText(" Viviendas ");
         mnuItemRegistrarPrestamo5.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        mnuItemRegistrarPrestamo5.setBorderPainted(true);
         mnuItemRegistrarPrestamo5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnuItemRegistrarPrestamo5ActionPerformed(evt);
@@ -656,7 +620,6 @@ public final class MenuPrincipalView extends javax.swing.JFrame {
         mnuItemRegistrarPrestamo6.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         mnuItemRegistrarPrestamo6.setText(" Garantías ");
         mnuItemRegistrarPrestamo6.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        mnuItemRegistrarPrestamo6.setBorderPainted(true);
         mnuItemRegistrarPrestamo6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnuItemRegistrarPrestamo6ActionPerformed(evt);
@@ -668,25 +631,33 @@ public final class MenuPrincipalView extends javax.swing.JFrame {
         mnuItemRegistrarPrestamo7.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         mnuItemRegistrarPrestamo7.setText(" Contratos encerrados ");
         mnuItemRegistrarPrestamo7.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        mnuItemRegistrarPrestamo7.setBorderPainted(true);
         mnuItemRegistrarPrestamo7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnuItemRegistrarPrestamo7ActionPerformed(evt);
             }
         });
         mnuVentas2.add(mnuItemRegistrarPrestamo7);
+        mnuVentas2.add(jSeparator51);
+
+        mnuItemRegistrarPrestamo10.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
+        mnuItemRegistrarPrestamo10.setText(" Recibos vencidos");
+        mnuItemRegistrarPrestamo10.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        mnuItemRegistrarPrestamo10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuItemRegistrarPrestamo10ActionPerformed(evt);
+            }
+        });
+        mnuVentas2.add(mnuItemRegistrarPrestamo10);
 
         jMenuBar1.add(mnuVentas2);
 
         mnuVentas3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         mnuVentas3.setText(" ESTADÍSTICAS ");
-        mnuVentas3.setBorderPainted(true);
         mnuVentas3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
 
         mnuItemRegistrarPrestamo8.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         mnuItemRegistrarPrestamo8.setText(" Movimientos por rubro ");
         mnuItemRegistrarPrestamo8.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        mnuItemRegistrarPrestamo8.setBorderPainted(true);
         mnuItemRegistrarPrestamo8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnuItemRegistrarPrestamo8ActionPerformed(evt);
@@ -698,7 +669,6 @@ public final class MenuPrincipalView extends javax.swing.JFrame {
         mnuItemRegistrarPrestamo9.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         mnuItemRegistrarPrestamo9.setText(" Depósitos en garantía ");
         mnuItemRegistrarPrestamo9.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        mnuItemRegistrarPrestamo9.setBorderPainted(true);
         mnuItemRegistrarPrestamo9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnuItemRegistrarPrestamo9ActionPerformed(evt);
@@ -713,7 +683,6 @@ public final class MenuPrincipalView extends javax.swing.JFrame {
         mnuCotizacion11.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         mnuCotizacion11.setText(" Comisiones alquileres");
         mnuCotizacion11.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        mnuCotizacion11.setBorderPainted(true);
         mnuCotizacion11.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnuCotizacion11ActionPerformed(evt);
@@ -725,7 +694,6 @@ public final class MenuPrincipalView extends javax.swing.JFrame {
         mnuCotizacion13.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         mnuCotizacion13.setText(" Comisiones cuotas ");
         mnuCotizacion13.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        mnuCotizacion13.setBorderPainted(true);
         mnuCotizacion13.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnuCotizacion13ActionPerformed(evt);
@@ -737,7 +705,6 @@ public final class MenuPrincipalView extends javax.swing.JFrame {
         mnuCotizacion14.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         mnuCotizacion14.setText(" Comisiones ventas");
         mnuCotizacion14.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        mnuCotizacion14.setBorderPainted(true);
         mnuCotizacion14.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnuCotizacion14ActionPerformed(evt);
@@ -749,7 +716,6 @@ public final class MenuPrincipalView extends javax.swing.JFrame {
         mnuCotizacion15.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         mnuCotizacion15.setText(" Honorarios contratos");
         mnuCotizacion15.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        mnuCotizacion15.setBorderPainted(true);
         mnuCotizacion15.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnuCotizacion15ActionPerformed(evt);
@@ -761,7 +727,6 @@ public final class MenuPrincipalView extends javax.swing.JFrame {
         mnuCotizacion16.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         mnuCotizacion16.setText(" Moras (adm.)");
         mnuCotizacion16.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        mnuCotizacion16.setBorderPainted(true);
         mnuCotizacion16.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnuCotizacion16ActionPerformed(evt);
@@ -773,7 +738,6 @@ public final class MenuPrincipalView extends javax.swing.JFrame {
         mnuCotizacion17.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         mnuCotizacion17.setText(" Gestiones de pago");
         mnuCotizacion17.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        mnuCotizacion17.setBorderPainted(true);
         mnuCotizacion17.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnuCotizacion17ActionPerformed(evt);
@@ -785,7 +749,6 @@ public final class MenuPrincipalView extends javax.swing.JFrame {
         mnuCotizacion18.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         mnuCotizacion18.setText(" Gestiones mantenimiento");
         mnuCotizacion18.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        mnuCotizacion18.setBorderPainted(true);
         mnuCotizacion18.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnuCotizacion18ActionPerformed(evt);
@@ -802,7 +765,6 @@ public final class MenuPrincipalView extends javax.swing.JFrame {
         mnuCotizacion19.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         mnuCotizacion19.setText(" Comisiones alquileres");
         mnuCotizacion19.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        mnuCotizacion19.setBorderPainted(true);
         mnuCotizacion19.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnuCotizacion19ActionPerformed(evt);
@@ -814,7 +776,6 @@ public final class MenuPrincipalView extends javax.swing.JFrame {
         mnuCotizacion20.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         mnuCotizacion20.setText(" Comisiones cuotas ");
         mnuCotizacion20.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        mnuCotizacion20.setBorderPainted(true);
         mnuCotizacion20.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnuCotizacion20ActionPerformed(evt);
@@ -826,7 +787,6 @@ public final class MenuPrincipalView extends javax.swing.JFrame {
         mnuCotizacion21.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         mnuCotizacion21.setText(" Comisiones ventas");
         mnuCotizacion21.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        mnuCotizacion21.setBorderPainted(true);
         mnuCotizacion21.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnuCotizacion21ActionPerformed(evt);
@@ -838,7 +798,6 @@ public final class MenuPrincipalView extends javax.swing.JFrame {
         mnuCotizacion22.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         mnuCotizacion22.setText(" Honorarios contratos");
         mnuCotizacion22.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        mnuCotizacion22.setBorderPainted(true);
         mnuCotizacion22.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnuCotizacion22ActionPerformed(evt);
@@ -850,7 +809,6 @@ public final class MenuPrincipalView extends javax.swing.JFrame {
         mnuCotizacion23.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         mnuCotizacion23.setText(" Moras (adm.)");
         mnuCotizacion23.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        mnuCotizacion23.setBorderPainted(true);
         mnuCotizacion23.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnuCotizacion23ActionPerformed(evt);
@@ -862,7 +820,6 @@ public final class MenuPrincipalView extends javax.swing.JFrame {
         mnuCotizacion24.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         mnuCotizacion24.setText(" Gestiones de pago");
         mnuCotizacion24.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        mnuCotizacion24.setBorderPainted(true);
         mnuCotizacion24.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnuCotizacion24ActionPerformed(evt);
@@ -874,7 +831,6 @@ public final class MenuPrincipalView extends javax.swing.JFrame {
         mnuCotizacion25.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         mnuCotizacion25.setText(" Gestiones mantenimiento");
         mnuCotizacion25.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        mnuCotizacion25.setBorderPainted(true);
         mnuCotizacion25.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnuCotizacion25ActionPerformed(evt);
@@ -889,13 +845,11 @@ public final class MenuPrincipalView extends javax.swing.JFrame {
 
         mnuVentas4.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         mnuVentas4.setText(" ADMINISTRACIÓN ");
-        mnuVentas4.setBorderPainted(true);
         mnuVentas4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
 
         mnuItemRegistrarPrestamo12.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         mnuItemRegistrarPrestamo12.setText("Cierre mes asegurado ");
         mnuItemRegistrarPrestamo12.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        mnuItemRegistrarPrestamo12.setBorderPainted(true);
         mnuItemRegistrarPrestamo12.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnuItemRegistrarPrestamo12ActionPerformed(evt);
@@ -907,7 +861,6 @@ public final class MenuPrincipalView extends javax.swing.JFrame {
         mnuItemRegistrarPrestamo13.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         mnuItemRegistrarPrestamo13.setText(" Facturación ");
         mnuItemRegistrarPrestamo13.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        mnuItemRegistrarPrestamo13.setBorderPainted(true);
         mnuItemRegistrarPrestamo13.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnuItemRegistrarPrestamo13ActionPerformed(evt);
@@ -919,7 +872,6 @@ public final class MenuPrincipalView extends javax.swing.JFrame {
         mnuItemRegistrarPrestamo14.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         mnuItemRegistrarPrestamo14.setText(" Datos Beta ");
         mnuItemRegistrarPrestamo14.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        mnuItemRegistrarPrestamo14.setBorderPainted(true);
         mnuItemRegistrarPrestamo14.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnuItemRegistrarPrestamo14ActionPerformed(evt);
@@ -931,7 +883,6 @@ public final class MenuPrincipalView extends javax.swing.JFrame {
         mnuItemRegistrarPrestamo15.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         mnuItemRegistrarPrestamo15.setText(" Usuarios ");
         mnuItemRegistrarPrestamo15.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        mnuItemRegistrarPrestamo15.setBorderPainted(true);
         mnuItemRegistrarPrestamo15.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnuItemRegistrarPrestamo15ActionPerformed(evt);
@@ -944,14 +895,12 @@ public final class MenuPrincipalView extends javax.swing.JFrame {
 
         mnuAyuda1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         mnuAyuda1.setText(" Control de Gastos");
-        mnuAyuda1.setBorderPainted(true);
         mnuAyuda1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         mnuAyuda1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
 
         mnuItemPropiedades3.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         mnuItemPropiedades3.setText(" Gastos por Propietarios ");
         mnuItemPropiedades3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        mnuItemPropiedades3.setBorderPainted(true);
         mnuItemPropiedades3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnuItemPropiedades3ActionPerformed(evt);
@@ -962,7 +911,6 @@ public final class MenuPrincipalView extends javax.swing.JFrame {
         mnuItemPropiedades4.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         mnuItemPropiedades4.setText(" Gastos por Inquilino");
         mnuItemPropiedades4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        mnuItemPropiedades4.setBorderPainted(true);
         mnuItemPropiedades4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnuItemPropiedades4ActionPerformed(evt);
@@ -973,7 +921,6 @@ public final class MenuPrincipalView extends javax.swing.JFrame {
         mnuItemPropiedades5.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         mnuItemPropiedades5.setText(" Gastos por Inmueble");
         mnuItemPropiedades5.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        mnuItemPropiedades5.setBorderPainted(true);
         mnuItemPropiedades5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnuItemPropiedades5ActionPerformed(evt);
@@ -985,14 +932,12 @@ public final class MenuPrincipalView extends javax.swing.JFrame {
 
         mnuAyuda.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         mnuAyuda.setText("  Ayuda  ");
-        mnuAyuda.setBorderPainted(true);
         mnuAyuda.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         mnuAyuda.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
 
         mnuItemConsultaCuentasProveedores1.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         mnuItemConsultaCuentasProveedores1.setText("  Sobre  ");
         mnuItemConsultaCuentasProveedores1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        mnuItemConsultaCuentasProveedores1.setBorderPainted(true);
         mnuItemConsultaCuentasProveedores1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnuItemConsultaCuentasProveedores1ActionPerformed(evt);
@@ -1362,6 +1307,11 @@ public final class MenuPrincipalView extends javax.swing.JFrame {
 
     }//GEN-LAST:event_mnuItemSesion1ActionPerformed
 
+    private void mnuItemRegistrarPrestamo10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuItemRegistrarPrestamo10ActionPerformed
+        InformeRecibosVencidos informeComisiones = new InformeRecibosVencidos(this, false);
+        informeComisiones.go();
+    }//GEN-LAST:event_mnuItemRegistrarPrestamo10ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel fondo;
     private javax.swing.JMenu jMenu1;
@@ -1416,6 +1366,7 @@ public final class MenuPrincipalView extends javax.swing.JFrame {
     private javax.swing.JPopupMenu.Separator jSeparator49;
     private javax.swing.JPopupMenu.Separator jSeparator5;
     private javax.swing.JPopupMenu.Separator jSeparator50;
+    private javax.swing.JPopupMenu.Separator jSeparator51;
     private javax.swing.JPopupMenu.Separator jSeparator6;
     private javax.swing.JPopupMenu.Separator jSeparator7;
     private javax.swing.JPopupMenu.Separator jSeparator8;
@@ -1468,6 +1419,7 @@ public final class MenuPrincipalView extends javax.swing.JFrame {
     private javax.swing.JMenuItem mnuItemPropietarios;
     private javax.swing.JMenuItem mnuItemRegistrarPrestamo;
     private javax.swing.JMenuItem mnuItemRegistrarPrestamo1;
+    private javax.swing.JMenuItem mnuItemRegistrarPrestamo10;
     private javax.swing.JMenuItem mnuItemRegistrarPrestamo12;
     private javax.swing.JMenuItem mnuItemRegistrarPrestamo13;
     private javax.swing.JMenuItem mnuItemRegistrarPrestamo14;

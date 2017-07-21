@@ -17,7 +17,6 @@
               </Border>
             </Property>
             <Property name="text" type="java.lang.String" value=" SISTEMA "/>
-            <Property name="borderPainted" type="boolean" value="true"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="12" style="1"/>
             </Property>
@@ -34,7 +33,6 @@
                     <EtchetBorder/>
                   </Border>
                 </Property>
-                <Property name="borderPainted" type="boolean" value="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuItemSesion1ActionPerformed"/>
@@ -51,7 +49,6 @@
                     <EtchetBorder/>
                   </Border>
                 </Property>
-                <Property name="borderPainted" type="boolean" value="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuItemSesionActionPerformed"/>
@@ -68,7 +65,6 @@
                     <EtchetBorder/>
                   </Border>
                 </Property>
-                <Property name="borderPainted" type="boolean" value="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuItemSalirActionPerformed"/>
@@ -84,7 +80,6 @@
               </Border>
             </Property>
             <Property name="text" type="java.lang.String" value=" REGISTROS "/>
-            <Property name="borderPainted" type="boolean" value="true"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="12" style="1"/>
             </Property>
@@ -109,7 +104,6 @@
                         <EtchetBorder/>
                       </Border>
                     </Property>
-                    <Property name="borderPainted" type="boolean" value="true"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuCotizacion10ActionPerformed"/>
@@ -128,7 +122,6 @@
                         <EtchetBorder/>
                       </Border>
                     </Property>
-                    <Property name="borderPainted" type="boolean" value="true"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuCotizacion2ActionPerformed"/>
@@ -147,7 +140,6 @@
                         <EtchetBorder/>
                       </Border>
                     </Property>
-                    <Property name="borderPainted" type="boolean" value="true"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuCotizacion4ActionPerformed"/>
@@ -166,7 +158,6 @@
                         <EtchetBorder/>
                       </Border>
                     </Property>
-                    <Property name="borderPainted" type="boolean" value="true"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuCotizacion5ActionPerformed"/>
@@ -185,7 +176,6 @@
                         <EtchetBorder/>
                       </Border>
                     </Property>
-                    <Property name="borderPainted" type="boolean" value="true"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuCotizacion6ActionPerformed"/>
@@ -204,7 +194,6 @@
                         <EtchetBorder/>
                       </Border>
                     </Property>
-                    <Property name="borderPainted" type="boolean" value="true"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuCotizacion7ActionPerformed"/>
@@ -223,7 +212,6 @@
                         <EtchetBorder/>
                       </Border>
                     </Property>
-                    <Property name="borderPainted" type="boolean" value="true"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuCotizacion8ActionPerformed"/>
@@ -242,7 +230,6 @@
                         <EtchetBorder/>
                       </Border>
                     </Property>
-                    <Property name="borderPainted" type="boolean" value="true"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuCotizacion3ActionPerformed"/>
@@ -261,7 +248,6 @@
                         <EtchetBorder/>
                       </Border>
                     </Property>
-                    <Property name="borderPainted" type="boolean" value="true"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuCotizacion28ActionPerformed"/>
@@ -280,7 +266,6 @@
                         <EtchetBorder/>
                       </Border>
                     </Property>
-                    <Property name="borderPainted" type="boolean" value="true"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuCotizacion29ActionPerformed"/>
@@ -299,7 +284,6 @@
                         <EtchetBorder/>
                       </Border>
                     </Property>
-                    <Property name="borderPainted" type="boolean" value="true"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuCotizacion9ActionPerformed"/>
@@ -318,7 +302,6 @@
                         <EtchetBorder/>
                       </Border>
                     </Property>
-                    <Property name="borderPainted" type="boolean" value="true"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuCotizacion12ActionPerformed"/>
@@ -337,7 +320,6 @@
                         <EtchetBorder/>
                       </Border>
                     </Property>
-                    <Property name="borderPainted" type="boolean" value="true"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuCotizacion26ActionPerformed"/>
@@ -356,7 +338,6 @@
                         <EtchetBorder/>
                       </Border>
                     </Property>
-                    <Property name="borderPainted" type="boolean" value="true"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuCotizacion27ActionPerformed"/>
@@ -377,7 +358,6 @@
                     <EtchetBorder/>
                   </Border>
                 </Property>
-                <Property name="borderPainted" type="boolean" value="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuInquilinosActionPerformed"/>
@@ -396,7 +376,6 @@
                     <EtchetBorder/>
                   </Border>
                 </Property>
-                <Property name="borderPainted" type="boolean" value="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuItemPropietariosActionPerformed"/>
@@ -415,7 +394,6 @@
                     <EtchetBorder/>
                   </Border>
                 </Property>
-                <Property name="borderPainted" type="boolean" value="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuItemPropiedadesActionPerformed"/>
@@ -434,7 +412,6 @@
                     <EtchetBorder/>
                   </Border>
                 </Property>
-                <Property name="borderPainted" type="boolean" value="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuInquilinos1ActionPerformed"/>
@@ -452,7 +429,6 @@
               </Border>
             </Property>
             <Property name="text" type="java.lang.String" value=" CAJA "/>
-            <Property name="borderPainted" type="boolean" value="true"/>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
               <Color id="Cursor Por defecto"/>
             </Property>
@@ -472,7 +448,6 @@
                     <EtchetBorder/>
                   </Border>
                 </Property>
-                <Property name="borderPainted" type="boolean" value="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuItemPropiedades2ActionPerformed"/>
@@ -491,7 +466,6 @@
                     <EtchetBorder/>
                   </Border>
                 </Property>
-                <Property name="borderPainted" type="boolean" value="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuItemPropiedades6ActionPerformed"/>
@@ -510,7 +484,6 @@
                     <EtchetBorder/>
                   </Border>
                 </Property>
-                <Property name="borderPainted" type="boolean" value="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuCotizacionActionPerformed"/>
@@ -528,7 +501,6 @@
               </Border>
             </Property>
             <Property name="text" type="java.lang.String" value=" CONTRATOS "/>
-            <Property name="borderPainted" type="boolean" value="true"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="12" style="1"/>
             </Property>
@@ -547,7 +519,6 @@
                     <EtchetBorder/>
                   </Border>
                 </Property>
-                <Property name="borderPainted" type="boolean" value="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuItemPropiedades1ActionPerformed"/>
@@ -566,7 +537,6 @@
                     <EtchetBorder/>
                   </Border>
                 </Property>
-                <Property name="borderPainted" type="boolean" value="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuItemRegistrarPrestamoActionPerformed"/>
@@ -585,7 +555,6 @@
                     <EtchetBorder/>
                   </Border>
                 </Property>
-                <Property name="borderPainted" type="boolean" value="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuCotizacion1ActionPerformed"/>
@@ -603,7 +572,6 @@
               </Border>
             </Property>
             <Property name="text" type="java.lang.String" value=" PROPIETARIOS "/>
-            <Property name="borderPainted" type="boolean" value="true"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="12" style="1"/>
             </Property>
@@ -620,7 +588,6 @@
                     <EtchetBorder/>
                   </Border>
                 </Property>
-                <Property name="borderPainted" type="boolean" value="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuItemRegistrarPrestamo1ActionPerformed"/>
@@ -639,7 +606,6 @@
                     <EtchetBorder/>
                   </Border>
                 </Property>
-                <Property name="borderPainted" type="boolean" value="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuItemRegistrarPrestamo2ActionPerformed"/>
@@ -655,7 +621,6 @@
               </Border>
             </Property>
             <Property name="text" type="java.lang.String" value=" CONSULTAS/LISTADOS"/>
-            <Property name="borderPainted" type="boolean" value="true"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="12" style="1"/>
             </Property>
@@ -672,7 +637,6 @@
                     <EtchetBorder/>
                   </Border>
                 </Property>
-                <Property name="borderPainted" type="boolean" value="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuItemRegistrarPrestamo3ActionPerformed"/>
@@ -691,7 +655,6 @@
                     <EtchetBorder/>
                   </Border>
                 </Property>
-                <Property name="borderPainted" type="boolean" value="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuItemRegistrarPrestamo4ActionPerformed"/>
@@ -710,7 +673,6 @@
                     <EtchetBorder/>
                   </Border>
                 </Property>
-                <Property name="borderPainted" type="boolean" value="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuItemRegistrarPrestamo5ActionPerformed"/>
@@ -729,7 +691,6 @@
                     <EtchetBorder/>
                   </Border>
                 </Property>
-                <Property name="borderPainted" type="boolean" value="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuItemRegistrarPrestamo6ActionPerformed"/>
@@ -748,10 +709,27 @@
                     <EtchetBorder/>
                   </Border>
                 </Property>
-                <Property name="borderPainted" type="boolean" value="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuItemRegistrarPrestamo7ActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JPopupMenu$Separator" name="jSeparator51">
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="mnuItemRegistrarPrestamo10">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Verdana" size="12" style="1"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value=" Recibos vencidos"/>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                  <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
+                    <EtchetBorder/>
+                  </Border>
+                </Property>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuItemRegistrarPrestamo10ActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>
@@ -764,7 +742,6 @@
               </Border>
             </Property>
             <Property name="text" type="java.lang.String" value=" ESTAD&#xcd;STICAS "/>
-            <Property name="borderPainted" type="boolean" value="true"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="12" style="1"/>
             </Property>
@@ -781,7 +758,6 @@
                     <EtchetBorder/>
                   </Border>
                 </Property>
-                <Property name="borderPainted" type="boolean" value="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuItemRegistrarPrestamo8ActionPerformed"/>
@@ -800,7 +776,6 @@
                     <EtchetBorder/>
                   </Border>
                 </Property>
-                <Property name="borderPainted" type="boolean" value="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuItemRegistrarPrestamo9ActionPerformed"/>
@@ -827,7 +802,6 @@
                         <EtchetBorder/>
                       </Border>
                     </Property>
-                    <Property name="borderPainted" type="boolean" value="true"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuCotizacion11ActionPerformed"/>
@@ -846,7 +820,6 @@
                         <EtchetBorder/>
                       </Border>
                     </Property>
-                    <Property name="borderPainted" type="boolean" value="true"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuCotizacion13ActionPerformed"/>
@@ -865,7 +838,6 @@
                         <EtchetBorder/>
                       </Border>
                     </Property>
-                    <Property name="borderPainted" type="boolean" value="true"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuCotizacion14ActionPerformed"/>
@@ -884,7 +856,6 @@
                         <EtchetBorder/>
                       </Border>
                     </Property>
-                    <Property name="borderPainted" type="boolean" value="true"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuCotizacion15ActionPerformed"/>
@@ -903,7 +874,6 @@
                         <EtchetBorder/>
                       </Border>
                     </Property>
-                    <Property name="borderPainted" type="boolean" value="true"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuCotizacion16ActionPerformed"/>
@@ -922,7 +892,6 @@
                         <EtchetBorder/>
                       </Border>
                     </Property>
-                    <Property name="borderPainted" type="boolean" value="true"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuCotizacion17ActionPerformed"/>
@@ -941,7 +910,6 @@
                         <EtchetBorder/>
                       </Border>
                     </Property>
-                    <Property name="borderPainted" type="boolean" value="true"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuCotizacion18ActionPerformed"/>
@@ -970,7 +938,6 @@
                         <EtchetBorder/>
                       </Border>
                     </Property>
-                    <Property name="borderPainted" type="boolean" value="true"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuCotizacion19ActionPerformed"/>
@@ -989,7 +956,6 @@
                         <EtchetBorder/>
                       </Border>
                     </Property>
-                    <Property name="borderPainted" type="boolean" value="true"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuCotizacion20ActionPerformed"/>
@@ -1008,7 +974,6 @@
                         <EtchetBorder/>
                       </Border>
                     </Property>
-                    <Property name="borderPainted" type="boolean" value="true"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuCotizacion21ActionPerformed"/>
@@ -1027,7 +992,6 @@
                         <EtchetBorder/>
                       </Border>
                     </Property>
-                    <Property name="borderPainted" type="boolean" value="true"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuCotizacion22ActionPerformed"/>
@@ -1046,7 +1010,6 @@
                         <EtchetBorder/>
                       </Border>
                     </Property>
-                    <Property name="borderPainted" type="boolean" value="true"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuCotizacion23ActionPerformed"/>
@@ -1065,7 +1028,6 @@
                         <EtchetBorder/>
                       </Border>
                     </Property>
-                    <Property name="borderPainted" type="boolean" value="true"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuCotizacion24ActionPerformed"/>
@@ -1084,7 +1046,6 @@
                         <EtchetBorder/>
                       </Border>
                     </Property>
-                    <Property name="borderPainted" type="boolean" value="true"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuCotizacion25ActionPerformed"/>
@@ -1104,7 +1065,6 @@
               </Border>
             </Property>
             <Property name="text" type="java.lang.String" value=" ADMINISTRACI&#xd3;N "/>
-            <Property name="borderPainted" type="boolean" value="true"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="12" style="1"/>
             </Property>
@@ -1121,7 +1081,6 @@
                     <EtchetBorder/>
                   </Border>
                 </Property>
-                <Property name="borderPainted" type="boolean" value="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuItemRegistrarPrestamo12ActionPerformed"/>
@@ -1140,7 +1099,6 @@
                     <EtchetBorder/>
                   </Border>
                 </Property>
-                <Property name="borderPainted" type="boolean" value="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuItemRegistrarPrestamo13ActionPerformed"/>
@@ -1159,7 +1117,6 @@
                     <EtchetBorder/>
                   </Border>
                 </Property>
-                <Property name="borderPainted" type="boolean" value="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuItemRegistrarPrestamo14ActionPerformed"/>
@@ -1178,7 +1135,6 @@
                     <EtchetBorder/>
                   </Border>
                 </Property>
-                <Property name="borderPainted" type="boolean" value="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuItemRegistrarPrestamo15ActionPerformed"/>
@@ -1196,7 +1152,6 @@
               </Border>
             </Property>
             <Property name="text" type="java.lang.String" value=" Control de Gastos"/>
-            <Property name="borderPainted" type="boolean" value="true"/>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
               <Color id="Cursor Por defecto"/>
             </Property>
@@ -1216,7 +1171,6 @@
                     <EtchetBorder/>
                   </Border>
                 </Property>
-                <Property name="borderPainted" type="boolean" value="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuItemPropiedades3ActionPerformed"/>
@@ -1233,7 +1187,6 @@
                     <EtchetBorder/>
                   </Border>
                 </Property>
-                <Property name="borderPainted" type="boolean" value="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuItemPropiedades4ActionPerformed"/>
@@ -1250,7 +1203,6 @@
                     <EtchetBorder/>
                   </Border>
                 </Property>
-                <Property name="borderPainted" type="boolean" value="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuItemPropiedades5ActionPerformed"/>
@@ -1266,7 +1218,6 @@
               </Border>
             </Property>
             <Property name="text" type="java.lang.String" value="  Ayuda  "/>
-            <Property name="borderPainted" type="boolean" value="true"/>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
               <Color id="Cursor Por defecto"/>
             </Property>
@@ -1286,7 +1237,6 @@
                     <BevelBorder/>
                   </Border>
                 </Property>
-                <Property name="borderPainted" type="boolean" value="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuItemConsultaCuentasProveedores1ActionPerformed"/>
