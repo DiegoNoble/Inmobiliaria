@@ -47,7 +47,7 @@ public class InformeRecibosVencidos extends javax.swing.JDialog {
     private void inicia() {
 
         this.container = Container.getInstancia();
-        cbTipoContrato.setModel(new DefaultComboBoxModel(TipoContrato.values()));
+        //cbTipoContrato.setModel(new DefaultComboBoxModel(TipoContrato.values()));
         accionesBotones();
         dpDesde.setDate(new Date());
     }
@@ -84,13 +84,19 @@ public class InformeRecibosVencidos extends javax.swing.JDialog {
             parametros.clear();
             parametros.put("vencimiento", dpDesde.getDate());
 
-            List tiposContrato = new ArrayList();
-            tiposContrato.add(cbTipoContrato.getSelectedItem().toString());
-            parametros.put("tipoContrato", tiposContrato);
+            
+            
+            String query = ("select r.situacion, r.id as recibo, r.fechaVencimiento, r.moneda, r.saldo, r.valor, c.id as contrato, "
+                    + "c.descripcioninquilino,c.descripcioninmueble, c.tipocontrato "
+                    + "from recibos r, contratos c "
+                    + "where r.situacion = 'PENDIENTE' AND r.fechaVencimiento <'2017-03-01' and "
+                    + "r.contrato_id = c.id and c.tipocontrato in ('VENTA') "
+                    + "order by contrato");
+            parametros.put("SQL", query);
 
             Connection conexion = DriverManager.getConnection(props.getUrl(), props.getUsr(), props.getPsw());
 
-            InputStream resource = getClass().getClassLoader().getResourceAsStream("reportes/InformeVencimientos.jasper");
+            InputStream resource = getClass().getClassLoader().getResourceAsStream("reportes/InformeVencimientos_1.jasper");
             JasperPrint jasperPrint = JasperFillManager.fillReport(resource, parametros, conexion);
             JasperViewer reporte = new JasperViewer(jasperPrint, false);
             reporte.setVisible(true);
@@ -119,7 +125,7 @@ public class InformeRecibosVencidos extends javax.swing.JDialog {
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        cbTipoContrato = new javax.swing.JComboBox();
+        jTextField1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new java.awt.GridBagLayout());
@@ -191,23 +197,19 @@ public class InformeRecibosVencidos extends javax.swing.JDialog {
         jPanel5.add(jLabel4, gridBagConstraints);
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel5.setText("Tipo de contrato");
+        jLabel5.setText("Solar");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         jPanel5.add(jLabel5, gridBagConstraints);
-
-        cbTipoContrato.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
-        cbTipoContrato.setForeground(new java.awt.Color(0, 51, 255));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-        jPanel5.add(cbTipoContrato, gridBagConstraints);
+        jPanel5.add(jTextField1, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -223,7 +225,6 @@ public class InformeRecibosVencidos extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public botones.BotonPDF btnInforme;
     public botones.BotonVolver btnVolver;
-    public javax.swing.JComboBox cbTipoContrato;
     public org.jdesktop.swingx.JXDatePicker dpDesde;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -233,5 +234,6 @@ public class InformeRecibosVencidos extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }
