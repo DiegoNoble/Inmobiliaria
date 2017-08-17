@@ -36,6 +36,8 @@ import com.dnsoft.inmobiliaria.views.PagoGastoInmuebleDialog;
 import com.dnsoft.inmobiliaria.views.PagoReciboDlg1;
 import com.dnsoft.inmobiliaria.views.RecibosPorContratoFrame;
 import com.dnsoft.inmobiliaria.views.RegistrarReciboComoPago;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -91,11 +93,32 @@ public class RecibosPorContratoController implements ActionListener {
         inicia();
     }
 
+     void verificaResolucionDePantalla() {
+        Toolkit kit = Toolkit.getDefaultToolkit();
+        Dimension tamTela = kit.getScreenSize();
+        int larg = tamTela.width;
+        System.out.println(larg);
+        if (larg < 1280) {
+            view.tblRecibos.setFont(new java.awt.Font("Tahoma", 0, 10));
+            view.tblRecibos.setRowHeight(20);
+            System.out.println("Fuent: 10 ");
+        } else if (larg >= 1280 && larg < 1600) {
+            view.tblRecibos.setFont(new java.awt.Font("Tahoma", 0, 12));
+            view.tblRecibos.setRowHeight(23);
+            System.out.println("Fuent: 12 ");
+        } else if (larg >= 1600) {
+            view.tblRecibos.setFont(new java.awt.Font("Tahoma", 0, 14));
+            view.tblRecibos.setRowHeight(25);
+            System.out.println("Fuent: 14 ");
+        }
+    }
+     
     private void inicia() {
 
         configTblRecibos();
         configuraTblGastosInquilino();
         accionesBotones();
+        verificaResolucionDePantalla();
         view.lblContrato.setText(contratoSeleccionado.getId() + ", " + contratoSeleccionado.getDescripcionInquilino() + ", " + contratoSeleccionado.getDescripcionInmueble());
         view.rbPagos.addActionListener(new ActionListener() {
 
@@ -335,7 +358,7 @@ public class RecibosPorContratoController implements ActionListener {
             listRecibos.addAll(recibosDAO.findByContratoOrderByFechaVencimientoAsc(contratoSeleccionado));
             for (Recibo recibo : listRecibos) {
                 CalculaMora calculaMora = new CalculaMora(recibo);
-                 if (recibo.getSituacion() != Situacion.PAGO) {
+                if (recibo.getSituacion() != Situacion.PAGO) {
                     recibo.setMora(calculaMora.moraGenerada());
                 }
             }
@@ -381,7 +404,7 @@ public class RecibosPorContratoController implements ActionListener {
 
         try {
 //            contratoDAO.findByContrato(pagoRecibo.get)
-           /* if (pagoRecibo.getRecibo().getContrato().getTipoContrato() == TipoContrato.ALQUILER) {
+            /* if (pagoRecibo.getRecibo().getContrato().getTipoContrato() == TipoContrato.ALQUILER) {
 
              new ImprimeRecibo().imprimieReciboAlquiler(pagoRecibo, pagoRecibo.getCotizacion());
 
@@ -497,7 +520,17 @@ public class RecibosPorContratoController implements ActionListener {
         view.btnImprimeRecibo.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent evt) {
-                imprimieRecibo();
+
+                if (pagoReciboDAO.findByRecibo(reciboSeleccionado).size() > 1) {
+                    PagosDetalleDlg detalles = new PagosDetalleDlg(null, false, reciboSeleccionado, true);
+                    detalles.setVisible(true);
+                    detalles.toFront();
+                    buscaRecibos();
+
+                } else {
+                    imprimieRecibo();
+                }
+
             }
         });
 

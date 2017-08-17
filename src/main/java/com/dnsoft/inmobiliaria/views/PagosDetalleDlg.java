@@ -56,25 +56,38 @@ public final class PagosDetalleDlg extends javax.swing.JDialog {
 
     public PagosDetalleDlg(java.awt.Frame parent, boolean modal, Recibo alquiler) {
         super(parent, modal);
-       
+
         initComponents();
+        this.alquiler = alquiler;
+        inicia();
+        accionesBotones();
+    }
+
+    public PagosDetalleDlg(java.awt.Frame parent, boolean modal, Recibo alquiler, Boolean reimprimir) {
+        super(parent, modal);
+        initComponents();
+        this.alquiler = alquiler;
+        inicia();
+        tblPagoAlquiler.removeColumn(tblPagoAlquiler.getColumn("Anular Pago"));
+    }
+
+    void inicia() {
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/imagenes/logoTrans.png")));
         //CIERRA JOPTIONPANE CON ESCAPE
         jPanel2.grabFocus();
         jPanel2.addKeyListener(new OptionPaneEstandar(this));
-        
-        this.alquiler = alquiler;
+
         this.container = Container.getInstancia();
         pagoAlquilerDAO = container.getBean(IPagoReciboDAO.class);
         pagoPropietarioDAO = container.getBean(IPagoPropietarioDAO.class);
         cCPropietarioDAO = container.getBean(ICCPropietarioDAO.class);
         contratoDAO = container.getBean(IContratoDAO.class);
         recibosDAO = container.getBean(IRecibosDAO.class);
-
         cajaDAO = container.getBean(ICajaDAO.class);
         setLocationRelativeTo(null);
         configuraTblPagoAlquiler();
         accionesBotones();
+
     }
 
     void configuraTblPagoAlquiler() {
@@ -181,7 +194,7 @@ public final class PagosDetalleDlg extends javax.swing.JDialog {
 
         try {
 //            contratoDAO.findByContrato(pagoRecibo.get)
-           /* if (pagoRecibo.getRecibo().getContrato().getTipoContrato() == TipoContrato.ALQUILER) {
+            /* if (pagoRecibo.getRecibo().getContrato().getTipoContrato() == TipoContrato.ALQUILER) {
 
              new ImprimeRecibo().imprimieReciboAlquiler(pagoRecibo, pagoRecibo.getCotizacion());
 

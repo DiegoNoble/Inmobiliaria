@@ -1,21 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6c84274e-bc7c-488d-8786-d0b3e4770a1a">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RecibosVencidos" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6c84274e-bc7c-488d-8786-d0b3e4770a1a">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="inmobiliaria1.xml"/>
+	<parameter name="tipoContrato" class="java.util.List"/>
 	<parameter name="vencimiento" class="java.util.Date"/>
-	<parameter name="SQL" class="java.lang.String">
-		<defaultValueExpression><![CDATA["select r.situacion, r.id as recibo, r.fechaVencimiento, r.moneda, r.saldo, r.valor, c.id as contrato, "+
-"c.descripcioninquilino,c.descripcioninmueble, c.tipocontrato "+
-"from recibos r, contratos c "+
-"where r.situacion = 'PENDIENTE' AND r.fechaVencimiento <'2017-03-01' and "+
-"r.contrato_id = c.id and c.tipocontrato in ('VENTA') "+
-"order by contrato"]]></defaultValueExpression>
+	<parameter name="propietarios" class="java.util.List">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="descripcionInmueble" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="monedas" class="java.util.List">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<queryString>
-		<![CDATA[$P!{SQL}]]>
+		<![CDATA[select r.situacion, r.id as recibo, r.fechaVencimiento, r.moneda, r.saldo, r.valor, c.id as contrato,
+c.descripcioninquilino,c.descripcioninmueble, c.tipocontrato, p.nombre
+from recibos r, contratos c, propietario_has_inmueble pi, propietarios p
+where 
+r.contrato_id = c.id and c.inmueble_id = pi.inmueble_id and pi.propietario_id = p.id
+and r.situacion = 'PENDIENTE' AND r.fechaVencimiento < $P{vencimiento} 
+and ( $X{IN,C.tipocontrato ,tipoContrato})
+and ( $X{IN,p.id,propietarios})
+and ( $X{IN,c.moneda,monedas})
+and c.descripcionInmueble like '%$P!{descripcionInmueble}%'
+order by p.id, contrato]]>
 	</queryString>
 	<field name="situacion" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
@@ -43,13 +55,16 @@
 	<field name="tipocontrato" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
+	<field name="nombre" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
 	<group name="Propietario">
 		<groupExpression><![CDATA[$F{contrato}]]></groupExpression>
 		<groupHeader>
-			<band height="65">
+			<band height="93">
 				<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.grid.JSSGridBagLayout"/>
 				<staticText>
-					<reportElement mode="Opaque" x="0" y="48" width="111" height="16" forecolor="#006699" backcolor="#E6E6E6" uuid="c1b6867b-832d-43f7-8f27-ef151ed33664">
+					<reportElement mode="Opaque" x="0" y="77" width="111" height="16" forecolor="#006699" backcolor="#E6E6E6" uuid="c1b6867b-832d-43f7-8f27-ef151ed33664">
 						<property name="com.jaspersoft.layout.grid.x" value="-1"/>
 						<property name="com.jaspersoft.layout.grid.y" value="3"/>
 						<property name="com.jaspersoft.layout.grid.weight.x" value="1.0"/>
@@ -64,7 +79,7 @@
 					<text><![CDATA[Fecha]]></text>
 				</staticText>
 				<staticText>
-					<reportElement positionType="FixRelativeToBottom" mode="Opaque" x="111" y="48" width="111" height="16" forecolor="#006699" backcolor="#E6E6E6" uuid="2a6e3b4d-bb1b-4107-9640-62fd5c8d7351">
+					<reportElement positionType="FixRelativeToBottom" mode="Opaque" x="111" y="77" width="111" height="16" forecolor="#006699" backcolor="#E6E6E6" uuid="2a6e3b4d-bb1b-4107-9640-62fd5c8d7351">
 						<property name="com.jaspersoft.layout.grid.x" value="-1"/>
 						<property name="com.jaspersoft.layout.grid.y" value="3"/>
 						<property name="com.jaspersoft.layout.grid.weight.x" value="1.0"/>
@@ -79,7 +94,7 @@
 					<text><![CDATA[Recibo]]></text>
 				</staticText>
 				<staticText>
-					<reportElement mode="Opaque" x="222" y="48" width="111" height="16" forecolor="#006699" backcolor="#E6E6E6" uuid="083cc619-7964-4124-acea-f5f8a4ebc670">
+					<reportElement mode="Opaque" x="222" y="77" width="111" height="16" forecolor="#006699" backcolor="#E6E6E6" uuid="083cc619-7964-4124-acea-f5f8a4ebc670">
 						<property name="com.jaspersoft.layout.grid.x" value="-1"/>
 						<property name="com.jaspersoft.layout.grid.y" value="3"/>
 						<property name="com.jaspersoft.layout.grid.weight.x" value="1.0"/>
@@ -94,7 +109,7 @@
 					<text><![CDATA[Moneda]]></text>
 				</staticText>
 				<staticText>
-					<reportElement mode="Opaque" x="333" y="48" width="111" height="16" forecolor="#006699" backcolor="#E6E6E6" uuid="96a38058-0928-4783-9799-802d8bb45ac1">
+					<reportElement mode="Opaque" x="333" y="77" width="111" height="16" forecolor="#006699" backcolor="#E6E6E6" uuid="96a38058-0928-4783-9799-802d8bb45ac1">
 						<property name="com.jaspersoft.layout.grid.x" value="-1"/>
 						<property name="com.jaspersoft.layout.grid.y" value="3"/>
 						<property name="com.jaspersoft.layout.grid.weight.x" value="1.0"/>
@@ -109,7 +124,7 @@
 					<text><![CDATA[Valor]]></text>
 				</staticText>
 				<staticText>
-					<reportElement positionType="FixRelativeToBottom" mode="Opaque" x="444" y="48" width="111" height="16" forecolor="#006699" backcolor="#E6E6E6" uuid="b4c2e7b8-9e14-4eb0-8fc5-3c95ef1a9c9a">
+					<reportElement positionType="FixRelativeToBottom" mode="Opaque" x="444" y="77" width="111" height="16" forecolor="#006699" backcolor="#E6E6E6" uuid="b4c2e7b8-9e14-4eb0-8fc5-3c95ef1a9c9a">
 						<property name="com.jaspersoft.layout.grid.x" value="-1"/>
 						<property name="com.jaspersoft.layout.grid.y" value="3"/>
 						<property name="com.jaspersoft.layout.grid.weight.x" value="1.0"/>
@@ -124,7 +139,7 @@
 					<text><![CDATA[Saldo]]></text>
 				</staticText>
 				<textField>
-					<reportElement x="0" y="24" width="555" height="24" forecolor="#000000" uuid="19e4a556-65ef-419c-90c2-8aaf4ab16633">
+					<reportElement x="0" y="53" width="555" height="24" forecolor="#000000" uuid="19e4a556-65ef-419c-90c2-8aaf4ab16633">
 						<property name="com.jaspersoft.layout.grid.x" value="0"/>
 						<property name="com.jaspersoft.layout.grid.y" value="2"/>
 						<property name="com.jaspersoft.layout.grid.weight.x" value="1.0"/>
@@ -139,7 +154,7 @@
 					<textFieldExpression><![CDATA[$F{descripcioninquilino}]]></textFieldExpression>
 				</textField>
 				<staticText>
-					<reportElement mode="Opaque" x="0" y="0" width="111" height="24" forecolor="#006699" backcolor="#E6E6E6" uuid="e1eee1e1-3a8a-4bcc-b7c3-806fab366d55">
+					<reportElement mode="Opaque" x="0" y="28" width="111" height="24" forecolor="#006699" backcolor="#E6E6E6" uuid="e1eee1e1-3a8a-4bcc-b7c3-806fab366d55">
 						<property name="com.jaspersoft.layout.grid.x" value="0"/>
 						<property name="com.jaspersoft.layout.grid.y" value="1"/>
 						<property name="com.jaspersoft.layout.grid.weight.x" value="1.0"/>
@@ -154,7 +169,7 @@
 					<text><![CDATA[Contrato]]></text>
 				</staticText>
 				<textField>
-					<reportElement x="111" y="0" width="111" height="24" forecolor="#000000" uuid="a2313bb0-ca34-412e-8111-c0b69bbafcfa">
+					<reportElement x="111" y="28" width="111" height="24" forecolor="#000000" uuid="a2313bb0-ca34-412e-8111-c0b69bbafcfa">
 						<property name="com.jaspersoft.layout.grid.x" value="-1"/>
 						<property name="com.jaspersoft.layout.grid.y" value="1"/>
 						<property name="com.jaspersoft.layout.grid.weight.x" value="1.0"/>
@@ -169,7 +184,7 @@
 					<textFieldExpression><![CDATA[$F{contrato}]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="222" y="0" width="333" height="24" forecolor="#000000" uuid="54d1db96-30d2-4586-bf91-bde8c947adc5">
+					<reportElement x="222" y="28" width="333" height="24" forecolor="#000000" uuid="54d1db96-30d2-4586-bf91-bde8c947adc5">
 						<property name="com.jaspersoft.layout.grid.x" value="2"/>
 						<property name="com.jaspersoft.layout.grid.y" value="1"/>
 						<property name="com.jaspersoft.layout.grid.weight.x" value="1.0"/>
@@ -183,10 +198,25 @@
 					</textElement>
 					<textFieldExpression><![CDATA[$F{descripcioninmueble}]]></textFieldExpression>
 				</textField>
+				<textField>
+					<reportElement isPrintRepeatedValues="false" x="3" y="0" width="333" height="24" forecolor="#993300" uuid="62ebdc7b-17bc-494c-be26-1590fb1cd3ea">
+						<property name="com.jaspersoft.layout.grid.x" value="2"/>
+						<property name="com.jaspersoft.layout.grid.y" value="1"/>
+						<property name="com.jaspersoft.layout.grid.weight.x" value="1.0"/>
+						<property name="com.jaspersoft.layout.grid.weight.y" value="1.0"/>
+						<property name="com.jaspersoft.layout.grid.rowspan" value="1"/>
+						<property name="com.jaspersoft.layout.grid.colspan" value="3"/>
+						<property name="com.jaspersoft.layout.grid.weight.fixed" value="false"/>
+					</reportElement>
+					<textElement>
+						<font fontName="Arial" size="17" isBold="true" isUnderline="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+				</textField>
 			</band>
 		</groupHeader>
 		<groupFooter>
-			<band height="50"/>
+			<band height="7"/>
 		</groupFooter>
 	</group>
 	<background>
@@ -221,7 +251,7 @@
 		</band>
 	</title>
 	<detail>
-		<band height="18">
+		<band height="19">
 			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.grid.JSSGridBagLayout"/>
 			<textField pattern="dd/MM/yyyy">
 				<reportElement x="0" y="0" width="111" height="18" uuid="70793ac5-2e64-409f-8c2d-c2457621ad45">
@@ -305,4 +335,7 @@
 			</textField>
 		</band>
 	</pageFooter>
+	<noData>
+		<band height="50"/>
+	</noData>
 </jasperReport>

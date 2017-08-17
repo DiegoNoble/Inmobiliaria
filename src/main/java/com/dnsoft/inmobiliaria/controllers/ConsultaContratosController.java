@@ -25,6 +25,9 @@ import com.dnsoft.inmobiliaria.views.DetallePropietariosInmueble;
 import com.dnsoft.inmobiliaria.views.InmuebleDetallesDialog_new;
 import com.dnsoft.inmobiliaria.views.InquilinoDetallesDlg;
 import com.dnsoft.inmobiliaria.views.RecibosPorContratoFrame;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -104,13 +107,33 @@ public class ConsultaContratosController implements ActionListener {
 
         configTblContrato();
         accionesBotones();
-
+        verificaResolucionDePantalla();
     }
 
     public void go() {
         this.view.setVisible(true);
         this.view.toFront();
 
+    }
+
+    void verificaResolucionDePantalla() {
+        Toolkit kit = Toolkit.getDefaultToolkit();
+        Dimension tamTela = kit.getScreenSize();
+        int larg = tamTela.width;
+        System.out.println(larg);
+        if (larg < 1280) {
+            view.tblContratos.setFont(new java.awt.Font("Tahoma", 0, 10));
+            view.tblContratos.setRowHeight(20);
+            System.out.println("Fuent: 10 ");
+        } else if (larg >= 1280 && larg < 1600) {
+            view.tblContratos.setFont(new java.awt.Font("Tahoma", 0, 12));
+            view.tblContratos.setRowHeight(23);
+            System.out.println("Fuent: 12 ");
+        } else if (larg >= 1600) {
+            view.tblContratos.setFont(new java.awt.Font("Tahoma", 0, 14));
+            view.tblContratos.setRowHeight(25);
+            System.out.println("Fuent: 14 ");
+        }
     }
 
     private void configTblContrato() {
@@ -155,8 +178,6 @@ public class ConsultaContratosController implements ActionListener {
                 }
             }
         });
-
-        view.tblContratos.setRowHeight(20);
 
         view.tblContratos.addMouseListener(new MouseAdapter() {
             @Override

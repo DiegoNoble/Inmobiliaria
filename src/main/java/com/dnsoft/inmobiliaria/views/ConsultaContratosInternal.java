@@ -83,7 +83,7 @@ public class ConsultaContratosInternal extends InternalFrameEstandar {
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         jPanel4.add(btnModificarContrato, gridBagConstraints);
 
-        tblContratos.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        tblContratos.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         tblContratos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -178,8 +178,6 @@ public class ConsultaContratosInternal extends InternalFrameEstandar {
         getContentPane().add(jPanel2, gridBagConstraints);
 
         jPanel5.setLayout(new java.awt.GridBagLayout());
-
-        txtBusqueda.setText(" ");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 0;

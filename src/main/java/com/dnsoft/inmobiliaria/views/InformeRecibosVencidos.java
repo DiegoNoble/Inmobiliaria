@@ -5,10 +5,11 @@
  */
 package com.dnsoft.inmobiliaria.views;
 
-import com.dnsoft.inmobiliaria.beans.TipoContrato;
+import com.dnsoft.inmobiliaria.beans.Moneda;
+import com.dnsoft.inmobiliaria.beans.Propietario;
+import com.dnsoft.inmobiliaria.daos.IPropietarioDAO;
 import com.dnsoft.inmobiliaria.utils.Container;
 import com.dnsoft.inmobiliaria.utils.LeeProperties;
-import com.dnsoft.inmobiliaria.utils.OptionPaneEstandar;
 import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -19,7 +20,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -32,6 +34,7 @@ import net.sf.jasperreports.view.JasperViewer;
 public class InformeRecibosVencidos extends javax.swing.JDialog {
 
     Container container;
+    IPropietarioDAO propietariosDAO;
     LeeProperties props = new LeeProperties();
 
     public InformeRecibosVencidos(java.awt.Frame parent, boolean modal) {
@@ -40,16 +43,29 @@ public class InformeRecibosVencidos extends javax.swing.JDialog {
         inicia();
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/imagenes/logoTrans.png")));
         //CIERRA JOPTIONPANE CON ESCAPE
-        jPanel1.grabFocus();
-        jPanel1.addKeyListener(new OptionPaneEstandar(this));
     }
 
     private void inicia() {
 
         this.container = Container.getInstancia();
-        //cbTipoContrato.setModel(new DefaultComboBoxModel(TipoContrato.values()));
+        this.container = Container.getInstancia();
+        propietariosDAO = container.getBean(IPropietarioDAO.class);
         accionesBotones();
         dpDesde.setDate(new Date());
+
+        DefaultListModel listaMonedas = new DefaultListModel();
+        listaMonedas.addElement("PESOS");
+        listaMonedas.addElement("DOLARES");
+        listaMonedas.addElement("UNIDADES_INDEXADAS");
+        listaMonedas.addElement("UNIDADES_REAJUSTABLES");
+        listMonedas.setModel(listaMonedas);
+
+        List<Propietario> propietarios = propietariosDAO.findAll();
+        DefaultListModel listaPropietarios = new DefaultListModel();
+        for (Propietario propietario : propietarios) {
+            listaPropietarios.addElement(propietario);
+        }
+        listPropietarios.setModel(listaPropietarios);
     }
 
     public void go() {
@@ -79,24 +95,32 @@ public class InformeRecibosVencidos extends javax.swing.JDialog {
     }
 
     public void reporte() {
+        List<String> monedasSeleccionadas = new ArrayList<>();
+        List<Long> propietariosSeleccionados = new ArrayList<>();
+
         try {
+            monedasSeleccionadas.addAll(listMonedas.getSelectedValuesList());
+
+            Object[] ps = listPropietarios.getSelectedValues();
+            for (Object p : ps) {
+                Propietario p1 = (Propietario) p;
+                propietariosSeleccionados.add(p1.getId());
+            }
+
             HashMap parametros = new HashMap();
             parametros.clear();
             parametros.put("vencimiento", dpDesde.getDate());
+            parametros.put("propietarios", propietariosSeleccionados);
+            parametros.put("monedas", monedasSeleccionadas);
+            parametros.put("descripcionInmueble", txtDescInmueble.getText());
 
-            
-            
-            String query = ("select r.situacion, r.id as recibo, r.fechaVencimiento, r.moneda, r.saldo, r.valor, c.id as contrato, "
-                    + "c.descripcioninquilino,c.descripcioninmueble, c.tipocontrato "
-                    + "from recibos r, contratos c "
-                    + "where r.situacion = 'PENDIENTE' AND r.fechaVencimiento <'2017-03-01' and "
-                    + "r.contrato_id = c.id and c.tipocontrato in ('VENTA') "
-                    + "order by contrato");
-            parametros.put("SQL", query);
+            List tiposContrato = new ArrayList();
+            tiposContrato.add("VENTA");
+            parametros.put("tipoContrato", tiposContrato);
 
             Connection conexion = DriverManager.getConnection(props.getUrl(), props.getUsr(), props.getPsw());
 
-            InputStream resource = getClass().getClassLoader().getResourceAsStream("reportes/InformeVencimientos_1.jasper");
+            InputStream resource = getClass().getClassLoader().getResourceAsStream("reportes/InformeVencimientos_2.jasper");
             JasperPrint jasperPrint = JasperFillManager.fillReport(resource, parametros, conexion);
             JasperViewer reporte = new JasperViewer(jasperPrint, false);
             reporte.setVisible(true);
@@ -114,7 +138,6 @@ public class InformeRecibosVencidos extends javax.swing.JDialog {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
-        jPanel1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         btnVolver = new botones.BotonVolver();
         btnInforme = new botones.BotonPDF();
@@ -123,19 +146,20 @@ public class InformeRecibosVencidos extends javax.swing.JDialog {
         jPanel5 = new javax.swing.JPanel();
         dpDesde = new org.jdesktop.swingx.JXDatePicker();
         jLabel2 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtDescInmueble = new javax.swing.JTextField();
+        jPanel4 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        listPropietarios = new javax.swing.JList<>();
+        jLabel10 = new javax.swing.JLabel();
+        jPanel6 = new javax.swing.JPanel();
+        jLabel11 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        listMonedas = new javax.swing.JList<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(600, 500));
         getContentPane().setLayout(new java.awt.GridBagLayout());
-
-        jPanel1.setLayout(new java.awt.GridBagLayout());
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        getContentPane().add(jPanel1, gridBagConstraints);
 
         jPanel3.setLayout(new java.awt.GridBagLayout());
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -156,7 +180,6 @@ public class InformeRecibosVencidos extends javax.swing.JDialog {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
         getContentPane().add(jPanel3, gridBagConstraints);
 
@@ -177,27 +200,21 @@ public class InformeRecibosVencidos extends javax.swing.JDialog {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         jPanel5.add(dpDesde, gridBagConstraints);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel2.setText("Fecha");
+        jLabel2.setText("Fecha vencimiento");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         jPanel5.add(jLabel2, gridBagConstraints);
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel4.setText("Fecha");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-        jPanel5.add(jLabel4, gridBagConstraints);
-
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel5.setText("Solar");
+        jLabel5.setText("Descripción Inmueble");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
@@ -209,12 +226,77 @@ public class InformeRecibosVencidos extends javax.swing.JDialog {
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-        jPanel5.add(jTextField1, gridBagConstraints);
+        jPanel5.add(txtDescInmueble, gridBagConstraints);
+
+        jPanel4.setLayout(new java.awt.GridBagLayout());
+
+        jScrollPane1.setViewportView(listPropietarios);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 100;
+        gridBagConstraints.ipady = 50;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
+        jPanel4.add(jScrollPane1, gridBagConstraints);
+
+        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel10.setText("Propietarios");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jPanel4.add(jLabel10, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        jPanel5.add(jPanel4, gridBagConstraints);
+
+        jPanel6.setLayout(new java.awt.GridBagLayout());
+
+        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel11.setText("Monedas");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jPanel6.add(jLabel11, gridBagConstraints);
+
+        jScrollPane2.setViewportView(listMonedas);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 70;
+        gridBagConstraints.ipady = 20;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
+        jPanel6.add(jScrollPane2, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        jPanel5.add(jPanel6, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 1;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         getContentPane().add(jPanel5, gridBagConstraints);
 
@@ -226,14 +308,20 @@ public class InformeRecibosVencidos extends javax.swing.JDialog {
     public botones.BotonPDF btnInforme;
     public botones.BotonVolver btnVolver;
     public org.jdesktop.swingx.JXDatePicker dpDesde;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JList<String> listMonedas;
+    private javax.swing.JList<String> listPropietarios;
+    private javax.swing.JTextField txtDescInmueble;
     // End of variables declaration//GEN-END:variables
 }

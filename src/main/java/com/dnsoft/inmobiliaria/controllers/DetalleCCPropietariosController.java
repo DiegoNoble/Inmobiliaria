@@ -22,6 +22,8 @@ import com.dnsoft.inmobiliaria.utils.ExportarDatosExcel;
 import com.dnsoft.inmobiliaria.views.CobroDeudaPropietario;
 import com.dnsoft.inmobiliaria.views.DetalleMovimientosCCPropietario;
 import com.dnsoft.inmobiliaria.views.RetiroPropietario;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -121,6 +123,32 @@ public class DetalleCCPropietariosController implements ActionListener {
 
     }
 
+    void verificaResolucionDePantalla() {
+        Toolkit kit = Toolkit.getDefaultToolkit();
+        Dimension tamTela = kit.getScreenSize();
+        int larg = tamTela.width;
+        if (larg < 1280) {
+            view.tblCCDolares.setFont(new java.awt.Font("Tahoma", 0, 10));
+            view.tblCCDolares.setRowHeight(20);
+
+            view.tblCCPesos.setFont(new java.awt.Font("Tahoma", 0, 10));
+            view.tblCCPesos.setRowHeight(20);
+        } else if (larg >= 1280 && larg < 1600) {
+            view.tblCCDolares.setFont(new java.awt.Font("Tahoma", 0, 12));
+            view.tblCCDolares.setRowHeight(23);
+
+            view.tblCCPesos.setFont(new java.awt.Font("Tahoma", 0, 12));
+            view.tblCCPesos.setRowHeight(23);
+
+        } else if (larg >= 1600) {
+            view.tblCCDolares.setFont(new java.awt.Font("Tahoma", 0, 14));
+            view.tblCCDolares.setRowHeight(25);
+
+            view.tblCCPesos.setFont(new java.awt.Font("Tahoma", 0, 14));
+            view.tblCCPesos.setRowHeight(25);
+        }
+    }
+
     final void inicio() {
         view.btnActualizaSaldoD.setActionCommand("actualizaSaldosD");
         view.btnActualizaSaldoD.addActionListener(this);
@@ -139,6 +167,7 @@ public class DetalleCCPropietariosController implements ActionListener {
         configuraTblCCDolares();
         accionesBotones();
         buscaMovimientosCC();
+        verificaResolucionDePantalla();
     }
 
     void fechas() {
@@ -355,51 +384,51 @@ public class DetalleCCPropietariosController implements ActionListener {
 
         view.btnRetiroDolares.addMouseListener(
                 new MouseAdapter() {
-                    @Override
-                    public void mouseClicked(MouseEvent evt
-                    ) {
-                        RetiroPropietario retiro = new RetiroPropietario(null, true, parametros.getRubroRetirosPropietarios(), propietarioSeleccionado, Moneda.DOLARES, saldoDolares);
-                        retiro.setVisible(true);
-                        retiro.toFront();
-                        buscaMovimientosCC();
-                        if (cajaController != null) {
-                            cajaController.actualizaTbl();
-                        }
-                    }
+            @Override
+            public void mouseClicked(MouseEvent evt
+            ) {
+                RetiroPropietario retiro = new RetiroPropietario(null, true, parametros.getRubroRetirosPropietarios(), propietarioSeleccionado, Moneda.DOLARES, saldoDolares);
+                retiro.setVisible(true);
+                retiro.toFront();
+                buscaMovimientosCC();
+                if (cajaController != null) {
+                    cajaController.actualizaTbl();
                 }
+            }
+        }
         );
 
         view.btnEntregaPesos.addMouseListener(
                 new MouseAdapter() {
-                    @Override
-                    public void mouseClicked(MouseEvent evt
-                    ) {
-                        CobroDeudaPropietario retiro = new CobroDeudaPropietario(null, true, parametros.getCobroDeudaPopietario(), propietarioSeleccionado, Moneda.PESOS);
-                        retiro.setVisible(true);
-                        retiro.toFront();
-                        buscaMovimientosCC();
-                        if (cajaController != null) {
-                            cajaController.actualizaTbl();
-                        }
-
-                    }
+            @Override
+            public void mouseClicked(MouseEvent evt
+            ) {
+                CobroDeudaPropietario retiro = new CobroDeudaPropietario(null, true, parametros.getCobroDeudaPopietario(), propietarioSeleccionado, Moneda.PESOS);
+                retiro.setVisible(true);
+                retiro.toFront();
+                buscaMovimientosCC();
+                if (cajaController != null) {
+                    cajaController.actualizaTbl();
                 }
+
+            }
+        }
         );
         view.btnEntregaDolares.addMouseListener(
                 new MouseAdapter() {
-                    @Override
-                    public void mouseClicked(MouseEvent evt
-                    ) {
-                        CobroDeudaPropietario retiro = new CobroDeudaPropietario(null, true, parametros.getCobroDeudaPopietario(), propietarioSeleccionado, Moneda.DOLARES);
-                        retiro.setVisible(true);
-                        retiro.toFront();
-                        buscaMovimientosCC();
-                        if (cajaController != null) {
-                            cajaController.actualizaTbl();
-                        }
-
-                    }
+            @Override
+            public void mouseClicked(MouseEvent evt
+            ) {
+                CobroDeudaPropietario retiro = new CobroDeudaPropietario(null, true, parametros.getCobroDeudaPopietario(), propietarioSeleccionado, Moneda.DOLARES);
+                retiro.setVisible(true);
+                retiro.toFront();
+                buscaMovimientosCC();
+                if (cajaController != null) {
+                    cajaController.actualizaTbl();
                 }
+
+            }
+        }
         );
         view.botonVolver1.addMouseListener(new MouseAdapter() {
             @Override

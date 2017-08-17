@@ -19,6 +19,8 @@ import com.dnsoft.inmobiliaria.utils.Container;
 import com.dnsoft.inmobiliaria.views.ConsultaCCPropietarioView;
 import com.dnsoft.inmobiliaria.views.DetalleMovimientosCCPropietario;
 import com.dnsoft.inmobiliaria.views.PropietariosDetalleDlg;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -86,11 +88,33 @@ public class ConsultaCCPropietariosController implements ActionListener {
             this.view.setVisible(true);
             this.view.toFront();
             view.setMaximum(true);
+            verificaResolucionDePantalla();
         } catch (PropertyVetoException ex) {
             Logger.getLogger(ConsultaCCPropietariosController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
+    
+      void verificaResolucionDePantalla() {
+        Toolkit kit = Toolkit.getDefaultToolkit();
+        Dimension tamTela = kit.getScreenSize();
+        int larg = tamTela.width;
+        System.out.println(larg);
+        if (larg < 1280) {
+            view.tblPropietario.setFont(new java.awt.Font("Tahoma", 0, 10));
+            view.tblPropietario.setRowHeight(20);
+            System.out.println("Fuent: 10 ");
+        } else if (larg >= 1280 && larg < 1600) {
+            view.tblPropietario.setFont(new java.awt.Font("Tahoma", 0, 12));
+            view.tblPropietario.setRowHeight(23);
+            System.out.println("Fuent: 12 ");
+        } else if (larg >= 1600) {
+            view.tblPropietario.setFont(new java.awt.Font("Tahoma", 0, 14));
+            view.tblPropietario.setRowHeight(25);
+            System.out.println("Fuent: 14 ");
+        }
+    }
+
 
     void saldos() {
 
