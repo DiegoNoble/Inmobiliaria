@@ -1,42 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.4.0.final using JasperReports Library version 6.4.1  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Propietarios" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6c84274e-bc7c-488d-8786-d0b3e4770a1a">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="inmobiliaria1.xml"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="inmobiliaria.xml"/>
+	<parameter name="propietarios" class="java.util.List"/>
 	<queryString>
 		<![CDATA[select p.nombre as propietario, ti.nombre as tipoInmueble, i.observaciones as inmueble, pi.porcentagePropiedad, i.statusinmueble, i.moneda,i.valorreferencia
 from  propietario_has_inmueble pi, PROPIETARIOS P, inmueble i, tipo_inmueble ti
  where pi.inmueble_id = i.id and p.id = pi.propietario_id and i.activo = 1
 and i.tipoinmueble_id = ti.id
- order by p.id;]]>
+and  ( $X{IN,p.id,propietarios})
+ order by p.id]]>
 	</queryString>
 	<field name="propietario" class="java.lang.String"/>
 	<field name="tipoInmueble" class="java.lang.String"/>
 	<field name="inmueble" class="java.lang.String"/>
-	<field name="porcentagePropiedad" class="java.math.BigDecimal">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="statusinmueble" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="moneda" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="valorreferencia" class="java.math.BigDecimal">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
+	<field name="porcentagePropiedad" class="java.math.BigDecimal"/>
+	<field name="statusinmueble" class="java.lang.String"/>
+	<field name="moneda" class="java.lang.String"/>
+	<field name="valorreferencia" class="java.math.BigDecimal"/>
+	<variable name="vendidas" class="java.lang.Integer" resetType="Group" resetGroup="Propietario" calculation="Sum">
+		<variableExpression><![CDATA[new Integer(!($F{statusinmueble}.equals("VENDIDA")) ? 0 : 1 )]]></variableExpression>
+	</variable>
+	<variable name="DISPONIBLES" class="java.lang.Integer" resetType="Group" resetGroup="Propietario" calculation="Sum">
+		<variableExpression><![CDATA[new Integer(!($F{statusinmueble}.equals("DISPONIBLE")) ? 0 : 1 )]]></variableExpression>
+	</variable>
 	<group name="Propietario">
 		<groupExpression><![CDATA[$F{propietario}]]></groupExpression>
 		<groupHeader>
 			<band height="65">
 				<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.grid.JSSGridBagLayout"/>
 				<staticText>
-					<reportElement mode="Opaque" x="3" y="49" width="94" height="16" forecolor="#006699" backcolor="#E6E6E6" uuid="c1b6867b-832d-43f7-8f27-ef151ed33664">
+					<reportElement mode="Opaque" x="0" y="39" width="62" height="26" forecolor="#006699" backcolor="#E6E6E6" uuid="c1b6867b-832d-43f7-8f27-ef151ed33664">
 						<property name="com.jaspersoft.layout.grid.x" value="-1"/>
 						<property name="com.jaspersoft.layout.grid.y" value="3"/>
-						<property name="com.jaspersoft.layout.grid.weight.x" value="1.0"/>
+						<property name="com.jaspersoft.layout.grid.weight.x" value="0.5"/>
+						<property name="com.jaspersoft.layout.grid.weight.y" value="0.7"/>
+						<property name="com.jaspersoft.layout.grid.rowspan" value="1"/>
+						<property name="com.jaspersoft.layout.grid.colspan" value="1"/>
+						<property name="com.jaspersoft.layout.grid.weight.fixed" value="false"/>
+					</reportElement>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Tipo]]></text>
+				</staticText>
+				<staticText>
+					<reportElement positionType="FixRelativeToBottom" mode="Opaque" x="62" y="39" width="247" height="26" forecolor="#006699" backcolor="#E6E6E6" uuid="2a6e3b4d-bb1b-4107-9640-62fd5c8d7351">
+						<property name="com.jaspersoft.layout.grid.x" value="-1"/>
+						<property name="com.jaspersoft.layout.grid.y" value="3"/>
+						<property name="com.jaspersoft.layout.grid.weight.x" value="2.0"/>
 						<property name="com.jaspersoft.layout.grid.weight.y" value="0.7"/>
 						<property name="com.jaspersoft.layout.grid.rowspan" value="1"/>
 						<property name="com.jaspersoft.layout.grid.colspan" value="1"/>
@@ -48,25 +64,10 @@ and i.tipoinmueble_id = ti.id
 					<text><![CDATA[Inmueble]]></text>
 				</staticText>
 				<staticText>
-					<reportElement positionType="FixRelativeToBottom" mode="Opaque" x="209" y="49" width="94" height="16" forecolor="#006699" backcolor="#E6E6E6" uuid="2a6e3b4d-bb1b-4107-9640-62fd5c8d7351">
+					<reportElement mode="Opaque" x="309" y="39" width="62" height="26" forecolor="#006699" backcolor="#E6E6E6" uuid="083cc619-7964-4124-acea-f5f8a4ebc670">
 						<property name="com.jaspersoft.layout.grid.x" value="-1"/>
 						<property name="com.jaspersoft.layout.grid.y" value="3"/>
-						<property name="com.jaspersoft.layout.grid.weight.x" value="1.0"/>
-						<property name="com.jaspersoft.layout.grid.weight.y" value="0.7"/>
-						<property name="com.jaspersoft.layout.grid.rowspan" value="1"/>
-						<property name="com.jaspersoft.layout.grid.colspan" value="1"/>
-						<property name="com.jaspersoft.layout.grid.weight.fixed" value="false"/>
-					</reportElement>
-					<textElement textAlignment="Left" verticalAlignment="Middle">
-						<font size="12" isBold="true"/>
-					</textElement>
-					<text><![CDATA[Situacion]]></text>
-				</staticText>
-				<staticText>
-					<reportElement mode="Opaque" x="312" y="49" width="94" height="16" forecolor="#006699" backcolor="#E6E6E6" uuid="083cc619-7964-4124-acea-f5f8a4ebc670">
-						<property name="com.jaspersoft.layout.grid.x" value="-1"/>
-						<property name="com.jaspersoft.layout.grid.y" value="3"/>
-						<property name="com.jaspersoft.layout.grid.weight.x" value="1.0"/>
+						<property name="com.jaspersoft.layout.grid.weight.x" value="0.5"/>
 						<property name="com.jaspersoft.layout.grid.weight.y" value="0.7"/>
 						<property name="com.jaspersoft.layout.grid.rowspan" value="1"/>
 						<property name="com.jaspersoft.layout.grid.colspan" value="1"/>
@@ -76,13 +77,28 @@ and i.tipoinmueble_id = ti.id
 					<textElement textAlignment="Left" verticalAlignment="Middle">
 						<font size="12" isBold="true"/>
 					</textElement>
+					<text><![CDATA[Situación]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Opaque" x="371" y="39" width="62" height="26" forecolor="#006699" backcolor="#E6E6E6" uuid="96a38058-0928-4783-9799-802d8bb45ac1">
+						<property name="com.jaspersoft.layout.grid.x" value="-1"/>
+						<property name="com.jaspersoft.layout.grid.y" value="3"/>
+						<property name="com.jaspersoft.layout.grid.weight.x" value="0.5"/>
+						<property name="com.jaspersoft.layout.grid.weight.y" value="0.7"/>
+						<property name="com.jaspersoft.layout.grid.rowspan" value="1"/>
+						<property name="com.jaspersoft.layout.grid.colspan" value="1"/>
+						<property name="com.jaspersoft.layout.grid.weight.fixed" value="false"/>
+					</reportElement>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font size="12" isBold="true"/>
+					</textElement>
 					<text><![CDATA[Moneda]]></text>
 				</staticText>
 				<staticText>
-					<reportElement mode="Opaque" x="415" y="49" width="94" height="16" forecolor="#006699" backcolor="#E6E6E6" uuid="96a38058-0928-4783-9799-802d8bb45ac1">
+					<reportElement positionType="FixRelativeToBottom" mode="Opaque" x="433" y="39" width="61" height="26" forecolor="#006699" backcolor="#E6E6E6" uuid="b4c2e7b8-9e14-4eb0-8fc5-3c95ef1a9c9a">
 						<property name="com.jaspersoft.layout.grid.x" value="-1"/>
 						<property name="com.jaspersoft.layout.grid.y" value="3"/>
-						<property name="com.jaspersoft.layout.grid.weight.x" value="1.0"/>
+						<property name="com.jaspersoft.layout.grid.weight.x" value="0.5"/>
 						<property name="com.jaspersoft.layout.grid.weight.y" value="0.7"/>
 						<property name="com.jaspersoft.layout.grid.rowspan" value="1"/>
 						<property name="com.jaspersoft.layout.grid.colspan" value="1"/>
@@ -93,29 +109,14 @@ and i.tipoinmueble_id = ti.id
 					</textElement>
 					<text><![CDATA[Valor]]></text>
 				</staticText>
-				<staticText>
-					<reportElement positionType="FixRelativeToBottom" mode="Opaque" x="518" y="49" width="94" height="16" forecolor="#006699" backcolor="#E6E6E6" uuid="b4c2e7b8-9e14-4eb0-8fc5-3c95ef1a9c9a">
-						<property name="com.jaspersoft.layout.grid.x" value="-1"/>
-						<property name="com.jaspersoft.layout.grid.y" value="3"/>
-						<property name="com.jaspersoft.layout.grid.weight.x" value="1.0"/>
-						<property name="com.jaspersoft.layout.grid.weight.y" value="0.7"/>
-						<property name="com.jaspersoft.layout.grid.rowspan" value="1"/>
-						<property name="com.jaspersoft.layout.grid.colspan" value="1"/>
-						<property name="com.jaspersoft.layout.grid.weight.fixed" value="false"/>
-					</reportElement>
-					<textElement textAlignment="Left" verticalAlignment="Middle">
-						<font size="12" isBold="true"/>
-					</textElement>
-					<text><![CDATA[Porcentaje propiedad]]></text>
-				</staticText>
 				<textField>
-					<reportElement x="0" y="0" width="555" height="24" forecolor="#990000" uuid="54d1db96-30d2-4586-bf91-bde8c947adc5">
-						<property name="com.jaspersoft.layout.grid.x" value="2"/>
+					<reportElement x="0" y="1" width="555" height="38" forecolor="#990000" uuid="54d1db96-30d2-4586-bf91-bde8c947adc5">
+						<property name="com.jaspersoft.layout.grid.x" value="0"/>
 						<property name="com.jaspersoft.layout.grid.y" value="1"/>
 						<property name="com.jaspersoft.layout.grid.weight.x" value="1.0"/>
 						<property name="com.jaspersoft.layout.grid.weight.y" value="1.0"/>
 						<property name="com.jaspersoft.layout.grid.rowspan" value="1"/>
-						<property name="com.jaspersoft.layout.grid.colspan" value="3"/>
+						<property name="com.jaspersoft.layout.grid.colspan" value="6"/>
 						<property name="com.jaspersoft.layout.grid.weight.fixed" value="false"/>
 					</reportElement>
 					<textElement>
@@ -124,7 +125,33 @@ and i.tipoinmueble_id = ti.id
 					<textFieldExpression><![CDATA[$F{propietario}]]></textFieldExpression>
 				</textField>
 				<staticText>
-					<reportElement mode="Opaque" x="106" y="49" width="94" height="16" forecolor="#006699" backcolor="#E6E6E6" uuid="b4d18b7c-4481-4e5a-b21e-1a22d0ebe1ef">
+					<reportElement mode="Opaque" x="494" y="39" width="61" height="26" forecolor="#006699" backcolor="#E6E6E6" uuid="b4d18b7c-4481-4e5a-b21e-1a22d0ebe1ef">
+						<property name="com.jaspersoft.layout.grid.x" value="-1"/>
+						<property name="com.jaspersoft.layout.grid.y" value="3"/>
+						<property name="com.jaspersoft.layout.grid.weight.x" value="0.5"/>
+						<property name="com.jaspersoft.layout.grid.weight.y" value="0.7"/>
+						<property name="com.jaspersoft.layout.grid.rowspan" value="1"/>
+						<property name="com.jaspersoft.layout.grid.colspan" value="1"/>
+						<property name="com.jaspersoft.layout.grid.weight.fixed" value="false"/>
+					</reportElement>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Propiedad]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="54">
+				<textField pattern="#,##0.###">
+					<reportElement x="450" y="0" width="100" height="20" uuid="bede8ff9-999f-4363-af8c-b208565c50cd"/>
+					<textElement>
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{vendidas}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement mode="Opaque" x="310" y="0" width="130" height="18" forecolor="#006699" backcolor="#E6E6E6" uuid="75b5a8db-9752-442d-8bcd-6913c8a0def6">
 						<property name="com.jaspersoft.layout.grid.x" value="-1"/>
 						<property name="com.jaspersoft.layout.grid.y" value="3"/>
 						<property name="com.jaspersoft.layout.grid.weight.x" value="1.0"/>
@@ -136,12 +163,34 @@ and i.tipoinmueble_id = ti.id
 					<textElement textAlignment="Left" verticalAlignment="Middle">
 						<font size="12" isBold="true"/>
 					</textElement>
-					<text><![CDATA[Inmueble]]></text>
+					<text><![CDATA[Cantidad vendidas]]></text>
 				</staticText>
+				<line>
+					<reportElement x="0" y="51" width="555" height="1" uuid="45ae446d-f650-4f79-a48a-e053ec1b3df4"/>
+				</line>
+				<staticText>
+					<reportElement mode="Opaque" x="310" y="20" width="130" height="18" forecolor="#006699" backcolor="#E6E6E6" uuid="f0a3bc49-6cf6-4c82-bbcd-9ac6b71131e0">
+						<property name="com.jaspersoft.layout.grid.x" value="-1"/>
+						<property name="com.jaspersoft.layout.grid.y" value="3"/>
+						<property name="com.jaspersoft.layout.grid.weight.x" value="1.0"/>
+						<property name="com.jaspersoft.layout.grid.weight.y" value="0.7"/>
+						<property name="com.jaspersoft.layout.grid.rowspan" value="1"/>
+						<property name="com.jaspersoft.layout.grid.colspan" value="1"/>
+						<property name="com.jaspersoft.layout.grid.weight.fixed" value="false"/>
+					</reportElement>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Cantidad disponible]]></text>
+				</staticText>
+				<textField pattern="#,##0.###">
+					<reportElement x="450" y="20" width="100" height="20" uuid="5acbb5cd-d088-44a1-8166-351442ab75e3"/>
+					<textElement>
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{DISPONIBLES}]]></textFieldExpression>
+				</textField>
 			</band>
-		</groupHeader>
-		<groupFooter>
-			<band height="50"/>
 		</groupFooter>
 	</group>
 	<background>
@@ -162,8 +211,84 @@ and i.tipoinmueble_id = ti.id
 		</band>
 	</title>
 	<detail>
-		<band height="18">
+		<band height="20">
 			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.grid.JSSGridBagLayout"/>
+			<textField>
+				<reportElement x="0" y="0" width="62" height="20" uuid="2f647d62-46b0-4b21-aff4-cae38037436e">
+					<property name="com.jaspersoft.layout.grid.x" value="-1"/>
+					<property name="com.jaspersoft.layout.grid.y" value="-1"/>
+					<property name="com.jaspersoft.layout.grid.weight.x" value="0.5"/>
+					<property name="com.jaspersoft.layout.grid.weight.y" value="1.0"/>
+					<property name="com.jaspersoft.layout.grid.rowspan" value="1"/>
+					<property name="com.jaspersoft.layout.grid.colspan" value="1"/>
+					<property name="com.jaspersoft.layout.grid.weight.fixed" value="false"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{tipoInmueble}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="62" y="0" width="247" height="20" uuid="643d9a5c-c369-44b1-86fb-7fc0daf17c00">
+					<property name="com.jaspersoft.layout.grid.x" value="-1"/>
+					<property name="com.jaspersoft.layout.grid.y" value="-1"/>
+					<property name="com.jaspersoft.layout.grid.weight.x" value="2.0"/>
+					<property name="com.jaspersoft.layout.grid.weight.y" value="1.0"/>
+					<property name="com.jaspersoft.layout.grid.rowspan" value="1"/>
+					<property name="com.jaspersoft.layout.grid.colspan" value="1"/>
+					<property name="com.jaspersoft.layout.grid.weight.fixed" value="false"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{inmueble}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="309" y="0" width="62" height="20" uuid="662404e4-1e72-4e1f-9c45-73e4f69bddcb">
+					<property name="com.jaspersoft.layout.grid.x" value="-1"/>
+					<property name="com.jaspersoft.layout.grid.y" value="-1"/>
+					<property name="com.jaspersoft.layout.grid.weight.x" value="0.5"/>
+					<property name="com.jaspersoft.layout.grid.weight.y" value="1.0"/>
+					<property name="com.jaspersoft.layout.grid.rowspan" value="1"/>
+					<property name="com.jaspersoft.layout.grid.colspan" value="1"/>
+					<property name="com.jaspersoft.layout.grid.weight.fixed" value="false"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{statusinmueble}.equals("DISPONIBLE")? "Disponible": $F{statusinmueble}+
+$F{statusinmueble}.equals("VENDIDA")? "Vendido": $F{statusinmueble}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="371" y="0" width="62" height="20" uuid="e91550e2-ba01-4c4f-9bb8-3a2f7db0c68e">
+					<property name="com.jaspersoft.layout.grid.x" value="-1"/>
+					<property name="com.jaspersoft.layout.grid.y" value="-1"/>
+					<property name="com.jaspersoft.layout.grid.weight.x" value="0.5"/>
+					<property name="com.jaspersoft.layout.grid.weight.y" value="1.0"/>
+					<property name="com.jaspersoft.layout.grid.rowspan" value="1"/>
+					<property name="com.jaspersoft.layout.grid.colspan" value="1"/>
+					<property name="com.jaspersoft.layout.grid.weight.fixed" value="false"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{moneda}.equals("UNIDADES_INDEXADAS")? "U.I": $F{moneda} +
+$F{moneda}.equals("UNIDADES_REAJUSTABLES")? "U.R": $F{moneda} +
+$F{moneda}.equals("PESOS")? "$U": $F{moneda} +
+$F{moneda}.equals("DOLARES")? "U$S": $F{moneda}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.###">
+				<reportElement x="433" y="0" width="61" height="20" uuid="375a5667-3b9b-4abd-977d-ecb6edf7f640">
+					<property name="com.jaspersoft.layout.grid.x" value="-1"/>
+					<property name="com.jaspersoft.layout.grid.y" value="-1"/>
+					<property name="com.jaspersoft.layout.grid.weight.x" value="0.5"/>
+					<property name="com.jaspersoft.layout.grid.weight.y" value="1.0"/>
+					<property name="com.jaspersoft.layout.grid.rowspan" value="1"/>
+					<property name="com.jaspersoft.layout.grid.colspan" value="1"/>
+					<property name="com.jaspersoft.layout.grid.weight.fixed" value="false"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{valorreferencia}]]></textFieldExpression>
+			</textField>
+			<textField pattern="">
+				<reportElement x="494" y="0" width="61" height="20" uuid="70050901-1398-40fe-9280-c0a1dc619425">
+					<property name="com.jaspersoft.layout.grid.x" value="-1"/>
+					<property name="com.jaspersoft.layout.grid.y" value="-1"/>
+					<property name="com.jaspersoft.layout.grid.weight.x" value="0.5"/>
+					<property name="com.jaspersoft.layout.grid.weight.y" value="1.0"/>
+					<property name="com.jaspersoft.layout.grid.rowspan" value="1"/>
+					<property name="com.jaspersoft.layout.grid.colspan" value="1"/>
+					<property name="com.jaspersoft.layout.grid.weight.fixed" value="false"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{porcentagePropiedad}]]></textFieldExpression>
+			</textField>
 		</band>
 	</detail>
 	<columnFooter>

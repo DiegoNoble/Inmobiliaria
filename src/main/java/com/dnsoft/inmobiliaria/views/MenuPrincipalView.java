@@ -1,6 +1,7 @@
 package com.dnsoft.inmobiliaria.views;
 
 import com.dnsoft.inmobiliaria.beans.Contrato;
+import com.dnsoft.inmobiliaria.beans.Propietario;
 import com.dnsoft.inmobiliaria.controllers.ConsultaCCPropietariosController;
 import com.dnsoft.inmobiliaria.controllers.ConsultaContratosController;
 import com.dnsoft.inmobiliaria.controllers.ConsultaDeCajaController;
@@ -14,10 +15,18 @@ import com.dnsoft.inmobiliaria.controllers.ProveedoresController;
 import com.dnsoft.inmobiliaria.daos.IContratoDAO;
 import com.dnsoft.inmobiliaria.utils.Container;
 import com.dnsoft.inmobiliaria.utils.DecorateDesktopPane;
+import com.dnsoft.inmobiliaria.utils.LeeProperties;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.io.InputStream;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.util.HashMap;
 import java.util.List;
 import javax.swing.*;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
 
 public final class MenuPrincipalView extends javax.swing.JFrame {
 
@@ -26,6 +35,7 @@ public final class MenuPrincipalView extends javax.swing.JFrame {
     //JDesktopPane desktopPane = new JDesktopPane();
     ImageIcon fot;
     ImageIcon icono;
+    LeeProperties props = new LeeProperties();
     Image icon = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/imagenes/logoTrans.png"));
 
     public MenuPrincipalView() {
@@ -161,8 +171,6 @@ public final class MenuPrincipalView extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
         mnuCotizacion11 = new javax.swing.JMenuItem();
         jSeparator36 = new javax.swing.JPopupMenu.Separator();
-        mnuCotizacion13 = new javax.swing.JMenuItem();
-        jSeparator37 = new javax.swing.JPopupMenu.Separator();
         mnuCotizacion14 = new javax.swing.JMenuItem();
         jSeparator38 = new javax.swing.JPopupMenu.Separator();
         mnuCotizacion15 = new javax.swing.JMenuItem();
@@ -173,21 +181,6 @@ public final class MenuPrincipalView extends javax.swing.JFrame {
         jSeparator41 = new javax.swing.JPopupMenu.Separator();
         mnuCotizacion18 = new javax.swing.JMenuItem();
         jSeparator29 = new javax.swing.JPopupMenu.Separator();
-        jMenu3 = new javax.swing.JMenu();
-        mnuCotizacion19 = new javax.swing.JMenuItem();
-        jSeparator42 = new javax.swing.JPopupMenu.Separator();
-        mnuCotizacion20 = new javax.swing.JMenuItem();
-        jSeparator43 = new javax.swing.JPopupMenu.Separator();
-        mnuCotizacion21 = new javax.swing.JMenuItem();
-        jSeparator44 = new javax.swing.JPopupMenu.Separator();
-        mnuCotizacion22 = new javax.swing.JMenuItem();
-        jSeparator45 = new javax.swing.JPopupMenu.Separator();
-        mnuCotizacion23 = new javax.swing.JMenuItem();
-        jSeparator46 = new javax.swing.JPopupMenu.Separator();
-        mnuCotizacion24 = new javax.swing.JMenuItem();
-        jSeparator47 = new javax.swing.JPopupMenu.Separator();
-        mnuCotizacion25 = new javax.swing.JMenuItem();
-        jSeparator30 = new javax.swing.JPopupMenu.Separator();
         mnuVentas4 = new javax.swing.JMenu();
         mnuItemRegistrarPrestamo12 = new javax.swing.JMenuItem();
         jSeparator32 = new javax.swing.JPopupMenu.Separator();
@@ -596,7 +589,7 @@ public final class MenuPrincipalView extends javax.swing.JFrame {
         mnuVentas2.add(jSeparator24);
 
         mnuItemRegistrarPrestamo4.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
-        mnuItemRegistrarPrestamo4.setText(" Inquilinos ");
+        mnuItemRegistrarPrestamo4.setText("Contratos / Inquilinos ");
         mnuItemRegistrarPrestamo4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         mnuItemRegistrarPrestamo4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -607,7 +600,7 @@ public final class MenuPrincipalView extends javax.swing.JFrame {
         mnuVentas2.add(jSeparator27);
 
         mnuItemRegistrarPrestamo5.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
-        mnuItemRegistrarPrestamo5.setText(" Viviendas ");
+        mnuItemRegistrarPrestamo5.setText(" Inmuebles");
         mnuItemRegistrarPrestamo5.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         mnuItemRegistrarPrestamo5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -691,17 +684,6 @@ public final class MenuPrincipalView extends javax.swing.JFrame {
         jMenu2.add(mnuCotizacion11);
         jMenu2.add(jSeparator36);
 
-        mnuCotizacion13.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
-        mnuCotizacion13.setText(" Comisiones cuotas ");
-        mnuCotizacion13.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        mnuCotizacion13.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnuCotizacion13ActionPerformed(evt);
-            }
-        });
-        jMenu2.add(mnuCotizacion13);
-        jMenu2.add(jSeparator37);
-
         mnuCotizacion14.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         mnuCotizacion14.setText(" Comisiones ventas");
         mnuCotizacion14.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -758,88 +740,6 @@ public final class MenuPrincipalView extends javax.swing.JFrame {
 
         mnuVentas3.add(jMenu2);
         mnuVentas3.add(jSeparator29);
-
-        jMenu3.setText(" Contratos ");
-        jMenu3.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
-
-        mnuCotizacion19.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
-        mnuCotizacion19.setText(" Comisiones alquileres");
-        mnuCotizacion19.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        mnuCotizacion19.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnuCotizacion19ActionPerformed(evt);
-            }
-        });
-        jMenu3.add(mnuCotizacion19);
-        jMenu3.add(jSeparator42);
-
-        mnuCotizacion20.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
-        mnuCotizacion20.setText(" Comisiones cuotas ");
-        mnuCotizacion20.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        mnuCotizacion20.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnuCotizacion20ActionPerformed(evt);
-            }
-        });
-        jMenu3.add(mnuCotizacion20);
-        jMenu3.add(jSeparator43);
-
-        mnuCotizacion21.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
-        mnuCotizacion21.setText(" Comisiones ventas");
-        mnuCotizacion21.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        mnuCotizacion21.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnuCotizacion21ActionPerformed(evt);
-            }
-        });
-        jMenu3.add(mnuCotizacion21);
-        jMenu3.add(jSeparator44);
-
-        mnuCotizacion22.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
-        mnuCotizacion22.setText(" Honorarios contratos");
-        mnuCotizacion22.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        mnuCotizacion22.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnuCotizacion22ActionPerformed(evt);
-            }
-        });
-        jMenu3.add(mnuCotizacion22);
-        jMenu3.add(jSeparator45);
-
-        mnuCotizacion23.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
-        mnuCotizacion23.setText(" Moras (adm.)");
-        mnuCotizacion23.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        mnuCotizacion23.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnuCotizacion23ActionPerformed(evt);
-            }
-        });
-        jMenu3.add(mnuCotizacion23);
-        jMenu3.add(jSeparator46);
-
-        mnuCotizacion24.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
-        mnuCotizacion24.setText(" Gestiones de pago");
-        mnuCotizacion24.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        mnuCotizacion24.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnuCotizacion24ActionPerformed(evt);
-            }
-        });
-        jMenu3.add(mnuCotizacion24);
-        jMenu3.add(jSeparator47);
-
-        mnuCotizacion25.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
-        mnuCotizacion25.setText(" Gestiones mantenimiento");
-        mnuCotizacion25.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        mnuCotizacion25.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnuCotizacion25ActionPerformed(evt);
-            }
-        });
-        jMenu3.add(mnuCotizacion25);
-
-        mnuVentas3.add(jMenu3);
-        mnuVentas3.add(jSeparator30);
 
         jMenuBar1.add(mnuVentas3);
 
@@ -1166,15 +1066,45 @@ public final class MenuPrincipalView extends javax.swing.JFrame {
     }//GEN-LAST:event_mnuItemRegistrarPrestamo2ActionPerformed
 
     private void mnuItemRegistrarPrestamo3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuItemRegistrarPrestamo3ActionPerformed
-        // TODO add your handling code here:
+
+        InformePropietarios informePropietarios = new InformePropietarios(this, false);
+        informePropietarios.go();
+
     }//GEN-LAST:event_mnuItemRegistrarPrestamo3ActionPerformed
 
     private void mnuItemRegistrarPrestamo4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuItemRegistrarPrestamo4ActionPerformed
-        // TODO add your handling code here:
+
+        try {
+            Connection conexion = DriverManager.getConnection(props.getUrl(), props.getUsr(), props.getPsw());
+            InputStream resource = getClass().getClassLoader().getResourceAsStream("reportes/Contratos.jasper");
+            JasperPrint jasperPrint = JasperFillManager.fillReport(resource, new HashMap<>(), conexion);
+            JasperViewer reporte = new JasperViewer(jasperPrint, false);
+            reporte.setVisible(true);
+
+            reporte.toFront();
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error! " + e, "Error", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+        }
+
     }//GEN-LAST:event_mnuItemRegistrarPrestamo4ActionPerformed
 
     private void mnuItemRegistrarPrestamo5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuItemRegistrarPrestamo5ActionPerformed
-        // TODO add your handling code here:
+        try {
+            Connection conexion = DriverManager.getConnection(props.getUrl(), props.getUsr(), props.getPsw());
+            InputStream resource = getClass().getClassLoader().getResourceAsStream("reportes/Inmuebles.jasper");
+            JasperPrint jasperPrint = JasperFillManager.fillReport(resource, new HashMap<>(), conexion);
+            JasperViewer reporte = new JasperViewer(jasperPrint, false);
+            reporte.setVisible(true);
+
+            reporte.toFront();
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error! " + e, "Error", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+        }
+        
     }//GEN-LAST:event_mnuItemRegistrarPrestamo5ActionPerformed
 
     private void mnuItemRegistrarPrestamo6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuItemRegistrarPrestamo6ActionPerformed
@@ -1218,10 +1148,6 @@ public final class MenuPrincipalView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_mnuCotizacion11ActionPerformed
 
-    private void mnuCotizacion13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuCotizacion13ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_mnuCotizacion13ActionPerformed
-
     private void mnuCotizacion14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuCotizacion14ActionPerformed
 
         InformeComisiones informeComisiones = new InformeComisiones(this, false);
@@ -1244,35 +1170,6 @@ public final class MenuPrincipalView extends javax.swing.JFrame {
     private void mnuCotizacion18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuCotizacion18ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_mnuCotizacion18ActionPerformed
-
-    private void mnuCotizacion19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuCotizacion19ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_mnuCotizacion19ActionPerformed
-
-    private void mnuCotizacion20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuCotizacion20ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_mnuCotizacion20ActionPerformed
-
-    private void mnuCotizacion21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuCotizacion21ActionPerformed
-        InformeComisiones view = new InformeComisiones(null, true);
-        view.go();
-    }//GEN-LAST:event_mnuCotizacion21ActionPerformed
-
-    private void mnuCotizacion22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuCotizacion22ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_mnuCotizacion22ActionPerformed
-
-    private void mnuCotizacion23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuCotizacion23ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_mnuCotizacion23ActionPerformed
-
-    private void mnuCotizacion24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuCotizacion24ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_mnuCotizacion24ActionPerformed
-
-    private void mnuCotizacion25ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuCotizacion25ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_mnuCotizacion25ActionPerformed
 
     private void mnuCotizacion26ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuCotizacion26ActionPerformed
         actualizaContratos();
@@ -1316,7 +1213,6 @@ public final class MenuPrincipalView extends javax.swing.JFrame {
     private javax.swing.JLabel fondo;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
@@ -1343,25 +1239,17 @@ public final class MenuPrincipalView extends javax.swing.JFrame {
     private javax.swing.JPopupMenu.Separator jSeparator28;
     private javax.swing.JPopupMenu.Separator jSeparator29;
     private javax.swing.JPopupMenu.Separator jSeparator3;
-    private javax.swing.JPopupMenu.Separator jSeparator30;
     private javax.swing.JPopupMenu.Separator jSeparator31;
     private javax.swing.JPopupMenu.Separator jSeparator32;
     private javax.swing.JPopupMenu.Separator jSeparator33;
     private javax.swing.JPopupMenu.Separator jSeparator34;
     private javax.swing.JPopupMenu.Separator jSeparator35;
     private javax.swing.JPopupMenu.Separator jSeparator36;
-    private javax.swing.JPopupMenu.Separator jSeparator37;
     private javax.swing.JPopupMenu.Separator jSeparator38;
     private javax.swing.JPopupMenu.Separator jSeparator39;
     private javax.swing.JPopupMenu.Separator jSeparator4;
     private javax.swing.JPopupMenu.Separator jSeparator40;
     private javax.swing.JPopupMenu.Separator jSeparator41;
-    private javax.swing.JPopupMenu.Separator jSeparator42;
-    private javax.swing.JPopupMenu.Separator jSeparator43;
-    private javax.swing.JPopupMenu.Separator jSeparator44;
-    private javax.swing.JPopupMenu.Separator jSeparator45;
-    private javax.swing.JPopupMenu.Separator jSeparator46;
-    private javax.swing.JPopupMenu.Separator jSeparator47;
     private javax.swing.JPopupMenu.Separator jSeparator48;
     private javax.swing.JPopupMenu.Separator jSeparator49;
     private javax.swing.JPopupMenu.Separator jSeparator5;
@@ -1381,20 +1269,12 @@ public final class MenuPrincipalView extends javax.swing.JFrame {
     private javax.swing.JMenuItem mnuCotizacion10;
     private javax.swing.JMenuItem mnuCotizacion11;
     private javax.swing.JMenuItem mnuCotizacion12;
-    private javax.swing.JMenuItem mnuCotizacion13;
     private javax.swing.JMenuItem mnuCotizacion14;
     private javax.swing.JMenuItem mnuCotizacion15;
     private javax.swing.JMenuItem mnuCotizacion16;
     private javax.swing.JMenuItem mnuCotizacion17;
     private javax.swing.JMenuItem mnuCotizacion18;
-    private javax.swing.JMenuItem mnuCotizacion19;
     private javax.swing.JMenuItem mnuCotizacion2;
-    private javax.swing.JMenuItem mnuCotizacion20;
-    private javax.swing.JMenuItem mnuCotizacion21;
-    private javax.swing.JMenuItem mnuCotizacion22;
-    private javax.swing.JMenuItem mnuCotizacion23;
-    private javax.swing.JMenuItem mnuCotizacion24;
-    private javax.swing.JMenuItem mnuCotizacion25;
     private javax.swing.JMenuItem mnuCotizacion26;
     private javax.swing.JMenuItem mnuCotizacion27;
     private javax.swing.JMenuItem mnuCotizacion28;
