@@ -112,7 +112,7 @@ public class PagoReciboDlg1 extends javax.swing.JDialog {
                 formato = new DecimalFormat("#,##0.0000", simbolos);
                 break;
             case UNIDADES_REAJUSTABLES:
-                formato = new DecimalFormat("#,##0.00", simbolos);
+                formato = new DecimalFormat("#.00", simbolos);
                 break;
         }
         cotizacionOficial = (Cotizacion) cotizacionDAO.findLastCotizacion(moneda);

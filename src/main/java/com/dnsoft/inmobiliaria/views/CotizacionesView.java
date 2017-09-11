@@ -121,7 +121,7 @@ public final class CotizacionesView extends InternalFrameEstandar {
 
             DecimalFormat formatoUS = new DecimalFormat("#,##0.00", simbolos);
 
-            DecimalFormat formatoUR = new DecimalFormat("#,##0.00", simbolos);
+            DecimalFormat formatoUR = new DecimalFormat("#.00", simbolos);
             DecimalFormat formatoUI = new DecimalFormat("#,##0.0000", simbolos);
             txtPesos.setText(cotizaciones.get(0).getValor().toString());
             txtDolares.setText(formatoUS.format(cotizaciones.get(1).getValor()));
