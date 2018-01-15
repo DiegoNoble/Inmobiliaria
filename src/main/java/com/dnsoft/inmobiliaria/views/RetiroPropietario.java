@@ -146,9 +146,10 @@ public final class RetiroPropietario extends javax.swing.JDialog {
         retiro.setDebito(importeRetiro);
         retiro.setCredito(BigDecimal.ZERO);
         retiro.setSaldo(saldoAnterior.subtract(importeRetiro));
-        retiro.setDescipcion("RETIRO ");
+        retiro.setDescipcion("RETIRO "+txtObservaciones.getText());
         retiro.setFecha(new Date());
         retiro.setMoneda(moneda);
+        
         cCPropietarioDAO.save(retiro);
 
         //Ajusta saldo cc propietario
@@ -195,6 +196,9 @@ public final class RetiroPropietario extends javax.swing.JDialog {
         txtMoneda = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         cbTipoDeCaja = new javax.swing.JComboBox();
+        jLabel13 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txtObservaciones = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new java.awt.GridBagLayout());
@@ -231,20 +235,20 @@ public final class RetiroPropietario extends javax.swing.JDialog {
         jPanel1.add(jLabel11, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridy = 4;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
         jPanel1.add(btnPagar, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridy = 4;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
         jPanel1.add(btnVolver, gridBagConstraints);
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel12.setText("Importe");
+        jLabel12.setText("Observaciones");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridy = 3;
         jPanel1.add(jLabel12, gridBagConstraints);
 
         txtMoneda.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -276,6 +280,27 @@ public final class RetiroPropietario extends javax.swing.JDialog {
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         jPanel1.add(cbTipoDeCaja, gridBagConstraints);
 
+        jLabel13.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel13.setText("Importe");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        jPanel1.add(jLabel13, gridBagConstraints);
+
+        txtObservaciones.setColumns(20);
+        txtObservaciones.setRows(5);
+        jScrollPane1.setViewportView(txtObservaciones);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        jPanel1.add(jScrollPane1, gridBagConstraints);
+
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
@@ -296,11 +321,14 @@ public final class RetiroPropietario extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField txtImporte;
     private javax.swing.JTextField txtMoneda;
+    private javax.swing.JTextArea txtObservaciones;
     // End of variables declaration//GEN-END:variables
 
 }

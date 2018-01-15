@@ -58,6 +58,6 @@ public class Retiro extends AbstractPersistable<Long> {
         this.valor = valor;
     }
 
-    
+      
 
 }

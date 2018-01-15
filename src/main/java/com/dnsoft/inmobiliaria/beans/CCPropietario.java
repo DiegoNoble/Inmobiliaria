@@ -52,7 +52,6 @@ public class CCPropietario extends AbstractPersistable<Long> {
         this.propietario = propietario;
     }
 
-    
     public CCPropietario(Propietario propietario, BigDecimal debito, BigDecimal credito, BigDecimal saldo, String descipcion, Date fecha, Moneda moneda, GastoInmueblePropietario gastoInmueblePropietario) {
         this.propietario = propietario;
         this.debito = debito;

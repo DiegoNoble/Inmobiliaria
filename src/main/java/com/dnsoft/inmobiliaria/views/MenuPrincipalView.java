@@ -88,7 +88,6 @@ public final class MenuPrincipalView extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jToolBar1 = new javax.swing.JToolBar();
         jPanel3 = new javax.swing.JPanel();
-        fondo = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         mnuSistema = new javax.swing.JMenu();
         mnuItemSesion1 = new javax.swing.JMenuItem();
@@ -215,9 +214,6 @@ public final class MenuPrincipalView extends javax.swing.JFrame {
         jToolBar1.add(jPanel3);
 
         getContentPane().add(jToolBar1, java.awt.BorderLayout.WEST);
-
-        fondo.setName("fondo"); // NOI18N
-        getContentPane().add(fondo, java.awt.BorderLayout.CENTER);
 
         jMenuBar1.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
 
@@ -1210,7 +1206,6 @@ public final class MenuPrincipalView extends javax.swing.JFrame {
     }//GEN-LAST:event_mnuItemRegistrarPrestamo10ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel fondo;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;

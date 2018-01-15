@@ -158,7 +158,6 @@ public class InformeRecibosVencidos extends javax.swing.JDialog {
         listMonedas = new javax.swing.JList<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(600, 500));
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
         jPanel3.setLayout(new java.awt.GridBagLayout());
