@@ -4,10 +4,12 @@ import com.dnsoft.inmobiliaria.Renderers.MeDateCellRenderer;
 import com.dnsoft.inmobiliaria.beans.Recibo;
 import com.dnsoft.inmobiliaria.beans.CCPropietario;
 import com.dnsoft.inmobiliaria.beans.Caja;
+import com.dnsoft.inmobiliaria.beans.Moneda;
 import com.dnsoft.inmobiliaria.beans.PagoRecibo;
 import com.dnsoft.inmobiliaria.beans.PagoPropietario;
 import com.dnsoft.inmobiliaria.beans.Propietario;
 import com.dnsoft.inmobiliaria.beans.Situacion;
+import com.dnsoft.inmobiliaria.beans.TipoDeCaja;
 import com.dnsoft.inmobiliaria.daos.IRecibosDAO;
 import com.dnsoft.inmobiliaria.daos.ICCPropietarioDAO;
 import com.dnsoft.inmobiliaria.daos.ICajaDAO;
@@ -27,6 +29,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
@@ -128,16 +131,16 @@ public final class PagosDetalleDlg extends javax.swing.JDialog {
     void eliminarSeleccionado() {
         try {
             PagoRecibo toDelete = tableModel.getCliente(tblPagoAlquiler.getSelectedRow());
+            List<PagoPropietario> listPagoPropietarioToDelete = pagoPropietarioDAO.findByPagoAlquiler(toDelete);
+            Moneda monedaCuentaCorriente = cCPropietarioDAO.findByPagoPropietario(listPagoPropietarioToDelete.get(0)).get(0).getMoneda();
+
             tableModel.eliminar(tblPagoAlquiler.getSelectedRow());
 
             Caja movimientoToRemove = cajaDAO.findByPagoRecibo(pagoRecibo);
-            if (movimientoToRemove != null) {
-                cajaDAO.delete(movimientoToRemove);
+            movimientoToRemove.setPagoRecibo(null);
+            cajaDAO.save(movimientoToRemove);
+            anulaMovimientoDeCaja(movimientoToRemove);
 
-                ActualizaSaldos actualizaSaldos = new ActualizaSaldos();
-                cajaDAO.save(actualizaSaldos.ActualizaSaldosCaja(cajaDAO.findByFechaAfterOrFechaEqualAndMonedaAndTipoDeCajaOrderByFechaDesc(pagoRecibo.getFecha(), pagoRecibo.getMoneda(), movimientoToRemove.getTipoDeCaja())));
-            }
-            List<PagoPropietario> listPagoPropietarioToDelete = pagoPropietarioDAO.findByPagoAlquiler(toDelete);
             pagoPropietarioDAO.delete(listPagoPropietarioToDelete);
             pagoAlquilerDAO.delete(toDelete);
 
@@ -147,8 +150,8 @@ public final class PagosDetalleDlg extends javax.swing.JDialog {
             }
 
             for (Propietario propietario : propietarios) {
-
-                List<CCPropietario> listCC = cCPropietarioDAO.findByPropietarioAndMonedaOrderByIdAsc(propietario, pagoRecibo.getMoneda());
+                List<CCPropietario> listCC = new ArrayList<>();
+                listCC = cCPropietarioDAO.findByPropietarioAndMonedaOrderByIdAsc(propietario, monedaCuentaCorriente);
 
                 ActualizaSaldos acSaldo = new ActualizaSaldos();
                 cCPropietarioDAO.save(acSaldo.ActualizaSaldosPropietarios(listCC));
@@ -172,6 +175,30 @@ public final class PagosDetalleDlg extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, "Error al anular pago: " + e, "Error", JOptionPane.ERROR_MESSAGE);
         }
 
+    }
+
+    void anulaMovimientoDeCaja(Caja movimientoToRemove) {
+        Caja movimiento = new Caja();
+        BigDecimal importe = movimientoToRemove.getEntrada();
+        movimiento.setDescripcion("ANULA " + movimientoToRemove.getDescripcion());
+
+        movimiento.setEntrada(BigDecimal.ZERO);
+        movimiento.setSalida(importe);
+
+        movimiento.setFecha(new Date());
+
+        movimiento.setMoneda(movimientoToRemove.getMoneda());
+
+        movimiento.setRubro(movimientoToRemove.getRubro());
+        Caja ultimoMovimiento = cajaDAO.findUltimoMovimiento(movimientoToRemove.getMoneda(), movimientoToRemove.getTipoDeCaja());
+
+        movimiento.setSaldo(ultimoMovimiento.getSaldo().subtract(importe));
+
+        movimiento.setTipoDeCaja(movimientoToRemove.getTipoDeCaja());
+
+        
+
+        cajaDAO.save(movimiento);
     }
 
     void accionesBotones() {

@@ -189,7 +189,7 @@
 				<textFieldExpression><![CDATA[$F{descipcion}]]></textFieldExpression>
 			</textField>
 			<textField pattern="dd/MM/yyyy">
-				<reportElement style="miestilo" x="2" y="0" width="44" height="11" uuid="6b8a1395-f7da-41e9-9bf1-2ef84625804d"/>
+				<reportElement style="miestilo" x="2" y="0" width="54" height="11" uuid="6b8a1395-f7da-41e9-9bf1-2ef84625804d"/>
 				<textElement>
 					<font fontName="Arial" size="9"/>
 				</textElement>

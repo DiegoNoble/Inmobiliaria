@@ -429,8 +429,7 @@ public class PagoReciboDlg1 extends javax.swing.JDialog {
         }
     }
 
-    void movimientoDeCaja(PagarRecibo pagarRecibo
-    ) {
+    void movimientoDeCaja(PagarRecibo pagarRecibo) {
         Caja movimiento = new Caja();
         BigDecimal importe = new BigDecimal(txtImporte.getText());
         movimiento.setDescripcion("Pago alquiler/cuotas, contrato: " + contratoSeleccionado.getId() + ", Inmueble: " + contratoSeleccionado.getInmueble());

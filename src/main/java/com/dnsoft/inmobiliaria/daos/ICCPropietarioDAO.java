@@ -2,6 +2,7 @@ package com.dnsoft.inmobiliaria.daos;
 
 import com.dnsoft.inmobiliaria.beans.CCPropietario;
 import com.dnsoft.inmobiliaria.beans.Moneda;
+import com.dnsoft.inmobiliaria.beans.PagoPropietario;
 import com.dnsoft.inmobiliaria.beans.Propietario;
 import java.util.Date;
 import java.util.List;
@@ -21,6 +22,9 @@ public interface ICCPropietarioDAO extends JpaRepository<CCPropietario, Long> {
     @Query("select c from CCPropietario c where c.id = (select max(id) from CCPropietario ca where ca.moneda = ?1 and ca.propietario = ?2)")
     CCPropietario findUltimoMovimiento(Moneda moneda, Propietario propietario);
     
+    @Query("Select c from CCPropietario c where c.propietario=?1 and c.moneda = ?2 order by c.id Asc ")
     List<CCPropietario> findByPropietarioAndMonedaOrderByIdAsc(Propietario propietario, Moneda moneda);
+    
+    List<CCPropietario> findByPagoPropietario(PagoPropietario pagoPropietario);
 
 }

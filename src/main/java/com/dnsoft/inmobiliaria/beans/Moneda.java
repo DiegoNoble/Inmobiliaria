@@ -10,7 +10,7 @@ package com.dnsoft.inmobiliaria.beans;
  * @author Diego Noble
  */
 public enum Moneda {
-    PESOS("$U"), DOLARES("U$S"),UNIDADES_INDEXADAS("U.I."), UNIDADES_REAJUSTABLES("U.R.");;
+    PESOS("$U"), DOLARES("U$S"),UNIDADES_INDEXADAS("U.I."), UNIDADES_REAJUSTABLES("U.R.");
     
      private final String string;
 

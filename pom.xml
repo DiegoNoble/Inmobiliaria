@@ -136,10 +136,9 @@
             <version>7.0.35</version>
         </dependency>
         <dependency>
-            <groupId>jfreechart</groupId>
+            <groupId>jfree</groupId>
             <artifactId>jfreechart</artifactId>
-            <version>1.0.0</version>
-            
+            <version>1.0.13</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -162,7 +161,6 @@
             <artifactId>JasperRunnerButton</artifactId>
             <version>1.0</version>
         </dependency>
-        
         <dependency>
             <groupId>xpp3</groupId>
             <artifactId>xpp3</artifactId>

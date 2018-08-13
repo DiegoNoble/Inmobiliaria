@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="567" leftMargin="14" rightMargin="14" topMargin="14" bottomMargin="14" uuid="73a62481-9ec4-4c59-95c4-545d08c01aac">
-	<property name="ireport.zoom" value="1.5"/>
-	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.zoom" value="3.8906136901500026"/>
+	<property name="ireport.x" value="50"/>
+	<property name="ireport.y" value="523"/>
 	<parameter name="inmueble" class="java.lang.String"/>
 	<parameter name="logo" class="java.lang.Object"/>
 	<parameter name="cliente" class="java.lang.String"/>
@@ -155,7 +155,7 @@
 				<textElement>
 					<font fontName="Tahoma" size="7" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{valor}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[ $P{valor}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
 				<reportElement x="217" y="309" width="49" height="11" uuid="d0c6b7dd-c1b7-4149-8fbd-e480428ddf90"/>
@@ -174,7 +174,7 @@
 				<text><![CDATA[=]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="66" y="196" width="10" height="10" uuid="72ea86e8-a1ae-4c19-b8c2-44864f4f13d4"/>
+				<reportElement x="74" y="196" width="10" height="10" uuid="72ea86e8-a1ae-4c19-b8c2-44864f4f13d4"/>
 				<textElement textAlignment="Justified">
 					<font fontName="Arial" size="7" isBold="true"/>
 				</textElement>
@@ -190,7 +190,7 @@
 				<text><![CDATA[$]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="76" y="196" width="21" height="10" uuid="c5a1c66c-0e6f-4635-b92c-d41db036615c"/>
+				<reportElement x="85" y="196" width="21" height="10" uuid="c5a1c66c-0e6f-4635-b92c-d41db036615c"/>
 				<textElement>
 					<font fontName="Arial" size="7" isBold="true"/>
 				</textElement>
@@ -211,7 +211,7 @@
 				<textFieldExpression><![CDATA[$P{moneda}]]></textFieldExpression>
 			</textField>
 			<textField pattern="dd/MM/yyyy">
-				<reportElement mode="Opaque" x="135" y="194" width="54" height="13" backcolor="#FDE9D9" uuid="3041d0fb-92cf-43f1-9521-502d321df11e"/>
+				<reportElement mode="Opaque" x="137" y="194" width="54" height="13" backcolor="#FDE9D9" uuid="3041d0fb-92cf-43f1-9521-502d321df11e"/>
 				<textElement>
 					<font fontName="Tahoma" size="7" isBold="true"/>
 				</textElement>
@@ -225,7 +225,7 @@
 				<textFieldExpression><![CDATA[$P{fecha}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="56" y="196" width="11" height="10" uuid="16eb5c24-f412-41f5-92fb-33749aa9710c"/>
+				<reportElement x="55" y="196" width="18" height="10" uuid="16eb5c24-f412-41f5-92fb-33749aa9710c"/>
 				<textElement>
 					<font fontName="Arial" size="7" isBold="true"/>
 				</textElement>
@@ -264,38 +264,38 @@
 				<textElement>
 					<font fontName="Tahoma" size="7" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{vencimiento}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[ $P{vencimiento}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="362" y="196" width="22" height="10" uuid="410382da-f295-4d7a-8385-33e159283732"/>
+				<reportElement x="370" y="196" width="22" height="10" uuid="410382da-f295-4d7a-8385-33e159283732"/>
 				<textElement>
 					<font fontName="Arial" size="7" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{total_cuotas}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="352" y="196" width="10" height="10" uuid="9e51bd0d-3233-41e5-a2e8-f939e016c1e0"/>
+				<reportElement x="357" y="196" width="10" height="10" uuid="9e51bd0d-3233-41e5-a2e8-f939e016c1e0"/>
 				<textElement textAlignment="Justified">
 					<font fontName="Arial" size="7" isBold="true"/>
 				</textElement>
 				<text><![CDATA[de]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="342" y="196" width="11" height="10" uuid="daa166b4-f751-4ae4-acd2-c6ac11654927"/>
+				<reportElement x="338" y="196" width="18" height="10" uuid="daa166b4-f751-4ae4-acd2-c6ac11654927"/>
 				<textElement>
 					<font fontName="Arial" size="7" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{cuota}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement mode="Opaque" x="510" y="194" width="39" height="13" uuid="ac9fec02-88ae-4128-8e12-afa2a46a921d"/>
+				<reportElement mode="Opaque" x="512" y="194" width="37" height="13" uuid="ac9fec02-88ae-4128-8e12-afa2a46a921d"/>
 				<textElement>
 					<font fontName="Tahoma" size="7" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{valor}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[ $P{valor}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="299" y="196" width="41" height="10" uuid="383a2300-bffd-4e96-bac3-4f7fd67c9681"/>
+				<reportElement x="297" y="196" width="39" height="10" uuid="383a2300-bffd-4e96-bac3-4f7fd67c9681"/>
 				<textElement textAlignment="Justified">
 					<font fontName="Arial" size="7" isBold="true"/>
 				</textElement>
@@ -384,7 +384,7 @@
 				<textFieldExpression><![CDATA[$P{contrato}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="13" y="196" width="42" height="10" uuid="6adb7525-38ab-4d86-a959-6ab3a0e89785"/>
+				<reportElement x="9" y="196" width="42" height="10" uuid="6adb7525-38ab-4d86-a959-6ab3a0e89785"/>
 				<textElement textAlignment="Justified">
 					<font fontName="Arial" size="7" isBold="true"/>
 				</textElement>
@@ -542,7 +542,7 @@ www.inmobiliariaberrutti.com]]></text>
 				<text><![CDATA[Referencia]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="299" y="181" width="85" height="13" forecolor="#000000" backcolor="#D9D9D9" uuid="04d999e0-626c-4300-bc67-4d77aa6abf30"/>
+				<reportElement mode="Opaque" x="299" y="181" width="95" height="13" forecolor="#000000" backcolor="#D9D9D9" uuid="04d999e0-626c-4300-bc67-4d77aa6abf30"/>
 				<textElement>
 					<font fontName="Calibri"/>
 				</textElement>

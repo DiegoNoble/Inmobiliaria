@@ -21,6 +21,7 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
  *
  * @author Diego Noble
  */
+
 @Entity
 @Table(name = "cc_propietario")
 
