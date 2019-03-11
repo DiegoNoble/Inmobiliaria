@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="567" leftMargin="14" rightMargin="14" topMargin="14" bottomMargin="14" uuid="73a62481-9ec4-4c59-95c4-545d08c01aac">
-	<property name="ireport.zoom" value="3.8906136901500026"/>
-	<property name="ireport.x" value="50"/>
-	<property name="ireport.y" value="523"/>
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="inmueble" class="java.lang.String"/>
 	<parameter name="logo" class="java.lang.Object"/>
 	<parameter name="cliente" class="java.lang.String"/>
@@ -141,7 +141,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$P{id}]]></textFieldExpression>
 			</textField>
-			<textField pattern="#,##0.00">
+			<textField pattern="#,##0">
 				<reportElement x="222" y="334" width="46" height="12" uuid="fd0cf4c2-5d38-4e56-8667-0c4e5cb5dca4">
 					<printWhenExpression><![CDATA[new Boolean($P{cotizacion}.doubleValue() != 1.0)]]></printWhenExpression>
 				</reportElement>
@@ -155,7 +155,7 @@
 				<textElement>
 					<font fontName="Tahoma" size="7" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[ $P{valor}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{valor}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
 				<reportElement x="217" y="309" width="49" height="11" uuid="d0c6b7dd-c1b7-4149-8fbd-e480428ddf90"/>
@@ -264,7 +264,7 @@
 				<textElement>
 					<font fontName="Tahoma" size="7" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[ $P{vencimiento}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{vencimiento}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="370" y="196" width="22" height="10" uuid="410382da-f295-4d7a-8385-33e159283732"/>
@@ -292,7 +292,7 @@
 				<textElement>
 					<font fontName="Tahoma" size="7" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[ $P{valor}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{valor}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="297" y="196" width="39" height="10" uuid="383a2300-bffd-4e96-bac3-4f7fd67c9681"/>
@@ -333,7 +333,7 @@
 				</textElement>
 				<text><![CDATA[=]]></text>
 			</staticText>
-			<textField pattern="#,##0.00">
+			<textField pattern="#,##0">
 				<reportElement x="508" y="334" width="44" height="12" uuid="9138138a-1a79-41bf-be5b-0753173005b0">
 					<printWhenExpression><![CDATA[new Boolean($P{cotizacion}.doubleValue() != 1.0)]]></printWhenExpression>
 				</reportElement>

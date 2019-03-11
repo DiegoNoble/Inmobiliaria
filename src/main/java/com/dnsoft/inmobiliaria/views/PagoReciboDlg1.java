@@ -64,12 +64,12 @@ public class PagoReciboDlg1 extends javax.swing.JDialog {
     public PagoReciboDlg1(java.awt.Frame parent, boolean modal, Recibo reciboSeleccionado, BigDecimal mora) {
         super(parent, modal);
         initComponents();
-        
+
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/imagenes/logoTrans.png")));
         //CIERRA JOPTIONPANE CON ESCAPE
         jPanel1.grabFocus();
         jPanel1.addKeyListener(new OptionPaneEstandar(this));
-        
+
         simbolos.setDecimalSeparator('.');
         this.container = Container.getInstancia();
         setLocationRelativeTo(null);
@@ -87,6 +87,13 @@ public class PagoReciboDlg1 extends javax.swing.JDialog {
     void inicio() {
 
         lblDetalleRecibo.setText("Contrato: " + reciboSeleccionado.getContrato().getId() + ", Recibo nro: " + reciboSeleccionado.getNroRecibo());
+
+        if (reciboSeleccionado.getContrato().getPaga_banco() == true) {
+            lblPagaEnBanco.setText("Este Contrato debe ser abonado en el Banco!");
+        }else{
+            lblPagaEnBanco.setText("");
+        }
+
         Character chs[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.', '-'};
 
         importeAPagar = reciboSeleccionado.getSaldo().add(mora);
@@ -101,6 +108,7 @@ public class PagoReciboDlg1 extends javax.swing.JDialog {
         cotizacionDAO = container.getBean(ICotizacionDAO.class);
         parametrosDAO = container.getBean(IParametrosDAO.class);
         cajaDAO = container.getBean(ICajaDAO.class);
+        lblMsj.setVisible(false);
 
         this.parametros = parametrosDAO.findOne(Long.valueOf(1));
 
@@ -168,11 +176,11 @@ public class PagoReciboDlg1 extends javax.swing.JDialog {
 
         rbDolares.addMouseListener(
                 new MouseAdapter() {
-                    @Override
-                    public void mouseClicked(MouseEvent evt) {
-                        calculaImporte();
-                    }
-                }
+            @Override
+            public void mouseClicked(MouseEvent evt) {
+                calculaImporte();
+            }
+        }
         );
 
         cbTipoCotizacion.addActionListener(new ActionListener() {
@@ -239,26 +247,26 @@ public class PagoReciboDlg1 extends javax.swing.JDialog {
         txtCotizacion.addKeyListener(
                 new KeyListener() {
 
-                    @Override
-                    public void keyTyped(KeyEvent e) {
-                        //NADA        
-                    }
+            @Override
+            public void keyTyped(KeyEvent e) {
+                //NADA        
+            }
 
-                    @Override
-                    public void keyPressed(KeyEvent e) {
-                        if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                            if (!txtCotizacion.getText().equals("")) {
-                                cotizacion = new Cotizacion(new BigDecimal(txtCotizacion.getText()));
-                                calculaImporte();
-                            }
-                        }
-                    }
-
-                    @Override
-                    public void keyReleased(KeyEvent e) {
-                        //NADA
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    if (!txtCotizacion.getText().equals("")) {
+                        cotizacion = new Cotizacion(new BigDecimal(txtCotizacion.getText()));
+                        calculaImporte();
                     }
                 }
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                //NADA
+            }
+        }
         );
 
         txtMora.addFocusListener(new FocusListener() {
@@ -285,30 +293,30 @@ public class PagoReciboDlg1 extends javax.swing.JDialog {
         txtMora.addKeyListener(
                 new KeyListener() {
 
-                    @Override
-                    public void keyTyped(KeyEvent e) {
-                        //NADA        
-                    }
+            @Override
+            public void keyTyped(KeyEvent e) {
+                //NADA        
+            }
 
-                    @Override
-                    public void keyPressed(KeyEvent e) {
-                        if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                            if (!txtMora.getText().equals("")) {
-                                //mora = new BigDecimal(txtMora.getText());
-                                calculaImporte();
-                            } else {
-                                txtMora.setText("0.00");
-                                //mora = new BigDecimal(txtMora.getText());
-                                calculaImporte();
-                            }
-                        }
-                    }
-
-                    @Override
-                    public void keyReleased(KeyEvent e) {
-                        //NADA
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    if (!txtMora.getText().equals("")) {
+                        //mora = new BigDecimal(txtMora.getText());
+                        calculaImporte();
+                    } else {
+                        txtMora.setText("0.00");
+                        //mora = new BigDecimal(txtMora.getText());
+                        calculaImporte();
                     }
                 }
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                //NADA
+            }
+        }
         );
 
         txtAPagar.addFocusListener(new FocusListener() {
@@ -340,34 +348,34 @@ public class PagoReciboDlg1 extends javax.swing.JDialog {
         txtAPagar.addKeyListener(
                 new KeyListener() {
 
-                    @Override
-                    public void keyTyped(KeyEvent e) {
-                        //NADA        
-                    }
+            @Override
+            public void keyTyped(KeyEvent e) {
+               
+            }
 
-                    @Override
-                    public void keyPressed(KeyEvent e) {
-                        if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                            if (!txtAPagar.getText().equals("")) {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    if (!txtAPagar.getText().equals("")) {
 
-                                importeAPagar = new BigDecimal(txtAPagar.getText());
-                                if (importeAPagar.doubleValue() > reciboSeleccionado.getSaldo().doubleValue()) {
-                                    txtAPagar.setText(reciboSeleccionado.getSaldo().toString());
-                                }
-                                calculaImporte();
-                            } else {
-                                txtAPagar.setText("1.00");
-                                //importeAPagar = new BigDecimal(txtAPagar.getText());
-                                calculaImporte();
-                            }
+                        importeAPagar = new BigDecimal(txtAPagar.getText());
+                        if (importeAPagar.doubleValue() > reciboSeleccionado.getSaldo().doubleValue()) {
+                            txtAPagar.setText(reciboSeleccionado.getSaldo().toString());
                         }
-                    }
-
-                    @Override
-                    public void keyReleased(KeyEvent e) {
-                        //NADA
+                        calculaImporte();
+                    } else {
+                        txtAPagar.setText("1.00");
+                        //importeAPagar = new BigDecimal(txtAPagar.getText());
+                        calculaImporte();
                     }
                 }
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                //NADA
+            }
+        }
         );
 
     }
@@ -483,13 +491,15 @@ public class PagoReciboDlg1 extends javax.swing.JDialog {
             valorEntrega = new BigDecimal(txtAPagar.getText()).setScale(2, RoundingMode.CEILING);
 
             if (rbDolares.isSelected()) {
-                pagar = new PagarRecibo(reciboSeleccionado, valorEntrega.subtract(mora), mora, Moneda.DOLARES, (TipoCotizacionContrato) cbTipoCotizacion.getSelectedItem(), new BigDecimal(txtCotizacion.getText()));
+                pagar = new PagarRecibo(reciboSeleccionado, valorEntrega.subtract(mora), mora, Moneda.DOLARES, 
+                        (TipoCotizacionContrato) cbTipoCotizacion.getSelectedItem(), new BigDecimal(txtCotizacion.getText()));
                 this.dispose();
                 movimientoDeCaja(pagar);
 
             } else if (rbPesos.isSelected()) {
 
-                pagar = new PagarRecibo(reciboSeleccionado, valorEntrega.subtract(mora), mora, Moneda.PESOS, (TipoCotizacionContrato) cbTipoCotizacion.getSelectedItem(), new BigDecimal(txtCotizacion.getText()));
+                pagar = new PagarRecibo(reciboSeleccionado, valorEntrega.subtract(mora), mora, Moneda.PESOS, 
+                        (TipoCotizacionContrato) cbTipoCotizacion.getSelectedItem(), new BigDecimal(txtCotizacion.getText()));
                 this.dispose();
                 movimientoDeCaja(pagar);
 
@@ -540,16 +550,17 @@ public class PagoReciboDlg1 extends javax.swing.JDialog {
         txtMora = new javax.swing.JTextField();
         txtAPagar = new javax.swing.JTextField();
         chpagoParcial = new javax.swing.JCheckBox();
+        lblMsj = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         btnVolver = new botones.BotonVolver();
         btnPagar = new botones.BotonPagar();
+        lblPagaEnBanco = new javax.swing.JLabel();
 
         jLabel1.setText("jLabel1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setIconImage(null);
-        setPreferredSize(new java.awt.Dimension(900, 550));
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
         jPanel2.setBackground(new java.awt.Color(204, 0, 0));
@@ -573,7 +584,7 @@ public class PagoReciboDlg1 extends javax.swing.JDialog {
         lblDetalleRecibo.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridy = 1;
         gridBagConstraints.gridwidth = 4;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.ipadx = 1;
@@ -583,7 +594,7 @@ public class PagoReciboDlg1 extends javax.swing.JDialog {
         cbTipoCotizacion.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridy = 4;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         jPanel1.add(cbTipoCotizacion, gridBagConstraints);
@@ -591,7 +602,7 @@ public class PagoReciboDlg1 extends javax.swing.JDialog {
         txtCotizacion.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridy = 4;
         gridBagConstraints.ipadx = 150;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         jPanel1.add(txtCotizacion, gridBagConstraints);
@@ -600,21 +611,21 @@ public class PagoReciboDlg1 extends javax.swing.JDialog {
         lblImporteDolares.setText("Importe");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridy = 5;
         jPanel1.add(lblImporteDolares, gridBagConstraints);
 
         lblTipoCotizacion.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         lblTipoCotizacion.setText("Cotización?");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridy = 4;
         jPanel1.add(lblTipoCotizacion, gridBagConstraints);
 
         txtImporte.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         txtImporte.setEnabled(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridy = 5;
         gridBagConstraints.ipadx = 150;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         jPanel1.add(txtImporte, gridBagConstraints);
@@ -622,7 +633,7 @@ public class PagoReciboDlg1 extends javax.swing.JDialog {
         cbTipoDeCaja.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         jPanel1.add(cbTipoDeCaja, gridBagConstraints);
@@ -652,7 +663,7 @@ public class PagoReciboDlg1 extends javax.swing.JDialog {
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridy = 4;
         gridBagConstraints.gridheight = 3;
         jPanel1.add(jPanel3, gridBagConstraints);
 
@@ -697,7 +708,7 @@ public class PagoReciboDlg1 extends javax.swing.JDialog {
         lbl2.setText("Total a pagar");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridy = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
         jPanel4.add(lbl2, gridBagConstraints);
 
@@ -706,7 +717,7 @@ public class PagoReciboDlg1 extends javax.swing.JDialog {
         lblMoneda.setText("moneda");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridy = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         jPanel4.add(lblMoneda, gridBagConstraints);
@@ -730,10 +741,11 @@ public class PagoReciboDlg1 extends javax.swing.JDialog {
         jPanel4.add(txtMora, gridBagConstraints);
 
         txtAPagar.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        txtAPagar.setToolTipText("Presione ENTER luego de modificar");
         txtAPagar.setEnabled(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridy = 2;
         gridBagConstraints.ipadx = 150;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         jPanel4.add(txtAPagar, gridBagConstraints);
@@ -747,12 +759,18 @@ public class PagoReciboDlg1 extends javax.swing.JDialog {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridy = 2;
         jPanel4.add(chpagoParcial, gridBagConstraints);
+
+        lblMsj.setText("Presione ENTER luego de modificar!");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 1;
+        jPanel4.add(lblMsj, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridy = 3;
         gridBagConstraints.gridwidth = 4;
         jPanel1.add(jPanel4, gridBagConstraints);
 
@@ -760,7 +778,7 @@ public class PagoReciboDlg1 extends javax.swing.JDialog {
         jLabel11.setText("Caja");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridy = 2;
         gridBagConstraints.ipadx = 1;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
@@ -785,11 +803,24 @@ public class PagoReciboDlg1 extends javax.swing.JDialog {
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridy = 7;
         gridBagConstraints.gridwidth = 4;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         jPanel1.add(jPanel5, gridBagConstraints);
+
+        lblPagaEnBanco.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        lblPagaEnBanco.setForeground(new java.awt.Color(255, 51, 51));
+        lblPagaEnBanco.setText("Paga en banco");
+        lblPagaEnBanco.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 4;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 1;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
+        jPanel1.add(lblPagaEnBanco, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -810,12 +841,14 @@ public class PagoReciboDlg1 extends javax.swing.JDialog {
     private void chpagoParcialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chpagoParcialActionPerformed
 
         if (chpagoParcial.isSelected()) {
+            lblMsj.setVisible(true);
             txtAPagar.setEnabled(true);
             txtMora.setEnabled(false);
             txtCuota.setText(reciboSeleccionado.getSaldo().toString());
             txtMora.setText(reciboSeleccionado.getMora().toString());
             txtAPagar.setText(reciboSeleccionado.getSaldo().add(reciboSeleccionado.getMora()).toString());
         } else {
+            lblMsj.setVisible(false);
             txtAPagar.setEnabled(false);
             txtMora.setEnabled(true);
         }
@@ -847,6 +880,8 @@ public class PagoReciboDlg1 extends javax.swing.JDialog {
     private javax.swing.JLabel lblMoneda;
     private javax.swing.JLabel lblMoneda1;
     private javax.swing.JLabel lblMoneda2;
+    private javax.swing.JLabel lblMsj;
+    private javax.swing.JLabel lblPagaEnBanco;
     private javax.swing.JLabel lblTipoCotizacion;
     private javax.swing.JRadioButton rbDolares;
     private javax.swing.JRadioButton rbPesos;

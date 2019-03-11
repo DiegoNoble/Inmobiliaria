@@ -436,6 +436,7 @@ public final class ContratosController implements ActionListener {
                     contrato.setPorcentajeComision((Double) view.spComision.getValue());
                     contrato.setDestinoMora((DestinoMoraEnum) view.cbDestino.getSelectedItem());
                     contrato.setActivo(Boolean.TRUE);
+                    contrato.setPaga_banco(view.chbPagaEnBanco.isSelected());
 
                     if (view.cbTipoContrato.getSelectedItem() == TipoContrato.ALQUILER) {
 
@@ -560,6 +561,7 @@ public final class ContratosController implements ActionListener {
         view.lblTipoReajuste.setVisible(false);
         view.cbTipoReajustes.setSelectedItem(null);
         view.chbAsegurado.setVisible(false);
+        view.chbPagaEnBanco.setVisible(true);
         view.cbTipoPagoAlquiler.setVisible(false);
         view.chbCierraMes.setVisible(false);
         view.dpVencimiento.setVisible(true);
@@ -588,6 +590,7 @@ public final class ContratosController implements ActionListener {
         view.panelGarantiaAlquiler.setVisible(true);
         view.lblTipoReajuste.setVisible(true);
         view.chbAsegurado.setVisible(true);
+        view.chbPagaEnBanco.setVisible(true);
         view.cbTipoPagoAlquiler.setVisible(true);
         view.chbCierraMes.setVisible(true);
         view.dpVencimiento.setVisible(false);
@@ -778,6 +781,7 @@ public final class ContratosController implements ActionListener {
         this.view.lblContrato.setText("Contrato Nro: " + contratoSeleccionado.getId());
         this.view.dpInicio.setDate(contratoSeleccionado.getFechaInicio());
         this.view.dpFIn.setDate(contratoSeleccionado.getFechaFin());
+        this.view.chbPagaEnBanco.setSelected(contratoSeleccionado.getPaga_banco());
 
         ///this.view.chbActivo.setSelected(contratoSeleccionado.getActivo());
         this.view.dpFechaInactivacion.setDate(contratoSeleccionado.getFechaInactivacion());

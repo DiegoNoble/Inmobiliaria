@@ -125,13 +125,13 @@ public class ContratosDialog extends javax.swing.JDialog {
         lblTipoCotizacion = new javax.swing.JLabel();
         cbTipoCotizacion = new javax.swing.JComboBox();
         btnNuevoTipoReajuste = new javax.swing.JButton();
+        chbPagaEnBanco = new javax.swing.JCheckBox();
         panelSituacion = new javax.swing.JPanel();
         lblContrato = new javax.swing.JLabel();
         dpFechaInactivacion = new org.jdesktop.swingx.JXDatePicker();
         jlFin2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1120, 800));
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
         jPanel2.setBackground(new java.awt.Color(204, 0, 0));
@@ -759,6 +759,13 @@ public class ContratosDialog extends javax.swing.JDialog {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
         jPanel5.add(btnNuevoTipoReajuste, gridBagConstraints);
 
+        chbPagaEnBanco.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        chbPagaEnBanco.setText("Paga en Banco?");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 4;
+        jPanel5.add(chbPagaEnBanco, gridBagConstraints);
+
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
@@ -827,6 +834,7 @@ public class ContratosDialog extends javax.swing.JDialog {
     public javax.swing.JComboBox cbTipoReajustes;
     public javax.swing.JCheckBox chbAsegurado;
     public javax.swing.JCheckBox chbCierraMes;
+    public javax.swing.JCheckBox chbPagaEnBanco;
     public org.jdesktop.swingx.JXDatePicker dpExtension;
     public org.jdesktop.swingx.JXDatePicker dpFIn;
     public org.jdesktop.swingx.JXDatePicker dpFechaInactivacion;

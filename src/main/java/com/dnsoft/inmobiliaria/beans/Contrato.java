@@ -60,6 +60,9 @@ public class Contrato extends AbstractPersistable<Long> {
 
     @Column(name = "activo", columnDefinition = "tinyint default true")
     private Boolean activo;
+    
+    @Column(name = "paga_banco", columnDefinition = "tinyint default false")
+    private Boolean paga_banco;
 
     @Column(name = "valorAlquiler_inicio_contrato")
     private BigDecimal valorAlquilerInicioContrato;
@@ -520,6 +523,15 @@ public class Contrato extends AbstractPersistable<Long> {
     public void setValorAlquilerInicioContrato(BigDecimal valorAlquilerInicioContrato) {
         this.valorAlquilerInicioContrato = valorAlquilerInicioContrato;
     }
+
+    public Boolean getPaga_banco() {
+        return paga_banco;
+    }
+
+    public void setPaga_banco(Boolean paga_banco) {
+        this.paga_banco = paga_banco;
+    }
+    
 
     @Override
     public String toString() {

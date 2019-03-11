@@ -17,17 +17,24 @@
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<queryString>
-		<![CDATA[select r.situacion, r.id as recibo, r.fechaVencimiento, r.moneda, r.saldo, r.valor, c.id as contrato,
+		<![CDATA[select r.situacion, r.id as recibo, r.fechaVencimiento, 
+CASE r.moneda 
+WHEN 'UNIDADES_REAJUSTABLES' THEN 'U.RI'
+WHEN 'UNIDADES_INDEXADAS' THEN 'U.I.'
+WHEN 'DOLARES' THEN 'U$D'
+WHEN 'PESOS' THEN '$U'
+END as moneda
+, r.saldo, r.valor, c.id as contrato,
 c.descripcioninquilino,c.descripcioninmueble, c.tipocontrato, p.nombre
 from recibos r, contratos c, propietario_has_inmueble pi, propietarios p
 where 
 r.contrato_id = c.id and c.inmueble_id = pi.inmueble_id and pi.propietario_id = p.id
-and r.situacion = 'PENDIENTE' AND r.fechaVencimiento < $P{vencimiento} 
+and r.situacion NOT IN ('PAGO') AND r.fechaVencimiento < $P{vencimiento} 
 and ( $X{IN,C.tipocontrato ,tipoContrato})
 and ( $X{IN,p.id,propietarios})
 and ( $X{IN,c.moneda,monedas})
 and c.descripcionInmueble like '%$P!{descripcionInmueble}%'
-order by p.id, contrato]]>
+order by p.id, contrato, r.fechaVencimiento]]>
 	</queryString>
 	<field name="situacion" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
