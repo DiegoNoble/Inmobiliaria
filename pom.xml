@@ -44,6 +44,7 @@
   
     </build>
     <repositories>
+        
         <repository>
             <id>unknown-jars-temp-repo</id>
             <name>A temporary repository created by NetBeans for libraries and jars it could not identify. Please replace the dependencies in this repository with correct ones and delete this repository.</name>
@@ -166,6 +167,7 @@
             <artifactId>xpp3</artifactId>
             <version>1.1.4c</version>
         </dependency>
+        
     </dependencies>
     <properties>
         

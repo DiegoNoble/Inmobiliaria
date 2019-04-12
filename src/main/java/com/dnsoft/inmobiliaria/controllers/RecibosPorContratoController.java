@@ -85,6 +85,7 @@ public class RecibosPorContratoController implements ActionListener {
         contratosDAO = container.getBean(IContratoDAO.class);
         gastoInmuebleInquilinoDAO = container.getBean(IGastoInmuebleInquilinoDAO.class);
         pagoReciboDAO = container.getBean(IPagoReciboDAO.class);
+
         pagoPropietarioDAO = container.getBean(IPagoPropietarioDAO.class);
         cCPropietarioDAO = container.getBean(ICCPropietarioDAO.class);
         this.view = view;
@@ -93,7 +94,7 @@ public class RecibosPorContratoController implements ActionListener {
         inicia();
     }
 
-     void verificaResolucionDePantalla() {
+    void verificaResolucionDePantalla() {
         Toolkit kit = Toolkit.getDefaultToolkit();
         Dimension tamTela = kit.getScreenSize();
         int larg = tamTela.width;
@@ -112,7 +113,7 @@ public class RecibosPorContratoController implements ActionListener {
             System.out.println("Fuent: 14 ");
         }
     }
-     
+
     private void inicia() {
 
         configTblRecibos();
@@ -511,10 +512,22 @@ public class RecibosPorContratoController implements ActionListener {
         view.btnAnularPago.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent evt) {
-                PagosDetalleDlg detalles = new PagosDetalleDlg(null, false, reciboSeleccionado);
-                detalles.setVisible(true);
-                detalles.toFront();
-                buscaRecibos();
+                List<PagoRecibo> findByRecibo = pagoReciboDAO.findByRecibo(reciboSeleccionado);
+                if (!findByRecibo.isEmpty()) {
+                    PagosDetalleDlg detalles = new PagosDetalleDlg(null, false, reciboSeleccionado);
+                    detalles.setVisible(true);
+                    detalles.toFront();
+                    buscaRecibos();
+                } else {
+                    if (JOptionPane.showConfirmDialog(null, "Confirma anulación?",
+                            "Confirmación", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                        reciboSeleccionado.setFechaPago(null);
+                        reciboSeleccionado.setSaldo(reciboSeleccionado.getValor());
+                        reciboSeleccionado.setSituacion(Situacion.PENDIENTE);
+                        recibosDAO.save(reciboSeleccionado);
+                        buscaRecibos();
+                    }
+                }
             }
         });
         view.btnImprimeRecibo.addMouseListener(new MouseAdapter() {
