@@ -79,7 +79,7 @@ public class DetalleTipoDocumento extends javax.swing.JDialog {
 
             @Override
             public void tableChanged(TableModelEvent tme) {
-                tipoDocumentoDAO.save(listTipoDocumento);
+                tipoDocumentoDAO.saveAll(listTipoDocumento);
             }
         });
 

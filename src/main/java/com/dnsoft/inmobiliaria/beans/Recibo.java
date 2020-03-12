@@ -12,6 +12,9 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -27,6 +30,12 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 @Table(name = "recibos")
 
 public class Recibo extends AbstractPersistable<Long> {
+
+    @Id
+      @GeneratedValue(strategy = GenerationType.AUTO)
+    
+    @Column(name = "id", updatable = false, nullable = false)
+    private Long id;
 
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "valor")
@@ -62,11 +71,21 @@ public class Recibo extends AbstractPersistable<Long> {
 
     private Integer nroRecibo;
     private Integer cantidadRecibos;
-  
-    @Column(name = "mora", columnDefinition = "Decimal(19,2) default '0.00'",nullable = true)
+
+    @Column(name = "mora", columnDefinition = "Decimal(19,2) default '0.00'", nullable = true)
     private BigDecimal mora;
 
     public Recibo() {
+    }
+
+    @Override
+    public Long getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public BigDecimal getValor() {
@@ -109,7 +128,6 @@ public class Recibo extends AbstractPersistable<Long> {
         this.contrato = contrato;
     }
 
-   
     public BigDecimal getMora() {
         return mora;
     }
@@ -118,7 +136,6 @@ public class Recibo extends AbstractPersistable<Long> {
         this.mora = mora;
     }
 
-    
     public BigDecimal getSaldo() {
         return saldo;
     }

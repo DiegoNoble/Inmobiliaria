@@ -8,6 +8,9 @@ package com.dnsoft.inmobiliaria.beans;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -22,9 +25,15 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 
 public class InmuebleHasComodidades extends AbstractPersistable<Long> {
 
+    @Id
+      @GeneratedValue(strategy = GenerationType.AUTO)
+    
+    @Column(name = "id", updatable = false, nullable = false)
+    private Long id;
+
     @Column(name = "cantidad")
     private Integer cantidad;
-    
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "comodidad_id")
     private Comodidad comodidad;
@@ -34,6 +43,16 @@ public class InmuebleHasComodidades extends AbstractPersistable<Long> {
     private Inmueble inmueble;
 
     public InmuebleHasComodidades() {
+    }
+
+    @Override
+    public Long getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public InmuebleHasComodidades(Inmueble inmueble) {
@@ -70,5 +89,4 @@ public class InmuebleHasComodidades extends AbstractPersistable<Long> {
         this.inmueble = inmueble;
     }
 
-  
 }

@@ -78,7 +78,7 @@ public final class DetalleMovimientoDeCaja extends javax.swing.JDialog {
         this.recibo = recibo;
         this.entrega = entrega;
         this.monedaTotal = recibo.getContrato().getMoneda();
-        this.parametros = parametrosDAO.findOne(Long.valueOf(1));
+        this.parametros = parametrosDAO.findAll().get(0);
         this.pagarRecibo = pagarAlquiler;
 
         tipoCotizacionContrato = recibo.getContrato().getTipoCotizacionContrato();
@@ -214,7 +214,7 @@ public final class DetalleMovimientoDeCaja extends javax.swing.JDialog {
                 for (Caja movimiento : listMovimientos) {
                     movimiento.setPagoRecibo(pagoRecibo);
                 }
-                cajaDAO.save(listMovimientos);
+                cajaDAO.saveAll(listMovimientos);
                 DetalleMovimientoDeCaja.this.dispose();
             }
         });

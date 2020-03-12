@@ -156,7 +156,8 @@ public final class CotizacionesView extends InternalFrameEstandar {
         ur.setValor(BigDecimal.valueOf(Double.parseDouble(txtUR.getText())));
         listCotizacion.add(ur);
 
-        cotizacionDAO.save(listCotizacion);
+        cotizacionDAO.saveAll(listCotizacion);    
+        
         desahbilitaCampos();
         JOptionPane.showMessageDialog(this, "Se registraron los datos correctamente!", "Correcto!", JOptionPane.INFORMATION_MESSAGE);
 

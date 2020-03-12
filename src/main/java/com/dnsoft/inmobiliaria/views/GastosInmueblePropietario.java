@@ -96,7 +96,7 @@ public class GastosInmueblePropietario extends javax.swing.JDialog {
     /* void guardarCambios() {
      try {
 
-     gastoInmueblePropietarioDAO.save(listGastoInmueblePropietario);
+     gastoInmueblePropietarioDAO.saveAll(listGastoInmueblePropietario);
      for (GastoInmueblePropietario gastos : listGastoInmueblePropietario) {
      Caja movimiento = new Caja();
      movimiento.setDescripcion("Gasto inmueble Propietario: " + gastos.getPropietario() + ", Inmueble " + gastos.getInmueble());
@@ -106,7 +106,7 @@ public class GastosInmueblePropietario extends javax.swing.JDialog {
      movimiento.setRubro(gastos.getRubro());
      movimiento.setSaldo(calculaSaldo(gastos.getMoneda()).add(gastos.getValor()));
      movimiento.setSalida(BigDecimal.ZERO);
-     cajaDAO.save(movimiento);
+     cajaDAO.saveAll(movimiento);
      }
      buscarPropietario();
      JOptionPane.showMessageDialog(this, "Se registro correctamente", "Correcto", JOptionPane.INFORMATION_MESSAGE);

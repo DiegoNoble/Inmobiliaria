@@ -83,7 +83,7 @@ public class DetalleCalles extends javax.swing.JDialog {
             @Override
             public void tableChanged(TableModelEvent tme) {
                 
-                        calleDAO.save(listCalles);
+                        calleDAO.saveAll(listCalles);
                 
             }
         });

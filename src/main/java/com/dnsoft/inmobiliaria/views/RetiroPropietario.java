@@ -155,7 +155,7 @@ public final class RetiroPropietario extends javax.swing.JDialog {
         //Ajusta saldo cc propietario
        /* ActualizaSaldos acSaldo = new ActualizaSaldos();
          List<CCPropietario> ccPropietario = cCPropietarioDAO.findByPropietarioAndMonedaOrderByIdAsc(propietario, moneda);
-         cCPropietarioDAO.save(acSaldo.ActualizaSaldosPropietarios(ccPropietario));*/
+         cCPropietarioDAO.saveAll(acSaldo.ActualizaSaldosPropietarios(ccPropietario));*/
         movimientoCaja();
         JOptionPane.showMessageDialog(null, "Se registro el retiro correctamente", "Correcto", JOptionPane.INFORMATION_MESSAGE);
         new ImprimeRecibo().imprimieReciboRetiroPropietario(retiro);

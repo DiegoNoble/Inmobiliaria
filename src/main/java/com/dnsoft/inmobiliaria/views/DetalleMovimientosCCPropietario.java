@@ -20,6 +20,7 @@ public class DetalleMovimientosCCPropietario extends javax.swing.JDialog {
     public DetalleMovimientosCCPropietario(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setLocationRelativeTo(null);
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/imagenes/logoTrans.png")));
         //CIERRA JOPTIONPANE CON ESCAPE
         jPanel2.grabFocus();
@@ -90,7 +91,7 @@ public class DetalleMovimientosCCPropietario extends javax.swing.JDialog {
         btnActualizaSaldoD = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1024, 750));
+        setPreferredSize(new java.awt.Dimension(1200, 750));
         addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 formKeyPressed(evt);

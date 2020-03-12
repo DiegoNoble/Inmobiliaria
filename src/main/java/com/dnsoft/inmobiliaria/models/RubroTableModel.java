@@ -17,7 +17,7 @@ import javax.swing.table.AbstractTableModel;
 public class RubroTableModel extends AbstractTableModel {
 
     //nome da coluna da table
-    private final String[] colunas = new String[]{"Nombre", "Descripción", "prueba"};
+    private final String[] colunas = new String[]{"Nombre", "Descripción"};
     //lista para a manipulacao do objeto
     private List<Rubro> list;
 

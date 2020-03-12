@@ -141,7 +141,7 @@ public final class PagosDetalleDlg extends javax.swing.JDialog {
             cajaDAO.save(movimientoToRemove);
             anulaMovimientoDeCaja(movimientoToRemove);
 
-            pagoPropietarioDAO.delete(listPagoPropietarioToDelete);
+            pagoPropietarioDAO.deleteAll(listPagoPropietarioToDelete);
             pagoAlquilerDAO.delete(toDelete);
 
             List<Propietario> propietarios = new ArrayList<>();
@@ -154,7 +154,7 @@ public final class PagosDetalleDlg extends javax.swing.JDialog {
                 listCC = cCPropietarioDAO.findByPropietarioAndMonedaOrderByIdAsc(propietario, monedaCuentaCorriente);
 
                 ActualizaSaldos acSaldo = new ActualizaSaldos();
-                cCPropietarioDAO.save(acSaldo.ActualizaSaldosPropietarios(listCC));
+                cCPropietarioDAO.saveAll(acSaldo.ActualizaSaldosPropietarios(listCC));
             }
 
             BigDecimal valorPago = toDelete.getValor();

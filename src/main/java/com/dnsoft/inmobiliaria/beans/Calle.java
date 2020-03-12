@@ -7,6 +7,9 @@ package com.dnsoft.inmobiliaria.beans;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Table;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
@@ -19,13 +22,31 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 
 public class Calle extends AbstractPersistable<Long> {
 
-    @Column(name = "nombre")
-    private String nombre;
+    @Id
+      @GeneratedValue(strategy = GenerationType.AUTO)
     
+    @Column(name = "id", updatable = false, nullable = false)
+    private Long id;
+    
+     @Column(name = "nombre")
+    private String nombre;
 
+
+   
+   
     public Calle() {
     }
 
+    
+     @Override
+    public Long getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(Long id) {
+        this.id = id;
+    }
     public Calle(String nombre) {
         this.nombre = nombre;
     }
@@ -38,8 +59,6 @@ public class Calle extends AbstractPersistable<Long> {
         this.nombre = nombre;
     }
 
-    
-    
     @Override
     public String toString() {
         return nombre;

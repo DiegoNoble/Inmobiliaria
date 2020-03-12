@@ -5,12 +5,12 @@
  */
 package com.dnsoft.inmobiliaria.models;
 
-import com.dnsoft.inmobiliaria.beans.CCPropietario;
-import com.dnsoft.inmobiliaria.beans.Propietario;
+import com.dnsoft.inmobiliaria.beans.TipoPago;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
+import javax.persistence.Tuple;
 import javax.swing.table.AbstractTableModel;
 
 /**
@@ -20,15 +20,15 @@ import javax.swing.table.AbstractTableModel;
 public class CCPropietarioTableModel extends AbstractTableModel {
 
     //nome da coluna da table
-    private final String[] colunas = new String[]{"Fecha", "Detalle", "Débitos", "Créditos", "Saldo"};
+    private final String[] colunas = new String[]{"Fecha", "Detalle", "Tipo pago", "Débitos", "Créditos", "Saldo"};
     //lista para a manipulacao do objeto
-    private final List<CCPropietario> list;
+    private final List<Tuple> list;
 
     public CCPropietarioTableModel() {
         list = new LinkedList<>();
     }
 
-    public CCPropietarioTableModel(List<CCPropietario> list) {
+    public CCPropietarioTableModel(List<Tuple> list) {
         this.list = list;
     }
 
@@ -47,18 +47,35 @@ public class CCPropietarioTableModel extends AbstractTableModel {
     //define o que cada coluna conterï¿½ do objeto
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        CCPropietario c = list.get(rowIndex);
+
+        Tuple c = list.get(rowIndex);
+
         switch (columnIndex) {
             case 0:
-                return c.getFecha();
+                return c.get(0);
             case 1:
-                return c.getDescipcion();
+                return c.get(1);
             case 2:
-                return c.getDebito();
+                if (c.get(1).toString().startsWith("Terreno")) {
+
+                    if (c.get(2).equals(TipoPago.TOTAL)) {
+                        return "Total";
+                    } else if (c.get(2).equals(TipoPago.PARCIAL)) {
+                        return "Parcial";
+                    } else if (c.get(2).equals(TipoPago.SALDO)) {
+                        return "Saldo";
+                    }
+                } else {
+
+                    return "";
+                }
+
             case 3:
-                return c.getCredito();
+                return c.get(3);
             case 4:
-                return c.getSaldo();
+                return c.get(4);
+            case 5:
+                return c.get(5);
             default:
                 return null;
         }
@@ -82,10 +99,12 @@ public class CCPropietarioTableModel extends AbstractTableModel {
             case 1:
                 return String.class;
             case 2:
-                return BigDecimal.class;
+                return String.class;
             case 3:
                 return BigDecimal.class;
             case 4:
+                return BigDecimal.class;
+            case 5:
                 return BigDecimal.class;
             default:
                 return null;
@@ -93,28 +112,24 @@ public class CCPropietarioTableModel extends AbstractTableModel {
     }
 
     @Override
-    public boolean isCellEditable(int rowIndex, int columnIndex) {
+    public boolean isCellEditable(int rowIndex, int columnIndex
+    ) {
 
         return false;
     }
 
-    public void agregar(CCPropietario gastoInmueblePropietario) {
+    public void agregar(Tuple gastoInmueblePropietario) {
         list.add(gastoInmueblePropietario);
 
         this.fireTableRowsInserted(list.size() - 1, list.size() - 1);
     }
 
-    public void eliminar(int row) {
-        list.remove(row);
-        this.fireTableRowsDeleted(row, row);
-    }
-
-    public void atualizar(int row, CCPropietario gastoInmueblePropietario) {
+    public void atualizar(int row, Tuple gastoInmueblePropietario) {
         list.set(row, gastoInmueblePropietario);
         this.fireTableRowsUpdated(row, row);
     }
 
-    public CCPropietario getCliente(int row) {
+    public Tuple getCliente(int row) {
         return list.get(row);
     }
 

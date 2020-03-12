@@ -80,7 +80,7 @@ public class DetalleBancos extends javax.swing.JDialog {
             @Override
             public void tableChanged(TableModelEvent tme) {
                 if (banco != null) {
-                    bancosDAO.save(listBancos);
+                    bancosDAO.saveAll(listBancos);
                 }
             }
         });

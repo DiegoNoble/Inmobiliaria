@@ -10,6 +10,9 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -27,8 +30,12 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 
 public class Inquilino extends AbstractPersistable<Long> {
 
-    @Column(insertable = false, updatable = false)
+    @Id
+      @GeneratedValue(strategy = GenerationType.AUTO)
+    
+    @Column(name = "id", updatable = false, nullable = false)
     private Long id;
+
     @Column(name = "nombre")
     private String nombre;
     @Column(name = "direccion")
@@ -61,22 +68,22 @@ public class Inquilino extends AbstractPersistable<Long> {
 
     @Column(name = "activo", columnDefinition = "tinyint default true")
     private Boolean activo;
-    
+
     @Column(name = "cod_referencia", length = 25)
     private String codReferencia;
 
     public Inquilino() {
     }
 
-    public Inquilino(Long id, String codReferencia,String nombre, String documento, Boolean activo) {
+    public Inquilino(Long id, String codReferencia, String nombre, String documento, Boolean activo) {
         this.id = id;
-         this.codReferencia = codReferencia;
+        this.codReferencia = codReferencia;
         this.nombre = nombre;
         this.activo = activo;
         this.documento = documento;
     }
 
-    public Inquilino(Long id, String codReferencia,  String nombre,String documento, Boolean activo, String direccion, String tel, String cel ) {
+    public Inquilino(Long id, String codReferencia, String nombre, String documento, Boolean activo, String direccion, String tel, String cel) {
         this.id = id;
         this.codReferencia = codReferencia;
         this.nombre = nombre;
@@ -86,8 +93,6 @@ public class Inquilino extends AbstractPersistable<Long> {
         this.direccion = direccion;
         this.documento = documento;
     }
-    
-    
 
     @Override
     public Long getId() {
@@ -202,8 +207,6 @@ public class Inquilino extends AbstractPersistable<Long> {
     public void setCodReferencia(String codReferencia) {
         this.codReferencia = codReferencia;
     }
-    
-    
 
     @Override
     public String toString() {

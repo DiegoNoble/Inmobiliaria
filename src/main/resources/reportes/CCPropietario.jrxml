@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="871fcd49-fe28-42fb-8731-6f28ab90d11e">
+<!-- Created with Jaspersoft Studio version 6.9.0.final using JasperReports Library version 6.9.0-cb8f9004be492ccc537180b49c026951f4220bf3  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="871fcd49-fe28-42fb-8731-6f28ab90d11e">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
@@ -31,6 +32,7 @@
 	<field name="credito" class="java.math.BigDecimal"/>
 	<field name="saldo" class="java.math.BigDecimal"/>
 	<field name="fecha" class="java.util.Date"/>
+	<field name="tipoPago" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -85,7 +87,7 @@
 		</band>
 	</title>
 	<pageHeader>
-		<band height="26" splitType="Stretch">
+		<band height="28" splitType="Stretch">
 			<textField>
 				<reportElement x="143" y="3" width="100" height="16" uuid="1a9c73ca-c441-477d-92c4-d0f82c6a6950"/>
 				<textElement>
@@ -94,7 +96,7 @@
 				<textFieldExpression><![CDATA[$P{moneda}]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement x="0" y="23" width="552" height="1" uuid="0d8fdada-cc19-4b1c-8854-0fdc77532578"/>
+				<reportElement x="0" y="27" width="556" height="1" uuid="0d8fdada-cc19-4b1c-8854-0fdc77532578"/>
 			</line>
 			<staticText>
 				<reportElement x="2" y="3" width="141" height="16" uuid="d8d75e8a-cbf7-46a2-9dff-6fb5cccff1a3"/>
@@ -104,14 +106,14 @@
 				<text><![CDATA[Cuenta Corriente en: ]]></text>
 			</staticText>
 			<textField pattern="#,##0.00;-#,##0.00">
-				<reportElement x="469" y="3" width="86" height="16" uuid="c543f9fb-fb2e-437f-b9d1-b6b5c6a2ae25"/>
+				<reportElement x="470" y="3" width="86" height="16" uuid="c543f9fb-fb2e-437f-b9d1-b6b5c6a2ae25"/>
 				<textElement>
 					<font fontName="Arial" size="13" isBold="true" isItalic="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{saldo}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="384" y="4" width="85" height="14" uuid="156543f2-1454-4c01-8d52-cd2d69b75928"/>
+				<reportElement x="385" y="4" width="85" height="14" uuid="156543f2-1454-4c01-8d52-cd2d69b75928"/>
 				<textElement>
 					<font fontName="Arial" size="12" isBold="true"/>
 				</textElement>
@@ -120,7 +122,7 @@
 		</band>
 	</pageHeader>
 	<columnHeader>
-		<band height="19" splitType="Stretch">
+		<band height="21" splitType="Stretch">
 			<staticText>
 				<reportElement x="2" y="0" width="44" height="14" uuid="6e1e49ba-fb6b-4ddf-8511-0e762acaebe6"/>
 				<textElement>
@@ -129,42 +131,49 @@
 				<text><![CDATA[Fecha]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="352" y="0" width="60" height="14" uuid="676f73dc-0424-4302-bf14-65090a0347b5"/>
+				<reportElement x="365" y="0" width="60" height="14" uuid="676f73dc-0424-4302-bf14-65090a0347b5"/>
 				<textElement>
 					<font fontName="Arial" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Debe]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="410" y="0" width="73" height="14" uuid="67ef22eb-cacb-4f1b-9c03-09eb84aaa1d1"/>
+				<reportElement x="429" y="0" width="60" height="14" uuid="67ef22eb-cacb-4f1b-9c03-09eb84aaa1d1"/>
 				<textElement>
 					<font fontName="Arial" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Haber]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="483" y="0" width="70" height="14" uuid="7ae93f4e-2cd9-48f0-bfab-2ab6258d2c6d"/>
+				<reportElement x="493" y="0" width="58" height="14" uuid="7ae93f4e-2cd9-48f0-bfab-2ab6258d2c6d"/>
 				<textElement>
 					<font fontName="Arial" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Saldo]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Transparent" x="56" y="0" width="134" height="14" uuid="5b5f472b-3730-4f63-9122-76157e06a258"/>
+				<reportElement mode="Transparent" x="63" y="0" width="220" height="14" uuid="5b5f472b-3730-4f63-9122-76157e06a258"/>
 				<textElement>
 					<font fontName="Arial" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Documento Operación]]></text>
 			</staticText>
 			<line>
-				<reportElement x="1" y="17" width="552" height="1" uuid="d88a0344-f9a7-406a-8702-ee90f7f516af"/>
+				<reportElement x="1" y="20" width="555" height="1" uuid="d88a0344-f9a7-406a-8702-ee90f7f516af"/>
 			</line>
+			<staticText>
+				<reportElement x="289" y="0" width="60" height="14" uuid="ba27fdda-a196-4d32-9104-381b36034743"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tipo pago]]></text>
+			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="14" splitType="Stretch">
+		<band height="18" splitType="Stretch">
 			<textField pattern="#,##0.00;-#,##0.00">
-				<reportElement style="miestilo" x="352" y="0" width="60" height="11" uuid="37bf272b-9a7e-41eb-a157-6a4b0db81297">
+				<reportElement style="miestilo" x="364" y="0" width="60" height="15" uuid="37bf272b-9a7e-41eb-a157-6a4b0db81297">
 					<printWhenExpression><![CDATA[$F{debito}.intValue() != 0.00]]></printWhenExpression>
 				</reportElement>
 				<textElement>
@@ -173,7 +182,7 @@
 				<textFieldExpression><![CDATA[$F{debito}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00;-#,##0.00">
-				<reportElement style="miestilo" x="410" y="0" width="73" height="11" uuid="fb2c1f6c-4bb6-4772-8b65-b797fae5a9d2">
+				<reportElement style="miestilo" x="429" y="0" width="60" height="15" uuid="fb2c1f6c-4bb6-4772-8b65-b797fae5a9d2">
 					<printWhenExpression><![CDATA[$F{credito}.intValue() != 0.00]]></printWhenExpression>
 				</reportElement>
 				<textElement>
@@ -182,7 +191,7 @@
 				<textFieldExpression><![CDATA[$F{credito}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement style="miestilo" x="56" y="0" width="296" height="11" uuid="143f63c7-13d5-45fa-8518-0495ee78aeff"/>
+				<reportElement style="miestilo" x="63" y="0" width="221" height="15" uuid="143f63c7-13d5-45fa-8518-0495ee78aeff"/>
 				<textElement>
 					<font fontName="Arial" size="9"/>
 				</textElement>
@@ -196,46 +205,55 @@
 				<textFieldExpression><![CDATA[$F{fecha}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00;-#,##0.00">
-				<reportElement style="miestilo" x="483" y="0" width="70" height="11" uuid="ee093d2f-2a83-424a-a597-67c1177e401b"/>
+				<reportElement style="miestilo" x="493" y="0" width="58" height="15" uuid="ee093d2f-2a83-424a-a597-67c1177e401b"/>
 				<textElement>
 					<font fontName="Arial" size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{saldo}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;-#,##0.00">
+				<reportElement style="miestilo" x="292" y="1" width="71" height="13" uuid="e7761f4c-0349-41f4-9b63-608426eff34f">
+					<printWhenExpression><![CDATA[$F{descipcion}.startsWith("Terreno")]]></printWhenExpression>
+				</reportElement>
+				<textElement>
+					<font fontName="Arial" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tipoPago}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
 	<pageFooter>
 		<band height="50">
 			<textField>
-				<reportElement x="501" y="26" width="15" height="11" uuid="f3efe4c8-9859-4c24-95b5-3f4bc7dee54e"/>
+				<reportElement x="521" y="23" width="15" height="11" uuid="f3efe4c8-9859-4c24-95b5-3f4bc7dee54e"/>
 				<textElement>
 					<font fontName="Arial" size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 			<textField pattern="dd/MM/yyyy HH:mm:ss">
-				<reportElement x="444" y="13" width="98" height="11" uuid="828afc8d-d070-4aee-84b2-13d6436f47c9"/>
+				<reportElement x="464" y="10" width="98" height="11" uuid="828afc8d-d070-4aee-84b2-13d6436f47c9"/>
 				<textElement>
 					<font fontName="Arial" size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="462" y="26" width="39" height="11" uuid="eff12e63-3a78-4e66-b4db-5a47556dfa66"/>
+				<reportElement x="482" y="23" width="39" height="11" uuid="eff12e63-3a78-4e66-b4db-5a47556dfa66"/>
 				<textElement textAlignment="Justified">
 					<font fontName="Arial" size="9" isBold="false"/>
 				</textElement>
 				<text><![CDATA[Página:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="516" y="26" width="16" height="11" uuid="ac80212f-3ef0-41e3-8661-8f69c23a946e"/>
+				<reportElement x="536" y="23" width="16" height="11" uuid="ac80212f-3ef0-41e3-8661-8f69c23a946e"/>
 				<textElement textAlignment="Justified">
 					<font fontName="Arial" size="9" isBold="false"/>
 				</textElement>
 				<text><![CDATA[de]]></text>
 			</staticText>
 			<textField evaluationTime="Report">
-				<reportElement x="532" y="26" width="15" height="11" uuid="34efaa61-a1b9-48e9-b125-26082dce6e01"/>
+				<reportElement x="552" y="23" width="15" height="11" uuid="34efaa61-a1b9-48e9-b125-26082dce6e01"/>
 				<textElement>
 					<font fontName="Arial" size="9"/>
 				</textElement>

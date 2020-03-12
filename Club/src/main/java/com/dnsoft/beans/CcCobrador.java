@@ -27,7 +27,7 @@ import javax.persistence.TemporalType;
 public class CcCobrador implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", updatable = false, nullable = false)
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;

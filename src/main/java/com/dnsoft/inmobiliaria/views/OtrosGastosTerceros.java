@@ -135,7 +135,7 @@ public class OtrosGastosTerceros extends javax.swing.JDialog {
             @Override
             public void valueChanged(ListSelectionEvent lse) {
                 if (tbl.getSelectedRow() != -1) {
-                    inquilinoSeleccionado = inquilinosDAO.findOne(listInquilinos.get(tbl.getSelectedRow()).getId());
+                    inquilinoSeleccionado = inquilinosDAO.getOne(listInquilinos.get(tbl.getSelectedRow()).getId());
                 } else {
                 }
             }
@@ -295,7 +295,7 @@ public class OtrosGastosTerceros extends javax.swing.JDialog {
 
         ActualizaSaldos acSaldo = new ActualizaSaldos();
         List<CCPropietario> ccPropietario = cCPropietarioDAO.findByPropietarioAndMonedaOrderByIdAsc(propietarioSeleccionado, monedaSeleccionada);
-        cCPropietarioDAO.save(acSaldo.ActualizaSaldosPropietarios(ccPropietario));
+        cCPropietarioDAO.saveAll(acSaldo.ActualizaSaldosPropietarios(ccPropietario));
 
     }
 

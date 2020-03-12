@@ -10,6 +10,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Table;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
@@ -21,6 +24,12 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 @Table(name = "tipo_reajuste")
 
 public class TipoReajuste extends AbstractPersistable<Long> {
+
+    @Id
+      @GeneratedValue(strategy = GenerationType.AUTO)
+    
+    @Column(name = "id", updatable = false, nullable = false)
+    private Long id;
 
     private String nombre;
     @Column(name = "descripcion")
@@ -35,6 +44,16 @@ public class TipoReajuste extends AbstractPersistable<Long> {
     private TipoReajusteAlquilerEnum tipoReajusteAlquilerEnum;
 
     public TipoReajuste() {
+    }
+
+    @Override
+    public Long getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getNombre() {

@@ -12,6 +12,9 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -25,6 +28,12 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 @Table(name = "gasto_inmueble_inmobiliaria")
 
 public class GastoInmuebleInmobiliaria extends AbstractPersistable<Long> {
+
+    @Id
+      @GeneratedValue(strategy = GenerationType.AUTO)
+    
+    @Column(name = "id", updatable = false, nullable = false)
+    private Long id;
 
     @Column(name = "fecha")
     @Temporal(javax.persistence.TemporalType.DATE)
@@ -40,9 +49,18 @@ public class GastoInmuebleInmobiliaria extends AbstractPersistable<Long> {
     private String descripcion;
     @ManyToOne(fetch = FetchType.LAZY)
     private Proveedor proveedor;
-    
 
     public GastoInmuebleInmobiliaria() {
+    }
+
+    @Override
+    public Long getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Date getFecha() {
@@ -105,7 +123,5 @@ public class GastoInmuebleInmobiliaria extends AbstractPersistable<Long> {
     public String toString() {
         return descripcion;
     }
-    
-    
 
 }

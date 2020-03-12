@@ -14,6 +14,9 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -30,10 +33,16 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 
 public class PagoPropietario extends AbstractPersistable<Long> {
 
+    @Id
+      @GeneratedValue(strategy = GenerationType.AUTO)
+    
+    @Column(name = "id", updatable = false, nullable = false)
+    private Long id;
+
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "valor")
     private BigDecimal valor;
-    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "pago_recibo_id")
     private PagoRecibo pagoRecibo;
     @ManyToOne(fetch = FetchType.LAZY)
@@ -55,10 +64,20 @@ public class PagoPropietario extends AbstractPersistable<Long> {
     private BigDecimal moraInmobiliaria;
     @Column(name = "mora_propietario")
     private BigDecimal morapropietario;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pagoPropietario",fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pagoPropietario", fetch = FetchType.LAZY)
     private List<CCPropietario> listCCPropietarios;
 
     public PagoPropietario() {
+    }
+
+    @Override
+    public Long getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public BigDecimal getValor() {
@@ -116,7 +135,6 @@ public class PagoPropietario extends AbstractPersistable<Long> {
     public void setComision(BigDecimal comision) {
         this.comision = comision;
     }
-
 
     public Boolean getRetieneInquilino() {
         return retieneInquilino;

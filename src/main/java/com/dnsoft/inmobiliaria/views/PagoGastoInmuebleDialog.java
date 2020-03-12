@@ -121,7 +121,7 @@ public final class PagoGastoInmuebleDialog extends javax.swing.JDialog {
 
     void pagaGastoInmuebleInquilino() {
 
-        Inquilino inquilino = inquilinoDAO.findOne(gastoInmuebleInquilino.getInquilino().getId());
+        Inquilino inquilino = inquilinoDAO.getOne(gastoInmuebleInquilino.getInquilino().getId());
         try {
             PagoGastoInmueble pagoGastoInmueble = new PagoGastoInmueble();
             valorEntrega = new BigDecimal(txtImporte.getText()).setScale(2, RoundingMode.CEILING);
@@ -238,7 +238,7 @@ public final class PagoGastoInmuebleDialog extends javax.swing.JDialog {
         ActualizaSaldos acSaldo = new ActualizaSaldos();
 
         List<CCPropietario> ccPropietario = cCPropietarioDAO.findByPropietarioAndMonedaOrderByIdAsc(gastoInmueblePropietario.getPropietario(), moneda);
-        cCPropietarioDAO.save(acSaldo.ActualizaSaldosPropietarios(ccPropietario));
+        cCPropietarioDAO.saveAll(acSaldo.ActualizaSaldosPropietarios(ccPropietario));
     }
 
     BigDecimal calculaSaldo() {

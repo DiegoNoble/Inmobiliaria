@@ -82,7 +82,7 @@ public class DetalleComodidades extends javax.swing.JDialog {
             @Override
             public void tableChanged(TableModelEvent tme) {
                
-                    comodidadesDAO.save(listComodidades);
+                    comodidadesDAO.saveAll(listComodidades);
                 
             }
         });

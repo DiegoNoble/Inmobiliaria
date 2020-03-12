@@ -8,10 +8,14 @@ package com.dnsoft.inmobiliaria.beans;
 import java.math.BigDecimal;
 import java.util.Date;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -21,12 +25,17 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
  *
  * @author Diego Noble
  */
-
 @Entity
 @Table(name = "cc_propietario")
 
 public class CCPropietario extends AbstractPersistable<Long> {
 
+    @Id
+      @GeneratedValue(strategy = GenerationType.AUTO)
+    
+    @Column(name = "id", updatable = false, nullable = false)
+    private Long id;
+    
     @ManyToOne(fetch = FetchType.LAZY)
     private Propietario propietario;
     private BigDecimal debito;
@@ -41,6 +50,7 @@ public class CCPropietario extends AbstractPersistable<Long> {
     private PagoPropietario pagoPropietario;
     @ManyToOne(fetch = FetchType.LAZY)
     private GastoInmueblePropietario gastoInmueblePropietario;
+    private String tipoPago;
 
     public CCPropietario() {
     }
@@ -73,6 +83,16 @@ public class CCPropietario extends AbstractPersistable<Long> {
         this.fecha = fecha;
         this.moneda = moneda;
         this.pagoPropietario = pagoPropietario;
+    }
+
+    @Override
+    public Long getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Propietario getPropietario() {
@@ -145,6 +165,14 @@ public class CCPropietario extends AbstractPersistable<Long> {
 
     public void setGastoInmueblePropietario(GastoInmueblePropietario gastoInmueblePropietario) {
         this.gastoInmueblePropietario = gastoInmueblePropietario;
+    }
+
+    public String getTipoPago() {
+        return tipoPago;
+    }
+
+    public void setTipoPago(String tipoPago) {
+        this.tipoPago = tipoPago;
     }
 
 }

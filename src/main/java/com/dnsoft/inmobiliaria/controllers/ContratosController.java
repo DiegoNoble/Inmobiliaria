@@ -251,7 +251,7 @@ public final class ContratosController implements ActionListener {
         view.btnGuardar.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent evt) {
-                
+
                 guardarContrato(new Contrato());
             }
         }
@@ -507,11 +507,11 @@ public final class ContratosController implements ActionListener {
                     } else {
                         if (view.dpFechaInactivacion.getEditor().getText().equals("")) {
 
-                            contratoSeleccionado.setFechaInactivacion(view.dpFechaInactivacion.getDate());
-                            contratoSeleccionado.setActivo(false);
-                        }else{
                             contratoSeleccionado.setFechaInactivacion(null);
                             contratoSeleccionado.setActivo(true);
+                        } else {
+                            contratoSeleccionado.setFechaInactivacion(view.dpFechaInactivacion.getDate());
+                            contratoSeleccionado.setActivo(false);
                         }
                         if (JOptionPane.showConfirmDialog(view, "Desea volver a generar recibos pendientes?", "Confirmación", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
 

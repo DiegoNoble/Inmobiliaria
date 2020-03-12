@@ -252,7 +252,7 @@ public class NuevoGastoInmueble extends javax.swing.JDialog {
 
             ActualizaSaldos acSaldo = new ActualizaSaldos();
             List<CCPropietario> ccPropietario = cCPropietarioDAO.findByPropietarioAndMonedaOrderByIdAsc(propietarioSeleccionado, monedaSeleccionada);
-            cCPropietarioDAO.save(acSaldo.ActualizaSaldosPropietarios(ccPropietario));
+            cCPropietarioDAO.saveAll(acSaldo.ActualizaSaldosPropietarios(ccPropietario));
 
         }
 

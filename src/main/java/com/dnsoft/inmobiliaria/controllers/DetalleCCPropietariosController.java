@@ -6,12 +6,14 @@
 package com.dnsoft.inmobiliaria.controllers;
 
 import com.dnsoft.inmobiliaria.Renderers.CCPorpietarioRenderer;
+import com.dnsoft.inmobiliaria.Renderers.MeBigDecimalCellRenderer;
 import com.dnsoft.inmobiliaria.Renderers.MeDateCellRenderer;
 import com.dnsoft.inmobiliaria.beans.CCPropietario;
 import com.dnsoft.inmobiliaria.beans.Moneda;
 import com.dnsoft.inmobiliaria.beans.Parametros;
 import com.dnsoft.inmobiliaria.beans.Propietario;
 import com.dnsoft.inmobiliaria.beans.Rubro;
+import com.dnsoft.inmobiliaria.beans.TipoPago;
 import com.dnsoft.inmobiliaria.daos.ICCPropietarioDAO;
 import com.dnsoft.inmobiliaria.daos.IParametrosDAO;
 import com.dnsoft.inmobiliaria.daos.IPropietarioDAO;
@@ -35,11 +37,13 @@ import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import javax.persistence.Tuple;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -63,8 +67,8 @@ public class DetalleCCPropietariosController implements ActionListener {
     CCPropietarioTableModel tableModelCCDolares;
     ControlDeCajaController cajaController;
     DetalleMovimientosCCPropietario view;
-    List<CCPropietario> listCCPesos;
-    List<CCPropietario> listCCDolares;
+    List<Tuple> listCCPesos;
+    List<Tuple> listCCDolares;
     BigDecimal saldoPesos;
     BigDecimal saldoDolares;
     Rubro rubro;
@@ -206,8 +210,11 @@ public class DetalleCCPropietariosController implements ActionListener {
         view.tblCCPesos.setModel(tableModelCCPesos);
         view.tblCCPesos.getColumn("Fecha").setCellRenderer(new MeDateCellRenderer());
         view.tblCCPesos.setDefaultRenderer(Object.class, new CCPorpietarioRenderer(1));
+        view.tblCCPesos.getColumn("Débitos").setCellRenderer(new MeBigDecimalCellRenderer());
+        view.tblCCPesos.getColumn("Créditos").setCellRenderer(new MeBigDecimalCellRenderer());
+        view.tblCCPesos.getColumn("Saldo").setCellRenderer(new MeBigDecimalCellRenderer());
 
-        int[] anchos = {5, 400, 5, 5, 5};
+        int[] anchos = {5, 500, 5, 5, 5, 5};
 
         for (int i = 0; i < view.tblCCPesos.getColumnCount(); i++) {
 
@@ -225,9 +232,12 @@ public class DetalleCCPropietariosController implements ActionListener {
         tableModelCCDolares = new CCPropietarioTableModel(listCCDolares);
         view.tblCCDolares.setModel(tableModelCCDolares);
         view.tblCCDolares.getColumn("Fecha").setCellRenderer(new MeDateCellRenderer());
+        view.tblCCDolares.getColumn("Débitos").setCellRenderer(new MeBigDecimalCellRenderer());
+        view.tblCCDolares.getColumn("Créditos").setCellRenderer(new MeBigDecimalCellRenderer());
+        view.tblCCDolares.getColumn("Saldo").setCellRenderer(new MeBigDecimalCellRenderer());
         view.tblCCDolares.setDefaultRenderer(Object.class, new CCPorpietarioRenderer(1));
 
-        int[] anchos = {5, 400, 5, 5, 5};
+        int[] anchos = {5, 500, 5, 5, 5, 5};
 
         for (int i = 0; i < view.tblCCDolares.getColumnCount(); i++) {
 
@@ -273,8 +283,23 @@ public class DetalleCCPropietariosController implements ActionListener {
     void informePesos() {
 
         try {
+            List<CCPropietario> ccp = new ArrayList<>();
+            for (Tuple t : listCCPesos) {
+                CCPropietario ccPropietario = new CCPropietario();
+                ccPropietario.setFecha((Date) t.get(0));
+                ccPropietario.setDescipcion((String) t.get(1));
+                if (t.get(2) == null) {
+                    ccPropietario.setTipoPago("");
+                } else {
+                    ccPropietario.setTipoPago((String) t.get(2).toString());
+                }
 
-            JRBeanCollectionDataSource beanCollectionDataSource = new JRBeanCollectionDataSource(listCCPesos);
+                ccPropietario.setDebito((BigDecimal) t.get(3));
+                ccPropietario.setCredito((BigDecimal) t.get(4));
+                ccPropietario.setSaldo((BigDecimal) t.get(5));
+                ccp.add(ccPropietario);
+            }
+            JRBeanCollectionDataSource beanCollectionDataSource = new JRBeanCollectionDataSource(ccp);
             InputStream resource = getClass().getClassLoader().getResourceAsStream("reportes/CCPropietario.jasper");
 
             BufferedImage logo = ImageIO.read(getClass().getResource("/imagenes/logo.png"));
@@ -303,8 +328,24 @@ public class DetalleCCPropietariosController implements ActionListener {
     void informeDolares() {
 
         try {
+             List<CCPropietario> ccd = new ArrayList<>();
+            for (Tuple t : listCCDolares) {
+                CCPropietario ccPropietario = new CCPropietario();
+                ccPropietario.setFecha((Date) t.get(0));
+                ccPropietario.setDescipcion((String) t.get(1));
+                if (t.get(2) == null) {
+                    ccPropietario.setTipoPago("");
+                } else {
+                    ccPropietario.setTipoPago((String) t.get(2).toString());
+                }
 
-            JRBeanCollectionDataSource beanCollectionDataSource = new JRBeanCollectionDataSource(listCCDolares);
+                ccPropietario.setDebito((BigDecimal) t.get(3));
+                ccPropietario.setCredito((BigDecimal) t.get(4));
+                ccPropietario.setSaldo((BigDecimal) t.get(5));
+                ccd.add(ccPropietario);
+            }
+            
+            JRBeanCollectionDataSource beanCollectionDataSource = new JRBeanCollectionDataSource(ccd);
             InputStream resource = getClass().getClassLoader().getResourceAsStream("reportes/CCPropietario.jasper");
 
             BufferedImage logo = ImageIO.read(getClass().getResource("/imagenes/logo.png"));
@@ -448,14 +489,14 @@ public class DetalleCCPropietariosController implements ActionListener {
             case "actualizaSaldosD":
 
                 ActualizaSaldos as = new ActualizaSaldos();
-                cCPropietarioDAO.save(as.ActualizaSaldosPropietarios(listCCDolares));
+                //cCPropietarioDAO.save(as.ActualizaSaldosPropietarios(listCCDolares));
 
                 break;
 
             case "actualizaSaldosP":
 
                 ActualizaSaldos asp = new ActualizaSaldos();
-                cCPropietarioDAO.save(asp.ActualizaSaldosPropietarios(listCCPesos));
+                //cCPropietarioDAO.save(asp.ActualizaSaldosPropietarios(listCCPesos));
 
                 break;
 

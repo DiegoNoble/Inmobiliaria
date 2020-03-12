@@ -118,7 +118,7 @@ public final class RubroDlg extends javax.swing.JDialog {
         createKeybindings(tbl);
 
         tbl.setRowHeight(25);
-        int[] anchos = {150, 300, 20};
+        int[] anchos = {150, 300};
         new AjustaColumnas().ajustar(tbl, anchos);
 
         ListSelectionModel selectionModel = tbl.getSelectionModel();
@@ -137,7 +137,7 @@ public final class RubroDlg extends javax.swing.JDialog {
 
             @Override
             public void tableChanged(TableModelEvent tme) {
-                rubrosDAO.save(listRubros);
+                rubrosDAO.saveAll(listRubros);
             }
         });
 

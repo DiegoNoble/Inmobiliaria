@@ -12,6 +12,9 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -27,6 +30,11 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 
 public class PagoGastoInmueble extends AbstractPersistable<Long> {
 
+    @Id
+      @GeneratedValue(strategy = GenerationType.AUTO)
+    
+    @Column(name = "id", updatable = false, nullable = false)
+    private Long id;
     @Column(name = "valor")
     private BigDecimal valor;
     @Column(name = "fecha")
@@ -43,6 +51,16 @@ public class PagoGastoInmueble extends AbstractPersistable<Long> {
     private TipoPago tipoPago;
 
     public PagoGastoInmueble() {
+    }
+
+    @Override
+    public Long getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public BigDecimal getValor() {
@@ -77,7 +95,6 @@ public class PagoGastoInmueble extends AbstractPersistable<Long> {
         this.gastoInmuebleInquilino = gastoInmuebleInquilino;
     }
 
-    
     public Moneda getMoneda() {
         return moneda;
     }

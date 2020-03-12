@@ -7,12 +7,14 @@ package com.dnsoft.inmobiliaria.beans;
 
 import java.math.BigDecimal;
 import java.util.Date;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -28,6 +30,12 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 @Table(name = "pagos_recibos")
 
 public class PagoRecibo extends AbstractPersistable<Long> {
+
+    @Id
+      @GeneratedValue(strategy = GenerationType.AUTO)
+    
+    @Column(name = "id", updatable = false, nullable = false)
+    private Long id;
 
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "valor")
@@ -48,12 +56,22 @@ public class PagoRecibo extends AbstractPersistable<Long> {
     @Enumerated(EnumType.STRING)
     @Column(length = 25)
     private TipoPago tipoPago;
-    @Column(name = "mora", columnDefinition = "Decimal(19,2) default '0.00'",nullable = true)
+    @Column(name = "mora", columnDefinition = "Decimal(19,2) default '0.00'", nullable = true)
     private BigDecimal mora;
-    @Column(name = "cotizacion",precision = 19, scale = 4)
+    @Column(name = "cotizacion", precision = 19, scale = 4)
     private BigDecimal cotizacion;
 
     public PagoRecibo() {
+    }
+
+    @Override
+    public Long getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public BigDecimal getValor() {

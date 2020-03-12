@@ -9,6 +9,9 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -25,6 +28,12 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 @Table(name = "proveedores")
 
 public class Proveedor extends AbstractPersistable<Long> {
+
+    @Id
+      @GeneratedValue(strategy = GenerationType.AUTO)
+    
+    @Column(name = "id", updatable = false, nullable = false)
+    private Long id;
 
     @Column(name = "nombre")
     private String nombre;
@@ -62,10 +71,18 @@ public class Proveedor extends AbstractPersistable<Long> {
 
     @Column(name = "email")
     private String email;
-    
-    
 
     public Proveedor() {
+    }
+
+    @Override
+    public Long getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getNombre() {
@@ -163,9 +180,6 @@ public class Proveedor extends AbstractPersistable<Long> {
     public void setListCuentas(List<CuentaBancoProveedor> listCuentas) {
         this.listCuentas = listCuentas;
     }
-
-  
-   
 
     @Override
     public String toString() {

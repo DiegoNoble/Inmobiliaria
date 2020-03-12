@@ -82,7 +82,7 @@ public class DetalleTipoInmueble extends javax.swing.JDialog {
 
             @Override
             public void tableChanged(TableModelEvent tme) {
-                        tipoInmuebleDAO.save(listTipoInmueble);
+                        tipoInmuebleDAO.saveAll(listTipoInmueble);
             }
         });
 

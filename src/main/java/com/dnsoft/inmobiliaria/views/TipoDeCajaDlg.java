@@ -83,7 +83,7 @@ public class TipoDeCajaDlg extends javax.swing.JDialog {
             @Override
             public void tableChanged(TableModelEvent tme) {
                 if (tipoDeCaja != null) {
-                    tipoDeCajasDAO.save(listTipoDeCajas);
+                    tipoDeCajasDAO.saveAll(listTipoDeCajas);
                 }
             }
         });

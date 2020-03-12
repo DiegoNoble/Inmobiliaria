@@ -8,6 +8,9 @@ package com.dnsoft.inmobiliaria.beans;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -21,6 +24,12 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 @Table(name = "cuenta_banco_proveedor")
 
 public class CuentaBancoProveedor extends AbstractPersistable<Long> {
+
+    @Id
+      @GeneratedValue(strategy = GenerationType.AUTO)
+    
+    @Column(name = "id", updatable = false, nullable = false)
+    private Long id;
 
     @Column(name = "nro")
     private String nro;
@@ -36,12 +45,21 @@ public class CuentaBancoProveedor extends AbstractPersistable<Long> {
     public CuentaBancoProveedor() {
     }
 
+    @Override
+    public Long getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public CuentaBancoProveedor(String nro, Banco banco, Proveedor proveedor) {
         this.nro = nro;
         this.banco = banco;
         this.proveedor = proveedor;
     }
-
 
     public String getNro() {
         return nro;
@@ -66,7 +84,6 @@ public class CuentaBancoProveedor extends AbstractPersistable<Long> {
     public void setProveedor(Proveedor proveedor) {
         this.proveedor = proveedor;
     }
-
 
     @Override
     public String toString() {

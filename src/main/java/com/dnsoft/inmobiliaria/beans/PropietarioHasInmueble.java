@@ -9,6 +9,9 @@ import java.math.BigDecimal;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -23,9 +26,15 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 
 public class PropietarioHasInmueble extends AbstractPersistable<Long> {
 
+    @Id
+      @GeneratedValue(strategy = GenerationType.AUTO)
+    
+    @Column(name = "id", updatable = false, nullable = false)
+    private Long id;
+
     @Column(name = "porcentagePropiedad")
     private BigDecimal procentagePropiedad;
-    
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "inmueble_id")
     private Inmueble inmueble;
@@ -37,17 +46,27 @@ public class PropietarioHasInmueble extends AbstractPersistable<Long> {
     public PropietarioHasInmueble() {
     }
 
+    @Override
+    public Long getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public PropietarioHasInmueble(BigDecimal procentagePropiedad, Inmueble inmueble, Propietario propietario) {
         this.procentagePropiedad = procentagePropiedad;
         this.inmueble = inmueble;
         this.propietario = propietario;
     }
+
     public PropietarioHasInmueble(BigDecimal procentagePropiedad, Inmueble inmueble) {
         this.procentagePropiedad = procentagePropiedad;
         this.inmueble = inmueble;
     }
 
-    
     public BigDecimal getProcentagePropiedad() {
         return procentagePropiedad;
     }

@@ -80,7 +80,7 @@ public class DetalleBarrios extends javax.swing.JDialog {
             @Override
             public void tableChanged(TableModelEvent tme) {
                 
-                    barrioDAO.save(listBarrio);
+                    barrioDAO.saveAll(listBarrio);
                
             }
         });

@@ -7,6 +7,9 @@ package com.dnsoft.inmobiliaria.beans;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Table;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
@@ -18,19 +21,34 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 @Table(name = "rubros")
 
 public class Rubro extends AbstractPersistable<Long> {
+
+    @Id
+      @GeneratedValue(strategy = GenerationType.AUTO)
+    
+    @Column(name = "id", updatable = false, nullable = false)
+    private Long id;
+
     @Column(name = "nombre")
     private String nombre;
     @Column(name = "descripcion")
     private String descripcion;
-  
+
     public Rubro() {
+    }
+
+    @Override
+    public Long getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Rubro(String nombre) {
         this.nombre = nombre;
     }
-    
-
 
     public String getDescripcion() {
         return descripcion;
@@ -47,13 +65,10 @@ public class Rubro extends AbstractPersistable<Long> {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    
-    
+
     @Override
     public String toString() {
-        return nombre ;
+        return nombre;
     }
 
-    
-    
 }

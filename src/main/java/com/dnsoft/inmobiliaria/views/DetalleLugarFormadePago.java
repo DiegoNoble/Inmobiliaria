@@ -80,7 +80,7 @@ public class DetalleLugarFormadePago extends javax.swing.JDialog {
             @Override
             public void tableChanged(TableModelEvent tme) {
                 if (banco != null) {
-                    bancosDAO.save(listLugarFormadePagos);
+                    bancosDAO.saveAll(listLugarFormadePagos);
                 }
             }
         });

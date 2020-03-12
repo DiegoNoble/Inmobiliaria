@@ -12,6 +12,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -27,6 +30,12 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 @Table(name = "caja")
 
 public class Caja extends AbstractPersistable<Long> {
+
+    @Id
+      @GeneratedValue(strategy = GenerationType.AUTO)
+    
+    @Column(name = "id", updatable = false, nullable = false)
+    private Long id;
 
     @Column(name = "fecha")
     @Temporal(TemporalType.TIMESTAMP)
@@ -51,7 +60,18 @@ public class Caja extends AbstractPersistable<Long> {
     private PagoRecibo pagoRecibo;
     @ManyToOne()
     private TipoDeCaja tipoDeCaja;
+
     public Caja() {
+    }
+
+    @Override
+    public Long getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Date getFecha() {
@@ -126,5 +146,4 @@ public class Caja extends AbstractPersistable<Long> {
         this.tipoDeCaja = tipoDeCaja;
     }
 
-    
 }

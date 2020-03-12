@@ -137,7 +137,7 @@ public final class CobroDeudaPropietario extends javax.swing.JDialog {
         //Ajusta saldo cc propietario
         ActualizaSaldos acSaldo = new ActualizaSaldos();
         List<CCPropietario> ccPropietario = cCPropietarioDAO.findByPropietarioAndMonedaOrderByIdAsc(propietario, moneda);
-        cCPropietarioDAO.save(acSaldo.ActualizaSaldosPropietarios(ccPropietario));
+        cCPropietarioDAO.saveAll(acSaldo.ActualizaSaldosPropietarios(ccPropietario));
         movimientoCaja();
     }
 

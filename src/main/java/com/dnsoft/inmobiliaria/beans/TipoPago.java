@@ -10,7 +10,7 @@ package com.dnsoft.inmobiliaria.beans;
  * @author Diego Noble
  */
 public enum TipoPago {
-    TOTAL("Total importe"), PARCIAL("Entrega");
+    TOTAL("Total"), PARCIAL("Parcial"), SALDO("Saldo");
     
      private final String string;
 

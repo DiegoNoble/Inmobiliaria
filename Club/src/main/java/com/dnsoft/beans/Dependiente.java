@@ -29,7 +29,7 @@ public class Dependiente implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", updatable = false, nullable = false)
     @Basic(optional = false)
     @Column(name = "ID")
     private Integer id;

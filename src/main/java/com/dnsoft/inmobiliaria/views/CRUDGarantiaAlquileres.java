@@ -84,7 +84,7 @@ public class CRUDGarantiaAlquileres extends javax.swing.JDialog {
             @Override
             public void tableChanged(TableModelEvent tme) {
                 if (garantia != null) {
-                    garantiasDAO.save(listGarantiaAlquilers);
+                    garantiasDAO.saveAll(listGarantiaAlquilers);
                     if (contratosController != null) {
                         contratosController.cargaGarantiasAlquiler();
                     }

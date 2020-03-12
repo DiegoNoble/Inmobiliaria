@@ -106,7 +106,7 @@ public class PagarRecibo {
         porcentageComision = BigDecimal.valueOf(contrato.getPorcentajeComision());
         valorComisionSobreMora = new BigDecimal(BigInteger.ZERO);
         listPropietariosDelInmueble = iPropietarioHasInmuebleDAO.findByInmueble(contrato.getInmueble());
-        parametros = parametrosDAO.findOne(Long.valueOf(1));
+        parametros = parametrosDAO.findAll().get(0);
 
     }
 
@@ -147,6 +147,11 @@ public class PagarRecibo {
             recibo.setSituacion(Situacion.CON_SALDO);
             pagoRecibo.setTipoPago(TipoPago.PARCIAL);
 
+        } else if((recibo.getSituacion()==Situacion.CON_SALDO) && (recibo.getSaldo().compareTo(BigDecimal.ZERO) == 0)){
+            recibo.setSituacion(Situacion.PAGO);
+            recibo.setFechaPago(new Date());
+            pagoRecibo.setTipoPago(TipoPago.SALDO);
+        
         } else {
             recibo.setSituacion(Situacion.PAGO);
             recibo.setFechaPago(new Date());
@@ -371,7 +376,7 @@ public class PagarRecibo {
             }
             ccPropietarioToBD.addAll(listCCPropietarios);
         }
-        cCPropietarioDAO.save(ccPropietarioToBD);
+        cCPropietarioDAO.saveAll(ccPropietarioToBD);
         /*
          ActualizaSaldos acSaldo = new ActualizaSaldos();
 

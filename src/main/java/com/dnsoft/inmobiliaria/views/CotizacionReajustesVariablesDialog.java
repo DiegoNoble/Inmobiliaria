@@ -173,7 +173,7 @@ public final class CotizacionReajustesVariablesDialog extends javax.swing.JDialo
 
     void guardar() {
         try {
-            cotizacionDAO.save(listCotizacionIndices);
+            cotizacionDAO.saveAll(listCotizacionIndices);
             JOptionPane.showMessageDialog(this, "Se guardaron los datos correctamente", "Correcto", JOptionPane.INFORMATION_MESSAGE);
 
             if (JOptionPane.showConfirmDialog(this, "Desea aplicar el reajuste a los contratos habilitados?", "Correcto", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {

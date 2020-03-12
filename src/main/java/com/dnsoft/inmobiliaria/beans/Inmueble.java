@@ -13,6 +13,9 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -29,6 +32,12 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 
 public class Inmueble extends AbstractPersistable<Long> {
 
+     @Id
+      @GeneratedValue(strategy = GenerationType.AUTO)
+    
+    @Column(name = "id", updatable = false, nullable = false)
+    private Long id;
+     
     @Column(name = "padron")
     private String padron;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
@@ -104,6 +113,18 @@ public class Inmueble extends AbstractPersistable<Long> {
         this.ciudad = ciudad;
     }
 
+   
+
+    @Override
+    public Long getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(Long id) {
+        this.id = id;
+    }
+    
     public String getNro() {
         return nro;
     }

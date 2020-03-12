@@ -14,6 +14,9 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -32,8 +35,12 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 
 public class Contrato extends AbstractPersistable<Long> {
 
-    @Column(insertable = false, updatable = false)
+    @Id
+      @GeneratedValue(strategy = GenerationType.AUTO)
+    
+    @Column(name = "id", updatable = false, nullable = false)
     private Long id;
+
     @Column(name = "fecha_inicio")
     @Temporal(TemporalType.DATE)
     private Date fechaInicio;
@@ -60,7 +67,7 @@ public class Contrato extends AbstractPersistable<Long> {
 
     @Column(name = "activo", columnDefinition = "tinyint default true")
     private Boolean activo;
-    
+
     @Column(name = "paga_banco", columnDefinition = "tinyint default false")
     private Boolean paga_banco;
 
@@ -531,7 +538,6 @@ public class Contrato extends AbstractPersistable<Long> {
     public void setPaga_banco(Boolean paga_banco) {
         this.paga_banco = paga_banco;
     }
-    
 
     @Override
     public String toString() {

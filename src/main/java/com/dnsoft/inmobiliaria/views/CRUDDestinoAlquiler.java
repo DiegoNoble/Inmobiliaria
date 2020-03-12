@@ -84,7 +84,7 @@ public class CRUDDestinoAlquiler extends javax.swing.JDialog {
             @Override
             public void tableChanged(TableModelEvent tme) {
                 if (destino != null) {
-                    destinosDAO.save(listDestinoAlquilers);
+                    destinosDAO.saveAll(listDestinoAlquilers);
                     if (contratosController != null) {
                         contratosController.cargaDestinoAlquiler();
                     }

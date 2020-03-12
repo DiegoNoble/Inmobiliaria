@@ -9,8 +9,9 @@ import java.math.BigDecimal;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -26,6 +27,12 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 
 public class CotizacionReajustes extends AbstractPersistable<Long> {
 
+    @Id
+      @GeneratedValue(strategy = GenerationType.AUTO)
+    
+    @Column(name = "id", updatable = false, nullable = false)
+    private Long id;
+
     @Column(name = "fecha")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fecha;
@@ -39,6 +46,16 @@ public class CotizacionReajustes extends AbstractPersistable<Long> {
     private Date periodo;
 
     public CotizacionReajustes() {
+    }
+
+    @Override
+    public Long getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public CotizacionReajustes(Date fecha, BigDecimal valor, TipoReajuste tipoReajuste, Date periodo) {

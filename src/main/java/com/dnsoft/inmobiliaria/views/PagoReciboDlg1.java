@@ -110,7 +110,7 @@ public class PagoReciboDlg1 extends javax.swing.JDialog {
         cajaDAO = container.getBean(ICajaDAO.class);
         lblMsj.setVisible(false);
 
-        this.parametros = parametrosDAO.findOne(Long.valueOf(1));
+        this.parametros = parametrosDAO.findAll().get(0);
 
         switch (reciboSeleccionado.getMoneda()) {
             case DOLARES:
@@ -581,7 +581,7 @@ public class PagoReciboDlg1 extends javax.swing.JDialog {
         lblDetalleRecibo.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         lblDetalleRecibo.setForeground(new java.awt.Color(0, 51, 204));
         lblDetalleRecibo.setText("Detalle recibo");
-        lblDetalleRecibo.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        lblDetalleRecibo.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
@@ -631,6 +631,11 @@ public class PagoReciboDlg1 extends javax.swing.JDialog {
         jPanel1.add(txtImporte, gridBagConstraints);
 
         cbTipoDeCaja.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        cbTipoDeCaja.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbTipoDeCajaActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
@@ -638,7 +643,7 @@ public class PagoReciboDlg1 extends javax.swing.JDialog {
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         jPanel1.add(cbTipoDeCaja, gridBagConstraints);
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Moneda a pagar", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Moneda a pagar", 0, 0, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
         jPanel3.setPreferredSize(new java.awt.Dimension(180, 86));
         jPanel3.setLayout(new java.awt.GridBagLayout());
 
@@ -812,7 +817,7 @@ public class PagoReciboDlg1 extends javax.swing.JDialog {
         lblPagaEnBanco.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         lblPagaEnBanco.setForeground(new java.awt.Color(255, 51, 51));
         lblPagaEnBanco.setText("Paga en banco");
-        lblPagaEnBanco.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        lblPagaEnBanco.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -855,6 +860,10 @@ public class PagoReciboDlg1 extends javax.swing.JDialog {
         calculaImporte();
 
     }//GEN-LAST:event_chpagoParcialActionPerformed
+
+    private void cbTipoDeCajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTipoDeCajaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbTipoDeCajaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

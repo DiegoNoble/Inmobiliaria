@@ -28,6 +28,7 @@
             <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
                 <property name="showSql" value="true"/>
                 <property name="generateDdl" value="true"/>
+                 
             </bean>
         </property>
         <property name="persistenceUnitName" value="PU"/>
@@ -38,6 +39,7 @@
         <property name="entityManagerFactory" ref="entityManagerFactory"/>
         <property name="jpaDialect">
             <bean class="org.springframework.orm.jpa.vendor.HibernateJpaDialect"/>
+             
         </property>
     </bean>
 

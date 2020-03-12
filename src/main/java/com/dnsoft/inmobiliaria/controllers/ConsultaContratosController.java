@@ -155,7 +155,7 @@ public class ConsultaContratosController implements ActionListener {
 
         }
 
-        view.tblContratos.getColumn("Activo").setMaxWidth(0);
+       view.tblContratos.getColumn("Activo").setMaxWidth(0);
         view.tblContratos.getColumn("Activo").setMinWidth(0);
         view.tblContratos.getColumn("Activo").setPreferredWidth(0);
         view.tblContratos.getColumn("Activo").setWidth(0);

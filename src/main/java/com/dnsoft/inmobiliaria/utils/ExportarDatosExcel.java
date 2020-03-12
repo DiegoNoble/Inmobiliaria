@@ -88,7 +88,9 @@ public class ExportarDatosExcel {
 
                     Boolean validaFecha = DateUtil.isValidDate(String.valueOf(object));
                     if (object != null) {
-                        if (validaObjetoNumerico(object.toString())) {
+                        if(object.toString().equals("")){
+                             s.addCell(new Label(i, j + 1, ""));
+                        }else if (validaObjetoNumerico(object.toString())) {
                             s.addCell(new Number(i, j + 1, Double.valueOf(String.valueOf(object))));
                         } else if (validaFecha) {
                             s.addCell(new DateTime(i, j + 1, (Date) object));
@@ -97,7 +99,6 @@ public class ExportarDatosExcel {
                         }
                     }
                 }
-
             }
             w.write();
             w.close();

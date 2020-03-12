@@ -8,6 +8,10 @@ package com.dnsoft.inmobiliaria.beans;
 import java.math.BigDecimal;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import org.springframework.data.jpa.domain.AbstractPersistable;
@@ -20,6 +24,12 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 @Table(name = "parametros")
 
 public class Parametros extends AbstractPersistable<Long> {
+
+    @Id
+      @GeneratedValue(strategy = GenerationType.AUTO)
+    
+    @Column(name = "id", updatable = false, nullable = false)
+    private Long id;
 
     @Column(name = "valor_minimo_comision_pesos")
     private BigDecimal minimoComisionPesos;
@@ -64,10 +74,20 @@ public class Parametros extends AbstractPersistable<Long> {
     @ManyToOne
     Rubro otrosGastosTerceros;
 
-     private String MySql_Path;
+    private String MySql_Path;
     private String nombreBasesDatos;
-    
+
     public Parametros() {
+    }
+
+    @Override
+    public Long getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public BigDecimal getMinimoComisionPesos() {
@@ -238,5 +258,4 @@ public class Parametros extends AbstractPersistable<Long> {
         this.nombreBasesDatos = nombreBasesDatos;
     }
 
-    
 }

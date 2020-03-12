@@ -82,7 +82,7 @@ public class DetalleCiudades extends javax.swing.JDialog {
             @Override
             public void tableChanged(TableModelEvent tme) {
                
-                    ciudadesDAO.save(listCiudades);
+                    ciudadesDAO.saveAll(listCiudades);
                 
             }
         });
