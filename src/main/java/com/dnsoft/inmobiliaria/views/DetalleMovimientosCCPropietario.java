@@ -162,8 +162,8 @@ public class DetalleMovimientosCCPropietario extends javax.swing.JDialog {
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         jPanel8.add(txtSaldoPesos, gridBagConstraints);
 
-        btnRetiroPesos.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
         btnRetiroPesos.setText("Registrar retiro en PESOS");
+        btnRetiroPesos.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
@@ -178,9 +178,9 @@ public class DetalleMovimientosCCPropietario extends javax.swing.JDialog {
         gridBagConstraints.gridy = 0;
         jPanel8.add(jLabel6, gridBagConstraints);
 
+        btnEntregaPesos.setText("Aporte a cuenta PESOS");
         btnEntregaPesos.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
         btnEntregaPesos.setPreferredSize(new java.awt.Dimension(20, 60));
-        btnEntregaPesos.setText("Aporte a cuenta PESOS");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;

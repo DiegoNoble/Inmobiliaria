@@ -7,6 +7,7 @@ package com.dnsoft.inmobiliaria.utils;
 
 import com.dnsoft.inmobiliaria.beans.CCPropietario;
 import com.dnsoft.inmobiliaria.beans.Caja;
+import static com.dnsoft.inmobiliaria.beans.Moneda.UNIDADES_REAJUSTABLES;
 import com.dnsoft.inmobiliaria.beans.PagoRecibo;
 import com.dnsoft.inmobiliaria.beans.Recibo;
 import com.dnsoft.inmobiliaria.beans.TipoCotizacionContrato;
@@ -179,6 +180,9 @@ public class ImprimeRecibo {
             parametros.put("mora", mora);
             DecimalFormat formato;
             switch (pago.getMoneda()) {
+                case PESOS:
+                    formato = new DecimalFormat("#,##0.00");
+                    break;
                 case DOLARES:
                     formato = new DecimalFormat("#,##0.00");
                     break;

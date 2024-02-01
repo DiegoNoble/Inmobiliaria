@@ -154,10 +154,10 @@
             </Component>
             <Component class="botones.BotonPagar" name="btnRetiroPesos">
               <Properties>
+                <Property name="text" type="java.lang.String" value="Registrar retiro en PESOS"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="10" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Registrar retiro en PESOS"/>
               </Properties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
@@ -180,13 +180,13 @@
             </Component>
             <Component class="botones.BotonPagar" name="btnEntregaPesos">
               <Properties>
+                <Property name="text" type="java.lang.String" value="Aporte a cuenta PESOS"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="10" style="1"/>
                 </Property>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[20, 60]"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Aporte a cuenta PESOS"/>
               </Properties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>

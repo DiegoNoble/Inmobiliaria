@@ -10,6 +10,7 @@ import com.dnsoft.inmobiliaria.Renderers.TableRendererConsultaContratos;
 import com.dnsoft.inmobiliaria.beans.Contrato;
 import com.dnsoft.inmobiliaria.beans.Inmueble;
 import com.dnsoft.inmobiliaria.beans.Inquilino;
+import com.dnsoft.inmobiliaria.beans.Propietario;
 import com.dnsoft.inmobiliaria.beans.Recibo;
 import com.dnsoft.inmobiliaria.beans.TipoContrato;
 import com.dnsoft.inmobiliaria.daos.IContratoDAO;
@@ -20,6 +21,7 @@ import com.dnsoft.inmobiliaria.daos.IRecibosDAO;
 import com.dnsoft.inmobiliaria.models.ContratosTableModel;
 import com.dnsoft.inmobiliaria.utils.Container;
 import com.dnsoft.inmobiliaria.utils.ControlarEntradaTexto;
+import com.dnsoft.inmobiliaria.utils.LeeProperties;
 import com.dnsoft.inmobiliaria.views.ConsultaContratosInternal;
 import com.dnsoft.inmobiliaria.views.DetallePropietariosInmueble;
 import com.dnsoft.inmobiliaria.views.InmuebleDetallesDialog_new;
@@ -32,8 +34,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.InputStream;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
@@ -42,6 +48,9 @@ import javax.swing.SwingConstants;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableCellRenderer;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
 import org.jdesktop.swingx.prompt.PromptSupport;
 
 /**
@@ -88,6 +97,7 @@ public class ConsultaContratosController implements ActionListener {
         view.btnNuevoContrato.setVisible(false);
         view.btnModificarContrato.setVisible(false);
         view.btnPagarConsultarRecibos.setEnabled(false);
+        view.btnInformePagos.setEnabled(false);
         this.view = view;
         //view.setSize(view.getMaximumSize());
         //view.setLocationRelativeTo(null);
@@ -155,7 +165,7 @@ public class ConsultaContratosController implements ActionListener {
 
         }
 
-       view.tblContratos.getColumn("Activo").setMaxWidth(0);
+        view.tblContratos.getColumn("Activo").setMaxWidth(0);
         view.tblContratos.getColumn("Activo").setMinWidth(0);
         view.tblContratos.getColumn("Activo").setPreferredWidth(0);
         view.tblContratos.getColumn("Activo").setWidth(0);
@@ -170,6 +180,7 @@ public class ConsultaContratosController implements ActionListener {
                     view.btnModificarContrato.setEnabled(true);
                     view.btnPagarConsultarRecibos.setEnabled(true);
                     view.btnActivarInactivar.setEnabled(true);
+                    view.btnInformePagos.setEnabled(true);
 
                 } else {
                     view.btnPagarConsultarRecibos.setEnabled(false);
@@ -319,6 +330,34 @@ public class ConsultaContratosController implements ActionListener {
 
                 }
                 buscaContratos();
+            }
+        });
+
+        view.btnInformePagos.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent evt) {
+                contratoSeleccionado = contratosDAO.findByContrato(listContratos.get(view.tblContratos.getSelectedRow()).getId());
+
+                try {
+                    System.setProperty("java.awt.headless", "true");
+                    HashMap parametros = new HashMap();
+                    parametros.clear();
+                    parametros.put("contrato", Integer.valueOf(contratoSeleccionado.getId().toString()));
+                    LeeProperties props = new LeeProperties();
+
+                    Connection conexion = DriverManager.getConnection(props.getUrl(), props.getUsr(), props.getPsw());
+
+                    InputStream resource = getClass().getClassLoader().getResourceAsStream("reportes/pagosRecibos.jasper");
+                    JasperPrint jasperPrint = JasperFillManager.fillReport(resource, parametros, conexion);
+                    JasperViewer reporte = new JasperViewer(jasperPrint, false);
+                    reporte.setVisible(true);
+
+                    reporte.toFront();
+
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, "Error! " + e, "Error", JOptionPane.ERROR_MESSAGE);
+                    e.printStackTrace();
+                }
             }
         });
     }

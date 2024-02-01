@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.0.final using JasperReports Library version 6.20.0-2bc7ab61c56f459e8176eb05c7705e145cd400ad  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RecibosVencidos" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6c84274e-bc7c-488d-8786-d0b3e4770a1a">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="inmobiliaria1.xml"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="inmobiliaria"/>
 	<parameter name="tipoContrato" class="java.util.List"/>
 	<parameter name="vencimiento" class="java.util.Date"/>
 	<parameter name="propietarios" class="java.util.List">
@@ -24,7 +25,7 @@ WHEN 'UNIDADES_INDEXADAS' THEN 'U.I.'
 WHEN 'DOLARES' THEN 'U$D'
 WHEN 'PESOS' THEN '$U'
 END as moneda
-, r.saldo, r.valor, c.id as contrato,
+, r.saldo, r.valor, r.nroRecibo, c.id as contrato,
 c.descripcioninquilino,c.descripcioninmueble, c.tipocontrato, p.nombre
 from recibos r, contratos c, propietario_has_inmueble pi, propietarios p
 where 
@@ -37,42 +38,81 @@ and c.descripcionInmueble like '%$P!{descripcionInmueble}%'
 order by p.id, contrato, r.fechaVencimiento]]>
 	</queryString>
 	<field name="situacion" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="situacion"/>
+		<property name="com.jaspersoft.studio.field.label" value="situacion"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="recibos"/>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="recibo" class="java.lang.Long"/>
+	<field name="recibo" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="id"/>
+		<property name="com.jaspersoft.studio.field.label" value="recibo"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="recibos"/>
+	</field>
 	<field name="fechaVencimiento" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.name" value="fechaVencimiento"/>
+		<property name="com.jaspersoft.studio.field.label" value="fechaVencimiento"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="recibos"/>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="moneda" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="moneda"/>
+		<property name="com.jaspersoft.studio.field.label" value="moneda"/>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="saldo" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="saldo"/>
+		<property name="com.jaspersoft.studio.field.label" value="saldo"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="recibos"/>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="valor" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="valor"/>
+		<property name="com.jaspersoft.studio.field.label" value="valor"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="recibos"/>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="contrato" class="java.lang.Long"/>
+	<field name="nroRecibo" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="nroRecibo"/>
+		<property name="com.jaspersoft.studio.field.label" value="nroRecibo"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="recibos"/>
+	</field>
+	<field name="contrato" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="id"/>
+		<property name="com.jaspersoft.studio.field.label" value="contrato"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="contratos"/>
+	</field>
 	<field name="descripcioninquilino" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="descripcionInquilino"/>
+		<property name="com.jaspersoft.studio.field.label" value="descripcioninquilino"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="contratos"/>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="descripcioninmueble" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="descripcionInmueble"/>
+		<property name="com.jaspersoft.studio.field.label" value="descripcioninmueble"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="contratos"/>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="tipocontrato" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="tipoContrato"/>
+		<property name="com.jaspersoft.studio.field.label" value="tipocontrato"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="contratos"/>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="nombre" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="nombre"/>
+		<property name="com.jaspersoft.studio.field.label" value="nombre"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="propietarios"/>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<group name="Propietario">
 		<groupExpression><![CDATA[$F{contrato}]]></groupExpression>
 		<groupHeader>
-			<band height="93">
+			<band height="138">
 				<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.grid.JSSGridBagLayout"/>
 				<staticText>
-					<reportElement mode="Opaque" x="0" y="77" width="111" height="16" forecolor="#006699" backcolor="#E6E6E6" uuid="c1b6867b-832d-43f7-8f27-ef151ed33664">
-						<property name="com.jaspersoft.layout.grid.x" value="-1"/>
+					<reportElement mode="Opaque" x="0" y="112" width="93" height="26" forecolor="#006699" backcolor="#E6E6E6" uuid="c1b6867b-832d-43f7-8f27-ef151ed33664">
+						<property name="com.jaspersoft.layout.grid.x" value="0"/>
 						<property name="com.jaspersoft.layout.grid.y" value="3"/>
 						<property name="com.jaspersoft.layout.grid.weight.x" value="1.0"/>
 						<property name="com.jaspersoft.layout.grid.weight.y" value="0.7"/>
@@ -86,8 +126,8 @@ order by p.id, contrato, r.fechaVencimiento]]>
 					<text><![CDATA[Fecha]]></text>
 				</staticText>
 				<staticText>
-					<reportElement positionType="FixRelativeToBottom" mode="Opaque" x="111" y="77" width="111" height="16" forecolor="#006699" backcolor="#E6E6E6" uuid="2a6e3b4d-bb1b-4107-9640-62fd5c8d7351">
-						<property name="com.jaspersoft.layout.grid.x" value="-1"/>
+					<reportElement positionType="FixRelativeToBottom" mode="Opaque" x="93" y="112" width="93" height="26" forecolor="#006699" backcolor="#E6E6E6" uuid="2a6e3b4d-bb1b-4107-9640-62fd5c8d7351">
+						<property name="com.jaspersoft.layout.grid.x" value="1"/>
 						<property name="com.jaspersoft.layout.grid.y" value="3"/>
 						<property name="com.jaspersoft.layout.grid.weight.x" value="1.0"/>
 						<property name="com.jaspersoft.layout.grid.weight.y" value="0.7"/>
@@ -101,8 +141,8 @@ order by p.id, contrato, r.fechaVencimiento]]>
 					<text><![CDATA[Recibo]]></text>
 				</staticText>
 				<staticText>
-					<reportElement mode="Opaque" x="222" y="77" width="111" height="16" forecolor="#006699" backcolor="#E6E6E6" uuid="083cc619-7964-4124-acea-f5f8a4ebc670">
-						<property name="com.jaspersoft.layout.grid.x" value="-1"/>
+					<reportElement mode="Opaque" x="187" y="112" width="92" height="26" forecolor="#006699" backcolor="#E6E6E6" uuid="083cc619-7964-4124-acea-f5f8a4ebc670">
+						<property name="com.jaspersoft.layout.grid.x" value="3"/>
 						<property name="com.jaspersoft.layout.grid.y" value="3"/>
 						<property name="com.jaspersoft.layout.grid.weight.x" value="1.0"/>
 						<property name="com.jaspersoft.layout.grid.weight.y" value="0.7"/>
@@ -116,8 +156,8 @@ order by p.id, contrato, r.fechaVencimiento]]>
 					<text><![CDATA[Moneda]]></text>
 				</staticText>
 				<staticText>
-					<reportElement mode="Opaque" x="333" y="77" width="111" height="16" forecolor="#006699" backcolor="#E6E6E6" uuid="96a38058-0928-4783-9799-802d8bb45ac1">
-						<property name="com.jaspersoft.layout.grid.x" value="-1"/>
+					<reportElement mode="Opaque" x="371" y="112" width="92" height="26" forecolor="#006699" backcolor="#E6E6E6" uuid="96a38058-0928-4783-9799-802d8bb45ac1">
+						<property name="com.jaspersoft.layout.grid.x" value="5"/>
 						<property name="com.jaspersoft.layout.grid.y" value="3"/>
 						<property name="com.jaspersoft.layout.grid.weight.x" value="1.0"/>
 						<property name="com.jaspersoft.layout.grid.weight.y" value="0.7"/>
@@ -131,8 +171,8 @@ order by p.id, contrato, r.fechaVencimiento]]>
 					<text><![CDATA[Valor]]></text>
 				</staticText>
 				<staticText>
-					<reportElement positionType="FixRelativeToBottom" mode="Opaque" x="444" y="77" width="111" height="16" forecolor="#006699" backcolor="#E6E6E6" uuid="b4c2e7b8-9e14-4eb0-8fc5-3c95ef1a9c9a">
-						<property name="com.jaspersoft.layout.grid.x" value="-1"/>
+					<reportElement positionType="FixRelativeToBottom" mode="Opaque" x="463" y="112" width="92" height="26" forecolor="#006699" backcolor="#E6E6E6" uuid="b4c2e7b8-9e14-4eb0-8fc5-3c95ef1a9c9a">
+						<property name="com.jaspersoft.layout.grid.x" value="6"/>
 						<property name="com.jaspersoft.layout.grid.y" value="3"/>
 						<property name="com.jaspersoft.layout.grid.weight.x" value="1.0"/>
 						<property name="com.jaspersoft.layout.grid.weight.y" value="0.7"/>
@@ -146,7 +186,7 @@ order by p.id, contrato, r.fechaVencimiento]]>
 					<text><![CDATA[Saldo]]></text>
 				</staticText>
 				<textField>
-					<reportElement x="0" y="53" width="555" height="24" forecolor="#000000" uuid="19e4a556-65ef-419c-90c2-8aaf4ab16633">
+					<reportElement x="0" y="75" width="371" height="37" forecolor="#000000" uuid="19e4a556-65ef-419c-90c2-8aaf4ab16633">
 						<property name="com.jaspersoft.layout.grid.x" value="0"/>
 						<property name="com.jaspersoft.layout.grid.y" value="2"/>
 						<property name="com.jaspersoft.layout.grid.weight.x" value="1.0"/>
@@ -161,7 +201,7 @@ order by p.id, contrato, r.fechaVencimiento]]>
 					<textFieldExpression><![CDATA[$F{descripcioninquilino}]]></textFieldExpression>
 				</textField>
 				<staticText>
-					<reportElement mode="Opaque" x="0" y="28" width="111" height="24" forecolor="#006699" backcolor="#E6E6E6" uuid="e1eee1e1-3a8a-4bcc-b7c3-806fab366d55">
+					<reportElement mode="Opaque" x="0" y="38" width="93" height="37" forecolor="#006699" backcolor="#E6E6E6" uuid="e1eee1e1-3a8a-4bcc-b7c3-806fab366d55">
 						<property name="com.jaspersoft.layout.grid.x" value="0"/>
 						<property name="com.jaspersoft.layout.grid.y" value="1"/>
 						<property name="com.jaspersoft.layout.grid.weight.x" value="1.0"/>
@@ -176,7 +216,7 @@ order by p.id, contrato, r.fechaVencimiento]]>
 					<text><![CDATA[Contrato]]></text>
 				</staticText>
 				<textField>
-					<reportElement x="111" y="28" width="111" height="24" forecolor="#000000" uuid="a2313bb0-ca34-412e-8111-c0b69bbafcfa">
+					<reportElement x="93" y="38" width="93" height="37" forecolor="#000000" uuid="a2313bb0-ca34-412e-8111-c0b69bbafcfa">
 						<property name="com.jaspersoft.layout.grid.x" value="-1"/>
 						<property name="com.jaspersoft.layout.grid.y" value="1"/>
 						<property name="com.jaspersoft.layout.grid.weight.x" value="1.0"/>
@@ -191,13 +231,13 @@ order by p.id, contrato, r.fechaVencimiento]]>
 					<textFieldExpression><![CDATA[$F{contrato}]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="222" y="28" width="333" height="24" forecolor="#000000" uuid="54d1db96-30d2-4586-bf91-bde8c947adc5">
+					<reportElement x="186" y="38" width="277" height="37" forecolor="#000000" uuid="54d1db96-30d2-4586-bf91-bde8c947adc5">
 						<property name="com.jaspersoft.layout.grid.x" value="2"/>
 						<property name="com.jaspersoft.layout.grid.y" value="1"/>
 						<property name="com.jaspersoft.layout.grid.weight.x" value="1.0"/>
 						<property name="com.jaspersoft.layout.grid.weight.y" value="1.0"/>
 						<property name="com.jaspersoft.layout.grid.rowspan" value="1"/>
-						<property name="com.jaspersoft.layout.grid.colspan" value="3"/>
+						<property name="com.jaspersoft.layout.grid.colspan" value="4"/>
 						<property name="com.jaspersoft.layout.grid.weight.fixed" value="false"/>
 					</reportElement>
 					<textElement>
@@ -206,9 +246,9 @@ order by p.id, contrato, r.fechaVencimiento]]>
 					<textFieldExpression><![CDATA[$F{descripcioninmueble}]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement isPrintRepeatedValues="false" x="3" y="0" width="333" height="24" forecolor="#993300" uuid="62ebdc7b-17bc-494c-be26-1590fb1cd3ea">
-						<property name="com.jaspersoft.layout.grid.x" value="2"/>
-						<property name="com.jaspersoft.layout.grid.y" value="1"/>
+					<reportElement isPrintRepeatedValues="false" x="0" y="0" width="187" height="38" forecolor="#993300" uuid="62ebdc7b-17bc-494c-be26-1590fb1cd3ea">
+						<property name="com.jaspersoft.layout.grid.x" value="0"/>
+						<property name="com.jaspersoft.layout.grid.y" value="0"/>
 						<property name="com.jaspersoft.layout.grid.weight.x" value="1.0"/>
 						<property name="com.jaspersoft.layout.grid.weight.y" value="1.0"/>
 						<property name="com.jaspersoft.layout.grid.rowspan" value="1"/>
@@ -220,6 +260,21 @@ order by p.id, contrato, r.fechaVencimiento]]>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
 				</textField>
+				<staticText>
+					<reportElement positionType="FixRelativeToBottom" mode="Opaque" x="279" y="112" width="92" height="26" forecolor="#006699" backcolor="#E6E6E6" uuid="78a9bfa1-9e21-42ed-8e86-70dc00f43912">
+						<property name="com.jaspersoft.layout.grid.x" value="4"/>
+						<property name="com.jaspersoft.layout.grid.y" value="3"/>
+						<property name="com.jaspersoft.layout.grid.weight.x" value="1.0"/>
+						<property name="com.jaspersoft.layout.grid.weight.y" value="0.7"/>
+						<property name="com.jaspersoft.layout.grid.rowspan" value="1"/>
+						<property name="com.jaspersoft.layout.grid.colspan" value="1"/>
+						<property name="com.jaspersoft.layout.grid.weight.fixed" value="false"/>
+					</reportElement>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Nro. Cuota]]></text>
+				</staticText>
 			</band>
 		</groupHeader>
 		<groupFooter>
@@ -258,11 +313,11 @@ order by p.id, contrato, r.fechaVencimiento]]>
 		</band>
 	</title>
 	<detail>
-		<band height="19">
+		<band height="24">
 			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.grid.JSSGridBagLayout"/>
 			<textField pattern="dd/MM/yyyy">
-				<reportElement x="0" y="0" width="111" height="18" uuid="70793ac5-2e64-409f-8c2d-c2457621ad45">
-					<property name="com.jaspersoft.layout.grid.x" value="-1"/>
+				<reportElement x="0" y="0" width="93" height="24" uuid="70793ac5-2e64-409f-8c2d-c2457621ad45">
+					<property name="com.jaspersoft.layout.grid.x" value="0"/>
 					<property name="com.jaspersoft.layout.grid.y" value="0"/>
 					<property name="com.jaspersoft.layout.grid.weight.x" value="1.0"/>
 					<property name="com.jaspersoft.layout.grid.weight.y" value="1.0"/>
@@ -273,8 +328,8 @@ order by p.id, contrato, r.fechaVencimiento]]>
 				<textFieldExpression><![CDATA[$F{fechaVencimiento}]]></textFieldExpression>
 			</textField>
 			<textField pattern="">
-				<reportElement x="111" y="0" width="111" height="18" uuid="632b2522-d40c-4a1b-af1d-82d371e9700a">
-					<property name="com.jaspersoft.layout.grid.x" value="-1"/>
+				<reportElement x="93" y="0" width="93" height="24" uuid="632b2522-d40c-4a1b-af1d-82d371e9700a">
+					<property name="com.jaspersoft.layout.grid.x" value="1"/>
 					<property name="com.jaspersoft.layout.grid.y" value="0"/>
 					<property name="com.jaspersoft.layout.grid.weight.x" value="1.0"/>
 					<property name="com.jaspersoft.layout.grid.weight.y" value="1.0"/>
@@ -285,8 +340,8 @@ order by p.id, contrato, r.fechaVencimiento]]>
 				<textFieldExpression><![CDATA[$F{recibo}]]></textFieldExpression>
 			</textField>
 			<textField pattern="">
-				<reportElement x="222" y="0" width="111" height="18" uuid="ab7838be-564c-4a25-9edb-c0795c52e581">
-					<property name="com.jaspersoft.layout.grid.x" value="-1"/>
+				<reportElement x="186" y="0" width="93" height="24" uuid="ab7838be-564c-4a25-9edb-c0795c52e581">
+					<property name="com.jaspersoft.layout.grid.x" value="2"/>
 					<property name="com.jaspersoft.layout.grid.y" value="0"/>
 					<property name="com.jaspersoft.layout.grid.weight.x" value="1.0"/>
 					<property name="com.jaspersoft.layout.grid.weight.y" value="1.0"/>
@@ -297,8 +352,8 @@ order by p.id, contrato, r.fechaVencimiento]]>
 				<textFieldExpression><![CDATA[$F{moneda}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.##;¤-#,##0.##">
-				<reportElement x="333" y="0" width="111" height="18" uuid="cad80e82-490b-4856-a8a1-dd34ea85f261">
-					<property name="com.jaspersoft.layout.grid.x" value="-1"/>
+				<reportElement x="371" y="0" width="92" height="24" uuid="cad80e82-490b-4856-a8a1-dd34ea85f261">
+					<property name="com.jaspersoft.layout.grid.x" value="4"/>
 					<property name="com.jaspersoft.layout.grid.y" value="0"/>
 					<property name="com.jaspersoft.layout.grid.weight.x" value="1.0"/>
 					<property name="com.jaspersoft.layout.grid.weight.y" value="1.0"/>
@@ -309,8 +364,8 @@ order by p.id, contrato, r.fechaVencimiento]]>
 				<textFieldExpression><![CDATA[$F{valor}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.##;¤-#,##0.##">
-				<reportElement x="444" y="0" width="111" height="18" uuid="db39f154-56d3-49a6-9119-b5cc5823cdef">
-					<property name="com.jaspersoft.layout.grid.x" value="-1"/>
+				<reportElement x="463" y="0" width="92" height="24" uuid="db39f154-56d3-49a6-9119-b5cc5823cdef">
+					<property name="com.jaspersoft.layout.grid.x" value="5"/>
 					<property name="com.jaspersoft.layout.grid.y" value="0"/>
 					<property name="com.jaspersoft.layout.grid.weight.x" value="1.0"/>
 					<property name="com.jaspersoft.layout.grid.weight.y" value="1.0"/>
@@ -319,6 +374,18 @@ order by p.id, contrato, r.fechaVencimiento]]>
 					<property name="com.jaspersoft.layout.grid.weight.fixed" value="false"/>
 				</reportElement>
 				<textFieldExpression><![CDATA[$F{saldo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="279" y="0" width="92" height="24" uuid="36dad31e-8fcd-46c9-a4fd-b32ef2daae12">
+					<property name="com.jaspersoft.layout.grid.x" value="3"/>
+					<property name="com.jaspersoft.layout.grid.y" value="0"/>
+					<property name="com.jaspersoft.layout.grid.weight.x" value="1.0"/>
+					<property name="com.jaspersoft.layout.grid.weight.y" value="1.0"/>
+					<property name="com.jaspersoft.layout.grid.rowspan" value="1"/>
+					<property name="com.jaspersoft.layout.grid.colspan" value="1"/>
+					<property name="com.jaspersoft.layout.grid.weight.fixed" value="false"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{nroRecibo}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

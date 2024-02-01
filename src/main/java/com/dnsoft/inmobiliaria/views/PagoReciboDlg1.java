@@ -4,6 +4,7 @@ import com.dnsoft.inmobiliaria.beans.Caja;
 import com.dnsoft.inmobiliaria.beans.Contrato;
 import com.dnsoft.inmobiliaria.beans.Cotizacion;
 import com.dnsoft.inmobiliaria.beans.Moneda;
+import static com.dnsoft.inmobiliaria.beans.Moneda.DOLARES;
 import com.dnsoft.inmobiliaria.beans.PagoRecibo;
 import com.dnsoft.inmobiliaria.beans.Parametros;
 import com.dnsoft.inmobiliaria.beans.Recibo;
@@ -90,7 +91,7 @@ public class PagoReciboDlg1 extends javax.swing.JDialog {
 
         if (reciboSeleccionado.getContrato().getPaga_banco() == true) {
             lblPagaEnBanco.setText("Este Contrato debe ser abonado en el Banco!");
-        }else{
+        } else {
             lblPagaEnBanco.setText("");
         }
 
@@ -113,6 +114,9 @@ public class PagoReciboDlg1 extends javax.swing.JDialog {
         this.parametros = parametrosDAO.findAll().get(0);
 
         switch (reciboSeleccionado.getMoneda()) {
+            case PESOS:
+                formato = new DecimalFormat("#.00", simbolos);
+                break;
             case DOLARES:
                 formato = new DecimalFormat("#,##0.00", simbolos);
                 break;
@@ -279,13 +283,16 @@ public class PagoReciboDlg1 extends javax.swing.JDialog {
             @Override
             public void focusLost(FocusEvent e) {
 
-                if (!txtMora.getText().equals("")) {
-                    //mora = new BigDecimal(txtMora.getText());
-                    calculaImporte();
-                } else {
-                    txtMora.setText("0.00");
-                    //mora = new BigDecimal(txtMora.getText());
-                    calculaImporte();
+                if (!chpagoParcial.isSelected()) {
+
+                    if (!txtMora.getText().equals("")) {
+                        //mora = new BigDecimal(txtMora.getText());
+                        calculaImporte();
+                    } else {
+                        txtMora.setText("0.00");
+                        //mora = new BigDecimal(txtMora.getText());
+                        calculaImporte();
+                    }
                 }
             }
         });
@@ -300,14 +307,16 @@ public class PagoReciboDlg1 extends javax.swing.JDialog {
 
             @Override
             public void keyPressed(KeyEvent e) {
-                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                    if (!txtMora.getText().equals("")) {
-                        //mora = new BigDecimal(txtMora.getText());
-                        calculaImporte();
-                    } else {
-                        txtMora.setText("0.00");
-                        //mora = new BigDecimal(txtMora.getText());
-                        calculaImporte();
+                if (!chpagoParcial.isSelected()) {
+                    if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                        if (!txtMora.getText().equals("")) {
+                            //mora = new BigDecimal(txtMora.getText());
+                            calculaImporte();
+                        } else {
+                            txtMora.setText("0.00");
+                            //mora = new BigDecimal(txtMora.getText());
+                            calculaImporte();
+                        }
                     }
                 }
             }
@@ -328,34 +337,7 @@ public class PagoReciboDlg1 extends javax.swing.JDialog {
 
             @Override
             public void focusLost(FocusEvent e) {
-
-                if (!txtAPagar.getText().equals("")) {
-
-                    importeAPagar = new BigDecimal(txtAPagar.getText());
-                    if (importeAPagar.doubleValue() > reciboSeleccionado.getSaldo().doubleValue()) {
-                        txtAPagar.setText(reciboSeleccionado.getSaldo().toString());
-                    }
-                    calculaImporte();
-                } else {
-                    txtAPagar.setText("1.00");
-
-                    //importeAPagar = new BigDecimal(txtAPagar.getText());
-                    calculaImporte();
-                }
-            }
-        });
-
-        txtAPagar.addKeyListener(
-                new KeyListener() {
-
-            @Override
-            public void keyTyped(KeyEvent e) {
-               
-            }
-
-            @Override
-            public void keyPressed(KeyEvent e) {
-                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                if (!chpagoParcial.isSelected()) {
                     if (!txtAPagar.getText().equals("")) {
 
                         importeAPagar = new BigDecimal(txtAPagar.getText());
@@ -365,8 +347,38 @@ public class PagoReciboDlg1 extends javax.swing.JDialog {
                         calculaImporte();
                     } else {
                         txtAPagar.setText("1.00");
+
                         //importeAPagar = new BigDecimal(txtAPagar.getText());
                         calculaImporte();
+                    }
+                }
+            }
+        });
+
+        txtAPagar.addKeyListener(
+                new KeyListener() {
+
+            @Override
+            public void keyTyped(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (!chpagoParcial.isSelected()) {
+                    if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                        if (!txtAPagar.getText().equals("")) {
+
+                            importeAPagar = new BigDecimal(txtAPagar.getText());
+                            if (importeAPagar.doubleValue() > reciboSeleccionado.getSaldo().doubleValue()) {
+                                txtAPagar.setText(reciboSeleccionado.getSaldo().toString());
+                            }
+                            calculaImporte();
+                        } else {
+                            txtAPagar.setText("1.00");
+                            //importeAPagar = new BigDecimal(txtAPagar.getText());
+                            calculaImporte();
+                        }
                     }
                 }
             }
@@ -491,14 +503,14 @@ public class PagoReciboDlg1 extends javax.swing.JDialog {
             valorEntrega = new BigDecimal(txtAPagar.getText()).setScale(2, RoundingMode.CEILING);
 
             if (rbDolares.isSelected()) {
-                pagar = new PagarRecibo(reciboSeleccionado, valorEntrega.subtract(mora), mora, Moneda.DOLARES, 
+                pagar = new PagarRecibo(reciboSeleccionado, valorEntrega.subtract(mora), mora, Moneda.DOLARES,
                         (TipoCotizacionContrato) cbTipoCotizacion.getSelectedItem(), new BigDecimal(txtCotizacion.getText()));
                 this.dispose();
                 movimientoDeCaja(pagar);
 
             } else if (rbPesos.isSelected()) {
 
-                pagar = new PagarRecibo(reciboSeleccionado, valorEntrega.subtract(mora), mora, Moneda.PESOS, 
+                pagar = new PagarRecibo(reciboSeleccionado, valorEntrega.subtract(mora), mora, Moneda.PESOS,
                         (TipoCotizacionContrato) cbTipoCotizacion.getSelectedItem(), new BigDecimal(txtCotizacion.getText()));
                 this.dispose();
                 movimientoDeCaja(pagar);
@@ -848,7 +860,7 @@ public class PagoReciboDlg1 extends javax.swing.JDialog {
         if (chpagoParcial.isSelected()) {
             lblMsj.setVisible(true);
             txtAPagar.setEnabled(true);
-            txtMora.setEnabled(false);
+            txtMora.setEnabled(true);
             txtCuota.setText(reciboSeleccionado.getSaldo().toString());
             txtMora.setText(reciboSeleccionado.getMora().toString());
             txtAPagar.setText(reciboSeleccionado.getSaldo().add(reciboSeleccionado.getMora()).toString());
